@@ -1,0 +1,15 @@
+{
+  "name": "ศูนย์การเรียนรู้เคมี PKchemistry",
+  "short_name": "PKchemistry",
+  "description": "ศูนย์การเรียนรู้วิชาเคมี ม.ปลาย เนื้อหาครบเคมี 1-6 พร้อมแบบทดสอบ เครื่องมือเคมี และระบบติดตามการเรียน",
+  "lang": "th",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F8FAFC",
+  "theme_color": "#0EA5A0",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

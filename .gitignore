@@ -1,0 +1,14 @@
+# ===== สำรองเก่า (ใช้ git history แทนต่อไปนี้) =====
+# ไฟล์เหล่านี้ยังอยู่บนดิสก์ แค่ไม่ track ใน git
+index.html.bak_*
+index.html.bak*
+backups/
+
+# ===== ขยะระบบ =====
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# ===== Claude Code (เฉพาะเครื่อง) =====
+.claude/settings.local.json
