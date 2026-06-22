@@ -24,9 +24,23 @@
 (ใช้ไฟล์ `data/quiz-export.csv` ที่ผม export ให้ — มีโจทย์เขียนมือเดิมครบทุกบทพร้อมก๊อปวาง)
 บทที่ไม่ใส่ในชีต = ใช้โจทย์ฝังในหน้าเหมือนเดิม → จึง "เริ่มจากน้อย ค่อย ๆ ย้ายทีละบท" ได้
 
+## ⚠️ สำคัญที่สุด: กันชีตแปลงข้อมูลเพี้ยน
+
+Google Sheets จะ "เดา" ชนิดข้อมูลให้อัตโนมัติ ซึ่ง **ทำให้เฉลย/ตัวเลือกเพี้ยน** ถ้าไม่ปิด เช่น
+- จัดเรียงอิเล็กตรอน `2, 8, 1` → กลายเป็นวันที่ `2, 8, 2001` ❌
+- ตัวเลือกขึ้นต้น `=` → กลายเป็นสูตร `#ERROR!` ❌
+- `8.550` → `8.55`, `2.0` → `2`, `5.6%` → `5.60%` (ตัด/เพิ่มศูนย์)
+
+**วิธีกัน — ตอน import CSV:**
+File → Import → Upload `quiz-export.csv` → ในกล่อง import ให้ **เอาเครื่องหมายถูกออกจาก
+"Convert text to numbers, dates, and formulas"** แล้วค่อย Import
+
+**ถ้าวางมือ (paste) แทน:** เลือกทั้งชีต (Ctrl+A) → Format → Number → **Plain text** ก่อน แล้วค่อยวาง
+
 ## ขั้นตอนเปิดใช้งาน
 
-1. สร้าง Google Sheets ใหม่ วางหัวตาราง + โจทย์ (เริ่มจากก๊อป `data/quiz-export.csv` ทั้งไฟล์มาวางในเซลล์ A1 → Data → Split text to columns)
+1. สร้าง Google Sheets ใหม่ → **File → Import → Upload `data/quiz-export.csv`** →
+   ปิด "Convert text to numbers, dates, and formulas" (ดูหัวข้อด้านบน) → Import
 2. **File → Share → Publish to web**
 3. เลือก: แท็บที่ใส่โจทย์ · รูปแบบ **Comma-separated values (.csv)** → กด **Publish**
 4. คัดลอกลิงก์ที่ได้ (รูปแบบ `https://docs.google.com/spreadsheets/d/e/XXXX/pub?gid=0&single=true&output=csv`)
