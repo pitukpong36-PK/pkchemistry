@@ -18675,8 +18675,10 @@ Bingo.win = ()=>{
 const Lab = window.Lab = {};
 /* รายการแล็บ (ขยายต่อรายบทได้) */
 const LABS = [
+  { id:'safety',  ch:'บทที่ 1 · ความปลอดภัยและทักษะปฏิบัติการ', ic:'🦺', name:'ความปลอดภัย & เลขนัยสำคัญ', desc:'สำรวจสัญลักษณ์ความปลอดภัย GHS ทั้ง 9 แบบ และฝึกนับเลขนัยสำคัญ/ปัดเศษ/สัญกรณ์วิทยาศาสตร์แบบโต้ตอบ' },
   { id:'atom',    ch:'บทที่ 2 · อะตอมและสมบัติของธาตุ', ic:'⚛️', name:'โครงสร้างอะตอม', desc:'เลือกธาตุ ปรับนิวตรอน (ไอโซโทป) และประจุ (ไอออน) — ดูแบบจำลองโบร์ การจัดเรียงอิเล็กตรอน และเลขมวล' },
   { id:'vsepr',   ch:'บทที่ 3 · พันธะเคมี', ic:'🔮', name:'VSEPR — รูปร่างโมเลกุล', desc:'ปรับจำนวนพันธะและคู่โดดเดี่ยวรอบอะตอมกลาง แล้วดูรูปร่าง มุมพันธะ และสภาพขั้วแบบเรียลไทม์' },
+  { id:'mole',    ch:'บทที่ 4 · โมลและสูตรโมเลกุล', ic:'🔢', name:'แปลงโมล ↔ มวล ↔ อนุภาค', desc:'เลือกสาร เลื่อนปรับจำนวนโมล — ดูมวล (g) จำนวนอนุภาค (×6.02×10²³) ปริมาตรแก๊ส STP และร้อยละองค์ประกอบ' },
   { id:'dilute',  ch:'บทที่ 5 · สารละลาย', ic:'💧', name:'เจือจางสารละลาย', desc:'ปรับความเข้มข้น/ปริมาตร แล้วเติมน้ำ — ดู M₁V₁=M₂V₂ และสีของสารละลายจางลงตามจริง' },
   { id:'stoich',  ch:'บทที่ 6 · ปริมาณสัมพันธ์', ic:'⚗️', name:'ปริมาณสัมพันธ์ / สารกำหนดปริมาณ', desc:'เลือกปฏิกิริยา ปรับโมลสารตั้งต้น — หาสารกำหนดปริมาณ ผลิตภัณฑ์ที่ได้ และสารที่เหลือ' },
   { id:'gas',     ch:'บทที่ 7 · แก๊ส', ic:'💨', name:'กฎของแก๊ส (PV=nRT)', desc:'เลือกกฎ Boyle/Charles/Gay-Lussac/Avogadro ปรับค่าแล้วดูลูกสูบ อนุภาค และค่าที่สัมพันธ์กัน' },
@@ -18721,6 +18723,8 @@ Lab.openHub = ()=>{
   $('labRoot').innerHTML=h;
 };
 Lab.open = (id)=>{
+  if(id==='safety'){ SAF={mode:'ghs', sym:0, num:'0.04060', dp:2}; Lab.renderSafety(); return; }
+  if(id==='mole'){ MOL={sub:0, mol:1.0}; Lab.renderMole(); return; }
   if(id==='atom'){ const e=ELEMENTS[5]; AT={z:6, n:Math.round(e[4])-6, ch:0}; Lab.renderAtom(); }
   else if(id==='vsepr'){ LST={x:4,e:0,atom:'A'}; Lab.renderVsepr(); }
   else if(id==='dilute'){ DST={c1:2.0, v1:50, water:50}; Lab.renderDilute(); }
@@ -18777,6 +18781,132 @@ Lab.renderVsepr = ()=>{
   $('labRoot').innerHTML=h;
 };
 Lab._labHead = (title)=>'<div class="lab-head"><button class="lab-back" onclick="Lab.openHub()">⟵ แล็บอื่น</button><h3>'+title+'</h3></div>';
+
+/* ═══ แล็บ บท 1: ความปลอดภัย (GHS) + เลขนัยสำคัญ ═══ */
+let SAF=null, MOL=null;
+const _GHS=[
+  {ic:'💥', n:'วัตถุระเบิด',          m:'ระเบิดได้ / สารไม่เสถียร',            ex:'ทีเอ็นที, ดอกไม้เพลิง, สารเปอร์ออกไซด์'},
+  {ic:'🔥', n:'ไวไฟ',                m:'ติดไฟง่าย ไอระเหยลุกไหม้ได้',          ex:'เอทานอล, อะซิโตน, แก๊สหุงต้ม (LPG)'},
+  {ic:'⭕', n:'ออกซิไดซ์',            m:'ช่วยให้สารอื่นลุกไหม้แรงขึ้น',         ex:'H₂O₂, KMnO₄, KNO₃'},
+  {ic:'🛢️', n:'แก๊สอัดความดัน',      m:'ถังแก๊สอัด/แก๊สเหลว เสี่ยงระเบิด',     ex:'ถังออกซิเจน, ถัง CO₂, ไนโตรเจนเหลว'},
+  {ic:'🧪', n:'กัดกร่อน',            m:'กัดผิวหนัง ตา และโลหะ',               ex:'กรดเข้มข้น (H₂SO₄, HCl), โซดาไฟ (NaOH)'},
+  {ic:'☠️', n:'พิษเฉียบพลัน',        m:'เป็นพิษร้ายแรง อาจถึงตาย',            ex:'ไซยาไนด์, เมทานอล, สารหนู'},
+  {ic:'❗', n:'ระคายเคือง/อันตราย',    m:'ระคายเคืองผิว ตา ทางเดินหายใจ',       ex:'สารฟอกขาว, ผงซักฟอกบางชนิด'},
+  {ic:'🫁', n:'อันตรายต่อสุขภาพ',     m:'ก่อมะเร็ง/ทำลายอวัยวะระยะยาว',        ex:'เบนซีน, แอสเบสตอส, ฟอร์มาลดีไฮด์'},
+  {ic:'🐟', n:'อันตรายต่อสิ่งแวดล้อม', m:'เป็นพิษต่อสัตว์น้ำ/ระบบนิเวศ',         ex:'สารกำจัดศัตรูพืช, โลหะหนัก (Hg, Pb)'}
+];
+Lab._diamond=(ic)=>'<svg viewBox="0 0 60 60" width="46" height="46" style="display:block;margin:0 auto;"><rect x="12" y="12" width="36" height="36" rx="5" transform="rotate(45 30 30)" fill="#fff" stroke="#dc2626" stroke-width="4"/><text x="30" y="38" font-size="20" text-anchor="middle">'+ic+'</text></svg>';
+Lab.renderSafety=()=>{
+  let h=Lab._labHead('🦺 ความปลอดภัย & เลขนัยสำคัญ');
+  h+='<div class="vs-presets">'
+    +'<button class="vs-chip'+(SAF.mode==='ghs'?' active':'')+'" onclick="Lab.safMode(\'ghs\')">⚠️ สัญลักษณ์ GHS</button>'
+    +'<button class="vs-chip'+(SAF.mode==='sig'?' active':'')+'" onclick="Lab.safMode(\'sig\')">🔢 เลขนัยสำคัญ</button></div>';
+  h+=(SAF.mode==='ghs'?Lab._safGHS():Lab._safSig());
+  $('labRoot').innerHTML=h;
+  if(SAF.mode==='sig') Lab.safCalc();
+};
+Lab.safMode=(m)=>{ SAF.mode=m; Lab.renderSafety(); };
+Lab.safSym=(i)=>{ SAF.sym=i; Lab.renderSafety(); };
+Lab.safPreset=(v)=>{ SAF.num=v; Lab.renderSafety(); };
+Lab._safGHS=()=>{
+  const s=_GHS[SAF.sym];
+  let g='<div style="font-size:12px;color:var(--muted);margin:8px 0 12px;">คลิกสัญลักษณ์เพื่อดูความหมาย — GHS เป็นมาตรฐานสากลบนฉลากสารเคมี</div>';
+  g+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(76px,1fr));gap:8px;">';
+  _GHS.forEach((x,i)=>{ const on=i===SAF.sym;
+    g+='<button onclick="Lab.safSym('+i+')" style="cursor:pointer;background:'+(on?'#fef2f2':'var(--white)')+';border:2px solid '+(on?'#dc2626':'var(--border)')+';border-radius:12px;padding:8px 4px;font-family:inherit;">'
+      +Lab._diamond(x.ic)+'<div style="font-size:10px;margin-top:4px;color:var(--text);line-height:1.2;">'+x.n+'</div></button>';
+  });
+  g+='</div>';
+  g+='<div class="vs-info" style="margin-top:14px;"><div style="display:flex;align-items:center;gap:12px;">'+Lab._diamond(s.ic)
+    +'<div><div style="font-family:Prompt,sans-serif;font-weight:700;font-size:16px;">'+s.n+'</div>'
+    +'<div style="font-size:12.5px;color:var(--muted);">'+s.m+'</div></div></div>'
+    +'<div class="vs-stat" style="margin-top:10px;"><span>ตัวอย่างสาร</span><b style="text-align:right;max-width:62%;">'+s.ex+'</b></div></div>';
+  return g;
+};
+Lab._safSig=()=>{
+  let g='<div style="font-size:12px;color:var(--muted);margin:8px 0 12px;">พิมพ์ตัวเลข แล้วดูจำนวนเลขนัยสำคัญ การปัดเศษ และสัญกรณ์วิทยาศาสตร์ทันที</div>';
+  g+='<div class="vs-presets">'+['1500','0.04060','0.00450','100.0','2.5','89000'].map(v=>'<button class="vs-chip" onclick="Lab.safPreset(\''+v+'\')">'+v+'</button>').join('')+'</div>';
+  g+='<div class="vs-step" style="margin-top:10px;"><span class="vs-lbl">พิมพ์ตัวเลข</span></div>';
+  g+='<input id="safNumIn" type="text" inputmode="decimal" value="'+SAF.num+'" oninput="Lab.safCalc()" style="width:100%;box-sizing:border-box;padding:10px 12px;border:2px solid var(--border);border-radius:10px;font-family:inherit;font-size:18px;background:var(--white);color:var(--text);">';
+  g+='<div class="vs-step" style="margin-top:12px;"><span class="vs-lbl">ปัดเศษเหลือ <b id="safDpV">'+SAF.dp+'</b> ตำแหน่งทศนิยม</span></div>';
+  g+='<input id="safDpIn" type="range" class="lab-range" min="0" max="5" step="1" value="'+SAF.dp+'" oninput="Lab.safCalc()">';
+  g+='<div id="safSigOut" class="vs-info" style="margin-top:14px;"></div>';
+  return g;
+};
+Lab._sigFigs=(s)=>{
+  s=(s||'').trim().replace(/^[+-]/,'');
+  if(!/^(\d+\.?\d*|\.\d+)$/.test(s)) return null;
+  const hasDot=s.indexOf('.')>=0;
+  let digits=s.replace('.','').replace(/^0+/,'');
+  if(digits==='') return 1;
+  if(!hasDot) return (digits.replace(/0+$/,'').length)||1;
+  return digits.length;
+};
+Lab._supExp=(e)=>String(e).replace('-','⁻').replace(/\d/g,d=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[+d]);
+Lab.safCalc=()=>{
+  const inEl=document.getElementById('safNumIn'), dpEl=document.getElementById('safDpIn'), out=document.getElementById('safSigOut');
+  if(!inEl||!out) return;
+  const raw=inEl.value, dp=dpEl?parseInt(dpEl.value,10):2;
+  SAF.num=raw; SAF.dp=dp;
+  const dv=document.getElementById('safDpV'); if(dv) dv.textContent=dp;
+  const sf=Lab._sigFigs(raw), num=parseFloat(raw);
+  if(sf===null||isNaN(num)){ out.innerHTML='<div style="color:#dc2626;font-size:13px;">⚠️ พิมพ์เป็นตัวเลข เช่น 0.04060 หรือ 1500</div>'; return; }
+  const parts=num.toExponential(Math.max(0,sf-1)).split('e');
+  const sci=(num===0)?'0':(parts[0]+' × 10'+Lab._supExp(parseInt(parts[1],10)));
+  out.innerHTML='<div class="vs-stat"><span>เลขนัยสำคัญ</span><b>'+sf+' ตัว</b></div>'
+    +'<div class="vs-stat"><span>ปัดเหลือ '+dp+' ตำแหน่งทศนิยม</span><b>'+num.toFixed(dp)+'</b></div>'
+    +'<div class="vs-stat"><span>สัญกรณ์วิทยาศาสตร์</span><b>'+sci+'</b></div>'
+    +'<div style="font-size:10.5px;color:var(--muted);margin-top:8px;">กฎ: 0 นำหน้าไม่นับ · 0 ระหว่างเลขนับ · 0 ท้ายนับเมื่อมีจุดทศนิยม</div>';
+};
+
+/* ═══ แล็บ บท 4: แปลงโมล ↔ มวล ↔ อนุภาค + ร้อยละองค์ประกอบ ═══ */
+const NA=6.022e23;
+const MOLE_SUBS=[
+  {f:'H₂O',      n:'น้ำ',                 M:18.02,  gas:false, comp:[['H',2,1.008],['O',1,16.00]]},
+  {f:'CO₂',      n:'คาร์บอนไดออกไซด์',     M:44.01,  gas:true,  comp:[['C',1,12.01],['O',2,16.00]]},
+  {f:'O₂',       n:'แก๊สออกซิเจน',         M:32.00,  gas:true,  comp:[['O',2,16.00]]},
+  {f:'NaCl',     n:'โซเดียมคลอไรด์',       M:58.44,  gas:false, comp:[['Na',1,22.99],['Cl',1,35.45]]},
+  {f:'C₆H₁₂O₆',  n:'กลูโคส',              M:180.16, gas:false, comp:[['C',6,12.01],['H',12,1.008],['O',6,16.00]]},
+  {f:'CaCO₃',    n:'แคลเซียมคาร์บอเนต',    M:100.09, gas:false, comp:[['Ca',1,40.08],['C',1,12.01],['O',3,16.00]]},
+  {f:'NaOH',     n:'โซเดียมไฮดรอกไซด์',    M:40.00,  gas:false, comp:[['Na',1,22.99],['O',1,16.00],['H',1,1.008]]},
+  {f:'H₂',       n:'แก๊สไฮโดรเจน',         M:2.016,  gas:true,  comp:[['H',2,1.008]]}
+];
+Lab._sci=(x)=>{ if(x===0) return '0'; const e=Math.floor(Math.log10(x)); const m=x/Math.pow(10,e); return m.toFixed(2)+' × 10'+Lab._supExp(e); };
+Lab._moleSVG=(mass,mol,gas,vol)=>
+  '<svg viewBox="0 0 300 180">'
+  +'<text x="100" y="52" font-size="9" text-anchor="middle" fill="#64748b">× M  ⇄  ÷ M</text>'
+  +'<text x="205" y="52" font-size="9" text-anchor="middle" fill="#64748b">× Nᴀ  ⇄  ÷ Nᴀ</text>'
+  +'<rect x="8" y="68" width="84" height="48" rx="8" fill="#ecfeff" stroke="#0EA5A4" stroke-width="2"/><text x="50" y="88" font-size="10" text-anchor="middle" fill="#0F766E">มวล (g)</text><text x="50" y="106" font-size="13" font-weight="bold" text-anchor="middle" fill="#0F766E">'+mass.toFixed(2)+'</text>'
+  +'<rect x="108" y="62" width="84" height="60" rx="11" fill="#0EA5A4" stroke="#0F766E" stroke-width="2"/><text x="150" y="84" font-size="10" text-anchor="middle" fill="#fff">โมล (mol)</text><text x="150" y="104" font-size="15" font-weight="bold" text-anchor="middle" fill="#fff">'+mol.toFixed(2)+'</text>'
+  +'<rect x="208" y="68" width="84" height="48" rx="8" fill="#fef9c3" stroke="#d97706" stroke-width="2"/><text x="250" y="88" font-size="10" text-anchor="middle" fill="#92400e">อนุภาค</text><text x="250" y="106" font-size="11" font-weight="bold" text-anchor="middle" fill="#92400e">'+mol.toFixed(2)+' Nᴀ</text>'
+  +'<line x1="92" y1="92" x2="106" y2="92" stroke="#94a3b8" stroke-width="2"/><line x1="192" y1="92" x2="206" y2="92" stroke="#94a3b8" stroke-width="2"/>'
+  +(gas?'<text x="150" y="150" font-size="10" text-anchor="middle" fill="#0369a1">แก๊สที่ STP: '+vol.toFixed(2)+' L  (× 22.4)</text>':'<text x="150" y="150" font-size="9" text-anchor="middle" fill="#94a3b8">— ของแข็ง/ของเหลว ไม่คิดปริมาตร STP —</text>')
+  +'</svg>';
+Lab.renderMole=()=>{
+  const s=MOLE_SUBS[MOL.sub], M=s.M, mol=MOL.mol;
+  const mass=mol*M, particles=mol*NA, vol=s.gas?mol*22.4:0;
+  let h=Lab._labHead('🔢 แปลงโมล ↔ มวล ↔ อนุภาค');
+  h+='<div style="font-size:12px;color:var(--muted);">เลือกสารแล้วเลื่อนปรับจำนวนโมล — ทุกค่าสัมพันธ์กันโดยมี "โมล" เป็นศูนย์กลาง</div>';
+  h+='<div class="vs-presets" style="margin-top:8px;">'+MOLE_SUBS.map((x,i)=>'<button class="vs-chip'+(i===MOL.sub?' active':'')+'" onclick="Lab.molSub('+i+')">'+x.f+'</button>').join('')+'</div>';
+  h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._moleSVG(mass,mol,s.gas,vol)+'</div><div>';
+  h+='<div class="vs-step"><span class="vs-lbl">'+s.f+' ('+s.n+') · มวลโมเลกุล M = <b>'+M.toFixed(2)+'</b> g/mol</span></div>';
+  h+='<div class="vs-step" style="margin-top:8px;"><span class="vs-lbl">จำนวนโมล n = <b>'+mol.toFixed(2)+'</b> mol</span></div>'+Lab._range('mol',0.1,10,0.1,mol,'molSet');
+  h+='<div class="vs-info" style="margin-top:14px;">';
+  h+='<div class="vs-stat"><span>มวล = n × M</span><b>'+mass.toFixed(2)+' g</b></div>';
+  h+='<div class="vs-stat"><span>จำนวนอนุภาค = n × Nᴀ</span><b>'+Lab._sci(particles)+'</b></div>';
+  if(s.gas) h+='<div class="vs-stat"><span>ปริมาตรที่ STP = n × 22.4</span><b>'+vol.toFixed(2)+' L</b></div>';
+  h+='</div>';
+  h+='<div style="font-size:12px;font-weight:700;margin:14px 0 6px;">ร้อยละองค์ประกอบโดยมวล</div>';
+  s.comp.forEach(c=>{ const pct=c[1]*c[2]/M*100;
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:12px;"><span style="width:42px;">'+c[0]+(c[1]>1?'<sub>'+c[1]+'</sub>':'')+'</span>'
+      +'<div style="flex:1;background:var(--border);border-radius:6px;height:14px;overflow:hidden;"><div style="width:'+pct.toFixed(1)+'%;height:100%;background:linear-gradient(90deg,#0EA5A4,#0F766E);"></div></div>'
+      +'<b style="width:46px;text-align:right;">'+pct.toFixed(1)+'%</b></div>';
+  });
+  h+='</div></div>';
+  $('labRoot').innerHTML=h;
+};
+Lab.molSub=(i)=>{ MOL.sub=i; Lab.renderMole(); };
+Lab.molSet=(k,v)=>{ MOL.mol=parseFloat(v); Lab.renderMole(); };
 
 /* ── แล็บ: โครงสร้างอะตอม (c1b2) ── */
 let AT = { z:6, n:6, ch:0 };
