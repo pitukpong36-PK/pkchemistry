@@ -1125,6 +1125,7 @@ html[data-theme="dark"] .vs-warn { background:#3b2f12; color:#fde68a; }
 .lab-sel:focus { outline:none; border-color:var(--teal); }
 @media(max-width:640px){ .vsepr-grid { grid-template-columns:1fr; gap:14px; } .lab-hub { grid-template-columns:1fr; } }
 @keyframes gasJit { 0%{transform:translate(0,0);} 25%{transform:translate(3px,-3px);} 50%{transform:translate(-2px,2px);} 75%{transform:translate(2px,3px);} 100%{transform:translate(0,0);} }
+@keyframes labPop { 0%{transform:scale(0.3);opacity:0;} 60%{transform:scale(1.12);} 100%{transform:scale(1);opacity:1;} }
 
 /* ── RPG: นักผจญภัยเคมี ── */
 #rpgRoot { max-width:560px; margin:0 auto; font-family:'Prompt',sans-serif; }
@@ -18723,7 +18724,7 @@ Lab.openHub = ()=>{
   $('labRoot').innerHTML=h;
 };
 Lab.open = (id)=>{
-  if(id==='safety'){ SAF={mode:'ghs', sym:0, num:'0.04060', dp:2}; Lab.renderSafety(); return; }
+  if(id==='safety'){ SAF={mode:'ghs', sym:0, num:'0.04060', dp:2, qi:0, qans:null, qopts:[]}; Lab.renderSafety(); return; }
   if(id==='mole'){ MOL={sub:0, mol:1.0, mode:'free', target:36.0}; Lab.renderMole(); return; }
   if(id==='atom'){ const e=ELEMENTS[5]; AT={z:6, n:Math.round(e[4])-6, ch:0}; Lab.renderAtom(); }
   else if(id==='vsepr'){ LST={x:4,e:0,atom:'A', mode:'free', tx:2, te:2}; Lab.renderVsepr(); }
@@ -18734,9 +18735,9 @@ Lab.open = (id)=>{
   else if(id==='rate'){ RST={T:25, C:1.0, powder:false, cat:false, mode:'free', target:8}; Lab.renderRate(); }
   else if(id==='equil'){ EQ={N2:1.0, H2:1.5, NH3:0.8, K:1.0, dir:0, mode:'free', target:2.5, msg:'ระบบอยู่ที่ภาวะสมดุล — ลองรบกวนดู'}; Lab.renderEquil(); }
   else if(id==='electro'){ ECH={a:'Zn', b:'Cu', mode:'free', target:1.0}; Lab.renderEch(); }
-  else if(id==='organic'){ ORG={mode:'hc', hcType:'alkane', nC:3, fg:'alcohol'}; Lab.renderOrganic(); }
-  else if(id==='polymer'){ POL={k:'PE', n:4}; Lab.renderPolymer(); }
-  else if(id==='enviro'){ ENV={mode:'problem', prob:'warming', elec:5, car:20, meat:1}; Lab.renderEnviro(); }
+  else if(id==='organic'){ ORG={mode:'hc', hcType:'alkane', nC:3, fg:'alcohol', chal:false, target:5}; Lab.renderOrganic(); }
+  else if(id==='polymer'){ POL={k:'PE', n:4, mode:'free', target:'เติม'}; Lab.renderPolymer(); }
+  else if(id==='enviro'){ ENV={mode:'problem', prob:'warming', elec:5, car:20, meat:1, chal:false, target:8}; Lab.renderEnviro(); }
 };
 Lab.vStep = (which,d)=>{ if(which==='x') LST.x=Math.max(1,Math.min(6,LST.x+d)); else LST.e=Math.max(0,Math.min(4,LST.e+d)); LST.atom='A'; Lab.renderVsepr(); };
 Lab.vPreset = (x,e,a)=>{ LST.x=x; LST.e=e; LST.atom=a; Lab.renderVsepr(); };
@@ -18820,12 +18821,28 @@ Lab.renderSafety=()=>{
   let h=Lab._labHead('🦺 ความปลอดภัย & เลขนัยสำคัญ');
   h+='<div class="vs-presets">'
     +'<button class="vs-chip'+(SAF.mode==='ghs'?' active':'')+'" onclick="Lab.safMode(\'ghs\')">⚠️ สัญลักษณ์ GHS</button>'
-    +'<button class="vs-chip'+(SAF.mode==='sig'?' active':'')+'" onclick="Lab.safMode(\'sig\')">🔢 เลขนัยสำคัญ</button></div>';
-  h+=(SAF.mode==='ghs'?Lab._safGHS():Lab._safSig());
+    +'<button class="vs-chip'+(SAF.mode==='sig'?' active':'')+'" onclick="Lab.safMode(\'sig\')">🔢 เลขนัยสำคัญ</button>'
+    +'<button class="vs-chip'+(SAF.mode==='quiz'?' active':'')+'" onclick="Lab.safMode(\'quiz\')">🎯 ทายสัญลักษณ์</button></div>';
+  h+=(SAF.mode==='ghs'?Lab._safGHS():SAF.mode==='sig'?Lab._safSig():Lab._safQuiz());
   $('labRoot').innerHTML=h;
   if(SAF.mode==='sig') Lab.safCalc();
 };
-Lab.safMode=(m)=>{ SAF.mode=m; Lab.renderSafety(); };
+Lab.safMode=(m)=>{ if(m==='quiz'){ Lab.safQuizNew(); return; } SAF.mode=m; Lab.renderSafety(); };
+Lab.safQuizNew=()=>{ SAF.mode='quiz'; SAF.qi=Math.floor(Math.random()*_GHS.length); SAF.qans=null;
+  const opts=[SAF.qi]; while(opts.length<4){ const r=Math.floor(Math.random()*_GHS.length); if(opts.indexOf(r)<0) opts.push(r); }
+  for(let i=opts.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)), tmp=opts[i]; opts[i]=opts[j]; opts[j]=tmp; }
+  SAF.qopts=opts; Lab.renderSafety(); };
+Lab.safAns=(i)=>{ SAF.qans=i; Lab.renderSafety(); };
+Lab._safQuiz=()=>{ const cor=SAF.qi, ans=SAF.qans;
+  let g='<div style="font-size:12px;color:var(--muted);margin:8px 0 12px;">สัญลักษณ์ GHS นี้หมายถึงอะไร? เลือกคำตอบ</div>';
+  g+='<div style="text-align:center;margin-bottom:12px;">'+Lab._diamond(_GHS[cor].ic)+'</div>';
+  g+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">';
+  SAF.qopts.forEach(oi=>{ let bg='var(--white)', bd='var(--border)';
+    if(ans!==null){ if(oi===cor){bg='#f0fdf4';bd='#16a34a';} else if(oi===ans){bg='#fef2f2';bd='#dc2626';} }
+    g+='<button onclick="Lab.safAns('+oi+')" '+(ans!==null?'disabled':'')+' style="cursor:'+(ans!==null?'default':'pointer')+';background:'+bg+';border:2px solid '+bd+';border-radius:10px;padding:10px;font-family:inherit;font-size:12.5px;color:var(--text);">'+_GHS[oi].n+'</button>'; });
+  g+='</div>';
+  if(ans!==null){ const ok=ans===cor; g+='<div class="vs-info" style="margin-top:12px;">'+Lab._fb(ok, ok?'ถูกต้อง! '+_GHS[cor].n:'คำตอบที่ถูกคือ '+_GHS[cor].n, _GHS[cor].m)+'<div style="margin-top:8px;"><button class="vs-chip" onclick="Lab.safQuizNew()">▶ ข้อใหม่</button></div></div>'; }
+  return g; };
 Lab.safSym=(i)=>{ SAF.sym=i; Lab.renderSafety(); };
 Lab.safPreset=(v)=>{ SAF.num=v; Lab.renderSafety(); };
 Lab._safGHS=()=>{
@@ -19392,6 +19409,8 @@ const ORG_FG = [
 ];
 let ORG = { mode:'hc', hcType:'alkane', nC:3, fg:'alcohol' };
 Lab.orgMode = (m)=>{ ORG.mode=m; Lab.renderOrganic(); };
+Lab.orgChal = ()=>{ ORG.chal=!ORG.chal; if(ORG.chal) Lab.orgNewTarget(); else Lab.renderOrganic(); };
+Lab.orgNewTarget = ()=>{ ORG.target=2+Math.floor(Math.random()*6); ORG.mode='hc'; Lab.renderOrganic(); };
 Lab.orgType = (t)=>{ ORG.hcType=t; const mn=ORG_HC[t].min; if(ORG.nC<mn) ORG.nC=mn; Lab.renderOrganic(); };
 Lab.orgN = (v)=>{ ORG.nC=parseInt(v,10); Lab.renderOrganic(); };
 Lab.orgFG = (k)=>{ ORG.fg=k; Lab.renderOrganic(); };
@@ -19421,6 +19440,8 @@ Lab.renderOrganic = ()=>{
   if(ORG.mode==='hc'){
     const t=ORG_HC[ORG.hcType], n=ORG.nC, H=t.hmul*n+t.hadd, mol='C'+(n>1?Lab._sub(n):'')+'H'+Lab._sub(H);
     h+='<div class="vs-presets" style="margin-top:4px;">'+Object.keys(ORG_HC).map(k=>'<button class="vs-chip'+(ORG.hcType===k?' active':'')+'" onclick="Lab.orgType(\''+k+'\')">'+ORG_HC[k].th+'</button>').join('')+'</div>';
+    h+='<div class="vs-presets" style="margin-top:4px;"><button class="vs-chip'+(ORG.chal?' active':'')+'" onclick="Lab.orgChal()">🎯 โหมดภารกิจ</button></div>';
+    if(ORG.chal){ const ok=(n===ORG.target); h+=Lab._goalBox('สร้างไฮโดรคาร์บอนที่มีคาร์บอน = '+ORG.target+' อะตอม', ok, Lab._fb(ok,'ตอนนี้ n='+n, n<ORG.target?'เพิ่มจำนวนคาร์บอน':'ลดจำนวนคาร์บอน'),'Lab.orgNewTarget()'); }
     h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._skeletal(ORG.hcType,n)+'<div style="font-family:Prompt,sans-serif;font-weight:700;font-size:16px;color:#334155;margin-top:4px;">'+Lab._orgCond(ORG.hcType,n)+'</div></div><div>';
     h+='<div class="vs-step"><span class="vs-lbl">จำนวนคาร์บอน n = <b>'+n+'</b></span></div>'+'<input type="range" class="lab-range" min="'+t.min+'" max="8" step="1" value="'+n+'" oninput="Lab.orgN(this.value)">';
     h+='<div class="vs-info" style="margin-top:14px;"><div class="vs-axe">'+mol+'</div>'+
@@ -19461,14 +19482,19 @@ const POLY = [
 let POL = { k:'PE', n:4 };
 Lab.polSet = (k)=>{ POL.k=k; Lab.renderPolymer(); };
 Lab.polN = (v)=>{ POL.n=parseInt(v,10); Lab.renderPolymer(); };
+Lab.polMode = (m)=>{ POL.mode=m; if(m==='challenge') Lab.polNewTarget(); else Lab.renderPolymer(); };
+Lab.polNewTarget = ()=>{ POL.target=(Math.random()<0.5?'เติม':'ควบแน่น'); Lab.renderPolymer(); };
 Lab.renderPolymer = ()=>{
   const p=POLY.find(x=>x.k===POL.k), n=POL.n;
   const cond=p.type.indexOf('ควบแน่น')>=0;
   let chain='<div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2px;font-family:Prompt,sans-serif;">';
   chain+='<span style="font-size:30px;color:#94a3b8;">[</span>';
-  for(let i=0;i<n;i++){ chain+='<span style="background:#0F766E;color:#fff;border-radius:6px;padding:5px 8px;font-size:12px;font-weight:700;">'+p.box+'</span>'+(i<n-1?'<span style="color:#64748b;">–</span>':''); }
+  for(let i=0;i<n;i++){ chain+='<span style="background:#0F766E;color:#fff;border-radius:6px;padding:5px 8px;font-size:12px;font-weight:700;display:inline-block;animation:labPop .4s ease-out '+(i*0.12).toFixed(2)+'s both;">'+p.box+'</span>'+(i<n-1?'<span style="color:#64748b;">–</span>':''); }
   chain+='<span style="font-size:30px;color:#94a3b8;">]</span><span style="font-size:13px;color:#334155;align-self:flex-end;">'+Lab._sub(n)+'</span></div>';
   let h=Lab._labHead('🧵 พอลิเมอร์');
+  h+=Lab._modeChips(POL.mode,"Lab.polMode('free')","Lab.polMode('challenge')");
+  if(POL.mode==='challenge'){ const ok=((cond?'ควบแน่น':'เติม')===POL.target);
+    h+=Lab._goalBox('เลือกพอลิเมอร์ที่เกิดแบบ "'+POL.target+'"', ok, Lab._fb(ok,(POL.k+' = แบบ'+(cond?'ควบแน่น':'เติม')), 'ดูชนิดการเกิดในตารางด้านขวา แล้วลองเลือกตัวอื่น'),'Lab.polNewTarget()'); }
   h+='<div class="vs-presets">'+POLY.map(x=>'<button class="vs-chip'+(POL.k===x.k?' active':'')+'" onclick="Lab.polSet(\''+x.k+'\')">'+x.k+'</button>').join('')+'</div>';
   h+='<div class="vsepr-grid"><div class="vsepr-stage" style="padding:16px;">'+chain+'<div style="font-size:10px;color:#64748b;margin-top:10px;">มอนอเมอร์ '+n+' หน่วยต่อกันเป็นสายโซ่ (degree of polymerization จริงมีเป็นพัน-หมื่นหน่วย)</div></div><div>';
   h+='<div class="vs-step"><span class="vs-lbl">องศาพอลิเมอไรเซชัน (จำนวนหน่วยซ้ำ) = <b>'+n+'</b></span></div>'+'<input type="range" class="lab-range" min="2" max="8" step="1" value="'+n+'" oninput="Lab.polN(this.value)">';
@@ -19498,6 +19524,13 @@ let ENV = { mode:'problem', prob:'warming', elec:5, car:20, meat:1 };
 Lab.envMode = (m)=>{ ENV.mode=m; Lab.renderEnviro(); };
 Lab.envProb = (k)=>{ ENV.prob=k; Lab.renderEnviro(); };
 Lab.envSet = (k,v)=>{ ENV[k]=parseFloat(v); Lab.renderEnviro(); };
+Lab._ENV_TARGETS=[4,6,8,12];
+Lab.envChal = ()=>{ ENV.chal=!ENV.chal; if(ENV.chal) Lab.envNewTarget(); else Lab.renderEnviro(); };
+Lab.envNewTarget = ()=>{ ENV.target=Lab._ENV_TARGETS[Math.floor(Math.random()*Lab._ENV_TARGETS.length)]; ENV.mode='carbon'; Lab.renderEnviro(); };
+Lab._co2Anim = (total)=>{ const N=Math.max(3,Math.min(10,Math.round(total))), dur=Math.max(1.0,2.6-total*0.12);
+  let s='<svg viewBox="0 0 120 72" style="max-width:120px;"><rect x="46" y="44" width="30" height="24" fill="#94a3b8"/><rect x="52" y="22" width="9" height="22" fill="#64748b"/>';
+  for(let i=0;i<N;i++){ const x=34+((i*37)%56); s+='<circle cx="'+x+'" r="3" fill="#9ca3af"><animate attributeName="cy" values="22;2" dur="'+dur.toFixed(2)+'s" begin="'+(i*0.25).toFixed(2)+'s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0" dur="'+dur.toFixed(2)+'s" begin="'+(i*0.25).toFixed(2)+'s" repeatCount="indefinite"/></circle>'; }
+  s+='<text x="60" y="70" font-size="7" fill="#64748b" text-anchor="middle">CO₂ ยิ่งมาก ยิ่งลอยถี่</text></svg>'; return s; };
 Lab.renderEnviro = ()=>{
   let h=Lab._labHead('🌍 เคมีกับสิ่งแวดล้อม');
   h+='<div class="vs-presets"><button class="vs-chip'+(ENV.mode==='problem'?' active':'')+'" onclick="Lab.envMode(\'problem\')">ปัญหาสิ่งแวดล้อม</button><button class="vs-chip'+(ENV.mode==='carbon'?' active':'')+'" onclick="Lab.envMode(\'carbon\')">คาร์บอนฟุตพรินต์</button></div>';
@@ -19513,6 +19546,9 @@ Lab.renderEnviro = ()=>{
     const eCO2=ENV.elec*ENV_EF.elec, cCO2=ENV.car*ENV_EF.car, mCO2=ENV.meat*ENV_EF.meat, total=eCO2+cCO2+mCO2;
     const trees=(total*365/21.77); // ต้นไม้ดูดซับ ~21.77 kg CO₂/ปี
     h+='<div style="font-size:12px;color:var(--muted);margin:6px 0;">ปรับกิจกรรมต่อวันแล้วดูปริมาณ CO₂ ที่ปล่อย (โดยประมาณ)</div>';
+    h+='<div class="vs-presets"><button class="vs-chip'+(ENV.chal?' active':'')+'" onclick="Lab.envChal()">🎯 โหมดภารกิจ</button></div>';
+    h+='<div style="text-align:center;">'+Lab._co2Anim(total)+'</div>';
+    if(ENV.chal){ const ok=total<=ENV.target; h+=Lab._goalBox('ลดคาร์บอนให้ ≤ '+ENV.target+' kg CO₂/วัน', ok, Lab._fb(ok,'ตอนนี้ '+total.toFixed(2)+' kg', 'ลดไฟฟ้า / การใช้รถ / มื้อเนื้อสัตว์'),'Lab.envNewTarget()'); }
     h+='<div class="vs-step"><span class="vs-lbl">⚡ ไฟฟ้า = <b>'+ENV.elec+'</b> kWh/วัน</span></div>'+'<input type="range" class="lab-range" min="0" max="30" step="1" value="'+ENV.elec+'" oninput="Lab.envSet(\'elec\',this.value)">';
     h+='<div class="vs-step" style="margin-top:10px;"><span class="vs-lbl">🚗 รถยนต์ = <b>'+ENV.car+'</b> km/วัน</span></div>'+'<input type="range" class="lab-range" min="0" max="100" step="5" value="'+ENV.car+'" oninput="Lab.envSet(\'car\',this.value)">';
     h+='<div class="vs-step" style="margin-top:10px;"><span class="vs-lbl">🍖 มื้อเนื้อสัตว์ = <b>'+ENV.meat+'</b> มื้อ/วัน</span></div>'+'<input type="range" class="lab-range" min="0" max="6" step="1" value="'+ENV.meat+'" oninput="Lab.envSet(\'meat\',this.value)">';
