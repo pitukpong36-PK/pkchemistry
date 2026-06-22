@@ -18730,7 +18730,7 @@ Lab.open = (id)=>{
   else if(id==='dilute'){ DST={c1:2.0, v1:50, water:50}; Lab.renderDilute(); }
   else if(id==='stoich'){ STO={rxn:0, amt:RXN[0].def.slice()}; Lab.renderStoich(); }
   else if(id==='gas'){ GST={mode:'boyle', V:10, T:300, n:1.0, P:0}; Lab.gasRecalc(); Lab.renderGas(); }
-  else if(id==='titrate'){ TST={vb:0}; Lab.renderTitrate(); }
+  else if(id==='titrate'){ TST={vb:0, mode:'free', target:7.00, hit:false}; Lab.renderTitrate(); }
   else if(id==='rate'){ RST={T:25, C:1.0, powder:false, cat:false}; Lab.renderRate(); }
   else if(id==='equil'){ EQ={N2:1.0, H2:1.5, NH3:0.8, K:1.0, dir:0, msg:'ระบบอยู่ที่ภาวะสมดุล — ลองรบกวนดู'}; Lab.renderEquil(); }
   else if(id==='electro'){ ECH={a:'Zn', b:'Cu'}; Lab.renderEch(); }
@@ -18916,8 +18916,11 @@ Lab._bohr = (shells, z, nn)=>{
   const cx=120, cy=120; let s='<svg viewBox="0 0 240 240" role="img" aria-label="แบบจำลองโบร์">';
   shells.forEach((cnt,si)=>{ const r=40+si*24;
     s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="#cbd5e1" stroke-width="1.2"/>';
+    const dur=(7+si*3).toFixed(1), a0='0 '+cx+' '+cy, a1='360 '+cx+' '+cy, from=(si%2?a1:a0), to=(si%2?a0:a1);
+    s+='<g><animateTransform attributeName="transform" attributeType="XML" type="rotate" from="'+from+'" to="'+to+'" dur="'+dur+'s" repeatCount="indefinite"/>';
     for(let j=0;j<cnt;j++){ const ang=(j/cnt)*2*Math.PI + si*0.5; const x=cx+r*Math.cos(ang), y=cy+r*Math.sin(ang);
-      s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="4" fill="#0F766E"/>'; } });
+      s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="4" fill="#0F766E"/>'; }
+    s+='</g>'; });
   s+='<circle cx="'+cx+'" cy="'+cy+'" r="24" fill="#ef4444"/><text x="'+cx+'" y="'+(cy-3)+'" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">'+z+' p⁺</text><text x="'+cx+'" y="'+(cy+10)+'" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">'+nn+' n</text>';
   s+='</svg>'; return s;
 };
@@ -19066,6 +19069,9 @@ Lab._ph = (vb)=>{ const molA=TIT.Ca*TIT.Va/1000, molB=TIT.Cb*vb/1000, Vt=(TIT.Va
   let ph; if(Math.abs(molA-molB)<1e-9) ph=7; else if(molB<molA){ ph=-Math.log10((molA-molB)/Vt); } else { ph=14-(-Math.log10((molB-molA)/Vt)); }
   return Math.max(0,Math.min(14,ph)); };
 Lab.titSet = (v)=>{ TST.vb=parseFloat(v); Lab.renderTitrate(); };
+Lab.titMode = (m)=>{ TST.mode=m; if(m==='challenge') Lab.titNewTarget(); else Lab.renderTitrate(); };
+Lab._TIT_TARGETS=[2.50,4.00,7.00,10.00,11.50];
+Lab.titNewTarget = ()=>{ TST.target=Lab._TIT_TARGETS[Math.floor(Math.random()*Lab._TIT_TARGETS.length)]; TST.vb=0; TST.hit=false; Lab.renderTitrate(); };
 Lab._titGraph = ()=>{
   const x0=40,x1=305,y0=200,y1=18, vmax=50; const px=v=>x0+(v/vmax)*(x1-x0), py=ph=>y0+(ph/14)*(y1-y0);
   let pts=''; for(let v=0;v<=vmax;v+=0.5){ pts+=px(v).toFixed(1)+','+py(Lab._ph(v)).toFixed(1)+' '; }
@@ -19083,10 +19089,30 @@ Lab._titGraph = ()=>{
 Lab.renderTitrate = ()=>{
   const vb=TST.vb, ph=Lab._ph(vb); const pink = ph>=8.2; const status = ph<6.5?'กรด':(ph>7.5?'เบส':'ใกล้กลาง/จุดสมมูล');
   const beakerFill = pink? '#ec4899' : '#e0f2fe'; const beakerOp = pink? 0.55 : 0.5;
+  const dripping = vb>0 && vb<50;   // แสดงหยดสารเมื่อยังไม่ปิดวาล์ว/ยังไม่สุดสเกล
   let h=Lab._labHead('🧫 ไทเทรตกรด-เบส (กรดแก่–เบสแก่)');
+  h+='<div class="vs-presets">'
+    +'<button class="vs-chip'+(TST.mode==='free'?' active':'')+'" onclick="Lab.titMode(\'free\')">🧪 อิสระ</button>'
+    +'<button class="vs-chip'+(TST.mode==='challenge'?' active':'')+'" onclick="Lab.titMode(\'challenge\')">🎯 ภารกิจ</button></div>';
   h+='<div style="font-size:12px;color:var(--muted);">สารตั้งต้น: HCl '+TIT.Ca+' M ปริมาตร '+TIT.Va+' mL · ไทแทรนต์: NaOH '+TIT.Cb+' M · เลื่อนเพื่อหยดเบส</div>';
+  // แถบภารกิจ
+  if(TST.mode==='challenge'){
+    const diff=Math.abs(ph-TST.target), tol=(TST.target===7.00?0.30:0.25), done=diff<=tol;
+    if(done) TST.hit=true;
+    const fb = done
+      ? '<span style="color:#16a34a;font-weight:700;">✅ สำเร็จ! pH ตรงเป้า (คลาดเคลื่อน '+diff.toFixed(2)+')</span>'
+      : '<span style="color:#d97706;">ห่างเป้า '+diff.toFixed(2)+' — '+(ph<TST.target?'หยดเบสเพิ่ม ⬆️':'หยดน้อยไป ⬇️ (ลดปริมาตร)')+'</span>';
+    h+='<div class="vs-info" style="margin-top:10px;background:'+(done?'#f0fdf4':'#fffbeb')+';border-color:'+(done?'#86efac':'#fde68a')+';">'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">'
+      +'<div style="font-size:13px;font-weight:700;">🎯 เป้าหมาย: ทำให้ pH = '+TST.target.toFixed(2)+(TST.target===7.00?' (จุดสมมูล)':'')+'</div>'
+      +'<button class="vs-chip" onclick="Lab.titNewTarget()">🔄 เป้าใหม่</button></div>'
+      +'<div style="font-size:12.5px;margin-top:6px;">'+fb+'</div></div>';
+  }
   h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._titGraph()+
-     '<svg viewBox="0 0 120 90" style="max-width:120px;"><rect x="40" y="8" width="40" height="74" rx="6" fill="none" stroke="#94a3b8" stroke-width="3"/><rect x="43" y="46" width="34" height="33" rx="3" fill="'+beakerFill+'" fill-opacity="'+beakerOp+'"/><text x="60" y="88" font-size="9" fill="#64748b" text-anchor="middle">'+(pink?'ชมพู (เบส)':'ไม่มีสี')+'</text></svg></div><div>';
+     '<svg viewBox="0 0 120 100" style="max-width:120px;">'+
+     '<rect x="55" y="2" width="10" height="20" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>'+   // บิวเรตต์
+     (dripping?'<circle cx="60" r="2.6" fill="#3b82f6"><animate attributeName="cy" values="22;46" dur="0.9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" dur="0.9s" repeatCount="indefinite"/></circle>':'')+
+     '<rect x="40" y="26" width="40" height="64" rx="6" fill="none" stroke="#94a3b8" stroke-width="3"/><rect x="43" y="58" width="34" height="29" rx="3" fill="'+beakerFill+'" fill-opacity="'+beakerOp+'"/><text x="60" y="98" font-size="9" fill="#64748b" text-anchor="middle">'+(pink?'ชมพู (เบส)':'ไม่มีสี')+'</text></svg></div><div>';
   h+='<div class="vs-step"><span class="vs-lbl">หยด NaOH = <b>'+vb.toFixed(1)+'</b> mL</span></div>'+'<input type="range" class="lab-range" min="0" max="50" step="0.5" value="'+vb+'" oninput="Lab.titSet(this.value)">';
   h+='<div class="vs-info" style="margin-top:14px;"><div class="vs-axe">pH = '+ph.toFixed(2)+'</div>'+
      '<div class="vs-shape">'+status+'<span>ฟีนอล์ฟทาลีน: '+(pink?'ชมพูอมม่วง':'ไม่มีสี')+'</span></div>'+
