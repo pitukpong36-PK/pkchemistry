@@ -1584,6 +1584,7 @@ html, body { max-width:100%; overflow-x:hidden; }
     <button class="nav-link" id="nav-home"    onclick="showPage('home')">เนื้อหาวิชา</button>
     <button class="nav-link" id="nav-media"   onclick="showPage('media')">คลังสื่อ</button>
     <button class="nav-link" id="nav-tools"   onclick="showPage('tools')">เครื่องมือ</button>
+    <button class="nav-link" id="nav-lab"     onclick="showPage('lab')">🧪 ห้องแล็บ</button>
     <button class="nav-link" id="nav-game"    onclick="showPage('game')">🎲 เกม</button>
   </div>
 
@@ -1827,7 +1828,6 @@ html, body { max-width:100%; overflow-x:hidden; }
       <button class="tool-tab" data-tool="ph" onclick="ChemTools.tab('ph')">🧪 คำนวณ pH</button>
       <button class="tool-tab" data-tool="convert" onclick="ChemTools.tab('convert')">🔄 แปลงหน่วย</button>
       <button class="tool-tab" data-tool="flash" onclick="ChemTools.tab('flash');ChemTools.flashHome()">🗂️ แฟลชการ์ด</button>
-      <button class="tool-tab" data-tool="lab" onclick="ChemTools.tab('lab');Lab.openHub()">🧪 ห้องแล็บ</button>
     </div>
 
     <!-- PERIODIC TABLE -->
@@ -1918,9 +1918,17 @@ html, body { max-width:100%; overflow-x:hidden; }
     <div class="tool-panel" id="tool-flash">
       <div class="tool-card"><div id="flashRoot"></div></div>
     </div>
-    <div class="tool-panel" id="tool-lab">
-      <div class="tool-card"><div id="labRoot"></div></div>
-    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PAGE: LAB (ห้องปฏิบัติการเชิงโต้ตอบ)
+════════════════════════════════════ -->
+<div class="page" id="page-lab">
+  <div class="tools-wrap">
+    <h2>🧪 ห้องปฏิบัติการเชิงโต้ตอบ</h2>
+    <div class="tools-sub">ทดลองเคมีด้วยตัวเอง — ปรับค่าแล้วเห็นผลทันที (สร้างในเว็บเอง ใช้ออฟไลน์ได้)</div>
+    <div class="tool-card"><div id="labRoot"></div></div>
   </div>
 </div>
 
@@ -4779,7 +4787,7 @@ c1b1: {
         </div>
         <div class="tip-box">💡 <strong>พันธะ → สมบัติ → การใช้งาน:</strong> ไอออนิก (แข็ง จุดหลอมสูง) → วัสดุทนความร้อน · โคเวเลนต์ร่างตาข่าย (แข็งมาก) → เครื่องตัด/เลนส์ · โลหะ (นำไฟฟ้า เหนียว) → สายไฟ/โครงสร้าง · พันธะไฮโดรเจน → ชีวโมเลกุล/เส้นใย</div>
         <div style="text-align:center;margin-top:14px;">
-          <button onclick="showPage('tools');ChemTools.tab('lab');Lab.open('vsepr');" style="background:linear-gradient(135deg,#0EA5A4,#0F766E);color:#fff;border:none;border-radius:12px;padding:12px 22px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(14,165,160,0.3);">🔮 ลองแล็บ VSEPR (รูปร่างโมเลกุล)</button>
+          <button onclick="showPage('lab');Lab.open('vsepr');" style="background:linear-gradient(135deg,#0EA5A4,#0F766E);color:#fff;border:none;border-radius:12px;padding:12px 22px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(14,165,160,0.3);">🔮 ลองแล็บ VSEPR (รูปร่างโมเลกุล)</button>
         </div>
       </div>
       <div class="content-section">
@@ -6350,7 +6358,7 @@ c1b1: {
           <div class="app-card"><div class="app-ic" style="background:#16A34A">🌱</div><div class="app-t">ปุ๋ยน้ำ/ยาพ่น</div><div class="app-u">เจือจางตามอัตราส่วน</div><div class="app-p">การเจือจาง</div></div>
         </div>
         <div class="tip-box">💡 <strong>ความเข้มข้นต้องพอดี:</strong> เข้มไปอาจเป็นอันตราย/สิ้นเปลือง เจือจางไปก็ไม่ได้ผล — การคำนวณ M, %, ppm จึงสำคัญมากในชีวิตจริง</div>
-        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('tools');ChemTools.tab('lab');Lab.open('dilute');">💧 ลองแล็บเจือจางสารละลาย</button></div>
+        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('lab');Lab.open('dilute');">💧 ลองแล็บเจือจางสารละลาย</button></div>
       </div>
       <div class="content-section">
         <h3>✏️ แบบฝึกหัดและตัวอย่างโจทย์</h3>
@@ -7169,7 +7177,7 @@ c1b1: {
           <div class="app-card"><div class="app-ic" style="background:#0F766E">📊</div><div class="app-t">โรงงาน</div><div class="app-u">ประเมินผลได้ร้อยละ</div><div class="app-p">ประสิทธิภาพการผลิต</div></div>
         </div>
         <div class="tip-box">💡 <strong>สัดส่วนคือทุกอย่าง:</strong> ใส่สารเกินก็เหลือทิ้ง (สิ้นเปลือง) ใส่ขาดก็ได้ผลน้อย — ปริมาณสัมพันธ์ช่วยคำนวณให้พอดีและคุ้มค่า</div>
-        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('tools');ChemTools.tab('lab');Lab.open('stoich');">⚗️ ลองแล็บปริมาณสัมพันธ์</button></div>
+        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('lab');Lab.open('stoich');">⚗️ ลองแล็บปริมาณสัมพันธ์</button></div>
       </div>
       <div class="content-section">
         <h3>✏️ แบบฝึกหัดและตัวอย่างโจทย์</h3>
@@ -8662,7 +8670,7 @@ c1b1: {
           <div class="app-card"><div class="app-ic" style="background:#16A34A">🧴</div><div class="app-t">สเปรย์กระป๋อง</div><div class="app-u">แก๊สอัดดันของเหลวออก</div><div class="app-p">ความดัน</div></div>
         </div>
         <div class="tip-box">💡 <strong>PV = nRT อยู่รอบตัว:</strong> ปั๊มยาง หม้ออัดความดัน ลูกโป่ง ถังแก๊ส ล้วนอธิบายได้ด้วยกฎของแก๊ส</div>
-        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('tools');ChemTools.tab('lab');Lab.open('gas');">💨 ลองแล็บกฎของแก๊ส</button></div>
+        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('lab');Lab.open('gas');">💨 ลองแล็บกฎของแก๊ส</button></div>
       </div>
       <div class="content-section">
         <h3>✏️ แบบฝึกหัดและตัวอย่างโจทย์</h3>
@@ -9589,7 +9597,7 @@ c1b1: {
           <div class="app-card"><div class="app-ic" style="background:#475569">⚙️</div><div class="app-t">การเกิดสนิม</div><div class="app-u">ความชื้น/เกลือเร่งสนิม</div><div class="app-p">ปัจจัยเร่งปฏิกิริยา</div></div>
         </div>
         <div class="tip-box">💡 <strong>ทฤษฎีการชน:</strong> อุณหภูมิ ความเข้มข้น พื้นที่ผิว และตัวเร่ง เพิ่มความถี่/พลังงานการชนที่ได้ผล — ใช้ทั้งเร่งและชะลอปฏิกิริยา</div>
-        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('tools');ChemTools.tab('lab');Lab.open('rate');">⏱️ ลองแล็บอัตราการเกิดปฏิกิริยา</button></div>
+        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('lab');Lab.open('rate');">⏱️ ลองแล็บอัตราการเกิดปฏิกิริยา</button></div>
       </div>
       <div class="content-section">
         <h3>✏️ แบบฝึกหัดและตัวอย่างโจทย์</h3>
@@ -10467,7 +10475,7 @@ c1b1: {
           <div class="app-card"><div class="app-ic" style="background:#7C3AED">🎨</div><div class="app-t">อินดิเคเตอร์</div><div class="app-u">เปลี่ยนสีตามสมดุลที่ pH ต่าง ๆ</div><div class="app-p">สมดุลของสี</div></div>
         </div>
         <div class="tip-box">💡 <strong>รบกวนแล้วระบบปรับตัว:</strong> เพิ่ม/ลดสาร ความดัน หรืออุณหภูมิ ทำให้สมดุลเลื่อนไปลดผลของการรบกวน — อุตสาหกรรมใช้หลักนี้เพิ่มผลผลิต</div>
-        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('tools');ChemTools.tab('lab');Lab.open('equil');">⚖️ ลองแล็บสมดุลเคมี</button></div>
+        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('lab');Lab.open('equil');">⚖️ ลองแล็บสมดุลเคมี</button></div>
       </div>
       <div class="content-section">
         <h3>✏️ แบบฝึกหัดและตัวอย่างโจทย์ (จากเอกสารประกอบบทเรียน)</h3>
@@ -11563,7 +11571,7 @@ c1b1: {
           <div class="app-card"><div class="app-ic" style="background:#475569">🧪</div><div class="app-t">กระดาษลิตมัส/ยูนิเวอร์แซล</div><div class="app-u">ทดสอบความเป็นกรด-เบส</div><div class="app-p">อินดิเคเตอร์</div></div>
         </div>
         <div class="tip-box">💡 <strong>pH สำคัญกับชีวิต:</strong> เลือดต้องอยู่ ~7.4 · ผิว ~5.5 · ดินปลูกพืชต้องเหมาะ — กรด-เบสและการสะเทินช่วยควบคุมให้พอดี</div>
-        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('tools');ChemTools.tab('lab');Lab.open('titrate');">🧫 ลองแล็บไทเทรตกรด-เบส</button></div>
+        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('lab');Lab.open('titrate');">🧫 ลองแล็บไทเทรตกรด-เบส</button></div>
       </div>
       <div class="content-section">
         <h3>✏️ แบบฝึกหัดและตัวอย่างโจทย์</h3>
@@ -12597,7 +12605,7 @@ c1b1: {
         </div>
         <div class="tip-box">💡 <strong>2 ประเภทเซลล์:</strong> กัลวานิก = เกิดปฏิกิริยาเอง คาย E°cell > 0 เปลี่ยนเคมี→ไฟฟ้า (แบตเตอรี่/เซลล์เชื้อเพลิง) · อิเล็กโทรไลต์ = ป้อนไฟฟ้าขับปฏิกิริยาที่ไม่เกิดเอง (ชุบโลหะ/แยกสาร) — แอโนด=ออกซิเดชัน, แคโทด=รีดักชัน เสมอ</div>
         <div style="text-align:center;margin-top:14px;">
-          <button onclick="showPage('tools');ChemTools.tab('lab');Lab.open('electro');" style="background:linear-gradient(135deg,#0EA5A4,#0F766E);color:#fff;border:none;border-radius:12px;padding:12px 22px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(14,165,160,0.3);">🔋 ลองแล็บเซลล์ไฟฟ้าเคมี</button>
+          <button onclick="showPage('lab');Lab.open('electro');" style="background:linear-gradient(135deg,#0EA5A4,#0F766E);color:#fff;border:none;border-radius:12px;padding:12px 22px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(14,165,160,0.3);">🔋 ลองแล็บเซลล์ไฟฟ้าเคมี</button>
         </div>
       </div>
       <div class="content-section">
@@ -13464,7 +13472,7 @@ c1b1: {
           <div class="app-card"><div class="app-ic" style="background:#B45309">🔥</div><div class="app-t">แก๊สหุงต้ม</div><div class="app-u">โพรเพน/บิวเทน</div><div class="app-p">แอลเคนโมเลกุลเล็ก</div></div>
         </div>
         <div class="tip-box">💡 <strong>หมู่ฟังก์ชัน = สมบัติ:</strong> –OH (แอลกอฮอล์) · –COOH (กรด) · –COO– (เอสเทอร์หอม) — หมู่ฟังก์ชันเดียวกันมีสมบัติคล้ายกันไม่ว่าสายคาร์บอนยาวแค่ไหน</div>
-        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('tools');ChemTools.tab('lab');Lab.open('organic');">🧬 ลองแล็บเคมีอินทรีย์</button></div>
+        <div style="text-align:center;margin-top:14px;"><button class="app-btn" onclick="showPage('lab');Lab.open('organic');">🧬 ลองแล็บเคมีอินทรีย์</button></div>
       </div>
       <div class="content-section">
         <h3>✏️ แบบฝึกหัดและตัวอย่างโจทย์</h3>
@@ -14203,7 +14211,7 @@ c1b1: {
         </div>
         <div class="tip-box">💡 <strong>โครงสร้าง → การใช้งาน:</strong> เทอร์มอพลาสติก (หลอมขึ้นรูปใหม่ได้) → บรรจุภัณฑ์/เส้นใย รีไซเคิลได้ · เทอร์มอเซต (เชื่อมขวาง คงรูป) → ปลั๊กไฟ/ด้ามจับทนร้อน · พอลิเมอร์ชีวภาพ → ลดขยะพลาสติก</div>
         <div style="text-align:center;margin-top:14px;">
-          <button onclick="showPage('tools');ChemTools.tab('lab');Lab.open('polymer');" style="background:linear-gradient(135deg,#0EA5A4,#0F766E);color:#fff;border:none;border-radius:12px;padding:12px 22px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(14,165,160,0.3);">🧵 ลองแล็บพอลิเมอร์</button>
+          <button onclick="showPage('lab');Lab.open('polymer');" style="background:linear-gradient(135deg,#0EA5A4,#0F766E);color:#fff;border:none;border-radius:12px;padding:12px 22px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(14,165,160,0.3);">🧵 ลองแล็บพอลิเมอร์</button>
         </div>
       </div>
       <div class="content-section">
@@ -15750,6 +15758,7 @@ function showPage(pageId) {
   const navBtn = document.getElementById('nav-' + pageId);
   if (navBtn) navBtn.classList.add('active');
   if (pageId==='game' && window.GameHub) GameHub.toHub();
+  if (pageId==='lab' && window.Lab) Lab.openHub();
   if (pageId==='media') loadMedia();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -18704,8 +18713,7 @@ const LAB_PRESETS = [
 ];
 let LST = { x:4, e:0, atom:'A' };
 Lab.openHub = ()=>{
-  let h='<div style="font-family:Prompt,sans-serif;font-size:18px;font-weight:700;margin-bottom:4px;">🧪 ห้องปฏิบัติการเชิงโต้ตอบ</div>'+
-    '<div style="font-size:12.5px;color:var(--muted);margin-bottom:14px;">เลือกแล็บเพื่อทดลองด้วยตัวเอง — ปรับค่าแล้วดูผลทันที (สร้างในเว็บเอง ไม่ต้องต่อเน็ตเพิ่ม)</div>';
+  let h='<div style="font-size:13px;color:var(--muted);margin-bottom:14px;">เลือกแล็บด้านล่างเพื่อเริ่มทดลอง — แต่ละแล็บจับคู่กับบทเรียน</div>';
   h+='<div class="lab-hub">';
   LABS.forEach(L=>{ h+='<div class="lab-card" onclick="Lab.open(\''+L.id+'\')"><div class="lc-ic">'+L.ic+'</div><div class="lc-ch">'+L.ch+'</div><h4>'+L.name+'</h4><p>'+L.desc+'</p></div>'; });
   LABS_SOON.forEach(L=>{ h+='<div class="lab-card soon"><div class="lc-ic">'+L.ic+'</div><div class="lc-ch">'+L.ch+'</div><h4>'+L.name+' <span style="font-size:10px;">(เร็ว ๆ นี้)</span></h4><p>'+L.desc+'</p></div>'; });
