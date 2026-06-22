@@ -18726,9 +18726,9 @@ Lab.open = (id)=>{
   if(id==='safety'){ SAF={mode:'ghs', sym:0, num:'0.04060', dp:2}; Lab.renderSafety(); return; }
   if(id==='mole'){ MOL={sub:0, mol:1.0, mode:'free', target:36.0}; Lab.renderMole(); return; }
   if(id==='atom'){ const e=ELEMENTS[5]; AT={z:6, n:Math.round(e[4])-6, ch:0}; Lab.renderAtom(); }
-  else if(id==='vsepr'){ LST={x:4,e:0,atom:'A'}; Lab.renderVsepr(); }
+  else if(id==='vsepr'){ LST={x:4,e:0,atom:'A', mode:'free', tx:2, te:2}; Lab.renderVsepr(); }
   else if(id==='dilute'){ DST={c1:2.0, v1:50, water:50, mode:'free', target:0.5}; Lab.renderDilute(); }
-  else if(id==='stoich'){ STO={rxn:0, amt:RXN[0].def.slice()}; Lab.renderStoich(); }
+  else if(id==='stoich'){ STO={rxn:0, amt:RXN[0].def.slice(), mode:'free'}; Lab.renderStoich(); }
   else if(id==='gas'){ GST={mode:'boyle', V:10, T:300, n:1.0, P:0, chal:false, target:2.5}; Lab.gasRecalc(); Lab.renderGas(); }
   else if(id==='titrate'){ TST={vb:0, mode:'free', target:7.00, hit:false}; Lab.renderTitrate(); }
   else if(id==='rate'){ RST={T:25, C:1.0, powder:false, cat:false, mode:'free', target:8}; Lab.renderRate(); }
@@ -18740,6 +18740,8 @@ Lab.open = (id)=>{
 };
 Lab.vStep = (which,d)=>{ if(which==='x') LST.x=Math.max(1,Math.min(6,LST.x+d)); else LST.e=Math.max(0,Math.min(4,LST.e+d)); LST.atom='A'; Lab.renderVsepr(); };
 Lab.vPreset = (x,e,a)=>{ LST.x=x; LST.e=e; LST.atom=a; Lab.renderVsepr(); };
+Lab.vMode = (m)=>{ LST.mode=m; if(m==='challenge') Lab.vNewTarget(); else Lab.renderVsepr(); };
+Lab.vNewTarget = ()=>{ const p=LAB_PRESETS[Math.floor(Math.random()*LAB_PRESETS.length)]; LST.tx=p.x; LST.te=p.e; Lab.renderVsepr(); };
 Lab._poly = (cx,cy,r,deg)=>({ x:+(cx+r*Math.sin(deg*Math.PI/180)).toFixed(1), y:+(cy-r*Math.cos(deg*Math.PI/180)).toFixed(1) });
 Lab._vsvg = (cfg, atom)=>{
   const cx=110, cy=100, r=74; let s='<svg viewBox="0 0 220 200" role="img" aria-label="รูปร่างโมเลกุล '+cfg.en+'">';
@@ -18757,7 +18759,11 @@ Lab._vsvg = (cfg, atom)=>{
 Lab.renderVsepr = ()=>{
   const key=LST.x+'_'+LST.e, cfg=LAB_VSEPR[key];
   let h=Lab._labHead('🔮 VSEPR — รูปร่างโมเลกุล');
+  h+=Lab._modeChips(LST.mode,"Lab.vMode('free')","Lab.vMode('challenge')");
   h+='<div style="font-size:12px;color:var(--muted);">เลือกโมเลกุลตัวอย่าง หรือปรับจำนวนพันธะ (X) และคู่โดดเดี่ยว (E) รอบอะตอมกลางเอง</div>';
+  if(LST.mode==='challenge'){ const tcfg=LAB_VSEPR[LST.tx+'_'+LST.te], ok=(LST.x===LST.tx && LST.e===LST.te);
+    h+=Lab._goalBox('สร้างรูปร่าง: '+(tcfg?tcfg.name:'?')+' (ปรับ X, E ให้ถูก)', ok,
+      Lab._fb(ok,'ตอนนี้ X='+LST.x+', E='+LST.e+(cfg?' = '+cfg.name:''), 'เป้าต้องการกลุ่มอิเล็กตรอน '+(LST.tx+LST.te)+' กลุ่ม'), 'Lab.vNewTarget()'); }
   h+='<div class="vs-presets">'+LAB_PRESETS.map(p=>{ const on=(p.x===LST.x&&p.e===LST.e); return '<button class="vs-chip'+(on?' active':'')+'" onclick="Lab.vPreset('+p.x+','+p.e+',\''+p.a+'\')">'+p.n+'</button>'; }).join('')+'</div>';
   h+='<div class="vsepr-grid"><div class="vsepr-stage">'+( cfg ? Lab._vsvg(cfg, LST.atom) : '<div style="padding:40px 10px;color:var(--muted);font-size:13px;">— ไม่มีรูปทรง —</div>' )+'</div>';
   // controls + info
@@ -18982,6 +18988,7 @@ const RXN = [
 let STO = { rxn:0, amt:[1,3] };
 Lab.stoRxn = (i)=>{ STO.rxn=i; STO.amt=RXN[i].def.slice(); Lab.renderStoich(); };
 Lab.stoSet = (idx,v)=>{ STO.amt[idx]=parseFloat(v); Lab.renderStoich(); };
+Lab.stoMode = (m)=>{ STO.mode=m; Lab.renderStoich(); };
 Lab._barH = (val,max,color,label,sub,hl)=>{ const hpx=Math.max(2,Math.min(110,val/max*110));
   return '<div style="display:flex;flex-direction:column;align-items:center;gap:3px;width:56px;">'+
     '<div style="font-size:11px;font-weight:700;color:#334155;">'+val.toFixed(2)+'</div>'+
@@ -18993,8 +19000,12 @@ Lab.renderStoich = ()=>{
   const prod=R.p.map(p=>({f:p.f, mol:p.c*xi})); const exc=R.r.map((x,i)=>({f:x.f, left:STO.amt[i]-x.c*xi}));
   let max=1; STO.amt.forEach(a=>{ if(a>max)max=a; }); prod.forEach(p=>{ if(p.mol>max)max=p.mol; });
   let h=Lab._labHead('⚗️ ปริมาณสัมพันธ์ / สารกำหนดปริมาณ');
+  h+=Lab._modeChips(STO.mode,"Lab.stoMode('free')","Lab.stoMode('challenge')");
   h+='<div class="vs-presets">'+RXN.map((x,i)=>'<button class="vs-chip'+(STO.rxn===i?' active':'')+'" onclick="Lab.stoRxn('+i+')">'+x.eq.split(' →')[0]+'…</button>').join('')+'</div>';
   h+='<div style="text-align:center;font-family:Prompt,sans-serif;font-weight:700;font-size:16px;margin:4px 0;">'+R.eq+'</div>';
+  if(STO.mode==='challenge'){ const maxLeft=Math.max.apply(null, exc.map(e=>e.left)); const ok=(xi>0.01 && maxLeft<0.05);
+    h+=Lab._goalBox('ปรับโมลให้ทำปฏิกิริยา "พอดี" (ไม่มีสารตั้งต้นเหลือ)', ok,
+      Lab._fb(ok,'สารเหลือมากสุด '+maxLeft.toFixed(2)+' โมล', 'ปรับอัตราส่วนโมลให้ตรงสัมประสิทธิ์สมการ'), null); }
   // bar chart
   let bars='<div style="display:flex;align-items:flex-end;justify-content:center;gap:6px;flex-wrap:wrap;">';
   R.r.forEach((x,i)=>{ bars+=Lab._barH(STO.amt[i],max,rc[i%3],x.f,(i===limIdx?'จำกัด':''),(i===limIdx)); });
