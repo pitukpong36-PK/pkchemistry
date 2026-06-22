@@ -18724,10 +18724,10 @@ Lab.openHub = ()=>{
 };
 Lab.open = (id)=>{
   if(id==='safety'){ SAF={mode:'ghs', sym:0, num:'0.04060', dp:2}; Lab.renderSafety(); return; }
-  if(id==='mole'){ MOL={sub:0, mol:1.0}; Lab.renderMole(); return; }
+  if(id==='mole'){ MOL={sub:0, mol:1.0, mode:'free', target:36.0}; Lab.renderMole(); return; }
   if(id==='atom'){ const e=ELEMENTS[5]; AT={z:6, n:Math.round(e[4])-6, ch:0}; Lab.renderAtom(); }
   else if(id==='vsepr'){ LST={x:4,e:0,atom:'A'}; Lab.renderVsepr(); }
-  else if(id==='dilute'){ DST={c1:2.0, v1:50, water:50}; Lab.renderDilute(); }
+  else if(id==='dilute'){ DST={c1:2.0, v1:50, water:50, mode:'free', target:0.5}; Lab.renderDilute(); }
   else if(id==='stoich'){ STO={rxn:0, amt:RXN[0].def.slice()}; Lab.renderStoich(); }
   else if(id==='gas'){ GST={mode:'boyle', V:10, T:300, n:1.0, P:0}; Lab.gasRecalc(); Lab.renderGas(); }
   else if(id==='titrate'){ TST={vb:0, mode:'free', target:7.00, hit:false}; Lab.renderTitrate(); }
@@ -18781,6 +18781,20 @@ Lab.renderVsepr = ()=>{
   $('labRoot').innerHTML=h;
 };
 Lab._labHead = (title)=>'<div class="lab-head"><button class="lab-back" onclick="Lab.openHub()">⟵ แล็บอื่น</button><h3>'+title+'</h3></div>';
+
+/* ── helper โหมดอิสระ/ภารกิจ + กล่องเป้าหมาย (ใช้ซ้ำหลายแล็บ) ── */
+Lab._modeChips = (cur, freeFn, chalFn)=>'<div class="vs-presets">'
+  +'<button class="vs-chip'+(cur!=='challenge'?' active':'')+'" onclick="'+freeFn+'">🧪 อิสระ</button>'
+  +'<button class="vs-chip'+(cur==='challenge'?' active':'')+'" onclick="'+chalFn+'">🎯 ภารกิจ</button></div>';
+Lab._fb = (ok, txt, hint)=> ok
+  ? '<span style="color:#16a34a;font-weight:700;">✅ สำเร็จ! '+txt+'</span>'
+  : '<span style="color:#d97706;">'+txt+(hint?' — '+hint:'')+'</span>';
+Lab._goalBox = (goalText, ok, fbHtml, newFn)=>
+  '<div class="vs-info" style="margin-top:10px;background:'+(ok?'#f0fdf4':'#fffbeb')+';border-color:'+(ok?'#86efac':'#fde68a')+';">'
+  +'<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">'
+  +'<div style="font-size:13px;font-weight:700;">🎯 '+goalText+'</div>'
+  +(newFn?'<button class="vs-chip" onclick="'+newFn+'">🔄 เป้าใหม่</button>':'')+'</div>'
+  +'<div style="font-size:12.5px;margin-top:6px;">'+fbHtml+'</div></div>';
 
 /* ═══ แล็บ บท 1: ความปลอดภัย (GHS) + เลขนัยสำคัญ ═══ */
 let SAF=null, MOL=null;
@@ -18877,7 +18891,7 @@ Lab._moleSVG=(mass,mol,gas,vol)=>
   +'<text x="100" y="52" font-size="9" text-anchor="middle" fill="#64748b">× M  ⇄  ÷ M</text>'
   +'<text x="205" y="52" font-size="9" text-anchor="middle" fill="#64748b">× Nᴀ  ⇄  ÷ Nᴀ</text>'
   +'<rect x="8" y="68" width="84" height="48" rx="8" fill="#ecfeff" stroke="#0EA5A4" stroke-width="2"/><text x="50" y="88" font-size="10" text-anchor="middle" fill="#0F766E">มวล (g)</text><text x="50" y="106" font-size="13" font-weight="bold" text-anchor="middle" fill="#0F766E">'+mass.toFixed(2)+'</text>'
-  +'<rect x="108" y="62" width="84" height="60" rx="11" fill="#0EA5A4" stroke="#0F766E" stroke-width="2"/><text x="150" y="84" font-size="10" text-anchor="middle" fill="#fff">โมล (mol)</text><text x="150" y="104" font-size="15" font-weight="bold" text-anchor="middle" fill="#fff">'+mol.toFixed(2)+'</text>'
+  +'<rect x="108" y="62" width="84" height="60" rx="11" fill="#0EA5A4" stroke="#0F766E" stroke-width="2"><animate attributeName="stroke-width" values="2;4;2" dur="2s" repeatCount="indefinite"/></rect><text x="150" y="84" font-size="10" text-anchor="middle" fill="#fff">โมล (mol)</text><text x="150" y="104" font-size="15" font-weight="bold" text-anchor="middle" fill="#fff">'+mol.toFixed(2)+'</text>'
   +'<rect x="208" y="68" width="84" height="48" rx="8" fill="#fef9c3" stroke="#d97706" stroke-width="2"/><text x="250" y="88" font-size="10" text-anchor="middle" fill="#92400e">อนุภาค</text><text x="250" y="106" font-size="11" font-weight="bold" text-anchor="middle" fill="#92400e">'+mol.toFixed(2)+' Nᴀ</text>'
   +'<line x1="92" y1="92" x2="106" y2="92" stroke="#94a3b8" stroke-width="2"/><line x1="192" y1="92" x2="206" y2="92" stroke="#94a3b8" stroke-width="2"/>'
   +(gas?'<text x="150" y="150" font-size="10" text-anchor="middle" fill="#0369a1">แก๊สที่ STP: '+vol.toFixed(2)+' L  (× 22.4)</text>':'<text x="150" y="150" font-size="9" text-anchor="middle" fill="#94a3b8">— ของแข็ง/ของเหลว ไม่คิดปริมาตร STP —</text>')
@@ -18886,7 +18900,11 @@ Lab.renderMole=()=>{
   const s=MOLE_SUBS[MOL.sub], M=s.M, mol=MOL.mol;
   const mass=mol*M, particles=mol*NA, vol=s.gas?mol*22.4:0;
   let h=Lab._labHead('🔢 แปลงโมล ↔ มวล ↔ อนุภาค');
+  h+=Lab._modeChips(MOL.mode,"Lab.molMode('free')","Lab.molMode('challenge')");
   h+='<div style="font-size:12px;color:var(--muted);">เลือกสารแล้วเลื่อนปรับจำนวนโมล — ทุกค่าสัมพันธ์กันโดยมี "โมล" เป็นศูนย์กลาง</div>';
+  if(MOL.mode==='challenge'){ const diff=Math.abs(mass-MOL.target), ok=diff<=0.5;
+    h+=Lab._goalBox('ปรับให้ได้มวล = '+MOL.target.toFixed(0)+' g (เลือกสาร + จำนวนโมล)', ok,
+      Lab._fb(ok,'ได้ '+mass.toFixed(2)+' g (ห่าง '+diff.toFixed(2)+')', mass<MOL.target?'เพิ่มโมล/เลือกสารที่หนักกว่า':'ลดโมล/เลือกสารที่เบากว่า'), 'Lab.molNewTarget()'); }
   h+='<div class="vs-presets" style="margin-top:8px;">'+MOLE_SUBS.map((x,i)=>'<button class="vs-chip'+(i===MOL.sub?' active':'')+'" onclick="Lab.molSub('+i+')">'+x.f+'</button>').join('')+'</div>';
   h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._moleSVG(mass,mol,s.gas,vol)+'</div><div>';
   h+='<div class="vs-step"><span class="vs-lbl">'+s.f+' ('+s.n+') · มวลโมเลกุล M = <b>'+M.toFixed(2)+'</b> g/mol</span></div>';
@@ -18907,6 +18925,9 @@ Lab.renderMole=()=>{
 };
 Lab.molSub=(i)=>{ MOL.sub=i; Lab.renderMole(); };
 Lab.molSet=(k,v)=>{ MOL.mol=parseFloat(v); Lab.renderMole(); };
+Lab.molMode=(m)=>{ MOL.mode=m; if(m==='challenge') Lab.molNewTarget(); else Lab.renderMole(); };
+Lab._MOL_TARGETS=[18,36,44,50,80,100];
+Lab.molNewTarget=()=>{ MOL.target=Lab._MOL_TARGETS[Math.floor(Math.random()*Lab._MOL_TARGETS.length)]; Lab.renderMole(); };
 
 /* ── แล็บ: โครงสร้างอะตอม (c1b2) ── */
 let AT = { z:6, n:6, ch:0 };
@@ -18993,6 +19014,9 @@ Lab.renderStoich = ()=>{
 /* ── แล็บ: เจือจางสารละลาย (c2b5) ── */
 let DST = { c1:2.0, v1:50, water:50 };
 Lab.dilSet = (k,v)=>{ DST[k]=parseFloat(v); Lab.renderDilute(); };
+Lab.dilMode = (m)=>{ DST.mode=m; if(m==='challenge') Lab.dilNewTarget(); else Lab.renderDilute(); };
+Lab._DIL_TARGETS=[0.25,0.50,0.75,1.00,1.50];
+Lab.dilNewTarget = ()=>{ DST.target=Lab._DIL_TARGETS[Math.floor(Math.random()*Lab._DIL_TARGETS.length)]; Lab.renderDilute(); };
 Lab._beaker = (bx, frac, conc, maxC, label, sub)=>{
   const W=84, H=120, by=16; const liqH=Math.max(5, frac*(H-16)); const ly=by+H-liqH-4;
   const op=Math.max(0.07, Math.min(0.9, conc/maxC));
@@ -19004,11 +19028,16 @@ Lab._beaker = (bx, frac, conc, maxC, label, sub)=>{
 Lab._range = (k,min,max,step,val,fn)=>'<input type="range" class="lab-range" min="'+min+'" max="'+max+'" step="'+step+'" value="'+val+'" oninput="Lab.'+fn+'(\''+k+'\',this.value)">';
 Lab.renderDilute = ()=>{
   const c1=DST.c1, v1=DST.v1, water=DST.water, v2=v1+water, m2=c1*v1/v2, df=v2/v1, maxC=5;
+  const drip = water>0 ? '<circle cx="234" r="3" fill="#3b82f6"><animate attributeName="cy" values="40;96" dur="0.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" dur="0.8s" repeatCount="indefinite"/></circle>' : '';
   const svg='<svg viewBox="0 0 300 170">'+Lab._beaker(18,Math.min(1,v1/130),c1,maxC,'ก่อน',c1.toFixed(2)+' M · '+v1+' mL')+
-    '<text x="150" y="74" font-size="26" text-anchor="middle" fill="#0ea5a4">➜</text><text x="150" y="92" font-size="10" text-anchor="middle" fill="#64748b">เติมน้ำ '+water+' mL</text>'+
+    '<text x="150" y="74" font-size="26" text-anchor="middle" fill="#0ea5a4">➜</text><text x="150" y="92" font-size="10" text-anchor="middle" fill="#64748b">เติมน้ำ '+water+' mL</text>'+drip+
     Lab._beaker(198,Math.min(1,v2/130),m2,maxC,'หลังเจือจาง',m2.toFixed(2)+' M · '+v2.toFixed(0)+' mL')+'</svg>';
   let h=Lab._labHead('💧 เจือจางสารละลาย');
+  h+=Lab._modeChips(DST.mode,"Lab.dilMode('free')","Lab.dilMode('challenge')");
   h+='<div style="font-size:12px;color:var(--muted);">เลื่อนปรับความเข้มข้นเริ่มต้น ปริมาตรที่ตวง และน้ำที่เติม — สูตร M₁V₁ = M₂V₂</div>';
+  if(DST.mode==='challenge'){ const diff=Math.abs(m2-DST.target), ok=diff<=0.03;
+    h+=Lab._goalBox('เจือจางให้ได้ M₂ = '+DST.target.toFixed(2)+' M', ok,
+      Lab._fb(ok,'ได้ '+m2.toFixed(3)+' M (ห่าง '+diff.toFixed(3)+')', m2>DST.target?'เติมน้ำเพิ่ม':'เติมน้ำน้อยลง/เพิ่มความเข้มข้น'), 'Lab.dilNewTarget()'); }
   h+='<div class="vsepr-grid"><div class="vsepr-stage">'+svg+'</div><div>';
   h+='<div class="vs-step"><span class="vs-lbl">ความเข้มข้นเริ่มต้น M₁ = <b>'+c1.toFixed(2)+'</b> M</span></div>'+Lab._range('c1',0.1,5,0.1,c1,'dilSet');
   h+='<div class="vs-step" style="margin-top:12px;"><span class="vs-lbl">ปริมาตรที่ตวง V₁ = <b>'+v1+'</b> mL</span></div>'+Lab._range('v1',10,100,5,v1,'dilSet');
