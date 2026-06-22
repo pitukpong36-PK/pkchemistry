@@ -18729,9 +18729,9 @@ Lab.open = (id)=>{
   else if(id==='vsepr'){ LST={x:4,e:0,atom:'A'}; Lab.renderVsepr(); }
   else if(id==='dilute'){ DST={c1:2.0, v1:50, water:50, mode:'free', target:0.5}; Lab.renderDilute(); }
   else if(id==='stoich'){ STO={rxn:0, amt:RXN[0].def.slice()}; Lab.renderStoich(); }
-  else if(id==='gas'){ GST={mode:'boyle', V:10, T:300, n:1.0, P:0}; Lab.gasRecalc(); Lab.renderGas(); }
+  else if(id==='gas'){ GST={mode:'boyle', V:10, T:300, n:1.0, P:0, chal:false, target:2.5}; Lab.gasRecalc(); Lab.renderGas(); }
   else if(id==='titrate'){ TST={vb:0, mode:'free', target:7.00, hit:false}; Lab.renderTitrate(); }
-  else if(id==='rate'){ RST={T:25, C:1.0, powder:false, cat:false}; Lab.renderRate(); }
+  else if(id==='rate'){ RST={T:25, C:1.0, powder:false, cat:false, mode:'free', target:8}; Lab.renderRate(); }
   else if(id==='equil'){ EQ={N2:1.0, H2:1.5, NH3:0.8, K:1.0, dir:0, msg:'ระบบอยู่ที่ภาวะสมดุล — ลองรบกวนดู'}; Lab.renderEquil(); }
   else if(id==='electro'){ ECH={a:'Zn', b:'Cu'}; Lab.renderEch(); }
   else if(id==='organic'){ ORG={mode:'hc', hcType:'alkane', nC:3, fg:'alcohol'}; Lab.renderOrganic(); }
@@ -19060,6 +19060,9 @@ Lab.gasRecalc = ()=>{ const g=GST;
   else g.V = g.n*GAS_R*g.T/g.P; };
 Lab.gasMode = (m)=>{ GST.mode=m; if(m==='charles'||m==='avogadro'){ GST.P=2.0; } Lab.gasRecalc(); Lab.renderGas(); };
 Lab.gasSet = (k,v)=>{ GST[k]=parseFloat(v); Lab.gasRecalc(); Lab.renderGas(); };
+Lab._GAS_TARGETS=[1.0,1.5,2.5,3.5,5.0];
+Lab.gasChal = ()=>{ GST.chal=!GST.chal; if(GST.chal) Lab.gasNewTarget(); else Lab.renderGas(); };
+Lab.gasNewTarget = ()=>{ GST.target=Lab._GAS_TARGETS[Math.floor(Math.random()*Lab._GAS_TARGETS.length)]; Lab.renderGas(); };
 Lab._gasSvg = ()=>{
   const g=GST, cx=60, top=10, fullH=150, W=80; const vFrac=Math.max(0.12,Math.min(1,g.V/25)); const gasH=fullH*vFrac; const pistonY=top+(fullH-gasH);
   let s='<svg viewBox="0 0 130 180">';
@@ -19077,6 +19080,10 @@ Lab.renderGas = ()=>{
   let h=Lab._labHead('💨 กฎของแก๊ส (PV = nRT)');
   h+='<div class="vs-presets">'+Object.keys(GAS_MODES).map(m=>'<button class="vs-chip'+(g.mode===m?' active':'')+'" onclick="Lab.gasMode(\''+m+'\')">'+GAS_MODES[m].n+'</button>').join('')+'</div>';
   h+='<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">โหมด <b>'+M.n+'</b> — '+M.fix+' · ปรับ '+M.adj+' แล้วดูค่าที่สัมพันธ์ ('+M.rel+')</div>';
+  h+='<div class="vs-presets"><button class="vs-chip'+(g.chal?' active':'')+'" onclick="Lab.gasChal()">🎯 โหมดภารกิจ</button></div>';
+  if(g.chal){ const diff=Math.abs(g.P-g.target), ok=diff<=0.1;
+    h+=Lab._goalBox('ปรับให้ความดัน P = '+g.target.toFixed(1)+' atm', ok,
+      Lab._fb(ok,'ได้ P = '+g.P.toFixed(2)+' atm (ห่าง '+diff.toFixed(2)+')', g.P<g.target?'เพิ่ม P (เช่น ลด V / เพิ่ม T,n)':'ลด P (เช่น เพิ่ม V / ลด T,n)'), 'Lab.gasNewTarget()'); }
   h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._gasSvg()+'</div><div>';
   if(g.mode==='boyle') h+='<div class="vs-step"><span class="vs-lbl">ปริมาตร V = <b>'+g.V.toFixed(1)+'</b> L</span></div>'+Lab._range('V',1,25,0.5,g.V,'gasSet');
   else if(g.mode==='charles'||g.mode==='gaylussac') h+='<div class="vs-step"><span class="vs-lbl">อุณหภูมิ T = <b>'+g.T.toFixed(0)+'</b> K</span></div>'+Lab._range('T',100,600,10,g.T,'gasSet');
@@ -19156,6 +19163,12 @@ Lab.renderTitrate = ()=>{
 let RST = { T:25, C:1.0, powder:false, cat:false };
 Lab.rateSet = (k,v)=>{ RST[k]=parseFloat(v); Lab.renderRate(); };
 Lab.rateTog = (k)=>{ RST[k]=!RST[k]; Lab.renderRate(); };
+Lab._RATE_TARGETS=[5,8,12,20];
+Lab.rateMode = (m)=>{ RST.mode=m; if(m==='challenge') Lab.rateNewTarget(); else Lab.renderRate(); };
+Lab.rateNewTarget = ()=>{ RST.target=Lab._RATE_TARGETS[Math.floor(Math.random()*Lab._RATE_TARGETS.length)]; Lab.renderRate(); };
+Lab._rateParticles = (rel)=>{ const dur=Math.max(0.25,Math.min(1.4,1.5-rel*0.06)); let s='<svg viewBox="0 0 120 64" style="max-width:120px;"><rect x="4" y="4" width="112" height="46" rx="6" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>';
+  for(let i=0;i<8;i++){ const px=12+((i*27)%96), py=12+((i*19)%30); s+='<circle cx="'+px+'" cy="'+py+'" r="3.2" fill="#ea580c" style="animation:gasJit '+dur.toFixed(2)+'s ease-in-out '+(i*0.1).toFixed(2)+'s infinite"/>'; }
+  s+='<text x="60" y="60" font-size="7.5" fill="#9a3412" text-anchor="middle">อัตราสูง → อนุภาคชนถี่ขึ้น</text></svg>'; return s; };
 Lab._rateVal = ()=>RST.C * Math.pow(2,(RST.T-25)/10) * (RST.powder?2.5:1) * (RST.cat?3:1);
 Lab._decayCurve = (rel)=>{
   const x0=38,x1=300,y0=150,y1=16; const k=0.045*rel, A0=100, tmax=60;
@@ -19187,8 +19200,12 @@ Lab._energyDiag = ()=>{
 Lab.renderRate = ()=>{
   const rel=Lab._rateVal(), relTxt=rel.toFixed(2);
   let h=Lab._labHead('⏱️ อัตราการเกิดปฏิกิริยา');
+  h+=Lab._modeChips(RST.mode,"Lab.rateMode('free')","Lab.rateMode('challenge')");
   h+='<div style="font-size:12px;color:var(--muted);">ปรับปัจจัยแล้วดูอัตราสัมพัทธ์ กราฟความเข้มข้น-เวลา และพลังงานก่อกัมมันต์ (Ea)</div>';
-  h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._decayCurve(rel)+Lab._energyDiag()+'</div><div>';
+  if(RST.mode==='challenge'){ const ok=rel>=RST.target;
+    h+=Lab._goalBox('ทำให้อัตราสัมพัทธ์ ≥ '+RST.target+' เท่า', ok,
+      Lab._fb(ok,'อัตราตอนนี้ ×'+relTxt, 'เพิ่มอุณหภูมิ/ความเข้มข้น หรือใช้ผง+ตัวเร่ง'), 'Lab.rateNewTarget()'); }
+  h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._rateParticles(rel)+Lab._decayCurve(rel)+Lab._energyDiag()+'</div><div>';
   h+='<div class="vs-step"><span class="vs-lbl">🌡️ อุณหภูมิ T = <b>'+RST.T+'</b> °C</span></div>'+'<input type="range" class="lab-range" min="0" max="100" step="5" value="'+RST.T+'" oninput="Lab.rateSet(\'T\',this.value)">';
   h+='<div class="vs-step" style="margin-top:12px;"><span class="vs-lbl">🧪 ความเข้มข้น = <b>'+RST.C.toFixed(1)+'</b> M</span></div>'+'<input type="range" class="lab-range" min="0.1" max="2" step="0.1" value="'+RST.C+'" oninput="Lab.rateSet(\'C\',this.value)">';
   h+='<div class="vs-presets" style="margin-top:12px;"><button class="vs-chip'+(RST.powder?' active':'')+'" onclick="Lab.rateTog(\'powder\')">'+(RST.powder?'✓ ':'')+'ผง (พื้นที่ผิวมาก)</button>'+
