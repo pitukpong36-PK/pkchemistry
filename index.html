@@ -18732,8 +18732,8 @@ Lab.open = (id)=>{
   else if(id==='gas'){ GST={mode:'boyle', V:10, T:300, n:1.0, P:0, chal:false, target:2.5}; Lab.gasRecalc(); Lab.renderGas(); }
   else if(id==='titrate'){ TST={vb:0, mode:'free', target:7.00, hit:false}; Lab.renderTitrate(); }
   else if(id==='rate'){ RST={T:25, C:1.0, powder:false, cat:false, mode:'free', target:8}; Lab.renderRate(); }
-  else if(id==='equil'){ EQ={N2:1.0, H2:1.5, NH3:0.8, K:1.0, dir:0, msg:'ระบบอยู่ที่ภาวะสมดุล — ลองรบกวนดู'}; Lab.renderEquil(); }
-  else if(id==='electro'){ ECH={a:'Zn', b:'Cu'}; Lab.renderEch(); }
+  else if(id==='equil'){ EQ={N2:1.0, H2:1.5, NH3:0.8, K:1.0, dir:0, mode:'free', target:2.5, msg:'ระบบอยู่ที่ภาวะสมดุล — ลองรบกวนดู'}; Lab.renderEquil(); }
+  else if(id==='electro'){ ECH={a:'Zn', b:'Cu', mode:'free', target:1.0}; Lab.renderEch(); }
   else if(id==='organic'){ ORG={mode:'hc', hcType:'alkane', nC:3, fg:'alcohol'}; Lab.renderOrganic(); }
   else if(id==='polymer'){ POL={k:'PE', n:4}; Lab.renderPolymer(); }
   else if(id==='enviro'){ ENV={mode:'problem', prob:'warming', elec:5, car:20, meat:1}; Lab.renderEnviro(); }
@@ -19225,7 +19225,15 @@ let EQ = { N2:1.0, H2:1.5, NH3:0.8, K:1.0, dir:0, msg:'ระบบอยู่�
 Lab._eqClamp = ()=>{ ['N2','H2','NH3'].forEach(k=>{ if(EQ[k]<0.05) EQ[k]=0.05; }); };
 Lab._shiftR = (f)=>{ const x=Math.min(EQ.N2, EQ.H2/3)*(f||0.18); EQ.N2-=x; EQ.H2-=3*x; EQ.NH3+=2*x; Lab._eqClamp(); };
 Lab._shiftL = (f)=>{ const x=(EQ.NH3/2)*(f||0.14); EQ.NH3-=2*x; EQ.N2+=x; EQ.H2+=3*x; Lab._eqClamp(); };
-Lab.eqReset = ()=>{ EQ={N2:1.0,H2:1.5,NH3:0.8,K:1.0,dir:0,msg:'รีเซ็ตสู่ภาวะสมดุล'}; Lab.renderEquil(); };
+Lab.eqReset = ()=>{ const md=EQ.mode, tg=EQ.target; EQ={N2:1.0,H2:1.5,NH3:0.8,K:1.0,dir:0,mode:md,target:tg,msg:'รีเซ็ตสู่ภาวะสมดุล'}; Lab.renderEquil(); };
+Lab._EQ_TARGETS=[1.8,2.2,2.8,3.5];
+Lab.eqMode = (m)=>{ EQ.mode=m; if(m==='challenge') Lab.eqNewTarget(); else Lab.renderEquil(); };
+Lab.eqNewTarget = ()=>{ EQ.target=Lab._EQ_TARGETS[Math.floor(Math.random()*Lab._EQ_TARGETS.length)]; Lab.renderEquil(); };
+Lab._eqArrows = (dir)=>{ const f=(dir>0?'1':'0.4'), b=(dir<0?'1':'0.4');
+  return '<svg viewBox="0 0 120 42" style="max-width:150px;margin-top:8px;">'
+   +'<line x1="22" y1="15" x2="98" y2="15" stroke="#0ea5a4" stroke-width="3" opacity="'+f+'"><animate attributeName="opacity" values="'+f+';1;'+f+'" dur="1.1s" repeatCount="indefinite"/></line><path d="M98 15 l-8 -4 l0 8 z" fill="#0ea5a4" opacity="'+f+'"/>'
+   +'<line x1="98" y1="27" x2="22" y2="27" stroke="#dc2626" stroke-width="3" opacity="'+b+'"><animate attributeName="opacity" values="'+b+';1;'+b+'" dur="1.7s" repeatCount="indefinite"/></line><path d="M22 27 l8 -4 l0 8 z" fill="#dc2626" opacity="'+b+'"/>'
+   +'<text x="60" y="9" font-size="8" fill="#0ea5a4" text-anchor="middle">ไปข้างหน้า (สร้าง NH₃)</text><text x="60" y="40" font-size="8" fill="#dc2626" text-anchor="middle">ย้อนกลับ</text></svg>'; };
 Lab.eqStress = (s)=>{
   if(s==='addN2'){ EQ.N2+=0.6; EQ.dir=1; Lab._shiftR(); EQ.msg='เพิ่ม N₂ → ระบบใช้ N₂ ส่วนเกิน เลื่อนไป "ขวา" สร้าง NH₃ มากขึ้น'; }
   else if(s==='addH2'){ EQ.H2+=0.8; EQ.dir=1; Lab._shiftR(); EQ.msg='เพิ่ม H₂ → เลื่อนไป "ขวา" สร้าง NH₃ มากขึ้น'; }
@@ -19247,10 +19255,14 @@ Lab.renderEquil = ()=>{
   const arrow = EQ.dir>0?'➜ เลื่อนขวา':(EQ.dir<0?'⬅ เลื่อนซ้าย':'⇌ ไม่เลื่อน');
   const arrowColor = EQ.dir>0?'#0ea5a4':(EQ.dir<0?'#dc2626':'#64748b');
   let h=Lab._labHead('⚖️ สมดุลเคมี — เลอชาเตอลิเอ');
+  h+=Lab._modeChips(EQ.mode,"Lab.eqMode('free')","Lab.eqMode('challenge')");
   h+='<div style="text-align:center;font-family:Prompt,sans-serif;font-weight:700;font-size:16px;margin:2px 0;">N₂(g) + 3H₂(g) ⇌ 2NH₃(g)　<span style="font-size:12px;color:#dc2626;">ΔH = −92 kJ (คายความร้อน)</span></div>';
+  if(EQ.mode==='challenge'){ const ok=EQ.NH3>=EQ.target;
+    h+=Lab._goalBox('ทำให้ NH₃ ≥ '+EQ.target.toFixed(1)+' โมล (ใช้ปุ่มรบกวนสมดุล)', ok,
+      Lab._fb(ok,'NH₃ ตอนนี้ '+EQ.NH3.toFixed(2)+' โมล', 'เลื่อนสมดุลไปขวา: +N₂/+H₂, −NH₃, เพิ่มความดัน หรือลดอุณหภูมิ'), 'Lab.eqNewTarget()'); }
   h+='<div class="vsepr-grid"><div class="vsepr-stage" style="padding:14px;">'+
      '<div style="display:flex;justify-content:center;gap:14px;align-items:flex-end;">'+Lab._eqBar(EQ.N2,max,'#3b82f6','N₂')+Lab._eqBar(EQ.H2,max,'#0ea5a4','H₂')+Lab._eqBar(EQ.NH3,max,'#f59e0b','NH₃')+'</div>'+
-     '<div style="margin-top:10px;font-weight:700;font-size:15px;color:'+arrowColor+';">'+arrow+'</div></div><div>';
+     '<div style="margin-top:10px;font-weight:700;font-size:15px;color:'+arrowColor+';">'+arrow+'</div>'+Lab._eqArrows(EQ.dir)+'</div><div>';
   h+='<div style="font-size:12.5px;font-weight:600;margin-bottom:6px;">รบกวนสมดุล:</div><div class="vs-presets">'+
      '<button class="vs-chip" onclick="Lab.eqStress(\'addN2\')">+ N₂</button><button class="vs-chip" onclick="Lab.eqStress(\'addH2\')">+ H₂</button>'+
      '<button class="vs-chip" onclick="Lab.eqStress(\'addNH3\')">+ NH₃</button><button class="vs-chip" onclick="Lab.eqStress(\'remNH3\')">− NH₃</button></div>'+
@@ -19277,6 +19289,9 @@ const ELECTRO = [
 let ECH = { a:'Zn', b:'Cu' };
 Lab._em = (k)=>{ for(let i=0;i<ELECTRO.length;i++){ if(ELECTRO[i].k===k) return ELECTRO[i]; } return null; };
 Lab.echSet = (side,k)=>{ ECH[side]=k; Lab.renderEch(); };
+Lab._ECH_TARGETS=[0.5,1.0,1.5,2.5];
+Lab.echMode = (m)=>{ ECH.mode=m; if(m==='challenge') Lab.echNewTarget(); else Lab.renderEch(); };
+Lab.echNewTarget = ()=>{ ECH.target=Lab._ECH_TARGETS[Math.floor(Math.random()*Lab._ECH_TARGETS.length)]; Lab.renderEch(); };
 Lab.echPreset = (a,b)=>{ ECH.a=a; ECH.b=b; Lab.renderEch(); };
 Lab._gcd = (a,b)=>b?Lab._gcd(b,a%b):a;
 Lab._echSvg = (left,right,leftIsAnode,Ecell)=>{
@@ -19290,6 +19305,8 @@ Lab._echSvg = (left,right,leftIsAnode,Ecell)=>{
   // electron flow arrow (anode -> cathode along top)
   const eDir = leftIsAnode? '⟶' : '⟵';
   s+='<text x="115" y="18" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle">e⁻ '+eDir+'</text><text x="205" y="18" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle">'+eDir+' e⁻</text>';
+  // อิเล็กตรอนวิ่งตามลวดด้านบน (แอโนด → แคโทด)
+  { const x0=leftIsAnode?70:250, x1=leftIsAnode?250:70; for(let i=0;i<3;i++){ s+='<circle r="2.8" cy="28" fill="#ef4444"><animate attributeName="cx" values="'+x0+';'+x1+'" dur="1.5s" begin="'+(i*0.5).toFixed(2)+'s" repeatCount="indefinite"/></circle>'; } }
   // salt bridge
   s+='<path d="M95 78 Q95 58 130 58 L190 58 Q225 58 225 78" fill="none" stroke="#cbd5e1" stroke-width="9" stroke-linecap="round"/><text x="160" y="54" font-size="9" fill="#64748b" text-anchor="middle">สะพานเกลือ</text>';
   // beakers
@@ -19305,6 +19322,10 @@ Lab._echSvg = (left,right,leftIsAnode,Ecell)=>{
 Lab.renderEch = ()=>{
   const A=Lab._em(ECH.a), B=Lab._em(ECH.b);
   let h=Lab._labHead('🔋 เซลล์ไฟฟ้าเคมี (กัลวานิก)');
+  h+=Lab._modeChips(ECH.mode,"Lab.echMode('free')","Lab.echMode('challenge')");
+  if(ECH.mode==='challenge'){ const ec=(ECH.a===ECH.b)?0:Math.abs(B.E-A.E), ok=ec>=ECH.target;
+    h+=Lab._goalBox('เลือกคู่โลหะให้ E°cell ≥ '+ECH.target.toFixed(1)+' V', ok,
+      Lab._fb(ok,'E°cell = '+ec.toFixed(2)+' V', 'เลือกโลหะที่ค่า E° ต่างกันมาก (เช่น Mg คู่ Ag)'), 'Lab.echNewTarget()'); }
   h+='<div class="vs-presets"><button class="vs-chip" onclick="Lab.echPreset(\'Zn\',\'Cu\')">เซลล์แดเนียล (Zn–Cu)</button><button class="vs-chip" onclick="Lab.echPreset(\'Cu\',\'Ag\')">Cu–Ag</button><button class="vs-chip" onclick="Lab.echPreset(\'Mg\',\'Cu\')">Mg–Cu</button></div>';
   const opts=(sel)=>ELECTRO.map(m=>'<option value="'+m.k+'"'+(sel===m.k?' selected':'')+'>'+m.k+' ('+m.th+') · E°='+m.E.toFixed(2)+' V</option>').join('');
   h+='<div style="display:flex;gap:10px;margin:8px 0;"><div style="flex:1;"><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">ขั้วซ้าย</div><select class="lab-sel" onchange="Lab.echSet(\'a\',this.value)">'+opts(ECH.a)+'</select></div>'+
