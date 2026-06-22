@@ -20067,11 +20067,30 @@ QGEN.c4b11=function(){ const t=ri(0,1);
 
 /* เป้าหมายจำนวนข้อต่อบท (รวมข้อเดิม) */
 const QGEN_TARGET = { c1b1:100, c1b2:145, c2b4:175, c2b5:110, c2b6:100, c3b7:125, c3b8:100, c3b9:100, c4b10:100, c4b11:100 };
+/* สแนปช็อตโจทย์เขียนมือที่ฝังในหน้า (ก่อนถูก merge) — ใช้เป็นฐานออฟไลน์ + ฐานตอนรีบิลด์จากชีต */
+const QUIZ_EMBED = JSON.parse(JSON.stringify(QUIZ_BANK));
+/* โจทย์จาก Google Sheets (เติมภายหลังตอน boot ถ้าเปิดผ่าน http) — { chId:[{q,c,a,e},...] } หรือ null */
+let QUIZ_SHEET = null;
+
+/* สร้าง QUIZ_BANK ใหม่จากศูนย์ทุกครั้ง → เรียกซ้ำได้ (idempotent) ไม่ทำ QUIZ_EXTRA ซ้ำซ้อน
+   ชั้นโจทย์เขียนมือ: บทไหน "มีในชีต" → ใช้จากชีตแทนทั้งบท, บทไหนไม่มี → ใช้ฝังในหน้า (+QUIZ_EXTRA)
+   จากนั้น QGEN เติมจนถึงเป้าหมายเหมือนเดิม */
 function expandQuizBank(){
-  // 1) รวมโจทย์เขียนมือ (QUIZ_EXTRA) เข้า QUIZ_BANK
-  if(typeof QUIZ_EXTRA!=='undefined'){ for(const k in QUIZ_EXTRA){ if(QUIZ_BANK[k] && QUIZ_EXTRA[k] && QUIZ_EXTRA[k].length) QUIZ_BANK[k]=QUIZ_BANK[k].concat(QUIZ_EXTRA[k]); } }
+  // 1) ชั้นโจทย์เขียนมือ
+  for(const ch in QUIZ_EMBED){
+    if(QUIZ_SHEET && QUIZ_SHEET[ch] && QUIZ_SHEET[ch].length){
+      QUIZ_BANK[ch] = QUIZ_SHEET[ch].slice();
+    } else {
+      QUIZ_BANK[ch] = QUIZ_EMBED[ch].slice();
+      if(typeof QUIZ_EXTRA!=='undefined' && QUIZ_EXTRA[ch] && QUIZ_EXTRA[ch].length)
+        QUIZ_BANK[ch] = QUIZ_BANK[ch].concat(QUIZ_EXTRA[ch]);
+    }
+  }
+  // บทใหม่ที่มีเฉพาะในชีต (ไม่เคยฝังในหน้า)
+  if(QUIZ_SHEET){ for(const ch in QUIZ_SHEET){ if(!QUIZ_EMBED[ch] && QUIZ_SHEET[ch].length) QUIZ_BANK[ch]=QUIZ_SHEET[ch].slice(); } }
   // 2) เครื่องสร้างโจทย์เติมจนถึงเป้าหมาย (กันซ้ำด้วยข้อความคำถาม)
   for(const ch in QGEN_TARGET){ const gen=QGEN[ch]; if(!gen) continue;
+    if(!QUIZ_BANK[ch]) QUIZ_BANK[ch]=[];
     const seen={}; QUIZ_BANK[ch].forEach(q=>{ seen[q.q]=1; });
     const target=QGEN_TARGET[ch]; let guard=0; const maxG=target*80;
     while(QUIZ_BANK[ch].length<target && guard<maxG){ guard++;
@@ -20081,6 +20100,69 @@ function expandQuizBank(){
   }
 }
 expandQuizBank();
+
+/* ═══ คลังโจทย์จาก Google Sheets — แก้โจทย์ในชีตได้โดยไม่ต้องแตะโค้ด ═══
+   วิธีตั้งค่า (ดูคู่มือเต็มใน reports/quiz-google-sheets.md):
+     1) สร้างชีตคอลัมน์:  บท | คำถาม | ตัวเลือก ก | ข | ค | ง | เฉลย(1-4) | คำอธิบาย
+     2) File → Share → Publish to web → เลือกแท็บ → รูปแบบ CSV → คัดลอกลิงก์
+     3) วางลิงก์ในตัวแปร QUIZ_SHEET_URL ด้านล่าง
+   ปล่อยว่าง = ปิดใช้งาน (ใช้โจทย์ฝังในหน้าเท่านั้น เหมือนเดิมทุกประการ)
+   หมายเหตุ: บทที่มีในชีตจะ "แทนทั้งบท" — ใส่โจทย์เดิมของบทนั้นให้ครบก่อนแล้วค่อยเพิ่ม/แก้ */
+const QUIZ_SHEET_URL = '';
+
+/* แยก CSV → แถว ตามมาตรฐาน RFC 4180 (รองรับ field มี comma / ขึ้นบรรทัด / คำพูดซ้อน "") */
+function parseCSV(text){
+  const rows=[]; let row=[], field='', inQ=false; let i=0; const n=text.length;
+  if(text.charCodeAt(0)===0xFEFF) i=1;            // ตัด BOM
+  for(; i<n; i++){ const ch=text[i];
+    if(inQ){
+      if(ch==='"'){ if(text[i+1]==='"'){ field+='"'; i++; } else inQ=false; }
+      else field+=ch;
+    } else if(ch==='"'){ inQ=true; }
+    else if(ch===','){ row.push(field); field=''; }
+    else if(ch==='\n'){ row.push(field); rows.push(row); row=[]; field=''; }
+    else if(ch!=='\r'){ field+=ch; }
+  }
+  if(field.length||row.length){ row.push(field); rows.push(row); }
+  return rows;
+}
+
+/* แปลงแถว CSV → { chId:[{q,c,a,e}] } ; ข้าม header และแถวที่ข้อมูลไม่ครบ/ไม่ถูกต้อง */
+function rowsToBank(rows){
+  if(!rows || !rows.length) return null;
+  const ANS=6, bank={};
+  let start=0; const first=rows[0]||[];
+  if(!/^[1-4]$/.test(String(first[ANS]||'').trim())) start=1;   // แถวแรกเป็นหัวตาราง → ข้าม
+  for(let r=start; r<rows.length; r++){ const c=rows[r]; if(!c) continue;
+    const ch=(c[0]||'').trim(), q=(c[1]||'').trim();
+    const opts=[(c[2]||'').trim(),(c[3]||'').trim(),(c[4]||'').trim(),(c[5]||'').trim()];
+    const a=parseInt(String(c[ANS]||'').trim(),10)-1, e=(c[7]||'').trim();
+    if(!ch || !q) continue;
+    if(opts.some(o=>!o)) continue;                 // ต้องครบ 4 ตัวเลือก
+    if(!(a>=0 && a<4)) continue;                   // เฉลยต้องเป็น 1-4
+    (bank[ch]=bank[ch]||[]).push({ q, c:opts, a, e });
+  }
+  return Object.keys(bank).length ? bank : null;
+}
+
+/* โหลดโจทย์จากชีตแล้วรีบิลด์คลัง (เฉพาะตอนเปิดผ่าน http(s); file:// ข้ามเพราะ fetch ถูกบล็อก) */
+async function loadQuizFromSheet(){
+  if(!QUIZ_SHEET_URL) return false;
+  if(!/^https?:$/.test(location.protocol)) return false;
+  try{
+    const res=await fetch(QUIZ_SHEET_URL, { cache:'no-cache' });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const bank=rowsToBank(parseCSV(await res.text()));
+    if(bank){
+      QUIZ_SHEET=bank; expandQuizBank();
+      const n=Object.values(bank).reduce((a,x)=>a+x.length,0);
+      console.info('[quiz] โหลดโจทย์จากชีต '+n+' ข้อ ใน '+Object.keys(bank).length+' บท');
+      return true;
+    }
+    console.warn('[quiz] ชีตไม่มีข้อมูลที่ใช้ได้ → ใช้โจทย์ฝังในหน้าแทน');
+  }catch(e){ console.warn('[quiz] ใช้โจทย์ฝังในหน้าแทน (ดึงชีตไม่ได้):', e); }
+  return false;
+}
 try{ PK.selfTest(); }catch(e){ console.error('selfTest failed', e); }
 /* ─── TEACHER DASHBOARD ─── */
 PK.isTeacher = () => !!(state.user && TEACHER_EMAILS.map(e=>e.toLowerCase()).includes((state.user.email||'').toLowerCase()));
@@ -20186,6 +20268,7 @@ window.addEventListener('beforeunload', ()=>{ if(state.mode==='cloud' && PK._bac
 
 /* ═══ 6) BOOT ═══ */
 (async function boot(){
+  await loadQuizFromSheet();   // ดึงคลังโจทย์จาก Google Sheets มาทับ (ถ้าตั้งค่า QUIZ_SHEET_URL + เปิดผ่าน http)
   let backend;
   if(CLOUD){
     try{ backend=CloudBackend; await backend.init(); }
