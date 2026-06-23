@@ -19439,30 +19439,57 @@ Lab.echMode = (m)=>{ ECH.mode=m; if(m==='challenge') Lab.echNewTarget(); else La
 Lab.echNewTarget = ()=>{ ECH.target=Lab._ECH_TARGETS[Math.floor(Math.random()*Lab._ECH_TARGETS.length)]; Lab.renderEch(); };
 Lab.echPreset = (a,b)=>{ ECH.a=a; ECH.b=b; Lab.renderEch(); };
 Lab._gcd = (a,b)=>b?Lab._gcd(b,a%b):a;
-Lab._echSvg = (left,right,leftIsAnode,Ecell)=>{
-  const Llab = leftIsAnode?'แอโนด (−)':'แคโทด (+)', Rlab = leftIsAnode?'แคโทด (+)':'แอโนด (−)';
-  let s='<svg viewBox="0 0 320 210">';
-  // voltmeter
-  s+='<circle cx="160" cy="28" r="20" fill="#fff" stroke="#475569" stroke-width="2.5"/><text x="160" y="24" font-size="13" font-weight="700" fill="#334155" text-anchor="middle">V</text><text x="160" y="38" font-size="10" fill="#0f766e" text-anchor="middle">'+Ecell.toFixed(2)+'</text>';
-  // wires
-  s+='<line x1="70" y1="60" x2="70" y2="28" stroke="#475569" stroke-width="2.5"/><line x1="70" y1="28" x2="140" y2="28" stroke="#475569" stroke-width="2.5"/>';
-  s+='<line x1="250" y1="60" x2="250" y2="28" stroke="#475569" stroke-width="2.5"/><line x1="250" y1="28" x2="180" y2="28" stroke="#475569" stroke-width="2.5"/>';
-  // electron flow arrow (anode -> cathode along top)
-  const eDir = leftIsAnode? '⟶' : '⟵';
-  s+='<text x="115" y="18" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle">e⁻ '+eDir+'</text><text x="205" y="18" font-size="11" font-weight="700" fill="#dc2626" text-anchor="middle">'+eDir+' e⁻</text>';
-  // อิเล็กตรอนวิ่งตามลวดด้านบน (แอโนด → แคโทด)
-  { const x0=leftIsAnode?70:250, x1=leftIsAnode?250:70; for(let i=0;i<3;i++){ s+='<circle r="2.8" cy="28" fill="#ef4444"><animate attributeName="cx" values="'+x0+';'+x1+'" dur="1.5s" begin="'+(i*0.5).toFixed(2)+'s" repeatCount="indefinite"/></circle>'; } }
-  // salt bridge
-  s+='<path d="M95 78 Q95 58 130 58 L190 58 Q225 58 225 78" fill="none" stroke="#cbd5e1" stroke-width="9" stroke-linecap="round"/><text x="160" y="54" font-size="9" fill="#64748b" text-anchor="middle">สะพานเกลือ</text>';
-  // beakers
-  s+='<rect x="40" y="80" width="80" height="100" rx="6" fill="#dbeafe" fill-opacity="0.5" stroke="#94a3b8" stroke-width="2.5"/>';
-  s+='<rect x="200" y="80" width="80" height="100" rx="6" fill="#fde68a" fill-opacity="0.4" stroke="#94a3b8" stroke-width="2.5"/>';
-  // electrodes
-  s+='<rect x="65" y="58" width="10" height="92" fill="#64748b"/><rect x="245" y="58" width="10" height="92" fill="#b45309"/>';
-  // labels
-  s+='<text x="70" y="196" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">'+left.k+'</text><text x="70" y="208" font-size="9.5" fill="#64748b" text-anchor="middle">'+Llab+'</text>';
-  s+='<text x="250" y="196" font-size="12" font-weight="700" fill="#334155" text-anchor="middle">'+right.k+'</text><text x="250" y="208" font-size="9.5" fill="#64748b" text-anchor="middle">'+Rlab+'</text>';
-  s+='</svg>'; return s;
+/* เดินตำแหน่งตามเส้น polyline ที่พารามิเตอร์ t∈[0,1] (ความยาวสะสม) */
+Lab._along = (pts, t)=>{ let segs=[], total=0;
+  for(let i=0;i<pts.length-1;i++){ const len=Math.hypot(pts[i+1][0]-pts[i][0],pts[i+1][1]-pts[i][1]); segs.push(len); total+=len; }
+  let d=t*total;
+  for(let i=0;i<segs.length;i++){ if(d<=segs[i]){ const f=segs[i]?d/segs[i]:0;
+      return [pts[i][0]+(pts[i+1][0]-pts[i][0])*f, pts[i][1]+(pts[i+1][1]-pts[i][1])*f]; } d-=segs[i]; }
+  return pts[pts.length-1]; };
+/* ── เครื่องยนต์เคมีไฟฟ้า: อิเล็กตรอนไหลตามลวด (เร็ว ∝ E°cell) + ไอออนเคลื่อนในบีกเกอร์ทั้งสอง ── */
+Lab._echEng = { es:[], ions:[] };
+Lab._echStart = (left,right,leftIsAnode,Ecell)=>{
+  const E=Lab._echEng, aX=leftIsAnode?70:250, cX=leftIsAnode?250:70;
+  const path=[[aX,60],[aX,28],[cX,28],[cX,60]];
+  const Llab=leftIsAnode?'แอโนด (−)':'แคโทด (+)', Rlab=leftIsAnode?'แคโทด (+)':'แอโนด (−)';
+  if(E.es.length!==6){ E.es=[]; for(let i=0;i<6;i++) E.es.push({t:i/6}); }
+  if(E.ions.length!==12){ E.ions=[]; for(let i=0;i<12;i++){ const lf=i<6;
+    E.ions.push({ x:(lf?44:204)+Math.random()*68, y:90+Math.random()*82, a:Math.random()*6.283, lf:lf }); } }
+  Lab._runCanvas('echCanvas', ctx=>{
+    ctx.setTransform(2,0,0,2,0,0); ctx.clearRect(0,0,320,210);
+    const spd=0.004+0.007*Math.min(2.5,Ecell)/2.5;
+    /* โวลต์มิเตอร์ */
+    ctx.fillStyle='#fff'; ctx.strokeStyle='#475569'; ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.arc(160,28,20,0,6.283); ctx.fill(); ctx.stroke();
+    ctx.fillStyle='#334155'; ctx.font='700 13px sans-serif'; ctx.textAlign='center'; ctx.fillText('V',160,32);
+    ctx.fillStyle='#0f766e'; ctx.font='10px sans-serif'; ctx.fillText(Ecell.toFixed(2),160,43);
+    /* ลวด */
+    ctx.strokeStyle='#475569'; ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.moveTo(70,60); ctx.lineTo(70,28); ctx.lineTo(140,28); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(250,60); ctx.lineTo(250,28); ctx.lineTo(180,28); ctx.stroke();
+    const eDir=leftIsAnode?'→':'←'; ctx.fillStyle='#dc2626'; ctx.font='700 11px sans-serif';
+    ctx.fillText('e⁻ '+eDir,115,16); ctx.fillText(eDir+' e⁻',205,16);
+    /* สะพานเกลือ */
+    ctx.strokeStyle='#cbd5e1'; ctx.lineWidth=9; ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(95,78); ctx.quadraticCurveTo(95,58,130,58); ctx.lineTo(190,58); ctx.quadraticCurveTo(225,58,225,78); ctx.stroke();
+    ctx.lineCap='butt'; ctx.fillStyle='#64748b'; ctx.font='9px sans-serif'; ctx.fillText('สะพานเกลือ',160,54);
+    /* บีกเกอร์ */
+    ctx.fillStyle='rgba(219,234,254,0.5)'; ctx.strokeStyle='#94a3b8'; ctx.lineWidth=2.5; Lab._rRect(ctx,40,80,80,100,6); ctx.fill(); ctx.stroke();
+    ctx.fillStyle='rgba(253,230,138,0.4)'; Lab._rRect(ctx,200,80,80,100,6); ctx.fill(); ctx.stroke();
+    /* ไอออนเคลื่อนในสารละลาย */
+    E.ions.forEach(p=>{ p.x+=Math.cos(p.a)*0.32; p.y+=Math.sin(p.a)*0.32;
+      Lab._bounce(p,(p.lf?42:202),(p.lf?118:278),84,176,3);
+      ctx.beginPath(); ctx.arc(p.x,p.y,3,0,6.283); ctx.fillStyle=p.lf?'#3b82f6':'#b45309'; ctx.fill(); });
+    /* ขั้วไฟฟ้า */
+    ctx.fillStyle='#64748b'; ctx.fillRect(65,58,10,92); ctx.fillStyle='#b45309'; ctx.fillRect(245,58,10,92);
+    /* อิเล็กตรอนไหลตามลวด */
+    ctx.fillStyle='#ef4444';
+    E.es.forEach(e=>{ e.t+=spd; if(e.t>1) e.t-=1; const pos=Lab._along(path,e.t);
+      ctx.beginPath(); ctx.arc(pos[0],pos[1],2.8,0,6.283); ctx.fill(); });
+    /* ป้ายขั้ว */
+    ctx.fillStyle='#334155'; ctx.font='700 12px sans-serif'; ctx.fillText(left.k,70,196); ctx.fillText(right.k,250,196);
+    ctx.fillStyle='#64748b'; ctx.font='9.5px sans-serif'; ctx.fillText(Llab,70,208); ctx.fillText(Rlab,250,208);
+  });
 };
 Lab.renderEch = ()=>{
   const A=Lab._em(ECH.a), B=Lab._em(ECH.b);
@@ -19486,7 +19513,7 @@ Lab.renderEch = ()=>{
   const oxi = co(cA)+anode.k+'(s) → '+co(cA)+anode.ion+' + '+lcm+'e⁻';
   const red = co(cC)+cathode.ion+' + '+lcm+'e⁻ → '+co(cC)+cathode.k+'(s)';
   const net = co(cA)+anode.k+' + '+co(cC)+cathode.ion+' → '+co(cA)+anode.ion+' + '+co(cC)+cathode.k;
-  h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._echSvg(A,B,leftIsAnode,Ecell)+'</div><div>';
+  h+='<div class="vsepr-grid"><div class="vsepr-stage"><canvas id="echCanvas" width="640" height="420" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto;"></canvas></div><div>';
   h+='<div class="vs-info"><div class="vs-axe">E°cell = +'+Ecell.toFixed(2)+' V</div>'+
      '<div class="vs-shape">'+(Ecell>0?'ปฏิกิริยาเกิดเองได้ (spontaneous)':'ไม่เกิดเอง')+'<span>E°cell = E°แคโทด − E°แอโนด = '+cathode.E.toFixed(2)+' − ('+anode.E.toFixed(2)+')</span></div>'+
      '<div class="vs-stat"><span>แอโนด (ออกซิเดชัน, −)</span><b>'+anode.k+'</b></div>'+
@@ -19497,7 +19524,7 @@ Lab.renderEch = ()=>{
        '<div><b style="color:#0f766e;">แคโทด:</b> '+red+'</div>'+
        '<div style="margin-top:4px;border-top:1px solid var(--border);padding-top:4px;"><b>รวม:</b> '+net+'</div></div>'+
      '<div style="font-size:10.5px;color:var(--muted);margin-top:8px;">จำง่าย: AN-OX / RED-CAT · อิเล็กตรอนไหลจากแอโนด(−)ไปแคโทด(+) ผ่านลวด · โลหะ E° ต่ำกว่าเป็นแอโนด</div></div>';
-  h+='</div></div>'; $('labRoot').innerHTML=h;
+  h+='</div></div>'; $('labRoot').innerHTML=h; Lab._echStart(A,B,leftIsAnode,Ecell);
 };
 
 /* ── แล็บ: เคมีอินทรีย์ (c5b12) ── */
