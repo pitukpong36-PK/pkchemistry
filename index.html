@@ -18734,6 +18734,7 @@ const LAB_PRESETS = [
 ];
 let LST = { x:4, e:0, atom:'A' };
 Lab.openHub = ()=>{
+  Lab._stopAnim();
   let h='<div style="font-size:13px;color:var(--muted);margin-bottom:14px;">เลือกแล็บด้านล่างเพื่อเริ่มทดลอง — แต่ละแล็บจับคู่กับบทเรียน</div>';
   h+='<div class="lab-hub">';
   LABS.forEach(L=>{ h+='<div class="lab-card" onclick="Lab.open(\''+L.id+'\')"><div class="lc-ic">'+L.ic+'</div><div class="lc-ch">'+L.ch+'</div><h4>'+L.name+'</h4><p>'+L.desc+'</p></div>'; });
@@ -18742,6 +18743,7 @@ Lab.openHub = ()=>{
   $('labRoot').innerHTML=h;
 };
 Lab.open = (id)=>{
+  Lab._stopAnim();
   if(id==='safety'){ SAF={mode:'ghs', sym:0, num:'0.04060', dp:2, qi:0, qans:null, qopts:[]}; Lab.renderSafety(); return; }
   if(id==='mole'){ MOL={sub:0, mol:1.0, mode:'free', target:36.0}; Lab.renderMole(); return; }
   if(id==='atom'){ const e=ELEMENTS[5]; AT={z:6, n:Math.round(e[4])-6, ch:0}; Lab.renderAtom(); }
@@ -19109,17 +19111,44 @@ Lab.gasSet = (k,v)=>{ GST[k]=parseFloat(v); Lab.gasRecalc(); Lab.renderGas(); };
 Lab._GAS_TARGETS=[1.0,1.5,2.5,3.5,5.0];
 Lab.gasChal = ()=>{ GST.chal=!GST.chal; if(GST.chal) Lab.gasNewTarget(); else Lab.renderGas(); };
 Lab.gasNewTarget = ()=>{ GST.target=Lab._GAS_TARGETS[Math.floor(Math.random()*Lab._GAS_TARGETS.length)]; Lab.renderGas(); };
-Lab._gasSvg = ()=>{
-  const g=GST, cx=60, top=10, fullH=150, W=80; const vFrac=Math.max(0.12,Math.min(1,g.V/25)); const gasH=fullH*vFrac; const pistonY=top+(fullH-gasH);
-  let s='<svg viewBox="0 0 130 180">';
-  s+='<rect x="'+(cx-W/2)+'" y="'+top+'" width="'+W+'" height="'+fullH+'" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="3"/>';
-  s+='<rect x="'+(cx-W/2)+'" y="'+pistonY+'" width="'+W+'" height="'+gasH+'" fill="#7dd3fc" fill-opacity="0.3"/>';
-  const N=Math.max(3,Math.round(g.n*7)); const dur=Math.max(0.35,1.7-g.T/450);
-  for(let i=0;i<N;i++){ const px=cx-W/2+8+((i*23)%(W-16)); const py=pistonY+8+(((i*37)%(Math.max(8,gasH-16))));
-    s+='<circle cx="'+px+'" cy="'+py+'" r="3.4" fill="#0369a1" style="animation:gasJit '+dur.toFixed(2)+'s ease-in-out '+(i*0.13).toFixed(2)+'s infinite"/>'; }
-  s+='<rect x="'+(cx-W/2-3)+'" y="'+(pistonY-7)+'" width="'+(W+6)+'" height="8" rx="2" fill="#475569"/>';
-  s+='<rect x="'+(cx-5)+'" y="'+(pistonY-18)+'" width="10" height="12" fill="#475569"/>';
-  s+='</svg>'; return s;
+/* เครื่องยนต์อนุภาคแก๊ส (rAF) — อนุภาควิ่งจริง ชนผนัง · ความเร็ว ∝ √T · จำนวน ∝ n · ลูกสูบขยับตาม V */
+Lab._gasEng = { raf:0, parts:[] };
+Lab._stopAnim = ()=>{ if(Lab._gasEng && Lab._gasEng.raf){ cancelAnimationFrame(Lab._gasEng.raf); Lab._gasEng.raf=0; } };
+Lab._gasBounds = ()=>{ const g=GST, cx=60, top=10, fullH=150, W=80;
+  const vFrac=Math.max(0.12,Math.min(1,g.V/25)), gasH=fullH*vFrac, pistonY=top+(fullH-gasH);
+  return { cx:cx, top:top, fullH:fullH, W:W, pistonY:pistonY,
+    left:cx-W/2+4, right:cx+W/2-4, topY:pistonY+4, botY:top+fullH-4 }; };
+Lab._rRect = (ctx,x,y,w,h,r)=>{ ctx.beginPath(); ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); };
+Lab._gasStart = ()=>{
+  Lab._stopAnim();
+  const cv=document.getElementById('gasCanvas'); if(!cv) return;
+  const ctx=cv.getContext('2d'), E=Lab._gasEng, b0=Lab._gasBounds();
+  const want=Math.max(4,Math.min(40,Math.round(GST.n*12)));
+  if(E.parts.length!==want){ E.parts=[]; for(let i=0;i<want;i++) E.parts.push({
+    x:b0.left+Math.random()*(b0.right-b0.left), y:b0.topY+Math.random()*(b0.botY-b0.topY),
+    a:Math.random()*Math.PI*2, sp:0.8+Math.random()*0.55 }); }
+  const loop=()=>{
+    if(!document.getElementById('gasCanvas')){ E.raf=0; return; }   /* ออกจากหน้าแล็บ → หยุดเอง กันรั่ว */
+    const b=Lab._gasBounds(), vmag=0.55*Math.sqrt(GST.T/300);
+    ctx.setTransform(2,0,0,2,0,0); ctx.clearRect(0,0,130,180);
+    ctx.fillStyle='#f1f5f9'; ctx.strokeStyle='#94a3b8'; ctx.lineWidth=3;
+    Lab._rRect(ctx,b.cx-b.W/2,b.top,b.W,b.fullH,4); ctx.fill(); ctx.stroke();
+    ctx.fillStyle='rgba(125,211,252,0.30)'; ctx.fillRect(b.cx-b.W/2,b.pistonY,b.W,b.top+b.fullH-b.pistonY);
+    ctx.fillStyle='#0369a1';
+    E.parts.forEach(p=>{
+      p.x+=Math.cos(p.a)*vmag*p.sp; p.y+=Math.sin(p.a)*vmag*p.sp;
+      if(p.x<b.left){ p.x=b.left; p.a=Math.PI-p.a; } else if(p.x>b.right){ p.x=b.right; p.a=Math.PI-p.a; }
+      if(p.y<b.topY){ p.y=b.topY; p.a=-p.a; } else if(p.y>b.botY){ p.y=b.botY; p.a=-p.a; }
+      p.x=Math.max(b.left,Math.min(b.right,p.x)); p.y=Math.max(b.topY,Math.min(b.botY,p.y));
+      ctx.beginPath(); ctx.arc(p.x,p.y,3.2,0,6.283); ctx.fill();
+    });
+    ctx.fillStyle='#475569';
+    Lab._rRect(ctx,b.cx-b.W/2-3,b.pistonY-7,b.W+6,8,2); ctx.fill();
+    ctx.fillRect(b.cx-5,b.pistonY-18,10,12);
+    E.raf=requestAnimationFrame(loop);
+  };
+  loop();
 };
 Lab.renderGas = ()=>{
   const g=GST, M=GAS_MODES[g.mode];
@@ -19130,7 +19159,7 @@ Lab.renderGas = ()=>{
   if(g.chal){ const diff=Math.abs(g.P-g.target), ok=diff<=0.1;
     h+=Lab._goalBox('ปรับให้ความดัน P = '+g.target.toFixed(1)+' atm', ok,
       Lab._fb(ok,'ได้ P = '+g.P.toFixed(2)+' atm (ห่าง '+diff.toFixed(2)+')', g.P<g.target?'เพิ่ม P (เช่น ลด V / เพิ่ม T,n)':'ลด P (เช่น เพิ่ม V / ลด T,n)'), 'Lab.gasNewTarget()'); }
-  h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._gasSvg()+'</div><div>';
+  h+='<div class="vsepr-grid"><div class="vsepr-stage"><canvas id="gasCanvas" width="260" height="360" style="width:130px;height:180px;"></canvas></div><div>';
   if(g.mode==='boyle') h+='<div class="vs-step"><span class="vs-lbl">ปริมาตร V = <b>'+g.V.toFixed(1)+'</b> L</span></div>'+Lab._range('V',1,25,0.5,g.V,'gasSet');
   else if(g.mode==='charles'||g.mode==='gaylussac') h+='<div class="vs-step"><span class="vs-lbl">อุณหภูมิ T = <b>'+g.T.toFixed(0)+'</b> K</span></div>'+Lab._range('T',100,600,10,g.T,'gasSet');
   else h+='<div class="vs-step"><span class="vs-lbl">จำนวนโมล n = <b>'+g.n.toFixed(2)+'</b> mol</span></div>'+Lab._range('n',0.2,3,0.1,g.n,'gasSet');
@@ -19141,7 +19170,7 @@ Lab.renderGas = ()=>{
      '<div class="vs-stat"><span>จำนวนโมล n</span><b>'+g.n.toFixed(2)+' mol</b></div>'+
      '<div class="vs-stat"><span>ค่าคงที่ R</span><b>0.0821 L·atm/mol·K</b></div>'+
      '<div style="font-size:10.5px;color:var(--muted);margin-top:8px;">ตรวจ: PV = '+(g.P*g.V).toFixed(2)+' · nRT = '+(g.n*GAS_R*g.T).toFixed(2)+' ✓</div></div>';
-  h+='</div></div>'; $('labRoot').innerHTML=h;
+  h+='</div></div>'; $('labRoot').innerHTML=h; Lab._gasStart();
 };
 
 /* ── แล็บ: ไทเทรตกรด-เบส (c4b10) ── */
