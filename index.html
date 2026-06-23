@@ -19111,25 +19111,37 @@ Lab.gasSet = (k,v)=>{ GST[k]=parseFloat(v); Lab.gasRecalc(); Lab.renderGas(); };
 Lab._GAS_TARGETS=[1.0,1.5,2.5,3.5,5.0];
 Lab.gasChal = ()=>{ GST.chal=!GST.chal; if(GST.chal) Lab.gasNewTarget(); else Lab.renderGas(); };
 Lab.gasNewTarget = ()=>{ GST.target=Lab._GAS_TARGETS[Math.floor(Math.random()*Lab._GAS_TARGETS.length)]; Lab.renderGas(); };
-/* เครื่องยนต์อนุภาคแก๊ส (rAF) — อนุภาควิ่งจริง ชนผนัง · ความเร็ว ∝ √T · จำนวน ∝ n · ลูกสูบขยับตาม V */
-Lab._gasEng = { raf:0, parts:[] };
-Lab._stopAnim = ()=>{ if(Lab._gasEng && Lab._gasEng.raf){ cancelAnimationFrame(Lab._gasEng.raf); Lab._gasEng.raf=0; } };
+/* ── เครื่องยนต์ canvas กลาง (rAF) ใช้ซ้ำทุกแล็บ: รัน loop เดียว · หยุดเองเมื่อ canvas หาย (กันรั่ว) ── */
+Lab._rafId = 0;
+Lab._stopAnim = ()=>{ if(Lab._rafId){ cancelAnimationFrame(Lab._rafId); Lab._rafId=0; } };
+Lab._runCanvas = (id, draw)=>{
+  Lab._stopAnim();
+  const cv=document.getElementById(id); if(!cv) return;
+  const ctx=cv.getContext('2d');
+  const step=()=>{ if(!document.getElementById(id)){ Lab._rafId=0; return; }
+    draw(ctx); Lab._rafId=requestAnimationFrame(step); };
+  step();
+};
+Lab._rRect = (ctx,x,y,w,h,r)=>{ ctx.beginPath(); ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); };
+/* สะท้อนผนังกรอบ [L,R]×[Tp,Bt] เผื่อรัศมี r — ใช้มุม p.a เป็นทิศ */
+Lab._bounce = (p,L,R,Tp,Bt,r)=>{ r=r||0;
+  if(p.x<L+r){ p.x=L+r; p.a=Math.PI-p.a; } else if(p.x>R-r){ p.x=R-r; p.a=Math.PI-p.a; }
+  if(p.y<Tp+r){ p.y=Tp+r; p.a=-p.a; } else if(p.y>Bt-r){ p.y=Bt-r; p.a=-p.a; } };
+
+/* ── เครื่องยนต์อนุภาคแก๊ส: อนุภาควิ่งจริง ชนผนัง · ความเร็ว ∝ √T · จำนวน ∝ n · ลูกสูบขยับตาม V ── */
+Lab._gasEng = { parts:[] };
 Lab._gasBounds = ()=>{ const g=GST, cx=60, top=10, fullH=150, W=80;
   const vFrac=Math.max(0.12,Math.min(1,g.V/25)), gasH=fullH*vFrac, pistonY=top+(fullH-gasH);
   return { cx:cx, top:top, fullH:fullH, W:W, pistonY:pistonY,
     left:cx-W/2+4, right:cx+W/2-4, topY:pistonY+4, botY:top+fullH-4 }; };
-Lab._rRect = (ctx,x,y,w,h,r)=>{ ctx.beginPath(); ctx.moveTo(x+r,y);
-  ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); };
 Lab._gasStart = ()=>{
-  Lab._stopAnim();
-  const cv=document.getElementById('gasCanvas'); if(!cv) return;
-  const ctx=cv.getContext('2d'), E=Lab._gasEng, b0=Lab._gasBounds();
+  const E=Lab._gasEng, b0=Lab._gasBounds();
   const want=Math.max(4,Math.min(40,Math.round(GST.n*12)));
   if(E.parts.length!==want){ E.parts=[]; for(let i=0;i<want;i++) E.parts.push({
     x:b0.left+Math.random()*(b0.right-b0.left), y:b0.topY+Math.random()*(b0.botY-b0.topY),
     a:Math.random()*Math.PI*2, sp:0.8+Math.random()*0.55 }); }
-  const loop=()=>{
-    if(!document.getElementById('gasCanvas')){ E.raf=0; return; }   /* ออกจากหน้าแล็บ → หยุดเอง กันรั่ว */
+  Lab._runCanvas('gasCanvas', ctx=>{
     const b=Lab._gasBounds(), vmag=0.55*Math.sqrt(GST.T/300);
     ctx.setTransform(2,0,0,2,0,0); ctx.clearRect(0,0,130,180);
     ctx.fillStyle='#f1f5f9'; ctx.strokeStyle='#94a3b8'; ctx.lineWidth=3;
@@ -19138,17 +19150,14 @@ Lab._gasStart = ()=>{
     ctx.fillStyle='#0369a1';
     E.parts.forEach(p=>{
       p.x+=Math.cos(p.a)*vmag*p.sp; p.y+=Math.sin(p.a)*vmag*p.sp;
-      if(p.x<b.left){ p.x=b.left; p.a=Math.PI-p.a; } else if(p.x>b.right){ p.x=b.right; p.a=Math.PI-p.a; }
-      if(p.y<b.topY){ p.y=b.topY; p.a=-p.a; } else if(p.y>b.botY){ p.y=b.botY; p.a=-p.a; }
+      Lab._bounce(p,b.left,b.right,b.topY,b.botY,0);
       p.x=Math.max(b.left,Math.min(b.right,p.x)); p.y=Math.max(b.topY,Math.min(b.botY,p.y));
       ctx.beginPath(); ctx.arc(p.x,p.y,3.2,0,6.283); ctx.fill();
     });
     ctx.fillStyle='#475569';
     Lab._rRect(ctx,b.cx-b.W/2-3,b.pistonY-7,b.W+6,8,2); ctx.fill();
     ctx.fillRect(b.cx-5,b.pistonY-18,10,12);
-    E.raf=requestAnimationFrame(loop);
-  };
-  loop();
+  });
 };
 Lab.renderGas = ()=>{
   const g=GST, M=GAS_MODES[g.mode];
@@ -19197,6 +19206,33 @@ Lab._titGraph = ()=>{
   s+='<text x="160" y="216" font-size="10" fill="#64748b" text-anchor="middle">ปริมาตร NaOH (mL)</text>';
   s+='</svg>'; return s;
 };
+/* ── เครื่องยนต์ไทเทรต: หยด NaOH ตกจากบิวเรตต์ลงบีกเกอร์ · สีสารละลายเปลี่ยนตาม pH (ใส→ชมพูที่ pH≳8.2) ── */
+Lab._titEng = { drops:[], t:0 };
+Lab._titStart = ()=>{
+  Lab._runCanvas('titCanvas', ctx=>{
+    const E=Lab._titEng, vb=TST.vb, ph=Lab._ph(vb), dripping=vb>0&&vb<50;
+    E.t++;
+    ctx.setTransform(2,0,0,2,0,0); ctx.clearRect(0,0,120,100);
+    /* บิวเรตต์ + ระดับเบสที่เหลือ (ลดลงตามที่หยด) */
+    ctx.fillStyle='#e2e8f0'; ctx.strokeStyle='#94a3b8'; ctx.lineWidth=1; Lab._rRect(ctx,54,2,12,40,2); ctx.fill(); ctx.stroke();
+    const used=vb/50; ctx.fillStyle='rgba(59,130,246,0.45)'; ctx.fillRect(55,2+used*38,10,39-used*38);
+    /* หยดที่กำลังตก */
+    if(dripping && E.t%10===0) E.drops.push({y:44});
+    ctx.fillStyle='#3b82f6';
+    E.drops.forEach(d=>{ d.y+=2.4; ctx.beginPath(); ctx.arc(60,d.y,2.3,0,6.283); ctx.fill(); });
+    E.drops=E.drops.filter(d=>d.y<58);
+    /* บีกเกอร์ */
+    ctx.strokeStyle='#94a3b8'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(40,58); ctx.lineTo(40,92); ctx.lineTo(80,92); ctx.lineTo(80,58); ctx.stroke();
+    /* สารละลาย: ใส (ฟ้าจาง) → ชมพู ตาม pH (อินเตอร์โพเลตสี) + ผิวกระเพื่อมเล็กน้อย */
+    const pk=Math.max(0,Math.min(1,(ph-8.0)/1.3));
+    const r=Math.round(224+(236-224)*pk), gg=Math.round(242+(72-242)*pk), bb=Math.round(254+(153-254)*pk);
+    const wob=Math.sin(E.t*0.08)*1.2;
+    ctx.fillStyle='rgba('+r+','+gg+','+bb+',0.65)'; ctx.fillRect(42,62+wob,36,29-wob);
+    ctx.fillStyle=pk>0.5?'#be185d':'#64748b'; ctx.font='8px sans-serif'; ctx.textAlign='center';
+    ctx.fillText(pk>0.5?'ชมพู (เบส)':'ไม่มีสี', 60, 99);
+  });
+};
 Lab.renderTitrate = ()=>{
   const vb=TST.vb, ph=Lab._ph(vb); const pink = ph>=8.2; const status = ph<6.5?'กรด':(ph>7.5?'เบส':'ใกล้กลาง/จุดสมมูล');
   const beakerFill = pink? '#ec4899' : '#e0f2fe'; const beakerOp = pink? 0.55 : 0.5;
@@ -19220,10 +19256,7 @@ Lab.renderTitrate = ()=>{
       +'<div style="font-size:12.5px;margin-top:6px;">'+fb+'</div></div>';
   }
   h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._titGraph()+
-     '<svg viewBox="0 0 120 100" style="max-width:120px;">'+
-     '<rect x="55" y="2" width="10" height="20" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>'+   // บิวเรตต์
-     (dripping?'<circle cx="60" r="2.6" fill="#3b82f6"><animate attributeName="cy" values="22;46" dur="0.9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" dur="0.9s" repeatCount="indefinite"/></circle>':'')+
-     '<rect x="40" y="26" width="40" height="64" rx="6" fill="none" stroke="#94a3b8" stroke-width="3"/><rect x="43" y="58" width="34" height="29" rx="3" fill="'+beakerFill+'" fill-opacity="'+beakerOp+'"/><text x="60" y="98" font-size="9" fill="#64748b" text-anchor="middle">'+(pink?'ชมพู (เบส)':'ไม่มีสี')+'</text></svg></div><div>';
+     '<canvas id="titCanvas" width="240" height="200" style="width:120px;height:100px;display:block;margin:6px auto 0;"></canvas></div><div>';
   h+='<div class="vs-step"><span class="vs-lbl">หยด NaOH = <b>'+vb.toFixed(1)+'</b> mL</span></div>'+'<input type="range" class="lab-range" min="0" max="50" step="0.5" value="'+vb+'" oninput="Lab.titSet(this.value)">';
   h+='<div class="vs-info" style="margin-top:14px;"><div class="vs-axe">pH = '+ph.toFixed(2)+'</div>'+
      '<div class="vs-shape">'+status+'<span>ฟีนอล์ฟทาลีน: '+(pink?'ชมพูอมม่วง':'ไม่มีสี')+'</span></div>'+
@@ -19231,7 +19264,7 @@ Lab.renderTitrate = ()=>{
      '<div class="vs-stat"><span>โมล OH⁻ ที่เติม</span><b>'+(TIT.Cb*vb/1000).toFixed(4)+' mol</b></div>'+
      '<div class="vs-stat"><span>จุดสมมูล</span><b>25.0 mL (pH 7)</b></div>'+
      '<div style="font-size:10.5px;color:var(--muted);margin-top:8px;">ก่อนสมมูล: H⁺ เหลือ → กรด · ที่สมมูล: เกลือ NaCl เป็นกลาง · หลังสมมูล: OH⁻ เกิน → เบส</div></div>';
-  h+='</div></div>'; $('labRoot').innerHTML=h;
+  h+='</div></div>'; $('labRoot').innerHTML=h; Lab._titStart();
 };
 
 /* ── แล็บ: อัตราการเกิดปฏิกิริยา (c3b8) ── */
@@ -19241,9 +19274,28 @@ Lab.rateTog = (k)=>{ RST[k]=!RST[k]; Lab.renderRate(); };
 Lab._RATE_TARGETS=[5,8,12,20];
 Lab.rateMode = (m)=>{ RST.mode=m; if(m==='challenge') Lab.rateNewTarget(); else Lab.renderRate(); };
 Lab.rateNewTarget = ()=>{ RST.target=Lab._RATE_TARGETS[Math.floor(Math.random()*Lab._RATE_TARGETS.length)]; Lab.renderRate(); };
-Lab._rateParticles = (rel)=>{ const dur=Math.max(0.25,Math.min(1.4,1.5-rel*0.06)); let s='<svg viewBox="0 0 120 64" style="max-width:120px;"><rect x="4" y="4" width="112" height="46" rx="6" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>';
-  for(let i=0;i<8;i++){ const px=12+((i*27)%96), py=12+((i*19)%30); s+='<circle cx="'+px+'" cy="'+py+'" r="3.2" fill="#ea580c" style="animation:gasJit '+dur.toFixed(2)+'s ease-in-out '+(i*0.1).toFixed(2)+'s infinite"/>'; }
-  s+='<text x="60" y="60" font-size="7.5" fill="#9a3412" text-anchor="middle">อัตราสูง → อนุภาคชนถี่ขึ้น</text></svg>'; return s; };
+/* ── เครื่องยนต์อนุภาคอัตรา: อนุภาควิ่ง+ชนกัน → วาบเหลือง = การชนที่เกิดปฏิกิริยา · เร็ว/ถี่ขึ้นตามปัจจัย ── */
+Lab._rateEng = { parts:[] };
+Lab._rateStart = ()=>{
+  const E=Lab._rateEng;
+  const want=Math.max(6,Math.min(26,Math.round(6+RST.C*7+(RST.powder?5:0))));
+  if(E.parts.length!==want){ E.parts=[]; for(let i=0;i<want;i++) E.parts.push({
+    x:10+Math.random()*100, y:10+Math.random()*44, a:Math.random()*6.283, fl:0 }); }
+  Lab._runCanvas('rateCanvas', ctx=>{
+    const vmag=0.45*Math.sqrt(Math.pow(2,(RST.T-25)/10))*(RST.powder?1.15:1);
+    const pReact=RST.cat?0.55:0.2;   /* ตัวเร่งลด Ea → สัดส่วนการชนที่ได้ผลสูงขึ้น */
+    ctx.setTransform(2,0,0,2,0,0); ctx.clearRect(0,0,120,64);
+    ctx.fillStyle='#fff7ed'; ctx.strokeStyle='#fb923c'; ctx.lineWidth=2; Lab._rRect(ctx,4,4,112,46,6); ctx.fill(); ctx.stroke();
+    const L=8,R=112,Tp=8,Bt=46;
+    E.parts.forEach(p=>{ p.x+=Math.cos(p.a)*vmag; p.y+=Math.sin(p.a)*vmag; Lab._bounce(p,L,R,Tp,Bt,3.2); if(p.fl>0)p.fl--; });
+    for(let i=0;i<E.parts.length;i++) for(let j=i+1;j<E.parts.length;j++){
+      const a=E.parts[i], b=E.parts[j], dx=a.x-b.x, dy=a.y-b.y;
+      if(dx*dx+dy*dy<42){ const ang=Math.atan2(dy,dx); a.a=ang; b.a=ang+Math.PI;
+        if(Math.random()<pReact){ a.fl=10; b.fl=10; } } }
+    E.parts.forEach(p=>{ ctx.beginPath(); ctx.arc(p.x,p.y,3.2,0,6.283); ctx.fillStyle=p.fl>0?'#facc15':'#ea580c'; ctx.fill(); });
+    ctx.fillStyle='#9a3412'; ctx.font='7px sans-serif'; ctx.textAlign='center'; ctx.fillText('ชนแล้ววาบเหลือง = ปฏิกิริยาเกิด',60,60);
+  });
+};
 Lab._rateVal = ()=>RST.C * Math.pow(2,(RST.T-25)/10) * (RST.powder?2.5:1) * (RST.cat?3:1);
 Lab._decayCurve = (rel)=>{
   const x0=38,x1=300,y0=150,y1=16; const k=0.045*rel, A0=100, tmax=60;
@@ -19280,7 +19332,7 @@ Lab.renderRate = ()=>{
   if(RST.mode==='challenge'){ const ok=rel>=RST.target;
     h+=Lab._goalBox('ทำให้อัตราสัมพัทธ์ ≥ '+RST.target+' เท่า', ok,
       Lab._fb(ok,'อัตราตอนนี้ ×'+relTxt, 'เพิ่มอุณหภูมิ/ความเข้มข้น หรือใช้ผง+ตัวเร่ง'), 'Lab.rateNewTarget()'); }
-  h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._rateParticles(rel)+Lab._decayCurve(rel)+Lab._energyDiag()+'</div><div>';
+  h+='<div class="vsepr-grid"><div class="vsepr-stage"><canvas id="rateCanvas" width="240" height="128" style="width:120px;height:64px;display:block;margin:0 auto 6px;"></canvas>'+Lab._decayCurve(rel)+Lab._energyDiag()+'</div><div>';
   h+='<div class="vs-step"><span class="vs-lbl">🌡️ อุณหภูมิ T = <b>'+RST.T+'</b> °C</span></div>'+'<input type="range" class="lab-range" min="0" max="100" step="5" value="'+RST.T+'" oninput="Lab.rateSet(\'T\',this.value)">';
   h+='<div class="vs-step" style="margin-top:12px;"><span class="vs-lbl">🧪 ความเข้มข้น = <b>'+RST.C.toFixed(1)+'</b> M</span></div>'+'<input type="range" class="lab-range" min="0.1" max="2" step="0.1" value="'+RST.C+'" oninput="Lab.rateSet(\'C\',this.value)">';
   h+='<div class="vs-presets" style="margin-top:12px;"><button class="vs-chip'+(RST.powder?' active':'')+'" onclick="Lab.rateTog(\'powder\')">'+(RST.powder?'✓ ':'')+'ผง (พื้นที่ผิวมาก)</button>'+
@@ -19292,7 +19344,7 @@ Lab.renderRate = ()=>{
      '<div class="vs-stat"><span>พื้นที่ผิว</span><b>×'+(RST.powder?'2.5':'1')+'</b></div>'+
      '<div class="vs-stat"><span>ตัวเร่งปฏิกิริยา</span><b>×'+(RST.cat?'3':'1')+'</b></div>'+
      '<div style="font-size:10.5px;color:var(--muted);margin-top:8px;">ตามทฤษฎีการชน: ปัจจัยเหล่านี้เพิ่มความถี่/พลังงานการชนที่ได้ผล ตัวเร่งช่วยลด Ea (ไม่เปลี่ยน ΔH)</div></div>';
-  h+='</div></div>'; $('labRoot').innerHTML=h;
+  h+='</div></div>'; $('labRoot').innerHTML=h; Lab._rateStart();
 };
 
 /* ── แล็บ: สมดุลเคมี / เลอชาเตอลิเอ (c3b9) — N₂ + 3H₂ ⇌ 2NH₃ (คายความร้อน) ── */
@@ -19325,6 +19377,23 @@ Lab._eqBar = (val,max,color,label)=>{ const hpx=Math.max(6,Math.min(120,val/max*
   return '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;"><div style="font-size:11px;font-weight:700;color:#334155;">'+val.toFixed(2)+'</div>'+
     '<div style="height:120px;width:34px;display:flex;align-items:flex-end;"><div style="width:100%;height:'+hpx.toFixed(0)+'px;background:'+color+';border-radius:5px 5px 0 0;transition:height .4s;"></div></div>'+
     '<div style="font-size:12px;font-weight:700;color:'+color+';">'+label+'</div></div>'; };
+/* ── เครื่องยนต์โมเลกุลสมดุล: จำนวนอนุภาคแต่ละชนิด ∝ โมล (N₂ น้ำเงิน · H₂ เขียว · NH₃ เหลือง) re-seed เมื่อสัดส่วนเปลี่ยน ── */
+Lab._eqEng = { parts:[], sig:'' };
+Lab._eqStart = ()=>{
+  const E=Lab._eqEng, sc=5;
+  const nN=Math.max(1,Math.round(EQ.N2*sc)), nH=Math.max(1,Math.round(EQ.H2*sc)), nA=Math.max(1,Math.round(EQ.NH3*sc));
+  const sig=nN+'-'+nH+'-'+nA;
+  if(E.sig!==sig){ E.sig=sig; E.parts=[];
+    const add=(n,c,r)=>{ for(let i=0;i<n;i++) E.parts.push({x:12+Math.random()*136,y:12+Math.random()*76,a:Math.random()*6.283,c:c,r:r}); };
+    add(nN,'#3b82f6',4.4); add(nH,'#0ea5a4',2.6); add(nA,'#f59e0b',3.6); }
+  Lab._runCanvas('eqCanvas', ctx=>{
+    ctx.setTransform(2,0,0,2,0,0); ctx.clearRect(0,0,160,100);
+    ctx.fillStyle='#f8fafc'; ctx.strokeStyle='#cbd5e1'; ctx.lineWidth=2; Lab._rRect(ctx,4,4,152,92,8); ctx.fill(); ctx.stroke();
+    const L=6,R=156,Tp=6,Bt=94;
+    E.parts.forEach(p=>{ p.x+=Math.cos(p.a)*0.5; p.y+=Math.sin(p.a)*0.5; Lab._bounce(p,L,R,Tp,Bt,p.r);
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.283); ctx.fillStyle=p.c; ctx.fill(); });
+  });
+};
 Lab.renderEquil = ()=>{
   const max=Math.max(2.5, EQ.N2, EQ.H2, EQ.NH3);
   const arrow = EQ.dir>0?'➜ เลื่อนขวา':(EQ.dir<0?'⬅ เลื่อนซ้าย':'⇌ ไม่เลื่อน');
@@ -19336,6 +19405,7 @@ Lab.renderEquil = ()=>{
     h+=Lab._goalBox('ทำให้ NH₃ ≥ '+EQ.target.toFixed(1)+' โมล (ใช้ปุ่มรบกวนสมดุล)', ok,
       Lab._fb(ok,'NH₃ ตอนนี้ '+EQ.NH3.toFixed(2)+' โมล', 'เลื่อนสมดุลไปขวา: +N₂/+H₂, −NH₃, เพิ่มความดัน หรือลดอุณหภูมิ'), 'Lab.eqNewTarget()'); }
   h+='<div class="vsepr-grid"><div class="vsepr-stage" style="padding:14px;">'+
+     '<canvas id="eqCanvas" width="320" height="200" style="width:160px;height:100px;display:block;margin:0 auto 10px;"></canvas>'+
      '<div style="display:flex;justify-content:center;gap:14px;align-items:flex-end;">'+Lab._eqBar(EQ.N2,max,'#3b82f6','N₂')+Lab._eqBar(EQ.H2,max,'#0ea5a4','H₂')+Lab._eqBar(EQ.NH3,max,'#f59e0b','NH₃')+'</div>'+
      '<div style="margin-top:10px;font-weight:700;font-size:15px;color:'+arrowColor+';">'+arrow+'</div>'+Lab._eqArrows(EQ.dir)+'</div><div>';
   h+='<div style="font-size:12.5px;font-weight:600;margin-bottom:6px;">รบกวนสมดุล:</div><div class="vs-presets">'+
@@ -19348,7 +19418,7 @@ Lab.renderEquil = ()=>{
      '<div class="vs-stat"><span>ค่าคงที่สมดุล K (สัมพัทธ์)</span><b>'+EQ.K.toFixed(2)+'</b></div>'+
      '<div style="font-size:13px;line-height:1.55;margin-top:8px;background:var(--white);border-radius:10px;padding:10px;">'+EQ.msg+'</div>'+
      '<div style="font-size:10.5px;color:var(--muted);margin-top:8px;">หลักเลอชาเตอลิเอ: ระบบจะปรับลดผลของสิ่งรบกวน · เฉพาะ "อุณหภูมิ" เท่านั้นที่เปลี่ยนค่า K · ตัวเร่งไม่เลื่อนสมดุล</div></div>';
-  h+='</div></div>'; $('labRoot').innerHTML=h;
+  h+='</div></div>'; $('labRoot').innerHTML=h; Lab._eqStart();
 };
 
 /* ── แล็บ: เซลล์ไฟฟ้าเคมี (เซลล์กัลวานิก) c4b11 ── */
