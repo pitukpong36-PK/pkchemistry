@@ -18713,19 +18713,19 @@ const LABS = [
 const LABS_SOON = [];
 /* ตารางรูปทรง VSEPR: key = "พันธะ_คู่โดดเดี่ยว" · dom = [มุม(องศา, 0=บน), เป็นคู่โดดเดี่ยว?] */
 const LAB_VSEPR = {
- '2_0':{axe:'AX₂',  name:'เส้นตรง', en:'Linear', ang:'180°', egeo:'เส้นตรง', polar:false, ex:'CO₂, BeCl₂, HCN', dom:[[90,0],[270,0]]},
- '3_0':{axe:'AX₃',  name:'สามเหลี่ยมแบนราบ', en:'Trigonal planar', ang:'120°', egeo:'สามเหลี่ยมแบนราบ', polar:false, ex:'BF₃, SO₃, CO₃²⁻', dom:[[0,0],[120,0],[240,0]]},
- '2_1':{axe:'AX₂E', name:'มุมงอ', en:'Bent', ang:'~118° (<120°)', egeo:'สามเหลี่ยมแบนราบ', polar:true, ex:'SO₂, O₃, NO₂⁻', dom:[[0,1],[125,0],[235,0]]},
- '4_0':{axe:'AX₄',  name:'ทรงสี่หน้า', en:'Tetrahedral', ang:'109.5°', egeo:'ทรงสี่หน้า', polar:false, ex:'CH₄, CCl₄, NH₄⁺', dom:[[45,0],[135,0],[225,0],[315,0]]},
- '3_1':{axe:'AX₃E', name:'พีระมิดฐานสามเหลี่ยม', en:'Trigonal pyramidal', ang:'~107°', egeo:'ทรงสี่หน้า', polar:true, ex:'NH₃, PCl₃, H₃O⁺', dom:[[0,1],[120,0],[180,0],[240,0]]},
- '2_2':{axe:'AX₂E₂',name:'มุมงอ', en:'Bent', ang:'~104.5°', egeo:'ทรงสี่หน้า', polar:true, ex:'H₂O, H₂S, OF₂', dom:[[45,1],[315,1],[130,0],[230,0]]},
- '5_0':{axe:'AX₅',  name:'พีระมิดคู่ฐานสามเหลี่ยม', en:'Trigonal bipyramidal', ang:'90° และ 120°', egeo:'พีระมิดคู่ฐานสามเหลี่ยม', polar:false, ex:'PCl₅, PF₅', dom:[[0,0],[180,0],[90,0],[215,0],[325,0]]},
- '4_1':{axe:'AX₄E', name:'ไม้กระดานหก', en:'Seesaw', ang:'~90°,~120°,~180°', egeo:'พีระมิดคู่ฐานสามเหลี่ยม', polar:true, ex:'SF₄', dom:[[0,0],[180,0],[215,0],[325,0],[90,1]]},
- '3_2':{axe:'AX₃E₂',name:'รูปตัว T', en:'T-shaped', ang:'~90°', egeo:'พีระมิดคู่ฐานสามเหลี่ยม', polar:true, ex:'ClF₃, BrF₃', dom:[[0,0],[180,0],[90,0],[215,1],[325,1]]},
- '2_3':{axe:'AX₂E₃',name:'เส้นตรง', en:'Linear', ang:'180°', egeo:'พีระมิดคู่ฐานสามเหลี่ยม', polar:false, ex:'XeF₂, I₃⁻', dom:[[0,0],[180,0],[90,1],[215,1],[325,1]]},
- '6_0':{axe:'AX₆',  name:'ทรงแปดหน้า', en:'Octahedral', ang:'90°', egeo:'ทรงแปดหน้า', polar:false, ex:'SF₆', dom:[[0,0],[180,0],[90,0],[270,0],[45,0],[225,0]]},
- '5_1':{axe:'AX₅E', name:'พีระมิดฐานสี่เหลี่ยม', en:'Square pyramidal', ang:'~90°', egeo:'ทรงแปดหน้า', polar:true, ex:'BrF₅', dom:[[90,0],[270,0],[45,0],[225,0],[0,0],[180,1]]},
- '4_2':{axe:'AX₄E₂',name:'สี่เหลี่ยมแบนราบ', en:'Square planar', ang:'90°', egeo:'ทรงแปดหน้า', polar:false, ex:'XeF₄', dom:[[90,0],[270,0],[45,0],[225,0],[0,1],[180,1]]}
+ '2_0':{axe:'AX₂',  name:'เส้นตรง', en:'Linear', ang:'180°', egeo:'เส้นตรง', polar:false, ex:'CO₂, BeCl₂, HCN', dom:[[90,0],[270,0]], geom:'ส่วนของเส้นตรง', dom3:[[0,0,1,0],[0,0,-1,0]]},
+ '3_0':{axe:'AX₃',  name:'สามเหลี่ยมแบนราบ', en:'Trigonal planar', ang:'120°', egeo:'สามเหลี่ยมแบนราบ', polar:false, ex:'BF₃, SO₃, CO₃²⁻', dom:[[0,0],[120,0],[240,0]], geom:'สามเหลี่ยมด้านเท่า (ระนาบ)', dom3:[[1,0,0,0],[-0.5,0.866,0,0],[-0.5,-0.866,0,0]]},
+ '2_1':{axe:'AX₂E', name:'มุมงอ', en:'Bent', ang:'~118° (<120°)', egeo:'สามเหลี่ยมแบนราบ', polar:true, ex:'SO₂, O₃, NO₂⁻', dom:[[0,1],[125,0],[235,0]], geom:'มุม / รูปตัว V', dom3:[[1,0,0,1],[-0.5,0.866,0,0],[-0.5,-0.866,0,0]]},
+ '4_0':{axe:'AX₄',  name:'ทรงสี่หน้า', en:'Tetrahedral', ang:'109.5°', egeo:'ทรงสี่หน้า', polar:false, ex:'CH₄, CCl₄, NH₄⁺', dom:[[45,0],[135,0],[225,0],[315,0]], geom:'ทรงสี่หน้า (tetrahedron)', dom3:[[0.577,0.577,0.577,0],[0.577,-0.577,-0.577,0],[-0.577,0.577,-0.577,0],[-0.577,-0.577,0.577,0]]},
+ '3_1':{axe:'AX₃E', name:'พีระมิดฐานสามเหลี่ยม', en:'Trigonal pyramidal', ang:'~107°', egeo:'ทรงสี่หน้า', polar:true, ex:'NH₃, PCl₃, H₃O⁺', dom:[[0,1],[120,0],[180,0],[240,0]], geom:'พีระมิดฐานสามเหลี่ยม', dom3:[[0.577,0.577,0.577,1],[0.577,-0.577,-0.577,0],[-0.577,0.577,-0.577,0],[-0.577,-0.577,0.577,0]]},
+ '2_2':{axe:'AX₂E₂',name:'มุมงอ', en:'Bent', ang:'~104.5°', egeo:'ทรงสี่หน้า', polar:true, ex:'H₂O, H₂S, OF₂', dom:[[45,1],[315,1],[130,0],[230,0]], geom:'มุม / รูปตัว V', dom3:[[0.577,0.577,0.577,1],[-0.577,-0.577,0.577,1],[0.577,-0.577,-0.577,0],[-0.577,0.577,-0.577,0]]},
+ '5_0':{axe:'AX₅',  name:'พีระมิดคู่ฐานสามเหลี่ยม', en:'Trigonal bipyramidal', ang:'90° และ 120°', egeo:'พีระมิดคู่ฐานสามเหลี่ยม', polar:false, ex:'PCl₅, PF₅', dom:[[0,0],[180,0],[90,0],[215,0],[325,0]], geom:'พีระมิดคู่ฐานสามเหลี่ยม', dom3:[[1,0,0,0],[-0.5,0.866,0,0],[-0.5,-0.866,0,0],[0,0,1,0],[0,0,-1,0]]},
+ '4_1':{axe:'AX₄E', name:'ไม้กระดานหก', en:'Seesaw', ang:'~90°,~120°,~180°', egeo:'พีระมิดคู่ฐานสามเหลี่ยม', polar:true, ex:'SF₄', dom:[[0,0],[180,0],[215,0],[325,0],[90,1]], geom:'ดิสฟีนอยด์ (ไม้กระดานหก)', dom3:[[1,0,0,1],[-0.5,0.866,0,0],[-0.5,-0.866,0,0],[0,0,1,0],[0,0,-1,0]]},
+ '3_2':{axe:'AX₃E₂',name:'รูปตัว T', en:'T-shaped', ang:'~90°', egeo:'พีระมิดคู่ฐานสามเหลี่ยม', polar:true, ex:'ClF₃, BrF₃', dom:[[0,0],[180,0],[90,0],[215,1],[325,1]], geom:'รูปตัว T', dom3:[[1,0,0,1],[-0.5,0.866,0,1],[-0.5,-0.866,0,0],[0,0,1,0],[0,0,-1,0]]},
+ '2_3':{axe:'AX₂E₃',name:'เส้นตรง', en:'Linear', ang:'180°', egeo:'พีระมิดคู่ฐานสามเหลี่ยม', polar:false, ex:'XeF₂, I₃⁻', dom:[[0,0],[180,0],[90,1],[215,1],[325,1]], geom:'ส่วนของเส้นตรง', dom3:[[1,0,0,1],[-0.5,0.866,0,1],[-0.5,-0.866,0,1],[0,0,1,0],[0,0,-1,0]]},
+ '6_0':{axe:'AX₆',  name:'ทรงแปดหน้า', en:'Octahedral', ang:'90°', egeo:'ทรงแปดหน้า', polar:false, ex:'SF₆', dom:[[0,0],[180,0],[90,0],[270,0],[45,0],[225,0]], geom:'ทรงแปดหน้า (octahedron)', dom3:[[1,0,0,0],[-1,0,0,0],[0,1,0,0],[0,-1,0,0],[0,0,1,0],[0,0,-1,0]]},
+ '5_1':{axe:'AX₅E', name:'พีระมิดฐานสี่เหลี่ยม', en:'Square pyramidal', ang:'~90°', egeo:'ทรงแปดหน้า', polar:true, ex:'BrF₅', dom:[[90,0],[270,0],[45,0],[225,0],[0,0],[180,1]], geom:'พีระมิดฐานสี่เหลี่ยมจัตุรัส', dom3:[[1,0,0,0],[-1,0,0,0],[0,1,0,0],[0,-1,0,0],[0,0,1,0],[0,0,-1,1]]},
+ '4_2':{axe:'AX₄E₂',name:'สี่เหลี่ยมแบนราบ', en:'Square planar', ang:'90°', egeo:'ทรงแปดหน้า', polar:false, ex:'XeF₄', dom:[[90,0],[270,0],[45,0],[225,0],[0,1],[180,1]], geom:'สี่เหลี่ยมจัตุรัส (ระนาบ)', dom3:[[1,0,0,0],[-1,0,0,0],[0,1,0,0],[0,-1,0,0],[0,0,1,1],[0,0,-1,1]]}
 };
 const LAB_PRESETS = [
   {n:'CO₂',x:2,e:0,a:'C'},{n:'BF₃',x:3,e:0,a:'B'},{n:'SO₂',x:2,e:1,a:'S'},{n:'CH₄',x:4,e:0,a:'C'},
@@ -18777,6 +18777,39 @@ Lab._vsvg = (cfg, atom)=>{
   s+='<circle cx="'+cx+'" cy="'+cy+'" r="22" fill="#0F766E"/><text x="'+cx+'" y="'+cy+'" font-size="17" font-weight="700" fill="#fff" text-anchor="middle" dominant-baseline="central">'+atom+'</text>';
   s+='</svg>'; return s;
 };
+/* ── เครื่องยนต์ VSEPR 3D: หมุนโมเลกุล + วาดโครงพหุหน้า (รูปทรงเรขาคณิต) บน canvas projection เขียนเอง ── */
+Lab._vseprEng = { ang:0 };
+Lab._vseprStart = (key)=>{
+  const cfg=LAB_VSEPR[key]; if(!cfg||!cfg.dom3) return;
+  Lab._runCanvas('vseprCanvas', ctx=>{
+    const E=Lab._vseprEng; E.ang+=0.012;
+    const cx=110, cy=98, scale=60, focal=3.6;
+    const cosY=Math.cos(E.ang), sinY=Math.sin(E.ang), cosX=Math.cos(-0.45), sinX=Math.sin(-0.45);
+    const rot=(p)=>{ const x=p[0]*cosY+p[2]*sinY, z=-p[0]*sinY+p[2]*cosY, y=p[1]*cosX-z*sinX, z2=p[1]*sinX+z*cosX; return [x,y,z2]; };
+    const proj=(v)=>{ const ps=scale*focal/(focal-v[2]); return [cx+v[0]*ps, cy+v[1]*ps]; };
+    ctx.setTransform(2,0,0,2,0,0); ctx.clearRect(0,0,220,200);
+    const R=cfg.dom3.map(d=>{ const r=rot(d); return {p:proj(r), z:r[2], lp:d[3]}; });
+    const c=proj(rot([0,0,0]));
+    ctx.strokeStyle='#94a3b8'; ctx.lineWidth=3;
+    R.forEach(o=>{ if(o.lp) return; ctx.beginPath(); ctx.moveTo(c[0],c[1]); ctx.lineTo(o.p[0],o.p[1]); ctx.stroke(); });
+    const bi=[]; cfg.dom3.forEach((d,i)=>{ if(!d[3]) bi.push(i); });
+    let minD=Infinity; for(let i=0;i<bi.length;i++) for(let j=i+1;j<bi.length;j++){ const a=cfg.dom3[bi[i]],b=cfg.dom3[bi[j]], dd=Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]); if(dd<minD)minD=dd; }
+    ctx.strokeStyle='rgba(13,148,136,0.5)'; ctx.lineWidth=1.6; ctx.setLineDash([4,3]);
+    for(let i=0;i<bi.length;i++) for(let j=i+1;j<bi.length;j++){ const a=cfg.dom3[bi[i]],b=cfg.dom3[bi[j]], dd=Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]);
+      if(dd<=minD*1.28){ ctx.beginPath(); ctx.moveTo(R[bi[i]].p[0],R[bi[i]].p[1]); ctx.lineTo(R[bi[j]].p[0],R[bi[j]].p[1]); ctx.stroke(); } }
+    ctx.setLineDash([]);
+    const sph=[{p:c,z:0,t:'c'}]; R.forEach(o=>sph.push({p:o.p,z:o.z,t:o.lp?'l':'a'}));
+    sph.sort((a,b)=>a.z-b.z);
+    sph.forEach(o=>{ const dz=focal/(focal-o.z);
+      if(o.t==='l'){ ctx.fillStyle='rgba(124,58,237,0.40)'; ctx.beginPath(); ctx.arc(o.p[0],o.p[1],10*dz,0,6.283); ctx.fill();
+        ctx.fillStyle='#7c3aed'; ctx.beginPath(); ctx.arc(o.p[0]-3,o.p[1],1.8,0,6.283); ctx.fill(); ctx.beginPath(); ctx.arc(o.p[0]+3,o.p[1],1.8,0,6.283); ctx.fill(); }
+      else if(o.t==='a'){ const r=8*dz; ctx.fillStyle='#cbd5e1'; ctx.strokeStyle='#64748b'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(o.p[0],o.p[1],r,0,6.283); ctx.fill(); ctx.stroke();
+        ctx.fillStyle='#334155'; ctx.font='bold 10px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('X',o.p[0],o.p[1]); }
+      else { const r=12*dz; ctx.fillStyle='#0F766E'; ctx.beginPath(); ctx.arc(o.p[0],o.p[1],r,0,6.283); ctx.fill();
+        ctx.fillStyle='#fff'; ctx.font='bold 12px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(LST.atom||'A',o.p[0],o.p[1]); } });
+    ctx.textBaseline='alphabetic';
+  });
+};
 Lab.renderVsepr = ()=>{
   const key=LST.x+'_'+LST.e, cfg=LAB_VSEPR[key];
   let h=Lab._labHead('🔮 VSEPR — รูปร่างโมเลกุล');
@@ -18786,7 +18819,7 @@ Lab.renderVsepr = ()=>{
     h+=Lab._goalBox('สร้างรูปร่าง: '+(tcfg?tcfg.name:'?')+' (ปรับ X, E ให้ถูก)', ok,
       Lab._fb(ok,'ตอนนี้ X='+LST.x+', E='+LST.e+(cfg?' = '+cfg.name:''), 'เป้าต้องการกลุ่มอิเล็กตรอน '+(LST.tx+LST.te)+' กลุ่ม'), 'Lab.vNewTarget()'); }
   h+='<div class="vs-presets">'+LAB_PRESETS.map(p=>{ const on=(p.x===LST.x&&p.e===LST.e); return '<button class="vs-chip'+(on?' active':'')+'" onclick="Lab.vPreset('+p.x+','+p.e+',\''+p.a+'\')">'+p.n+'</button>'; }).join('')+'</div>';
-  h+='<div class="vsepr-grid"><div class="vsepr-stage">'+( cfg ? Lab._vsvg(cfg, LST.atom) : '<div style="padding:40px 10px;color:var(--muted);font-size:13px;">— ไม่มีรูปทรง —</div>' )+'</div>';
+  h+='<div class="vsepr-grid"><div class="vsepr-stage">'+( cfg ? '<canvas id="vseprCanvas" width="440" height="400" style="width:220px;height:200px;display:block;margin:0 auto;"></canvas><div style="font-size:9.5px;color:var(--muted);text-align:center;margin-top:-2px;">🔄 หมุนอัตโนมัติ (3 มิติ) · เส้นประเขียว = โครงรูปทรงเรขาคณิต · ม่วง = คู่โดดเดี่ยว</div>' : '<div style="padding:40px 10px;color:var(--muted);font-size:13px;">— ไม่มีรูปทรง —</div>' )+'</div>';
   // controls + info
   h+='<div><div class="vs-step"><span class="vs-lbl">⚛️ พันธะรอบอะตอมกลาง (X)</span>'+
      '<button class="vs-btn" onclick="Lab.vStep(\'x\',-1)" '+(LST.x<=1?'disabled':'')+'>−</button><span class="vs-num">'+LST.x+'</span><button class="vs-btn" onclick="Lab.vStep(\'x\',1)" '+(LST.x>=6?'disabled':'')+'>+</button></div>';
@@ -18797,6 +18830,7 @@ Lab.renderVsepr = ()=>{
        '<div class="vs-shape">'+cfg.name+'<span>'+cfg.en+'</span></div>'+
        '<div class="vs-stat"><span>จำนวนกลุ่มอิเล็กตรอน (steric)</span><b>'+(LST.x+LST.e)+'</b></div>'+
        '<div class="vs-stat"><span>เรขาคณิตคู่อิเล็กตรอน</span><b>'+cfg.egeo+'</b></div>'+
+       '<div class="vs-stat"><span>ชื่อรูปทรงทางเรขาคณิต (คณิต)</span><b style="color:#0d9488;">'+(cfg.geom||cfg.name)+'</b></div>'+
        '<div class="vs-stat"><span>มุมพันธะ</span><b>'+cfg.ang+'</b></div>'+
        '<div class="vs-stat"><span>สภาพขั้วโมเลกุล</span><b style="color:'+(cfg.polar?'#dc2626':'#0F766E')+'">'+(cfg.polar?'มีขั้ว (polar)':'ไม่มีขั้ว (nonpolar)')+'</b></div>'+
        '<div class="vs-stat"><span>ตัวอย่าง</span><b>'+cfg.ex+'</b></div>'+
@@ -18805,7 +18839,7 @@ Lab.renderVsepr = ()=>{
     h+='<div class="vs-warn" style="margin-top:12px;">⚠️ การจัดเรียง X='+LST.x+', E='+LST.e+' ไม่ใช่รูปทรง VSEPR มาตรฐานที่พบทั่วไป ลองปรับค่า หรือกดโมเลกุลตัวอย่างด้านบน</div>';
   }
   h+='</div></div>';
-  $('labRoot').innerHTML=h;
+  $('labRoot').innerHTML=h; if(cfg) Lab._vseprStart(key);
 };
 Lab._labHead = (title)=>'<div class="lab-head"><button class="lab-back" onclick="Lab.openHub()">⟵ แล็บอื่น</button><h3>'+title+'</h3></div>';
 
