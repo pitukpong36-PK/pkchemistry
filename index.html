@@ -19039,6 +19039,31 @@ Lab._bohr = (shells, z, nn)=>{
   s+='<circle cx="'+cx+'" cy="'+cy+'" r="24" fill="#ef4444"/><text x="'+cx+'" y="'+(cy-3)+'" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">'+z+' p⁺</text><text x="'+cx+'" y="'+(cy+10)+'" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">'+nn+' n</text>';
   s+='</svg>'; return s;
 };
+/* ── เครื่องยนต์อะตอม 3D: นิวเคลียส + ชั้นอิเล็กตรอนเป็นวงโคจรเอียงใน 3 มิติ หมุน + z-sort ── */
+Lab._atomEng = { t:0 };
+Lab._atomStart = (shells, z, nn)=>{
+  Lab._runCanvas('atomCanvas', ctx=>{
+    const E=Lab._atomEng; E.t+=0.01;
+    const cx=110, cy=110, F=240, ay=E.t, vx=-0.35;
+    ctx.setTransform(2,0,0,2,0,0); ctx.clearRect(0,0,220,220);
+    const items=[];
+    shells.forEach((cnt,si)=>{ const Rr=34+si*24, ti=0.5+si*0.5, spin=ay*(1+(shells.length-si)*0.15);
+      ctx.strokeStyle='rgba(148,163,184,0.4)'; ctx.lineWidth=1; ctx.beginPath();
+      for(let k=0;k<=48;k++){ const th=k/48*6.283, p0=[Rr*Math.cos(th), Rr*Math.sin(th)*Math.cos(ti), Rr*Math.sin(th)*Math.sin(ti)];
+        const r=Lab._rot3(p0,ay,vx), pr=Lab._proj3(r,cx,cy,1,F); if(k===0)ctx.moveTo(pr[0],pr[1]); else ctx.lineTo(pr[0],pr[1]); }
+      ctx.stroke();
+      for(let j=0;j<cnt;j++){ const th=spin+j/cnt*6.283, p0=[Rr*Math.cos(th), Rr*Math.sin(th)*Math.cos(ti), Rr*Math.sin(th)*Math.sin(ti)];
+        const r=Lab._rot3(p0,ay,vx), pr=Lab._proj3(r,cx,cy,1,F); items.push({x:pr[0],y:pr[1],z:r[2],t:'e'}); } });
+    items.push({x:cx,y:cy,z:0,t:'n'});
+    items.sort((a,b)=>a.z-b.z);
+    items.forEach(o=>{ const ps=F/(F-o.z);
+      if(o.t==='e'){ ctx.fillStyle='#0F766E'; ctx.beginPath(); ctx.arc(o.x,o.y,3.4*ps,0,6.283); ctx.fill(); }
+      else { ctx.fillStyle='#ef4444'; ctx.beginPath(); ctx.arc(o.x,o.y,14,0,6.283); ctx.fill();
+        ctx.fillStyle='#fff'; ctx.font='bold 9px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillText(z+' p⁺',o.x,o.y-4); ctx.fillText(nn+' n',o.x,o.y+5); } });
+    ctx.textBaseline='alphabetic';
+  });
+};
 Lab.renderAtom = ()=>{
   const e=ELEMENTS[AT.z-1], z=AT.z, nn=AT.n, A=z+nn, elec=Math.max(0,z-AT.ch);
   const shells=econfig(elec), val=shells.length?shells[shells.length-1]:0;
@@ -19046,7 +19071,7 @@ Lab.renderAtom = ()=>{
   const symDisp = e[1]+(AT.ch>0?(AT.ch===1?'⁺':sup(AT.ch)+'⁺'):(AT.ch<0?(AT.ch===-1?'⁻':sup(-AT.ch)+'⁻'):''));
   let h=Lab._labHead('⚛️ โครงสร้างอะตอม');
   h+='<div style="font-size:12px;color:var(--muted);">เลื่อนเลือกธาตุ (Z = 1–20) แล้วปรับนิวตรอน/ประจุ — ดูแบบจำลองโบร์และการจัดเรียงอิเล็กตรอน</div>';
-  h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._bohr(shells,z,nn)+
+  h+='<div class="vsepr-grid"><div class="vsepr-stage"><canvas id="atomCanvas" width="440" height="440" style="width:220px;height:220px;display:block;margin:0 auto;"></canvas>'+
      '<div style="font-family:Prompt,sans-serif;font-weight:800;font-size:30px;color:#0F766E;">'+symDisp+'</div>'+
      '<div style="font-size:12px;color:#334155;">'+e[3]+' ('+e[2]+')</div>'+
      '<div style="font-size:12px;color:#64748b;margin-top:2px;">ไอโซโทป '+sup(A)+e[1]+' · เลขมวล A = '+A+' · Z = '+z+'</div></div><div>';
@@ -19063,7 +19088,7 @@ Lab.renderAtom = ()=>{
      '<div class="vs-stat"><span>เลขมวล (A = p+n)</span><b>'+A+'</b></div>'+
      '<div class="vs-stat"><span>หมู่ · คาบ</span><b>'+e[6]+' · '+e[7]+'</b></div>'+
      '<div style="font-size:10.5px;color:var(--muted);margin-top:8px;">นิวเคลียส = โปรตอน+นิวตรอน · อิเล็กตรอนเรียงเป็นชั้น (2, 8, 8, 2) · เวเลนซ์ = อิเล็กตรอนชั้นนอกสุด · เปลี่ยนนิวตรอน = ไอโซโทป · เปลี่ยนอิเล็กตรอน = ไอออน</div></div>';
-  h+='</div></div>'; $('labRoot').innerHTML=h;
+  h+='</div></div>'; $('labRoot').innerHTML=h; Lab._atomStart(shells,z,nn);
 };
 
 /* ── แล็บ: ปริมาณสัมพันธ์ / สารกำหนดปริมาณ (c2b6) ── */
@@ -19220,6 +19245,10 @@ Lab._rRect = (ctx,x,y,w,h,r)=>{ ctx.beginPath(); ctx.moveTo(x+r,y);
 Lab._bounce = (p,L,R,Tp,Bt,r)=>{ r=r||0;
   if(p.x<L+r){ p.x=L+r; p.a=Math.PI-p.a; } else if(p.x>R-r){ p.x=R-r; p.a=Math.PI-p.a; }
   if(p.y<Tp+r){ p.y=Tp+r; p.a=-p.a; } else if(p.y>Bt-r){ p.y=Bt-r; p.a=-p.a; } };
+/* ── helper 3D ใช้ซ้ำ: หมุนรอบแกน Y(ay) แล้วเอียงแกน X(ax) · ฉายภาพ perspective ── */
+Lab._rot3 = (p,ay,ax)=>{ const cY=Math.cos(ay),sY=Math.sin(ay),cX=Math.cos(ax),sX=Math.sin(ax);
+  const x=p[0]*cY+p[2]*sY, z=-p[0]*sY+p[2]*cY, y=p[1]*cX-z*sX, z2=p[1]*sX+z*cX; return [x,y,z2]; };
+Lab._proj3 = (v,cx,cy,scale,focal)=>{ const ps=scale*focal/(focal-v[2]); return [cx+v[0]*ps, cy+v[1]*ps, v[2]]; };
 
 /* ── เครื่องยนต์อนุภาคแก๊ส: อนุภาควิ่งจริง ชนผนัง · ความเร็ว ∝ √T · จำนวน ∝ n · ลูกสูบขยับตาม V ── */
 Lab._gasEng = { parts:[] };
