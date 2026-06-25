@@ -3678,19 +3678,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
       </div>
     </script>
-<script>
-// ─── CHAPTER DATA (เนื้อหาครบทุกบท) ─────────────────────────
-const chapters = {
-c1b1: {
-    subject:'เคมี 1', colorClass:'c1', badge:'บทที่ 1',
-    title:'ความปลอดภัยและทักษะในปฏิบัติการเคมี',
-    meta:'เคมี 1 · บทที่ 1 · สสวท. ม.4 เล่ม 1'
-  },
-  c1b2: {
-    subject:'เคมี 1', colorClass:'c1', badge:'บทที่ 2',
-    title:'อะตอมและสมบัติของธาตุ',
-    meta:'เคมี 1 · บทที่ 2 · สสวท. ม.4 เล่ม 1',
-    richHTML: `
+<script type="text/template" id="chap-tpl-c1b2">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <div class="formula-box">
@@ -4528,13 +4516,8 @@ c1b1: {
         </div>
 
       </div>
-    `
-  },
-  c1b3: {
-    subject:'เคมี 1', colorClass:'c1', badge:'บทที่ 3',
-    title:'พันธะเคมี',
-    meta:'เคมี 1 · บทที่ 3 · สสวท. ม.4 เล่ม 1',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c1b3">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <div class="formula-box">
@@ -5483,13 +5466,8 @@ c1b1: {
         </div>
 
       </div>
-    `
-  },
-  c2b4: {
-    subject:'เคมี 2', colorClass:'c2', badge:'บทที่ 4',
-    title:'โมลและสูตรเคมี',
-    meta:'เคมี 2 · บทที่ 4 · สสวท. ม.4 เล่ม 2',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c2b4">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <div class="formula-box">
@@ -6233,13 +6211,8 @@ c1b1: {
         </div>
 
       </div>
-    `
-  },
-  c2b5: {
-    subject:'เคมี 2', colorClass:'c2', badge:'บทที่ 5',
-    title:'สารละลาย',
-    meta:'เคมี 2 · บทที่ 5 · สสวท. ม.4 เล่ม 2',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c2b5">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <div class="formula-box">
@@ -7023,13 +6996,8 @@ c1b1: {
         </div>
 
       </div>
-    `
-  },
-  c2b6: {
-    subject:'เคมี 2', colorClass:'c2', badge:'บทที่ 6',
-    title:'ปริมาณสัมพันธ์',
-    meta:'เคมี 2 · บทที่ 6 · สสวท. ม.4 เล่ม 2',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c2b6">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <div class="formula-box">
@@ -7865,13 +7833,8 @@ c1b1: {
         </div>
 
       </div>
-    `
-  },
-  c3b7: {
-    subject:'เคมี 3', colorClass:'c3', badge:'บทที่ 7',
-    title:'แก๊สและสมบัติของแก๊ส',
-    meta:'เคมี 3 · บทที่ 7 · สสวท. ม.5 เล่ม 1',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c3b7">
       <!-- ── Scoped CSS for gas chapter animations (gas-anim-* / gas-law-*) ── -->
       <style>
         /* Keyframes (scoped names to avoid conflicts) */
@@ -9362,16 +9325,8 @@ c1b1: {
         </div>
 
       </div>
-    `
-  },
-
-
-
-  c3b8: {
-    subject:'เคมี 3', colorClass:'c3', badge:'บทที่ 8',
-    title:'อัตราการเกิดปฏิกิริยาเคมี',
-    meta:'เคมี 3 · บทที่ 8 · สสวท. ม.5 เล่ม 1',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c3b8">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <div class="formula-box">
@@ -10296,13 +10251,8 @@ c1b1: {
         </div>
 
       </div>
-    `
-  },
-  c3b9: {
-    subject:'เคมี 3', colorClass:'c3', badge:'บทที่ 9',
-    title:'สมดุลเคมี',
-    meta:'เคมี 3 · บทที่ 9 · สสวท. ม.5 เล่ม 1',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c3b9">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <div class="formula-box">
@@ -11210,13 +11160,8 @@ c1b1: {
         </div>
 
       </div>
-    `
-  },
-  c4b10: {
-    subject:'เคมี 4', colorClass:'c4', badge:'บทที่ 10',
-    title:'กรด เบส',
-    meta:'เคมี 4 · บทที่ 10 · สสวท. ม.5 เล่ม 2',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c4b10">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <p>บทนี้สอนให้รู้จักกรด-เบสตั้งแต่นิยาม จนถึงการคำนวณและการประยุกต์ในชีวิตจริง เรียงตามลำดับ:</p>
@@ -12256,13 +12201,8 @@ c1b1: {
           • <strong>ไทเทรต 1:1:</strong> M_a × V_a = M_b × V_b · ถ้าอัตราส่วนไม่ใช่ 1:1 ใช้สโตอิคิโอเมตรี
         </div>
       </div>
-    `
-  },
-  c4b11: {
-    subject:'เคมี 4', colorClass:'c4', badge:'บทที่ 11',
-    title:'เคมีไฟฟ้า',
-    meta:'เคมี 4 · บทที่ 11 · สสวท. ม.5 เล่ม 2',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c4b11">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <p>บทนี้สอนเรื่องปฏิกิริยาที่เกี่ยวกับการ <em>ถ่ายโอนอิเล็กตรอน</em> และการเปลี่ยนพลังงานเคมี ↔ ไฟฟ้า ตามลำดับ:</p>
@@ -13278,13 +13218,8 @@ c1b1: {
           • <strong>Salt bridge:</strong> เคลื่อนที่ของ <em>ไอออน</em> ไม่ใช่อิเล็กตรอน
         </div>
       </div>
-    `
-  },
-  c5b12: {
-    subject:'เคมี 5', colorClass:'c5', badge:'บทที่ 12',
-    title:'เคมีอินทรีย์',
-    meta:'เคมี 5 · บทที่ 12 · สสวท. ม.6 เล่ม 1',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c5b12">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <div class="formula-box">
@@ -14188,13 +14123,8 @@ c1b1: {
         </div>
 
       </div>
-    `
-  },
-  c5b13: {
-    subject:'เคมี 5', colorClass:'c5', badge:'บทที่ 13',
-    title:'พอลิเมอร์',
-    meta:'เคมี 5 · บทที่ 13 · สสวท. ม.6 เล่ม 1',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c5b13">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <div class="formula-box">
@@ -14969,13 +14899,8 @@ c1b1: {
         </div>
 
       </div>
-    `
-  },
-  c6b14: {
-    subject:'เคมี 6', colorClass:'c6', badge:'บทที่ 14',
-    title:'เคมีกับการแก้ปัญหา',
-    meta:'เคมี 6 · บทที่ 14 · สสวท. ม.6 เล่ม 2',
-    richHTML: `
+    </script>
+<script type="text/template" id="chap-tpl-c6b14">
       <div class="content-section">
         <h3>📋 หัวข้อที่จะได้เรียนในบทนี้</h3>
         <div class="formula-box">
@@ -15851,7 +15776,82 @@ c1b1: {
         </div>
 
       </div>
-    `
+    </script>
+<script>
+// ─── CHAPTER DATA (เนื้อหาครบทุกบท) ─────────────────────────
+const chapters = {
+c1b1: {
+    subject:'เคมี 1', colorClass:'c1', badge:'บทที่ 1',
+    title:'ความปลอดภัยและทักษะในปฏิบัติการเคมี',
+    meta:'เคมี 1 · บทที่ 1 · สสวท. ม.4 เล่ม 1'
+  },
+  c1b2: {
+    subject:'เคมี 1', colorClass:'c1', badge:'บทที่ 2',
+    title:'อะตอมและสมบัติของธาตุ',
+    meta:'เคมี 1 · บทที่ 2 · สสวท. ม.4 เล่ม 1'
+  },
+  c1b3: {
+    subject:'เคมี 1', colorClass:'c1', badge:'บทที่ 3',
+    title:'พันธะเคมี',
+    meta:'เคมี 1 · บทที่ 3 · สสวท. ม.4 เล่ม 1'
+  },
+  c2b4: {
+    subject:'เคมี 2', colorClass:'c2', badge:'บทที่ 4',
+    title:'โมลและสูตรเคมี',
+    meta:'เคมี 2 · บทที่ 4 · สสวท. ม.4 เล่ม 2'
+  },
+  c2b5: {
+    subject:'เคมี 2', colorClass:'c2', badge:'บทที่ 5',
+    title:'สารละลาย',
+    meta:'เคมี 2 · บทที่ 5 · สสวท. ม.4 เล่ม 2'
+  },
+  c2b6: {
+    subject:'เคมี 2', colorClass:'c2', badge:'บทที่ 6',
+    title:'ปริมาณสัมพันธ์',
+    meta:'เคมี 2 · บทที่ 6 · สสวท. ม.4 เล่ม 2'
+  },
+  c3b7: {
+    subject:'เคมี 3', colorClass:'c3', badge:'บทที่ 7',
+    title:'แก๊สและสมบัติของแก๊ส',
+    meta:'เคมี 3 · บทที่ 7 · สสวท. ม.5 เล่ม 1'
+  },
+
+
+
+  c3b8: {
+    subject:'เคมี 3', colorClass:'c3', badge:'บทที่ 8',
+    title:'อัตราการเกิดปฏิกิริยาเคมี',
+    meta:'เคมี 3 · บทที่ 8 · สสวท. ม.5 เล่ม 1'
+  },
+  c3b9: {
+    subject:'เคมี 3', colorClass:'c3', badge:'บทที่ 9',
+    title:'สมดุลเคมี',
+    meta:'เคมี 3 · บทที่ 9 · สสวท. ม.5 เล่ม 1'
+  },
+  c4b10: {
+    subject:'เคมี 4', colorClass:'c4', badge:'บทที่ 10',
+    title:'กรด เบส',
+    meta:'เคมี 4 · บทที่ 10 · สสวท. ม.5 เล่ม 2'
+  },
+  c4b11: {
+    subject:'เคมี 4', colorClass:'c4', badge:'บทที่ 11',
+    title:'เคมีไฟฟ้า',
+    meta:'เคมี 4 · บทที่ 11 · สสวท. ม.5 เล่ม 2'
+  },
+  c5b12: {
+    subject:'เคมี 5', colorClass:'c5', badge:'บทที่ 12',
+    title:'เคมีอินทรีย์',
+    meta:'เคมี 5 · บทที่ 12 · สสวท. ม.6 เล่ม 1'
+  },
+  c5b13: {
+    subject:'เคมี 5', colorClass:'c5', badge:'บทที่ 13',
+    title:'พอลิเมอร์',
+    meta:'เคมี 5 · บทที่ 13 · สสวท. ม.6 เล่ม 1'
+  },
+  c6b14: {
+    subject:'เคมี 6', colorClass:'c6', badge:'บทที่ 14',
+    title:'เคมีกับการแก้ปัญหา',
+    meta:'เคมี 6 · บทที่ 14 · สสวท. ม.6 เล่ม 2'
   },
 };
 
