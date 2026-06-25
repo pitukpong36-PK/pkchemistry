@@ -18868,6 +18868,7 @@ const LABS = [
   { id:'mole',    ch:'บทที่ 4 · โมลและสูตรโมเลกุล', ic:'🔢', name:'แปลงโมล ↔ มวล ↔ อนุภาค', desc:'เลือกสาร เลื่อนปรับจำนวนโมล — ดูมวล (g) จำนวนอนุภาค (×6.02×10²³) ปริมาตรแก๊ส STP และร้อยละองค์ประกอบ' },
   { id:'dilute',  ch:'บทที่ 5 · สารละลาย', ic:'💧', name:'เจือจางสารละลาย', desc:'ปรับความเข้มข้น/ปริมาตร แล้วเติมน้ำ — ดู M₁V₁=M₂V₂ และสีของสารละลายจางลงตามจริง' },
   { id:'stoich',  ch:'บทที่ 6 · ปริมาณสัมพันธ์', ic:'⚗️', name:'ปริมาณสัมพันธ์ / สารกำหนดปริมาณ', desc:'เลือกปฏิกิริยา ปรับโมลสารตั้งต้น — หาสารกำหนดปริมาณ ผลิตภัณฑ์ที่ได้ และสารที่เหลือ' },
+  { id:'calor',   ch:'บทที่ 6 · ปริมาณสัมพันธ์ (พลังงานความร้อน)', ic:'🔥', name:'แคลอรีมิเตอร์ q = mcΔT', desc:'เลือกสาร (น้ำ/เอทานอล/โลหะ) ปรับมวลและอุณหภูมิ — คำนวณพลังงานความร้อนที่ดูด/คาย พร้อมเทอร์มอมิเตอร์และทิศพลังงาน' },
   { id:'gas',     ch:'บทที่ 7 · แก๊ส', ic:'💨', name:'กฎของแก๊ส (PV=nRT)', desc:'เลือกกฎ Boyle/Charles/Gay-Lussac/Avogadro ปรับค่าแล้วดูลูกสูบ อนุภาค และค่าที่สัมพันธ์กัน' },
   { id:'rate',    ch:'บทที่ 8 · อัตราการเกิดปฏิกิริยา', ic:'⏱️', name:'อัตราการเกิดปฏิกิริยา', desc:'ปรับอุณหภูมิ ความเข้มข้น พื้นที่ผิว และตัวเร่ง — ดูอัตรา กราฟความเข้มข้น-เวลา และแผนภาพพลังงาน' },
   { id:'equil',   ch:'บทที่ 9 · สมดุลเคมี', ic:'⚖️', name:'สมดุลเคมี (เลอชาเตอลิเอ)', desc:'รบกวนสมดุล N₂+3H₂⇌2NH₃ (เพิ่ม/ลดสาร ความดัน อุณหภูมิ) แล้วดูทิศที่สมดุลเลื่อน' },
@@ -18878,7 +18879,7 @@ const LABS = [
   { id:'enviro',  ch:'บทที่ 14 · เคมีกับสิ่งแวดล้อม', ic:'🌍', name:'เคมีกับสิ่งแวดล้อม', desc:'สำรวจปัญหาสิ่งแวดล้อม (สาเหตุ-ผล-แนวทางแก้) และคำนวณคาร์บอนฟุตพรินต์จากกิจกรรมประจำวัน' }
 ];
 /* แมพแล็บ → บทเรียน (สำหรับปุ่ม "ทดสอบความเข้าใจ" เชื่อม แล็บ→ควิซ→ทบทวน) */
-const LAB_CHAP = { safety:'c1b1', atom:'c1b2', vsepr:'c1b3', mole:'c2b4', dilute:'c2b5', stoich:'c2b6', gas:'c3b7', rate:'c3b8', equil:'c3b9', titrate:'c4b10', electro:'c4b11', organic:'c5b12', polymer:'c5b13', enviro:'c6b14' };
+const LAB_CHAP = { safety:'c1b1', atom:'c1b2', vsepr:'c1b3', mole:'c2b4', dilute:'c2b5', stoich:'c2b6', calor:'c2b6', gas:'c3b7', rate:'c3b8', equil:'c3b9', titrate:'c4b10', electro:'c4b11', organic:'c5b12', polymer:'c5b13', enviro:'c6b14' };
 /* แล็บที่กำลังจะมา (โชว์เป็นการ์ดจาง ๆ) */
 const LABS_SOON = [];
 /* ตารางรูปทรง VSEPR: key = "พันธะ_คู่โดดเดี่ยว" · dom = [มุม(องศา, 0=บน), เป็นคู่โดดเดี่ยว?] */
@@ -18920,6 +18921,7 @@ Lab.open = (id)=>{
   if(id==='atom'){ const e=ELEMENTS[5]; AT={z:6, n:Math.round(e[4])-6, ch:0}; Lab.renderAtom(); }
   else if(id==='vsepr'){ LST={x:4,e:0,atom:'A', mode:'free', tx:2, te:2}; Lab.renderVsepr(); }
   else if(id==='dilute'){ DST={c1:2.0, v1:50, water:50, mode:'free', target:0.5}; Lab.renderDilute(); }
+  else if(id==='calor'){ CAL={sub:0, m:100, t1:25, t2:75, mode:'free', target:10}; Lab.renderCalor(); }
   else if(id==='stoich'){ STO={rxn:0, amt:RXN[0].def.slice(), mode:'free'}; Lab.renderStoich(); }
   else if(id==='gas'){ GST={mode:'boyle', V:10, T:300, n:1.0, P:0, chal:false, target:2.5}; Lab.gasRecalc(); Lab.renderGas(); }
   else if(id==='titrate'){ TST={vb:0, mode:'free', target:7.00, hit:false}; Lab.renderTitrate(); }
@@ -19390,6 +19392,63 @@ Lab.renderDilute = ()=>{
      '<div class="vs-stat"><span>อัตราการเจือจาง</span><b>'+df.toFixed(2)+' เท่า</b></div>'+
      '<div style="font-size:10.5px;color:var(--muted);margin-top:8px;">* จำนวนโมลตัวถูกละลายคงที่ ('+(c1*v1/1000).toFixed(4)+' mol) เติมน้ำทำให้เจือจางลง</div></div>';
   h+='</div></div>'; $('labRoot').innerHTML=h; Lab._dilStart();
+};
+
+/* ── แล็บใหม่ (v.3): แคลอรีมิเตอร์ q = mcΔT — พลังงานความร้อน (เชื่อมบท 6 ΔH) ── */
+const CAL_SUBS = [
+  {n:'น้ำ', c:4.18, col:'#3b82f6'},
+  {n:'เอทานอล', c:2.44, col:'#a855f7'},
+  {n:'อะลูมิเนียม', c:0.90, col:'#9ca3af'},
+  {n:'เหล็ก', c:0.45, col:'#64748b'},
+  {n:'ทองแดง', c:0.385, col:'#b45309'}
+];
+let CAL = { sub:0, m:100, t1:25, t2:75, mode:'free', target:10 };
+Lab.calSub = (i)=>{ CAL.sub=parseInt(i,10); Lab.renderCalor(); };
+Lab.calSet = (k,v)=>{ CAL[k]=parseFloat(v); Lab.renderCalor(); };
+Lab.calMode = (m)=>{ CAL.mode=m; if(m==='challenge') Lab.calNewTarget(); else Lab.renderCalor(); };
+Lab._CAL_TARGETS=[5,10,15,20,30];
+Lab.calNewTarget = ()=>{ CAL.target=Lab._CAL_TARGETS[Math.floor(Math.random()*Lab._CAL_TARGETS.length)]; Lab.renderCalor(); };
+Lab._calThermo = (t1,t2,s,dir)=>{
+  const top=18, H=170, bot=top+H, cl=v=>bot-(Math.max(0,Math.min(100,v))/100)*H;
+  const lvl1=cl(t1), lvl2=cl(t2);
+  return '<svg viewBox="0 0 200 235" style="width:170px;height:200px;display:block;margin:0 auto;">'+
+    '<rect x="20" y="60" width="80" height="150" rx="8" fill="none" stroke="#94a3b8" stroke-width="3"/>'+
+    '<rect x="23" y="95" width="74" height="112" rx="5" fill="'+s.col+'" fill-opacity="0.35"/>'+
+    '<text x="60" y="228" font-size="11" font-weight="700" fill="#334155" text-anchor="middle">'+s.n+' '+CAL.m+' g</text>'+
+    '<text x="60" y="50" font-size="22" text-anchor="middle">'+dir.ic+'</text>'+
+    '<rect x="135" y="'+top+'" width="16" height="'+H+'" rx="8" fill="#e5e7eb" stroke="#94a3b8" stroke-width="2"/>'+
+    '<circle cx="143" cy="'+(bot+12)+'" r="14" fill="#dc2626"/>'+
+    '<rect x="139" y="'+lvl2+'" width="8" height="'+(bot-lvl2)+'" fill="#dc2626"/>'+
+    '<line x1="151" y1="'+lvl1+'" x2="161" y2="'+lvl1+'" stroke="#64748b" stroke-width="1.5" stroke-dasharray="2,2"/>'+
+    '<text x="163" y="'+(lvl1+3)+'" font-size="9" fill="#64748b">T₁ '+t1+'°</text>'+
+    '<line x1="151" y1="'+lvl2+'" x2="161" y2="'+lvl2+'" stroke="#dc2626" stroke-width="2"/>'+
+    '<text x="163" y="'+(lvl2+3)+'" font-size="10" font-weight="700" fill="#dc2626">T₂ '+t2+'°</text>'+
+    '</svg>';
+};
+Lab.renderCalor = ()=>{
+  const s=CAL_SUBS[CAL.sub], dT=CAL.t2-CAL.t1, q=CAL.m*s.c*dT, qkJ=q/1000;
+  const dir = dT>0 ? {t:'ดูดความร้อน (ร้อนขึ้น)', ic:'🔥', col:'#dc2626'}
+            : dT<0 ? {t:'คายความร้อน (เย็นลง)', ic:'❄️', col:'#2563eb'}
+            : {t:'ไม่เปลี่ยนแปลง', ic:'➖', col:'#64748b'};
+  let h=Lab._labHead('🔥 แคลอรีมิเตอร์ — q = mcΔT');
+  h+=Lab._modeChips(CAL.mode,"Lab.calMode('free')","Lab.calMode('challenge')");
+  h+='<div style="font-size:12px;color:var(--muted);">เลือกสาร ปรับมวลและอุณหภูมิ แล้วดูพลังงานความร้อน q ที่ดูด/คายออกมา (q = มวล × ความร้อนจำเพาะ × ผลต่างอุณหภูมิ)</div>';
+  if(CAL.mode==='challenge'){ const diff=Math.abs(qkJ-CAL.target), ok=diff<=0.3;
+    h+=Lab._goalBox('ทำให้ q = '+CAL.target+' kJ', ok,
+      Lab._fb(ok,'ได้ '+qkJ.toFixed(2)+' kJ (ห่าง '+diff.toFixed(2)+')', Math.abs(qkJ)<CAL.target?'เพิ่มมวลหรือผลต่างอุณหภูมิ':'ลดมวลหรือผลต่างอุณหภูมิ'), 'Lab.calNewTarget()'); }
+  h+='<div class="vs-presets" style="margin-top:10px;">'+CAL_SUBS.map((x,i)=>'<button class="vs-chip'+(i===CAL.sub?' active':'')+'" onclick="Lab.calSub('+i+')">'+x.n+'</button>').join('')+'</div>';
+  h+='<div class="vsepr-grid"><div class="vsepr-stage">'+Lab._calThermo(CAL.t1,CAL.t2,s,dir)+'</div><div>';
+  h+='<div class="vs-step"><span class="vs-lbl">มวล m = <b>'+CAL.m+'</b> g</span></div>'+Lab._range('m',10,500,5,CAL.m,'calSet');
+  h+='<div class="vs-step" style="margin-top:12px;"><span class="vs-lbl">อุณหภูมิเริ่มต้น T₁ = <b>'+CAL.t1+'</b> °C</span></div>'+Lab._range('t1',0,100,1,CAL.t1,'calSet');
+  h+='<div class="vs-step" style="margin-top:12px;"><span class="vs-lbl">อุณหภูมิสุดท้าย T₂ = <b>'+CAL.t2+'</b> °C</span></div>'+Lab._range('t2',0,100,1,CAL.t2,'calSet');
+  h+='<div class="vs-info" style="margin-top:14px;"><div class="vs-axe" style="font-size:16px;">q = m·c·ΔT</div>'+
+     '<div style="text-align:center;font-size:13px;margin-bottom:8px;">'+CAL.m+' × '+s.c+' × ('+CAL.t2+'−'+CAL.t1+') = '+q.toFixed(0)+' J</div>'+
+     '<div class="vs-stat"><span>ความร้อนจำเพาะ c</span><b>'+s.c+' J/g·°C</b></div>'+
+     '<div class="vs-stat"><span>ผลต่างอุณหภูมิ ΔT</span><b>'+dT+' °C</b></div>'+
+     '<div class="vs-stat"><span>พลังงานความร้อน q</span><b>'+q.toFixed(0)+' J = '+qkJ.toFixed(2)+' kJ</b></div>'+
+     '<div class="vs-stat"><span>ทิศพลังงาน</span><b style="color:'+dir.col+'">'+dir.ic+' '+dir.t+'</b></div>'+
+     '<div style="font-size:10.5px;color:var(--muted);margin-top:8px;">* น้ำมี c สูงสุด (4.18) จึงเก็บ/คายความร้อนได้มากกว่าโลหะมวลเท่ากัน — เป็นเหตุผลที่น้ำใช้หล่อเย็น</div></div>';
+  h+='</div></div>'; $('labRoot').innerHTML=h;
 };
 
 /* ── แล็บ: กฎของแก๊ส PV=nRT (c3b7) ── */
