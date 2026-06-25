@@ -1099,6 +1099,9 @@ html[data-theme="dark"] .mcard.matched .mcard-front { background:#0e2a1a; }
 .lab-head { display:flex; align-items:center; gap:12px; padding-bottom:11px; margin-bottom:10px; border-bottom:2px solid var(--border); animation:labFade .25s ease; }
 .lab-head h3 { font-family:'Prompt',sans-serif; font-size:18px; margin:0; flex:1; }
 .lab-back { border:1.5px solid var(--border); background:var(--white); color:var(--teal-d); font-family:inherit; font-weight:600; font-size:13px; padding:7px 13px; border-radius:10px; cursor:pointer; transition:all .15s; white-space:nowrap; }
+.lab-quiz-cta { margin-left:auto; border:none; background:linear-gradient(135deg,#0EA5A4,#0F766E); color:#fff; font-family:inherit; font-weight:700; font-size:13px; padding:7px 14px; border-radius:10px; cursor:pointer; white-space:nowrap; box-shadow:0 4px 12px rgba(14,165,160,.28); transition:transform .12s; }
+.lab-quiz-cta:hover { transform:translateY(-1px); }
+@media(max-width:520px){ .lab-quiz-cta{ font-size:12px; padding:6px 10px; } .lab-head h3{ font-size:15px; } }
 .lab-back:hover { border-color:var(--teal); background:var(--teal-l); transform:translateX(-2px); }
 .vsepr-grid { display:grid; grid-template-columns:1.05fr 1fr; gap:18px; align-items:start; margin-top:6px; animation:labFade .25s ease; }
 .vsepr-stage { background-color:var(--bg); background-image:radial-gradient(rgba(13,148,136,.12) 1px, transparent 1px); background-size:16px 16px; border:1px solid var(--border); border-radius:16px; padding:14px; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:210px; }
@@ -18874,6 +18877,8 @@ const LABS = [
   { id:'polymer', ch:'บทที่ 13 · พอลิเมอร์', ic:'🧵', name:'พอลิเมอร์', desc:'เลือกพอลิเมอร์ — ดูมอนอเมอร์ หน่วยซ้ำ ชนิดการเกิด (เติม/ควบแน่น) สมบัติ และต่อสายโซ่ตามองศาพอลิเมอไรเซชัน' },
   { id:'enviro',  ch:'บทที่ 14 · เคมีกับสิ่งแวดล้อม', ic:'🌍', name:'เคมีกับสิ่งแวดล้อม', desc:'สำรวจปัญหาสิ่งแวดล้อม (สาเหตุ-ผล-แนวทางแก้) และคำนวณคาร์บอนฟุตพรินต์จากกิจกรรมประจำวัน' }
 ];
+/* แมพแล็บ → บทเรียน (สำหรับปุ่ม "ทดสอบความเข้าใจ" เชื่อม แล็บ→ควิซ→ทบทวน) */
+const LAB_CHAP = { safety:'c1b1', atom:'c1b2', vsepr:'c1b3', mole:'c2b4', dilute:'c2b5', stoich:'c2b6', gas:'c3b7', rate:'c3b8', equil:'c3b9', titrate:'c4b10', electro:'c4b11', organic:'c5b12', polymer:'c5b13', enviro:'c6b14' };
 /* แล็บที่กำลังจะมา (โชว์เป็นการ์ดจาง ๆ) */
 const LABS_SOON = [];
 /* ตารางรูปทรง VSEPR: key = "พันธะ_คู่โดดเดี่ยว" · dom = [มุม(องศา, 0=บน), เป็นคู่โดดเดี่ยว?] */
@@ -18909,6 +18914,7 @@ Lab.openHub = ()=>{
 };
 Lab.open = (id)=>{
   Lab._stopAnim();
+  Lab._curId = id;
   if(id==='safety'){ SAF={mode:'ghs', sym:0, num:'0.04060', dp:2, qi:0, qans:null, qopts:[]}; Lab.renderSafety(); return; }
   if(id==='mole'){ MOL={sub:0, mol:1.0, mode:'free', target:36.0}; Lab.renderMole(); return; }
   if(id==='atom'){ const e=ELEMENTS[5]; AT={z:6, n:Math.round(e[4])-6, ch:0}; Lab.renderAtom(); }
@@ -19006,7 +19012,12 @@ Lab.renderVsepr = ()=>{
   h+='</div></div>';
   $('labRoot').innerHTML=h; if(cfg) Lab._vseprStart(key);
 };
-Lab._labHead = (title)=>'<div class="lab-head"><button class="lab-back" onclick="Lab.openHub()">⟵ แล็บอื่น</button><h3>'+title+'</h3></div>';
+Lab._labHead = (title)=>{
+  const cid = LAB_CHAP[Lab._curId];
+  const quizCTA = (cid && typeof PK!=='undefined' && PK.hasQuiz && PK.hasQuiz(cid))
+    ? '<button class="lab-quiz-cta" onclick="PK.startQuiz(\''+cid+'\')" title="ทำแบบทดสอบบทนี้ ข้อที่ตอบผิดจะถูกเก็บไปทบทวน">📝 ทดสอบความเข้าใจ</button>' : '';
+  return '<div class="lab-head"><button class="lab-back" onclick="Lab.openHub()">⟵ แล็บอื่น</button><h3>'+title+'</h3>'+quizCTA+'</div>';
+};
 
 /* ── helper โหมดอิสระ/ภารกิจ + กล่องเป้าหมาย (ใช้ซ้ำหลายแล็บ) ── */
 Lab._modeChips = (cur, freeFn, chalFn)=>'<div class="vs-presets">'
