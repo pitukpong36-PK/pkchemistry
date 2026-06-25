@@ -20551,6 +20551,7 @@ RPG.renderBattle = (feedback, shake)=>{
 RPG.answer = (i)=>{
   if(RB.answered) return; RB.answered=true; RB.picked=i; const q=RB.q; RS.stats.answered++;
   const ch=RB.qch||CHAPTERS[RB.zi].id; RPG._recordAnswer(ch, i===q.a);
+  try{ SRS.record(ch, q.q, i===q.a); }catch(e){}
   if(i===q.a){
     RS.stats.correct++;
     if(RB.review || RB.fromReview){ RPG._removeReview(q.q); if(RB.review){ RB.cleared=(RB.cleared||0)+1; RB.mobHP=0; } }
