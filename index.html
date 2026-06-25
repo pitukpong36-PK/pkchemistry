@@ -2236,8 +2236,9 @@ html, body { max-width:100%; overflow-x:hidden; }
       <h1>ศูนย์การเรียนรู้<br><span>วิชาเคมี</span> ม.ปลาย</h1>
       <p>เรียนเคมี 1–6 ครบทุกบท พร้อมแบบทดสอบ 140 ข้อ เครื่องมือคำนวณ และระบบติดตามผลการเรียน — <strong style="color:#FBBF24">ฟรีทุกอย่าง</strong></p>
       <div class="hero-cta">
-        <button class="hero-btn" onclick="showPage('home')">📚 เริ่มเรียนเลย</button>
-        <button class="hero-btn secondary" onclick="PK.startExam()">🎯 ลองทำข้อสอบรวม</button>
+        <button class="hero-btn" onclick="showPage('home')">📚 เข้าสู่บทเรียน</button>
+        <button class="hero-btn secondary" id="heroAuthBtn" onclick="PK.openProfileOrLogin && PK.openProfileOrLogin()">🔐 เข้าสู่ระบบ</button>
+        <button class="hero-btn secondary" onclick="PK.startExam()">🎯 ลองทำข้อสอบ</button>
       </div>
     </div>
   </section>
@@ -2246,20 +2247,20 @@ html, body { max-width:100%; overflow-x:hidden; }
   <div class="container">
     <div class="stats-bar" style="margin-top:-32px; position:relative; z-index:2; box-shadow:0 4px 24px rgba(0,0,0,0.08);">
       <div class="stat-item">
-        <div class="stat-num" id="statCount1" style="color:var(--teal)">6</div>
-        <div class="stat-lbl">วิชาเคมี</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" id="statCount2" style="color:var(--amber)">14</div>
+        <div class="stat-num" id="statCount1" style="color:var(--teal)">14</div>
         <div class="stat-lbl">บทเรียน</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num" id="statCount3" style="color:var(--purple)">140</div>
-        <div class="stat-lbl">ข้อสอบ</div>
+        <div class="stat-num" id="statCount2" style="color:var(--amber)">1555</div>
+        <div class="stat-lbl">แบบทดสอบ</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num" style="color:var(--coral)">ฟรี</div>
-        <div class="stat-lbl">ไม่มีค่าใช้จ่าย</div>
+        <div class="stat-num" id="statCount3" style="color:var(--purple)">15</div>
+        <div class="stat-lbl">แล็บทดลอง</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="statCount4" style="color:var(--coral)">–</div>
+        <div class="stat-lbl">เข้าชม (ครั้ง)</div>
       </div>
     </div>
 
@@ -15883,6 +15884,7 @@ function showPage(pageId) {
   if (pageId==='game' && window.GameHub) GameHub.toHub();
   if (pageId==='lab' && window.Lab) Lab.openHub();
   if (pageId==='media') loadMedia();
+  if (pageId==='welcome' && window.PK && PK.renderWelcome) PK.renderWelcome();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -17335,7 +17337,8 @@ function renderAuthUI(){
     $('umTeacher').style.display = PK.isTeacher() ? '' : 'none';
   }
   const hg=$('heroGreeting');
-  if(hg){ if(u){ hg.textContent='👋 ยินดีต้อนรับกลับ, '+u.name+'!'; hg.style.display='block'; } else hg.style.display='none'; }
+  if(hg){ hg.textContent = u ? ('👋 ยินดีต้อนรับกลับ, '+u.name+'!') : '👋 ยินดีต้อนรับสู่ศูนย์การเรียนรู้เคมี — เข้าสู่ระบบเพื่อบันทึกความก้าวหน้า'; hg.style.display='block'; }
+  const hb=$('heroAuthBtn'); if(hb) hb.textContent = u ? '📊 โปรไฟล์ของฉัน' : '🔐 เข้าสู่ระบบ';
   if(!u && $('page-teacher').classList.contains('active')) window.showPage('welcome');
 }
 PK.openProfileOrLogin = ()=>{ if(state.user) PK.openProfile(); else PK.openAuth('login'); };
@@ -17987,8 +17990,18 @@ function countUp(el, target, dur){
     el.textContent=Math.round(e*target); if(t<1) requestAnimationFrame(step); else el.textContent=target; }
   requestAnimationFrame(step);
 }
-(function(){ const a=$('statCount1'),b=$('statCount2'),c=$('statCount3');
-  if(a) countUp(a,6); if(b) countUp(b,14); if(c) countUp(c,140); })();
+/* ─── ระบบนับคนเข้าชม (per-device, ออฟไลน์ได้) + สถิติหน้าแรก ─── */
+PK.bumpVisits = ()=>{ try{
+  let n=parseInt(localStorage.getItem('pk_visits')||'0',10)||0;
+  if(!sessionStorage.getItem('pk_visited')){ n++; localStorage.setItem('pk_visits',String(n)); sessionStorage.setItem('pk_visited','1'); }
+  return n; }catch(e){ return 0; } };
+PK.renderWelcome = ()=>{
+  const a=$('statCount1'),b=$('statCount2'),c=$('statCount3'),d=$('statCount4');
+  const ch=(typeof CHAPTERS!=='undefined'&&CHAPTERS.length)?CHAPTERS.length:14;
+  const lb=(typeof LABS!=='undefined'&&LABS.length)?LABS.length:15;
+  let qz=0; try{ for(const k in QUIZ_BANK) qz+=(QUIZ_BANK[k]||[]).length; }catch(e){}
+  if(a) countUp(a,ch); if(b) countUp(b, qz||1555); if(c) countUp(c,lb); if(d) countUp(d, PK.bumpVisits());
+};
 
 /* ═══ MARBLE BOARD GAME (เคมีมาร์เบิล) v2 ═══ */
 const Game = window.Game = {};
@@ -20922,6 +20935,7 @@ function expandQuizBank(){
   }
 }
 expandQuizBank();
+try{ if(window.PK && PK.renderWelcome) PK.renderWelcome(); }catch(e){}
 
 /* ═══ คลังโจทย์จาก Google Sheets — แก้โจทย์ในชีตได้โดยไม่ต้องแตะโค้ด ═══
    วิธีตั้งค่า (ดูคู่มือเต็มใน reports/quiz-google-sheets.md):
