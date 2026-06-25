@@ -505,6 +505,9 @@ footer strong { color:white; font-weight:600; }
 .app-card .app-u { font-size:10.5px; color:#0F766E; font-weight:600; margin-top:3px; }
 .app-card .app-p { font-size:9px; color:#6B7280; margin-top:3px; }
 .app-btn { background:linear-gradient(135deg,#0EA5A4,#0F766E); color:#fff; border:none; border-radius:12px; padding:12px 22px; font-family:inherit; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 6px 16px rgba(14,165,160,.3); }
+.app-btn:disabled { opacity:.45; cursor:default; box-shadow:none; filter:grayscale(.3); }
+.srs-weak { margin-top:12px; font-size:13px; color:var(--text); line-height:1.6; }
+.srs-hint { text-align:center; font-size:12px; color:var(--muted); margin-top:8px; line-height:1.5; }
 .auth-close { float:right; border:none; background:none; cursor:pointer; font-size:22px; color:var(--muted); line-height:1; margin:-6px -6px 0 0; }
 
 /* Profile / progress page */
@@ -1703,6 +1706,17 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="gami-stat"><div class="n" id="gamiBadgeCount">0</div><div class="l">เหรียญที่ได้รับ</div></div>
       </div>
       <div class="badge-grid" id="badgeGrid"></div>
+    </div>
+    <div class="progress-card" id="srsCard">
+      <h3>🧠 ทบทวนข้อที่เคยผิด</h3>
+      <div class="pf-stats">
+        <div class="pf-stat"><div class="n" id="srsDue">0</div><div class="l">ถึงกำหนดทบทวน</div></div>
+        <div class="pf-stat"><div class="n" id="srsTracked">0</div><div class="l">ข้อที่ติดตาม</div></div>
+        <div class="pf-stat"><div class="n" id="srsAcc">—</div><div class="l">แม่นยำควิซเฉลี่ย</div></div>
+      </div>
+      <div id="srsWeak" class="srs-weak"></div>
+      <div style="text-align:center;margin-top:12px;"><button class="app-btn" id="srsBtn" onclick="PK.startReview()" disabled>ยังไม่มีข้อทบทวน</button></div>
+      <div id="srsHint" class="srs-hint"></div>
     </div>
     <div class="progress-card">
       <h3>📈 ความคืบหน้าการเรียน</h3>
@@ -17361,6 +17375,26 @@ function renderProfile(){
     return `<div class="qs-row"><span class="qs-title">บทที่ ${idx} — ${c.t}</span><span class="qs-badge ${cls}">${r.best}/${r.total} · ${pct}%</span></div>`;
   }).join('');
   renderGami(p);
+  renderSRS(p);
+}
+/* ─── DASHBOARD: ทบทวนข้อที่เคยผิด + สรุปความแม่นยำ ─── */
+function renderSRS(p){
+  const card=$('srsCard'); if(!card) return;
+  const due=SRS.due().length, tracked=SRS.count();
+  $('srsDue').textContent=due; $('srsTracked').textContent=tracked;
+  const qz=(p&&p.quizzes)||{}; let bs=0,tt=0;
+  Object.keys(qz).forEach(k=>{ if(k==='__exam'||k==='__review') return; const r=qz[k]; if(r&&r.total){ bs+=r.best||0; tt+=r.total; } });
+  $('srsAcc').textContent = tt ? Math.round(bs/tt*100)+'%' : '—';
+  const weak=CHAPTERS.filter(c=>{ const r=qz[c.id]; return r&&r.total&&(r.best/r.total)<0.6; })
+    .map(c=>'บทที่ '+chIndex(c.id)+' '+c.t).slice(0,3);
+  $('srsWeak').innerHTML = weak.length ? '<b>📉 ควรเน้น:</b> '+weak.join(' · ') : '';
+  const btn=$('srsBtn'), hint=$('srsHint');
+  if(due>0){ btn.disabled=false; btn.textContent='เริ่มทบทวน '+due+' ข้อ →';
+    hint.textContent='ระบบนำข้อที่เคยตอบผิดมาถามซ้ำตามจังหวะการลืม (Leitner) ตอบถูกซ้ำ ๆ จะทิ้งช่วงนานขึ้นจนจำได้'; }
+  else if(tracked>0){ btn.disabled=true; btn.textContent='ยังไม่ถึงกำหนดทบทวน';
+    hint.textContent='เยี่ยม! ทบทวนครบรอบแล้ว เดี๋ยวมีข้อกลับมาให้ทบทวนอีกตามรอบเวลา'; }
+  else { btn.disabled=true; btn.textContent='ยังไม่มีข้อทบทวน';
+    hint.textContent='เมื่อทำแบบทดสอบแล้วตอบผิด ข้อนั้นจะถูกเก็บมาทบทวนที่นี่อัตโนมัติ'; }
 }
 
 /* ─── GAMIFICATION ─── */
@@ -17513,8 +17547,45 @@ PK.trackProblem = ()=>{ try{ PK._backend && PK._backend.trackProblem(); }catch(e
 PK.saveRPG = (s)=>{ try{ PK._backend && PK._backend.saveRPG && PK._backend.saveRPG(s); }catch(e){} };
 
 /* ─── QUIZ ENGINE ─── */
-const QZ = { ch:null, qs:[], i:0, score:0, answered:false };
+const QZ = { ch:null, qs:[], i:0, score:0, answered:false, review:false };
 const KEYS = ['ก','ข','ค','ง'];
+/* ─── SPACED REPETITION — ทบทวนข้อที่เคยผิด (Leitner box, เก็บใน localStorage) ─── */
+const SRS = {
+  _iv:[0, 0, 864e5, 3*864e5, 7*864e5, 21*864e5], // box1=ทบทวนได้ทันที · box2=1ว. · box3=3ว. · box4=7ว. · box5=จำได้(ลบออก)
+  _key(){ return 'pk_srs_'+((state.user&&state.user.email)||'guest'); },
+  _all(){ try{ return JSON.parse(localStorage.getItem(this._key())||'{}'); }catch(e){ return {}; } },
+  _save(m){ try{ localStorage.setItem(this._key(), JSON.stringify(m)); }catch(e){} },
+  _hash(s){ let h=0; s=String(s); for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))|0; } return h.toString(36); },
+  /* บันทึกผลตอบ 1 ข้อ: ผิด→เข้ากล่อง 1 (ทบทวนเร็ว) · ถูก→เลื่อนกล่องสูงขึ้น (ทิ้งช่วงนานขึ้น) · ถึงกล่อง 5 = จำได้ ลบออก */
+  record(ch, qtext, ok){
+    if(!ch || ch==='__exam' || ch==='__review') return;
+    const m=this._all(), k=ch+'|'+this._hash(qtext); let it=m[k];
+    if(ok){
+      if(it){ it.box=Math.min(5,(it.box||1)+1); it.right=(it.right||0)+1; it.due=Date.now()+this._iv[it.box];
+        if(it.box>=5) delete m[k]; }
+      // ตอบถูกตั้งแต่แรก (ไม่เคยอยู่ในคิว) → ไม่เพิ่ม
+    } else {
+      it=it||{ch, q:qtext, box:1, right:0, wrong:0, created:Date.now()};
+      it.ch=ch; it.q=qtext; it.box=1; it.wrong=(it.wrong||0)+1; it.due=Date.now()+this._iv[1];
+      m[k]=it;
+    }
+    this._save(m);
+  },
+  due(){ const m=this._all(), now=Date.now(); return Object.values(m).filter(it=>(it.due||0)<=now); },
+  count(){ return Object.keys(this._all()).length; }
+};
+PK.startReview = ()=>{
+  const due=SRS.due();
+  if(!due.length){ toast('ยังไม่มีข้อที่ถึงกำหนดทบทวน 🎉'); return; }
+  const qs=[];
+  due.forEach(it=>{ const bank=QUIZ_BANK[it.ch]||[]; const q=bank.find(x=>x.q===it.q); if(q) qs.push(Object.assign({}, q, {_ch:it.ch})); });
+  if(!qs.length){ toast('ไม่พบข้อทบทวนในคลังปัจจุบัน'); return; }
+  QZ.ch='__review'; QZ.review=true; QZ.qs=shuffle(qs).slice(0, Math.min(20, qs.length)); QZ.i=0; QZ.score=0; QZ.answered=false;
+  window.__pkQuizChapter='__review';
+  $('quizTitle').textContent='🧠 ทบทวนข้อที่เคยผิด ('+QZ.qs.length+' ข้อ)';
+  $('quizPlay').style.display=''; $('quizResult').style.display='none';
+  renderQuestion(); window.showPage('quiz');
+};
 function chTitle(id){ const c=CHAPTERS.find(x=>x.id===id); return c?c.t:''; }
 function chIndex(id){ return CHAPTERS.findIndex(x=>x.id===id)+1; }
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
@@ -17555,7 +17626,7 @@ PK.startQuiz = (id, level) => {
   window.__pkQuizChapter=id; window.__pkQuizLevel=level||'all';
   let pool=QUIZ_BANK[id].slice();
   if(level && level!=='all'){ const f=pool.filter(q=>PK.qLevel(q).k===level); if(f.length>=4) pool=f; }
-  QZ.ch=id; QZ.qs=shuffle(pool).slice(0, Math.min(QUIZ_PER, pool.length)); QZ.i=0; QZ.score=0; QZ.answered=false;
+  QZ.ch=id; QZ.review=false; QZ.qs=shuffle(pool).slice(0, Math.min(QUIZ_PER, pool.length)); QZ.i=0; QZ.score=0; QZ.answered=false;
   const lvName={easy:' · ระดับง่าย',med:' · ระดับปานกลาง',hard:' · ระดับยาก'}[level]||'';
   $('quizTitle').textContent='แบบทดสอบ บทที่ '+chIndex(id)+' — '+chTitle(id)+lvName;
   $('quizPlay').style.display=''; $('quizResult').style.display='none';
@@ -17584,6 +17655,7 @@ PK.answer = idx => {
   const btns=$('quizChoices').querySelectorAll('.quiz-choice');
   btns.forEach((b,i)=>{ b.disabled=true; if(i===correct) b.classList.add('correct'); });
   if(idx===correct) QZ.score++; else btns[idx].classList.add('wrong');
+  try{ SRS.record(QZ.review ? (QZ.qs[QZ.i]._ch||QZ.ch) : QZ.ch, QZ.qs[QZ.i].q, idx===correct); }catch(e){}
   const ex=$('quizExplain'); ex.classList.add('show');
   ex.innerHTML='<b>'+(idx===correct ? '✓ ถูกต้อง! ' : '✗ คำตอบที่ถูกคือ '+KEYS[correct]+'. ')+'</b>'+QZ.qs[QZ.i].e;
   $('quizNext').disabled=false;
@@ -17603,14 +17675,20 @@ function showResult(){
   $('qrEmoji').textContent=emoji; $('qrTitle').textContent=title;
   $('qrArc').setAttribute('stroke',color);
   $('qrPct').style.color=color;
-  $('qrSub').textContent = QZ.ch==='__exam' ? '🎯 ข้อสอบรวมทุกบท' : ('บทที่ '+chIndex(QZ.ch)+' — '+chTitle(QZ.ch));
+  $('qrSub').textContent = QZ.ch==='__review' ? '🧠 ทบทวนข้อที่เคยผิด' : QZ.ch==='__exam' ? '🎯 ข้อสอบรวมทุกบท' : ('บทที่ '+chIndex(QZ.ch)+' — '+chTitle(QZ.ch));
   let rec=null;
-  if(state.user && PK._backend && PK._backend.saveQuiz){ try{ rec=PK._backend.saveQuiz(QZ.ch,score,total); }catch(e){} }
-  if(rec){ $('qrBest').textContent='🏅 คะแนนดีที่สุด '+rec.best+'/'+rec.total+' · ทำแล้ว '+rec.attempts+' ครั้ง'; $('qrLoginNote').style.display='none'; }
-  else { $('qrBest').textContent=''; $('qrLoginNote').style.display = state.user ? 'none' : ''; }
-  PK.refreshQuizButton(QZ.ch);
+  if(QZ.ch==='__review'){
+    const left=SRS.due().length;
+    $('qrBest').textContent = left>0 ? ('🧠 ยังเหลือทบทวนอีก '+left+' ข้อ') : '🎉 ทบทวนครบรอบนี้แล้ว!';
+    $('qrLoginNote').style.display='none';
+  } else {
+    if(state.user && PK._backend && PK._backend.saveQuiz){ try{ rec=PK._backend.saveQuiz(QZ.ch,score,total); }catch(e){} }
+    if(rec){ $('qrBest').textContent='🏅 คะแนนดีที่สุด '+rec.best+'/'+rec.total+' · ทำแล้ว '+rec.attempts+' ครั้ง'; $('qrLoginNote').style.display='none'; }
+    else { $('qrBest').textContent=''; $('qrLoginNote').style.display = state.user ? 'none' : ''; }
+    PK.refreshQuizButton(QZ.ch);
+  }
 }
-PK.exitQuiz = () => { window.showPage(window.__pkQuizChapter==='__exam' ? 'home' : (window.__pkChapter ? 'chapter' : 'home')); };
+PK.exitQuiz = () => { window.showPage(window.__pkQuizChapter==='__review' ? 'profile' : window.__pkQuizChapter==='__exam' ? 'home' : (window.__pkChapter ? 'chapter' : 'home')); };
 
 /* ═══ MOCK EXAM — โหมดสอบเสมือนจริง (จับเวลา · ไม่เฉลยจนจบ · ทบทวนรายข้อ) ═══ */
 const MEX = window.MEX = {};
