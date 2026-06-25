@@ -18244,7 +18244,7 @@ function nextTurn(){
 function showGameQuestion(chId, cb){
   const qs=QUIZ_BANK[chId]; const q=qs[Math.floor(Math.random()*qs.length)];
   const order=shuffle(q.c.map((t,i)=>({t, ok:i===q.a})));
-  G.qCorrect=order.findIndex(o=>o.ok); G.qCb=cb; G.qDone=false; G.qExp=q.e||''; G.fiftyUsed=false;
+  G.qCorrect=order.findIndex(o=>o.ok); G.qCb=cb; G.qDone=false; G.qExp=q.e||''; G.fiftyUsed=false; G.qCh=chId; G.qText=q.q;
   $('gqChip').textContent='บทที่ '+chNo(chId);
   $('gqQ').innerHTML=q.q;
   $('gqResult').style.display='none';
@@ -18278,6 +18278,7 @@ Game.answer = (idx)=>{
   if(G.qDone) return; G.qDone=true;
   if(gTimer){ clearInterval(gTimer); gTimer=null; }
   const correct = idx===G.qCorrect;
+  try{ if(G.qCh) SRS.record(G.qCh, G.qText, correct); }catch(e){}
   const btns=$('gqChoices').querySelectorAll('.quiz-choice');
   btns.forEach((b,i)=>{ b.disabled=true; if(i===G.qCorrect) b.classList.add('correct'); });
   if(idx>=0 && !correct && btns[idx]) btns[idx].classList.add('wrong');
@@ -18642,7 +18643,7 @@ function snkAsk(p, cb){ if(p.human) snkShowQ(cb); else setTimeout(()=>cb(Math.ra
 function snkShowQ(cb){
   const ch=CHAPTERS[Math.floor(Math.random()*CHAPTERS.length)]; const qs=QUIZ_BANK[ch.id]; const q=qs[Math.floor(Math.random()*qs.length)];
   const order=shuffle(q.c.map((t,i)=>({t,ok:i===q.a})));
-  SNK.qCorrect=order.findIndex(o=>o.ok); SNK.qCb=cb; SNK.qDone=false; SNK.qExp=q.e||'';
+  SNK.qCorrect=order.findIndex(o=>o.ok); SNK.qCb=cb; SNK.qDone=false; SNK.qExp=q.e||''; SNK.qCh=ch.id; SNK.qText=q.q;
   $('gqChip').textContent='บทที่ '+(CHAPTERS.findIndex(c=>c.id===ch.id)+1);
   $('gqQ').innerHTML=q.q; $('gqResult').style.display='none'; $('gqTimer').textContent=''; $('gqTools').innerHTML='';
   $('gqChoices').innerHTML=order.map((o,idx)=>'<button class="quiz-choice" id="gqc'+idx+'" onclick="Snake.answer('+idx+')"><span class="qc-key">'+['ก','ข','ค','ง'][idx]+'</span><span>'+o.t+'</span></button>').join('');
@@ -18651,6 +18652,7 @@ function snkShowQ(cb){
 Snake.answer = (idx)=>{
   if(SNK.qDone) return; SNK.qDone=true;
   const correct=idx===SNK.qCorrect;
+  try{ if(SNK.qCh) SRS.record(SNK.qCh, SNK.qText, correct); }catch(e){}
   const btns=$('gqChoices').querySelectorAll('.quiz-choice');
   btns.forEach((b,i)=>{ b.disabled=true; if(i===SNK.qCorrect) b.classList.add('correct'); });
   if(idx>=0 && !correct && btns[idx]) btns[idx].classList.add('wrong');
