@@ -31,5 +31,24 @@
 ## ทำ
 - แก้ href McGraw Hill · bump `sw.js` v13 → **v14**
 
-## ทำต่อ (เมื่อเว็บกลับมา 23:00)
-ตรวจสุขภาพลิงก์ทั้งหมด (HTTP 200) โดยเฉพาะ Khan deep links 14 อัน + ScienceDirect แล้วแก้อันที่ตาย/ย้าย
+## รอบ 2 — ตรวจสุขภาพลิงก์สดด้วย curl (เว็บกลับมาแล้ว)
+เช็ก HTTP status ทุกลิงก์ภายนอก (curl -L):
+
+| สถานะ | ลิงก์ | สรุป |
+|---|---|---|
+| **200** | Khan deep links ทั้ง 14 + course หลัก | ✅ live ทุกอัน + หัวข้อตรงบท (ตรวจรอบแรกแล้ว) |
+| **200** | PubChem · Google search (McGraw ที่แก้) | ✅ |
+| **403** | iupac.org · sciencedirect.com | บล็อกบอท (curl) ไม่ใช่หน้าตาย — เบราว์เซอร์จริงเปิดได้ |
+
+→ **ลิงก์เสียจริงมีแค่ McGraw Hill (แก้แล้วรอบ 1)** ลิงก์อื่น live หมด
+
+## รอบ 2 — เปลี่ยน ScienceDirect → LibreTexts (อัปเกรดให้เหมาะนักเรียน)
+ScienceDirect ใช้ได้ (403 = บอทเท่านั้น) แต่เป็นฐานวิจัย paywall ไม่เหมาะ ม.ปลาย
+- เปลี่ยนการ์ด → **LibreTexts Chemistry** (`chem.libretexts.org`, curl 200, ฟรี ครบทุกระดับ)
+- ตัวเลือกฟรีอื่นที่ยืนยัน 200 ไว้แล้ว: OpenStax Chemistry 2e (`openstax.org/details/books/chemistry-2e`)
+- ย้อนกลับได้ง่าย (การ์ดเดียว) ถ้าครูอยากได้ ScienceDirect คืน
+
+## สรุปสุดท้าย
+- ลิงก์อ้างอิงทั้งหมด **live + ตรงเนื้อหา** · เสียจริงแค่ McGraw Hill (แก้) · ScienceDirect→LibreTexts (อัปเกรด)
+- bump `sw.js` → v15
+- ค้าง: ขอครูยืนยันรายละเอียด "Chang Chemistry 14e/2022" ในการ์ด

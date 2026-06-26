@@ -1,5 +1,5 @@
 /* PKchemistry service worker — offline cache (works only when served over http/https) */
-const CACHE = 'pkchem-v14';
+const CACHE = 'pkchem-v15';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg', './data/media.json'];
 
 self.addEventListener('install', e => {
