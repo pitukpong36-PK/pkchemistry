@@ -508,6 +508,10 @@ footer strong { color:white; font-weight:600; }
 .app-btn:disabled { opacity:.45; cursor:default; box-shadow:none; filter:grayscale(.3); }
 .srs-weak { margin-top:12px; font-size:13px; color:var(--text); line-height:1.6; }
 .srs-hint { text-align:center; font-size:12px; color:var(--muted); margin-top:8px; line-height:1.5; }
+/* เศษส่วนแบบวางซ้อน (ตัวเศษบน / ตัวส่วนล่าง) ให้สมการอ่านง่าย */
+.frac { display:inline-flex; flex-direction:column; align-items:center; justify-content:center; vertical-align:middle; text-align:center; margin:0 .18em; line-height:1.1; }
+.frac > .n { display:block; padding:0 .35em 1px; border-bottom:1.5px solid currentColor; }
+.frac > .d { display:block; padding:1px .35em 0; }
 .auth-close { float:right; border:none; background:none; cursor:pointer; font-size:22px; color:var(--muted); line-height:1; margin:-6px -6px 0 0; }
 
 /* Profile / progress page */
@@ -3293,7 +3297,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              ค่าเฉลี่ย = (98.0 + 98.1 + 97.9)/3 = <strong>98.0 mL</strong> (ห่างค่าจริง 100.0)<br>
+              ค่าเฉลี่ย = <span class="frac"><span class="n">(98.0 + 98.1 + 97.9)</span><span class="d">3</span></span> = <strong>98.0 mL</strong> (ห่างค่าจริง 100.0)<br>
               ค่ากระจาย: ทุกค่าใกล้ 98.0 มาก<br>
               ⇒ <strong>เที่ยงสูง</strong> (ค่ากระจายน้อย) แต่ <strong>ไม่แม่น</strong> (ห่างค่าจริง)<br>
               💡 น่าจะเป็น <em>systematic error</em> — เช่น เครื่องวัด zero ผิด → ต้อง calibrate
@@ -3307,7 +3311,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              ค่าเฉลี่ย = (100.5 + 99.2 + 100.8)/3 = <strong>100.2 mL</strong> (ใกล้ค่าจริง)<br>
+              ค่าเฉลี่ย = <span class="frac"><span class="n">(100.5 + 99.2 + 100.8)</span><span class="d">3</span></span> = <strong>100.2 mL</strong> (ใกล้ค่าจริง)<br>
               ค่ากระจาย: ช่วง 99.2–100.8 (กว้าง ~1.6 mL)<br>
               ⇒ <strong>แม่นพอใช้</strong> แต่ <strong>เที่ยงต่ำ</strong> (กระจายมาก)<br>
               💡 น่าจะเป็น <em>random error</em> → แก้ได้โดยวัดซ้ำหลายครั้งและเอาค่าเฉลี่ย
@@ -3394,7 +3398,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               55 km/h × (1000 m / 1 km) × (1 h / 3600 s)<br>
-              = (55 × 1000 / 3600) m/s<br>
+              = (55 × <span class="frac"><span class="n">1000</span><span class="d">3600</span></span>) m/s<br>
               = 55,000/3600 = <strong>15.3 m/s</strong>
             </div>
           </details>
@@ -3433,7 +3437,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              760 mmHg = 760/760 = <strong>1.00 atm</strong><br>
+              760 mmHg = <span class="frac"><span class="n">760</span><span class="d">760</span></span> = <strong>1.00 atm</strong><br>
               1 atm = <strong>101,325 Pa</strong> ≈ 1.01 × 10⁵ Pa<br>
               💡 ความดันบรรยากาศที่ระดับน้ำทะเล = 1 atm = 760 mmHg = 101.325 kPa
             </div>
@@ -3608,7 +3612,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>สูตร/แนวคิดที่ใช้:</strong> คูณด้วยอัตราส่วนที่ค่า = 1 เพื่อให้หน่วยที่ไม่ต้องการ "ตัดกัน" เหลือหน่วยเป้าหมาย<br><br>
               <strong>ข้อ ก) g/cm³ → kg/m³:</strong><br>
               13.6 (g/cm³) × (1 kg / 1000 g) × (100 cm / 1 m)³<br>
-              = 13.6 × (1/1000) × (10⁶) kg/m³<br>
+              = 13.6 × (<span class="frac"><span class="n">1</span><span class="d">1000</span></span>) × (10⁶) kg/m³<br>
               = 13.6 × 1000 = <strong>13,600 kg/m³</strong><br>
               (จำง่าย: 1 g/cm³ = 1000 kg/m³ เสมอ)<br><br>
               <strong>ข้อ ข) km/h → m/s:</strong><br>
@@ -4405,8 +4409,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>สูตร/แนวคิดที่ใช้:</strong> Ā = Σ(Aᵢ × fᵢ) เมื่อ fᵢ = สัดส่วนไอโซโทป i (ไม่ใช่ %)<br><br>
               <strong>ขั้นที่ 1 — แปลง % เป็นสัดส่วน:</strong><br>
-              f(³⁵Cl) = 75.77 / 100 = 0.7577<br>
-              f(³⁷Cl) = 24.23 / 100 = 0.2423<br>
+              f(³⁵Cl) = <span class="frac"><span class="n">75.77</span><span class="d">100</span></span> = 0.7577<br>
+              f(³⁷Cl) = <span class="frac"><span class="n">24.23</span><span class="d">100</span></span> = 0.2423<br>
               ตรวจ: 0.7577 + 0.2423 = 1.0000 ✓<br><br>
               <strong>ขั้นที่ 2 — คำนวณมวลเฉลี่ย:</strong><br>
               Ā = 34.969 × 0.7577 + 36.966 × 0.2423<br>
@@ -4415,7 +4419,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>ขั้นที่ 3 — ตีความผล:</strong><br>
               ค่า 35.45 อยู่ระหว่าง 35 กับ 37 แต่ใกล้ 35 มากกว่า — สอดคล้องกับ ³⁵Cl มี abundance มากกว่า (75.77%) ✓<br>
               ค่านี้ตรงกับมวลอะตอมใน periodic table ของ Cl = 35.45 ✓<br><br>
-              <strong>ตรวจสอบเร็ว:</strong> ถ้า abundance เท่ากัน (50:50) Ā = (34.969+36.966)/2 = 35.968 ≠ 35.45 (เพราะ ³⁵Cl มีมากกว่า ค่าจึงเอียงไปหา 35) ✓
+              <strong>ตรวจสอบเร็ว:</strong> ถ้า abundance เท่ากัน (50:50) Ā = <span class="frac"><span class="n">(34.969+36.966)</span><span class="d">2</span></span> = 35.968 ≠ 35.45 (เพราะ ³⁵Cl มีมากกว่า ค่าจึงเอียงไปหา 35) ✓
             </div>
           </details>
         </div>
@@ -5519,7 +5523,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h3>🔢 มวลอะตอมและโมล</h3>
         <h4>มวลอะตอม (Atomic Mass)</h4>
         <ul>
-          <li><span class="li-dot sc-dot"></span>หน่วยมวลอะตอม (u หรือ amu): 1 u = 1/12 มวลของ ¹²C = 1.661 × 10⁻²⁷ kg</li>
+          <li><span class="li-dot sc-dot"></span>หน่วยมวลอะตอม (u หรือ amu): 1 u = <span class="frac"><span class="n">1</span><span class="d">12</span></span> มวลของ ¹²C = 1.661 × 10⁻²⁷ kg</li>
           <li><span class="li-dot sc-dot"></span>มวลอะตอมมาตรฐานคือมวลอะตอมเฉลี่ยที่คำนึงถึงไอโซโทปทุกชนิดตามอัตราส่วนที่พบในธรรมชาติ</li>
         </ul>
         <h4>โมล (Mole) และเลขอาโวกาโดร</h4>
@@ -5565,9 +5569,9 @@ html, body { max-width:100%; overflow-x:hidden; }
         </div>
         <div class="formula-box">
           <div class="formula-label">การแปลงหน่วย</div>
-          n = m/M   (n=mol, m=มวล(g), M=มวลโมลาร์(g/mol))<br>
-          n = N/Nₐ  (N = จำนวนอนุภาค)<br>
-          n = V/22.4 (สำหรับแก๊สที่ STP, V หน่วย L)
+          n = <span class="frac"><span class="n">m</span><span class="d">M</span></span> &nbsp;(n = mol, m = มวล (g), M = มวลโมลาร์ (g/mol))<br>
+          n = <span class="frac"><span class="n">N</span><span class="d">N<sub>A</sub></span></span> &nbsp;(N = จำนวนอนุภาค)<br>
+          n = <span class="frac"><span class="n">V</span><span class="d">22.4</span></span> &nbsp;(สำหรับแก๊สที่ STP, V หน่วย L)
         </div>
         <div class="note-box">
           ⚠️ <strong>จุดที่มักผิดในการแปลงหน่วยโมล:</strong><br>
@@ -5596,14 +5600,14 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="formula-box">
           <div class="formula-label">ร้อยละโดยมวล</div>
           %ธาตุ X = (จำนวนอะตอม X × มวลอะตอม X / มวลโมลาร์สาร) × 100<br>
-          ตัวอย่าง: % C ใน CO₂ = (1 × 12.01/44.01) × 100 = 27.29%<br>
-          ตัวอย่าง: % O ใน CO₂ = (2 × 16.00/44.01) × 100 = 72.71%
+          ตัวอย่าง: % C ใน CO₂ = (1 × <span class="frac"><span class="n">12.01</span><span class="d">44.01</span></span>) × 100 = 27.29%<br>
+          ตัวอย่าง: % O ใน CO₂ = (2 × <span class="frac"><span class="n">16.00</span><span class="d">44.01</span></span>) × 100 = 72.71%
         </div>
         <div class="note-box">
           ⚠️ <strong>ระวังสับสน Empirical vs Molecular:</strong><br>
           • <em>Empirical (สูตรอย่างง่าย)</em> = อัตราส่วน <strong>เล็กสุด</strong> ของอะตอม เช่น กลูโคส = CH₂O<br>
           • <em>Molecular (สูตรโมเลกุล)</em> = จำนวนอะตอม <strong>จริง</strong> ในโมเลกุล เช่น กลูโคส = C₆H₁₂O₆<br>
-          ความสัมพันธ์: Molecular = (Empirical)<sub>n</sub> โดย n = MW / EW (ปัดเศษให้เป็นจำนวนเต็ม)
+          ความสัมพันธ์: Molecular = (Empirical)<sub>n</sub> โดย n = <span class="frac"><span class="n">MW</span><span class="d">EW</span></span> (ปัดเศษให้เป็นจำนวนเต็ม)
         </div>
         <h4>สูตรอย่างง่ายและสูตรโมเลกุล</h4>
         <table class="content-table">
@@ -5615,10 +5619,10 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="formula-box">
           <div class="formula-label">ขั้นตอนหาสูตรอย่างง่ายจากข้อมูลการวิเคราะห์</div>
           โจทย์: สาร X มี C 52.17%, H 13.04%, O 34.78%<br>
-          1) แปลงเป็นโมล: C=52.17/12=4.347, H=13.04/1=13.04, O=34.78/16=2.174<br>
+          1) แปลงเป็นโมล: C=<span class="frac"><span class="n">52.17</span><span class="d">12</span></span>=4.347, H=<span class="frac"><span class="n">13.04</span><span class="d">1</span></span>=13.04, O=<span class="frac"><span class="n">34.78</span><span class="d">16</span></span>=2.174<br>
           2) หารด้วยค่าน้อยสุด (2.174): C=2.0, H=6.0, O=1.0<br>
           3) สูตรอย่างง่าย = C₂H₆O (มวล empirical = 46 g/mol)<br>
-          4) ถ้า MW = 46 g/mol: n = 46/46 = 1 → สูตรโมเลกุล = C₂H₆O (เอทานอล)
+          4) ถ้า MW = 46 g/mol: n = <span class="frac"><span class="n">46</span><span class="d">46</span></span> = 1 → สูตรโมเลกุล = C₂H₆O (เอทานอล)
         </div>
         <div class="tip-box">💡 <strong>การประยุกต์:</strong> นักเคมีวิเคราะห์ใช้ mass spectrometry ร่วมกับ elemental analysis เพื่อหาสูตรโมเลกุลของสารใหม่ในการวิจัยยา</div>
       </div>
@@ -5662,7 +5666,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              <strong>1 u = 1/12 ของมวล ¹²C ที่นิ่ง = 1.661 × 10⁻²⁷ kg</strong><br>
+              <strong>1 u = <span class="frac"><span class="n">1</span><span class="d">12</span></span> ของมวล ¹²C ที่นิ่ง = 1.661 × 10⁻²⁷ kg</strong><br>
               ที่มา: เลือก ¹²C เพราะมี isotope บริสุทธิ์ที่วัดได้ง่ายและเสถียร<br>
               💡 1 u × Nₐ = (1.661×10⁻²⁷)(6.022×10²³) = 1.000×10⁻³ kg = 1 g — สอดคล้องกับมวลโมลาร์
             </div>
@@ -5690,7 +5694,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               ตามกฎแก๊สอุดมคติ PV = nRT<br>
-              V = nRT/P = (1)(0.0821)(273)/1 = <strong>22.41 L</strong><br>
+              V = <span class="frac"><span class="n">nRT</span><span class="d">P</span></span> = <span class="frac"><span class="n">(1)(0.0821)(273)</span><span class="d">1</span></span> = <strong>22.41 L</strong><br>
               ค่านี้ไม่ขึ้นกับชนิดแก๊ส (เพราะแก๊สอุดมคติคิดว่าโมเลกุลขนาดเล็กไม่มีแรงระหว่างกัน)<br>
               ⇒ ที่ STP: 1 mol He = 1 mol CO₂ = 1 mol N₂ = 22.4 L<br>
               💡 ที่ 25°C (298 K), V_m = 24.5 L/mol (ใช้ในตำราเคมีบางเล่ม)
@@ -5707,7 +5711,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               n = m / M<br>
-              = 9.0 / 18 = <strong>0.50 mol</strong>
+              = <span class="frac"><span class="n">9.0</span><span class="d">18</span></span> = <strong>0.50 mol</strong>
             </div>
           </details>
         </div>
@@ -5784,7 +5788,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(Na) = 23/23 = 1 mol → อะตอม Na = 6.022×10²³ ตัว<br>
+              n(Na) = <span class="frac"><span class="n">23</span><span class="d">23</span></span> = 1 mol → อะตอม Na = 6.022×10²³ ตัว<br>
               แต่ละอะตอม Na มี 11 e⁻<br>
               e⁻ รวม = 6.022×10²³ × 11 = <strong>6.62 × 10²⁴ ตัว</strong>
             </div>
@@ -5823,7 +5827,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n = V/22.4 = 11.2/22.4 = <strong>0.500 mol</strong><br>
+              n = V/22.4 = <span class="frac"><span class="n">11.2</span><span class="d">22.4</span></span> = <strong>0.500 mol</strong><br>
               มวล = 0.500 × 16 = <strong>8.0 g</strong>
             </div>
           </details>
@@ -5836,7 +5840,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               ที่ STP: V₁ = 0.50 × 22.4 = 11.2 L<br>
-              ที่ 100°C: ใช้ V₂ = V₁ × (T₂/T₁) = 11.2 × (373/273)<br>
+              ที่ 100°C: ใช้ V₂ = V₁ × (T₂/T₁) = 11.2 × (<span class="frac"><span class="n">373</span><span class="d">273</span></span>)<br>
               V₂ = 11.2 × 1.366 = <strong>15.3 L</strong><br>
               💡 อุณหภูมิเพิ่ม → ปริมาตรเพิ่ม (กฎของชาร์ล)
             </div>
@@ -5866,7 +5870,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               M(CO₂) = 12 + 2(16) = 44 g/mol<br>
               %C = (มวล C / M) × 100<br>
-              = (12 / 44) × 100 = <strong>27.3%</strong>
+              = (<span class="frac"><span class="n">12</span><span class="d">44</span></span>) × 100 = <strong>27.3%</strong>
             </div>
           </details>
         </div>
@@ -5878,7 +5882,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               M(NH₃) = 14 + 3(1) = 17 g/mol<br>
-              %N = (14/17) × 100 = <strong>82.4%</strong><br>
+              %N = (<span class="frac"><span class="n">14</span><span class="d">17</span></span>) × 100 = <strong>82.4%</strong><br>
               💡 NH₃ จึงเป็นปุ๋ยที่ให้ไนโตรเจนต่อมวลสูง
             </div>
           </details>
@@ -5891,8 +5895,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               M(K₂CO₃) = 2(39) + 12 + 3(16) = 78 + 12 + 48 = 138 g/mol<br>
-              %K = (2 × 39 / 138) × 100<br>
-              = 78/138 × 100 = <strong>56.5%</strong>
+              %K = (2 × <span class="frac"><span class="n">39</span><span class="d">138</span></span>) × 100<br>
+              = <span class="frac"><span class="n">78</span><span class="d">138</span></span> × 100 = <strong>56.5%</strong>
             </div>
           </details>
         </div>
@@ -5903,7 +5907,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              NH₃: %N = 14/17 = <strong>82.4%</strong><br>
+              NH₃: %N = <span class="frac"><span class="n">14</span><span class="d">17</span></span> = <strong>82.4%</strong><br>
               (NH₄)₂SO₄: M = 132, %N = 2(14)/132 = <strong>21.2%</strong><br>
               NH₄NO₃: M = 80, %N = 2(14)/80 = <strong>35.0%</strong><br>
               ⇒ <strong>NH₃ &gt; NH₄NO₃ &gt; (NH₄)₂SO₄</strong><br>
@@ -5921,9 +5925,9 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               <strong>1) แปลง % → mol</strong> (สมมติ 100 g):<br>
-              C: 52.17/12 = 4.347 mol<br>
-              H: 13.04/1 = 13.04 mol<br>
-              O: 34.78/16 = 2.174 mol<br>
+              C: <span class="frac"><span class="n">52.17</span><span class="d">12</span></span> = 4.347 mol<br>
+              H: <span class="frac"><span class="n">13.04</span><span class="d">1</span></span> = 13.04 mol<br>
+              O: <span class="frac"><span class="n">34.78</span><span class="d">16</span></span> = 2.174 mol<br>
               <strong>2) หารด้วยน้อยสุด</strong> (2.174):<br>
               C: 2.0 · H: 6.0 · O: 1.0<br>
               <strong>Empirical = C₂H₆O</strong>
@@ -5937,8 +5941,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              Fe: 69.94/55.85 = 1.252 mol<br>
-              O: 30.06/16 = 1.879 mol<br>
+              Fe: <span class="frac"><span class="n">69.94</span><span class="d">55.85</span></span> = 1.252 mol<br>
+              O: <span class="frac"><span class="n">30.06</span><span class="d">16</span></span> = 1.879 mol<br>
               หารด้วยน้อยสุด (1.252):<br>
               Fe: 1.0 · O: 1.50<br>
               คูณ 2: Fe: 2.0, O: 3.0<br>
@@ -5954,10 +5958,10 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               <strong>1) หาธาตุจาก CO₂, H₂O:</strong><br>
-              C จาก CO₂: 4.40 × (12/44) = 1.20 g<br>
-              H จาก H₂O: 2.70 × (2/18) = 0.30 g<br>
+              C จาก CO₂: 4.40 × (<span class="frac"><span class="n">12</span><span class="d">44</span></span>) = 1.20 g<br>
+              H จาก H₂O: 2.70 × (<span class="frac"><span class="n">2</span><span class="d">18</span></span>) = 0.30 g<br>
               ตรวจ: 1.20 + 0.30 = 1.50 g ✓ (ไม่มี O)<br>
-              <strong>2) → mol:</strong> C = 1.20/12 = 0.10, H = 0.30/1 = 0.30<br>
+              <strong>2) → mol:</strong> C = <span class="frac"><span class="n">1.20</span><span class="d">12</span></span> = 0.10, H = <span class="frac"><span class="n">0.30</span><span class="d">1</span></span> = 0.30<br>
               <strong>3) หารด้วยน้อยสุด:</strong> C: 1, H: 3<br>
               <strong>Empirical = CH₃</strong>
             </div>
@@ -5970,8 +5974,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              น้ำที่ระเหย = 25.0 − 16.0 = 9.0 g → n(H₂O) = 9.0/18 = 0.500 mol<br>
-              CuSO₄ คงเหลือ: M = 64+32+4(16) = 160 → n = 16.0/160 = 0.100 mol<br>
+              น้ำที่ระเหย = 25.0 − 16.0 = 9.0 g → n(H₂O) = <span class="frac"><span class="n">9.0</span><span class="d">18</span></span> = 0.500 mol<br>
+              CuSO₄ คงเหลือ: M = 64+32+4(16) = 160 → n = <span class="frac"><span class="n">16.0</span><span class="d">160</span></span> = 0.100 mol<br>
               อัตราส่วน H₂O : CuSO₄ = 0.500 : 0.100 = <strong>5 : 1</strong><br>
               ⇒ <strong>x = 5 → CuSO₄·5H₂O</strong> (จุนสี blue vitriol)
             </div>
@@ -5987,7 +5991,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               EW(CH₂O) = 12 + 2(1) + 16 = 30 g/mol<br>
-              n = MW/EW = 180/30 = 6<br>
+              n = <span class="frac"><span class="n">MW</span><span class="d">EW</span></span> = <span class="frac"><span class="n">180</span><span class="d">30</span></span> = 6<br>
               สูตรโมเลกุล = (CH₂O)₆ = <strong>C₆H₁₂O₆</strong> (กลูโคส)
             </div>
           </details>
@@ -6000,7 +6004,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               EW(NO₂) = 14 + 2(16) = 46<br>
-              n = 92/46 = 2<br>
+              n = <span class="frac"><span class="n">92</span><span class="d">46</span></span> = 2<br>
               สูตรโมเลกุล = (NO₂)₂ = <strong>N₂O₄</strong> (dinitrogen tetroxide)
             </div>
           </details>
@@ -6012,10 +6016,10 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              C: 92.3/12 = 7.69<br>
-              H: 7.7/1 = 7.70<br>
+              C: <span class="frac"><span class="n">92.3</span><span class="d">12</span></span> = 7.69<br>
+              H: <span class="frac"><span class="n">7.7</span><span class="d">1</span></span> = 7.70<br>
               อัตราส่วน 1:1 → <strong>Empirical = CH</strong><br>
-              EW(CH) = 13; n = 78/13 = 6<br>
+              EW(CH) = 13; n = <span class="frac"><span class="n">78</span><span class="d">13</span></span> = 6<br>
               <strong>Molecular = C₆H₆</strong> (เบนซีน — benzene)
             </div>
           </details>
@@ -6028,7 +6032,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               EW(CH₃) = 12 + 3 = 15<br>
-              n = 30/15 = 2<br>
+              n = <span class="frac"><span class="n">30</span><span class="d">15</span></span> = 2<br>
               สูตรโมเลกุล = (CH₃)₂ = <strong>C₂H₆</strong> (อีเทน — ethane)
             </div>
           </details>
@@ -6114,7 +6118,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               M(CaCO₃) = 40.08 + 12.01 + 3 × 16.00<br>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 40.08 + 12.01 + 48.00 = <strong>100.09 g/mol</strong><br><br>
               <strong>ขั้นที่ 2 (ก) — หา mol:</strong><br>
-              n = m/M = 50.0 / 100.09 = <strong>0.4996 mol ≈ 0.500 mol</strong><br><br>
+              n = m/M = <span class="frac"><span class="n">50.0</span><span class="d">100.09</span></span> = <strong>0.4996 mol ≈ 0.500 mol</strong><br><br>
               <strong>ขั้นที่ 3 (ข) — หาจำนวนโมเลกุล:</strong><br>
               N = n × Nₐ = 0.500 × 6.022×10²³ = <strong>3.01×10²³ โมเลกุล</strong><br><br>
               <strong>ขั้นที่ 4 (ค) — อะตอม O:</strong><br>
@@ -6137,21 +6141,21 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>สูตร/แนวคิดที่ใช้:</strong> C ทั้งหมดอยู่ใน CO₂, H ทั้งหมดอยู่ใน H₂O<br><br>
               <strong>ขั้นที่ 1 — หามวล C จาก CO₂:</strong><br>
-              m(C) = 2.200 × (12.01/44.01) = 2.200 × 0.2729 = <strong>0.600 g</strong><br>
-              n(C) = 0.600 / 12.01 = <strong>0.0500 mol</strong><br><br>
+              m(C) = 2.200 × (<span class="frac"><span class="n">12.01</span><span class="d">44.01</span></span>) = 2.200 × 0.2729 = <strong>0.600 g</strong><br>
+              n(C) = <span class="frac"><span class="n">0.600</span><span class="d">12.01</span></span> = <strong>0.0500 mol</strong><br><br>
               <strong>ขั้นที่ 2 — หามวล H จาก H₂O:</strong><br>
-              m(H) = 0.900 × (2.016/18.02) = 0.900 × 0.1119 = <strong>0.1007 g</strong><br>
-              n(H) = 0.1007 / 1.008 = <strong>0.0999 mol ≈ 0.100 mol</strong><br><br>
+              m(H) = 0.900 × (<span class="frac"><span class="n">2.016</span><span class="d">18.02</span></span>) = 0.900 × 0.1119 = <strong>0.1007 g</strong><br>
+              n(H) = <span class="frac"><span class="n">0.1007</span><span class="d">1.008</span></span> = <strong>0.0999 mol ≈ 0.100 mol</strong><br><br>
               <strong>ขั้นที่ 3 — หามวล O (ส่วนที่เหลือ):</strong><br>
               m(O) = 1.500 − 0.600 − 0.1007 = <strong>0.799 g ≈ 0.800 g</strong><br>
-              n(O) = 0.800 / 16.00 = <strong>0.0500 mol</strong><br><br>
+              n(O) = <span class="frac"><span class="n">0.800</span><span class="d">16.00</span></span> = <strong>0.0500 mol</strong><br><br>
               <strong>ขั้นที่ 4 — หาอัตราส่วน C:H:O:</strong><br>
               C : H : O = 0.0500 : 0.100 : 0.0500<br>
               หารด้วยค่าต่ำสุด (0.0500): = <strong>1 : 2 : 1</strong><br><br>
               <strong>คำตอบ: Empirical Formula = CH₂O</strong><br>
               (เช่นเดียวกับ formaldehyde, acetic acid, หรือ glucose ถ้า MW ต่างกัน)<br><br>
               <strong>ตรวจสอบเร็ว:</strong> EW(CH₂O) = 12+2+16 = 30 g/mol<br>
-              %C = 12/30 = 40.0%, %H = 2/30 = 6.7%, %O = 16/30 = 53.3%<br>
+              %C = <span class="frac"><span class="n">12</span><span class="d">30</span></span> = 40.0%, %H = <span class="frac"><span class="n">2</span><span class="d">30</span></span> = 6.7%, %O = <span class="frac"><span class="n">16</span><span class="d">30</span></span> = 53.3%<br>
               ตรวจย้อน: m(C)=1.500×0.400=0.600 g ✓
             </div>
           </details>
@@ -6171,10 +6175,10 @@ html, body { max-width:100%; overflow-x:hidden; }
               M(CH₄N₂O) = 12.01 + 4(1.008) + 2(14.01) + 16.00<br>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 12.01 + 4.032 + 28.02 + 16.00 = <strong>60.06 g/mol</strong><br><br>
               <strong>ขั้นที่ 2 — % แต่ละธาตุ:</strong><br>
-              %C = (12.01 / 60.06) × 100 = <strong>20.0%</strong><br>
-              %H = (4.032 / 60.06) × 100 = <strong>6.71%</strong><br>
-              %N = (28.02 / 60.06) × 100 = <strong>46.6%</strong><br>
-              %O = (16.00 / 60.06) × 100 = <strong>26.6%</strong><br><br>
+              %C = (<span class="frac"><span class="n">12.01</span><span class="d">60.06</span></span>) × 100 = <strong>20.0%</strong><br>
+              %H = (<span class="frac"><span class="n">4.032</span><span class="d">60.06</span></span>) × 100 = <strong>6.71%</strong><br>
+              %N = (<span class="frac"><span class="n">28.02</span><span class="d">60.06</span></span>) × 100 = <strong>46.6%</strong><br>
+              %O = (<span class="frac"><span class="n">16.00</span><span class="d">60.06</span></span>) × 100 = <strong>26.6%</strong><br><br>
               <strong>ตรวจสอบเร็ว:</strong> 20.0 + 6.71 + 46.6 + 26.6 = <strong>99.91 ≈ 100% ✓</strong><br>
               💡 ปุ๋ยยูเรียมี %N สูงมาก (46.6%) — เป็นแหล่ง N ราคาถูกและพกพาสะดวก
             </div>
@@ -6191,16 +6195,16 @@ html, body { max-width:100%; overflow-x:hidden; }
           <details class="solution-details">
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
-              <strong>สูตร/แนวคิดที่ใช้:</strong> สมมติ 100 g → หา mol → หา ratio → หา n = MW/EW<br><br>
+              <strong>สูตร/แนวคิดที่ใช้:</strong> สมมติ 100 g → หา mol → หา ratio → หา n = <span class="frac"><span class="n">MW</span><span class="d">EW</span></span><br><br>
               <strong>ขั้นที่ 1 — สมมติมี 100 g:</strong><br>
-              m(C) = 40.0 g → n(C) = 40.0/12.01 = 3.331 mol<br>
-              m(H) = 6.71 g → n(H) = 6.71/1.008 = 6.657 mol<br>
-              m(O) = 53.3 g → n(O) = 53.3/16.00 = 3.331 mol<br><br>
+              m(C) = 40.0 g → n(C) = <span class="frac"><span class="n">40.0</span><span class="d">12.01</span></span> = 3.331 mol<br>
+              m(H) = 6.71 g → n(H) = <span class="frac"><span class="n">6.71</span><span class="d">1.008</span></span> = 6.657 mol<br>
+              m(O) = 53.3 g → n(O) = <span class="frac"><span class="n">53.3</span><span class="d">16.00</span></span> = 3.331 mol<br><br>
               <strong>ขั้นที่ 2 — หาอัตราส่วน (หารด้วย 3.331):</strong><br>
               C : H : O = 1 : 1.997 : 1 ≈ <strong>1 : 2 : 1</strong><br>
               Empirical Formula = <strong>CH₂O</strong>, EW = 30.03 g/mol<br><br>
               <strong>ขั้นที่ 3 — หา n:</strong><br>
-              n = MW / EW = 90.08 / 30.03 = <strong>3</strong><br><br>
+              n = <span class="frac"><span class="n">MW</span><span class="d">EW</span></span> = <span class="frac"><span class="n">90.08</span><span class="d">30.03</span></span> = <strong>3</strong><br><br>
               <strong>Molecular Formula = C₃H₆O₃</strong><br>
               (อาจเป็น lactic acid = กรดแลคติกที่เกิดในกล้ามเนื้อขณะออกกำลังกาย)<br><br>
               <strong>ตรวจสอบ:</strong> M(C₃H₆O₃) = 3(12.01)+6(1.008)+3(16.00) = 36.03+6.048+48.00 = <strong>90.08 ✓</strong>
@@ -6218,7 +6222,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           • <strong>STP:</strong> 0°C, 1 atm → V_m = 22.4 L/mol<br>
           • <strong>%ธาตุ X:</strong> (n_X × M_X / M_compound) × 100<br>
           • <strong>Empirical Formula:</strong> อัตราส่วนเล็กสุดของอะตอม (เช่น CH₂O)<br>
-          • <strong>Molecular Formula:</strong> Empirical × n (n = MW/EW)<br>
+          • <strong>Molecular Formula:</strong> Empirical × n (n = <span class="frac"><span class="n">MW</span><span class="d">EW</span></span>)<br>
           • <strong>เคล็ดลับ:</strong> ทุกการคำนวณวิ่งผ่าน mole — แปลงไป mole ก่อนเสมอ
         </div>
         <h4>⚠️ ความเข้าใจผิดที่พบบ่อย</h4>
@@ -6304,7 +6308,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           <div class="formula-label">การเจือจาง (Dilution)</div>
           M₁V₁ = M₂V₂<br>
           ตัวอย่าง: ต้องการ HCl 0.1 M 500 mL จาก HCl 12 M<br>
-          V₁ = M₂V₂/M₁ = (0.1×500)/12 = 4.17 mL<br>
+          V₁ = <span class="frac"><span class="n">M₂V₂</span><span class="d">M₁</span></span> = <span class="frac"><span class="n">(0.1×500)</span><span class="d">12</span></span> = 4.17 mL<br>
           → ดูด 4.17 mL HCl เข้มข้น เติมน้ำจนครบ 500 mL
         </div>
         <div class="note-box">⚠️ <strong>ความปลอดภัยในการเจือจางกรด:</strong> เติมกรดลงน้ำ ห้ามเติมน้ำลงกรด (Acid into water, Always!) เพราะความร้อนจะระเหยกรดกระเซ็น</div>
@@ -6433,7 +6437,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               %w/w = (m_solute / m_solution) × 100<br>
               m_solution = 5.0 + 95.0 = 100.0 g<br>
-              %w/w = (5.0/100.0) × 100 = <strong>5.0%</strong>
+              %w/w = (<span class="frac"><span class="n">5.0</span><span class="d">100.0</span></span>) × 100 = <strong>5.0%</strong>
             </div>
           </details>
         </div>
@@ -6445,7 +6449,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               %v/v = (V_solute / V_solution) × 100<br>
-              = (40/200) × 100 = <strong>20%</strong><br>
+              = (<span class="frac"><span class="n">40</span><span class="d">200</span></span>) × 100 = <strong>20%</strong><br>
               💡 เครื่องดื่มแอลกอฮอล์เขียน "alcohol by volume" (ABV) เป็น %v/v
             </div>
           </details>
@@ -6458,7 +6462,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               %w/v = (m_solute[g] / V_solution[mL]) × 100<br>
-              = (0.9/100) × 100 = <strong>0.9% w/v</strong><br>
+              = (<span class="frac"><span class="n">0.9</span><span class="d">100</span></span>) × 100 = <strong>0.9% w/v</strong><br>
               💡 "น้ำเกลือ Normal Saline" — isotonic กับเลือดมนุษย์
             </div>
           </details>
@@ -6498,8 +6502,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n = 7.30/36.5 = 0.200 mol<br>
-              M = n/V = 0.200/0.500 = <strong>0.400 M</strong>
+              n = <span class="frac"><span class="n">7.30</span><span class="d">36.5</span></span> = 0.200 mol<br>
+              M = n/V = <span class="frac"><span class="n">0.200</span><span class="d">0.500</span></span> = <strong>0.400 M</strong>
             </div>
           </details>
         </div>
@@ -6524,7 +6528,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               n รวม = (0.10×0.100) + (0.20×0.150) = 0.010 + 0.030 = 0.040 mol<br>
               V รวม = 100 + 150 = 250 mL = 0.250 L<br>
-              M = 0.040/0.250 = <strong>0.160 M</strong>
+              M = <span class="frac"><span class="n">0.040</span><span class="d">0.250</span></span> = <strong>0.160 M</strong>
             </div>
           </details>
         </div>
@@ -6537,8 +6541,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n = 18/180 = 0.100 mol<br>
-              m = n / m_solvent(kg) = 0.100/0.500 = <strong>0.200 m</strong>
+              n = <span class="frac"><span class="n">18</span><span class="d">180</span></span> = 0.100 mol<br>
+              m = n / m_solvent(kg) = <span class="frac"><span class="n">0.100</span><span class="d">0.500</span></span> = <strong>0.200 m</strong>
             </div>
           </details>
         </div>
@@ -6549,10 +6553,10 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(EtOH) = 46/46 = 1.00 mol<br>
-              n(H₂O) = 90/18 = 5.00 mol<br>
+              n(EtOH) = <span class="frac"><span class="n">46</span><span class="d">46</span></span> = 1.00 mol<br>
+              n(H₂O) = <span class="frac"><span class="n">90</span><span class="d">18</span></span> = 5.00 mol<br>
               n_total = 6.00 mol<br>
-              X_EtOH = 1.00/6.00 = <strong>0.167</strong>
+              X_EtOH = <span class="frac"><span class="n">1.00</span><span class="d">6.00</span></span> = <strong>0.167</strong>
             </div>
           </details>
         </div>
@@ -6578,8 +6582,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               n(NaCl) = 1.0 mol<br>
-              n(H₂O) = 1000/18 = 55.56 mol<br>
-              X_NaCl = 1.0 / (1.0 + 55.56) = <strong>0.0177</strong><br>
+              n(H₂O) = <span class="frac"><span class="n">1000</span><span class="d">18</span></span> = 55.56 mol<br>
+              X_NaCl = <span class="frac"><span class="n">1.0</span><span class="d">(1.0 + 55.56)</span></span> = <strong>0.0177</strong><br>
               💡 ในน้ำเจือจาง — X ของตัวละลายน้อยเสมอ
             </div>
           </details>
@@ -6594,7 +6598,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               M₁V₁ = M₂V₂<br>
-              V₁ = (0.1 × 500)/12 = <strong>4.17 mL</strong><br>
+              V₁ = <span class="frac"><span class="n">(0.1 × 500)</span><span class="d">12</span></span> = <strong>4.17 mL</strong><br>
               ⇒ ดูด HCl 4.17 mL ลงใน volumetric flask 500 mL แล้วเติมน้ำจนถึงขีด<br>
               ⚠️ ระวังเทกรดลงน้ำ ไม่ใช่ตรงข้าม
             </div>
@@ -6609,7 +6613,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               M₁V₁ = M₂V₂<br>
               16 × 0.025 = M₂ × 1.0<br>
-              M₂ = 0.400/1.0 = <strong>0.40 M</strong>
+              M₂ = <span class="frac"><span class="n">0.400</span><span class="d">1.0</span></span> = <strong>0.40 M</strong>
             </div>
           </details>
         </div>
@@ -6636,7 +6640,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               M₁V₁ = M₂V₂ (V₂ = ปริมาตรรวม = 500 mL)<br>
               0.5 × 100 = M₂ × 500<br>
-              M₂ = 50/500 = <strong>0.10 M</strong><br>
+              M₂ = <span class="frac"><span class="n">50</span><span class="d">500</span></span> = <strong>0.10 M</strong><br>
               💡 เจือจาง 5 เท่า → M ลด 5 เท่า
             </div>
           </details>
@@ -6767,8 +6771,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(NaCl) = 5.85/58.5 = 0.100 mol<br>
-              m = 0.100/1.0 = 0.100 mol/kg<br>
+              n(NaCl) = <span class="frac"><span class="n">5.85</span><span class="d">58.5</span></span> = 0.100 mol<br>
+              m = <span class="frac"><span class="n">0.100</span><span class="d">1.0</span></span> = 0.100 mol/kg<br>
               ΔT_b = K_b × m × i = 0.512 × 0.100 × 2 = 0.102°C<br>
               T_b = 100 + 0.102 = <strong>100.10°C</strong>
             </div>
@@ -6781,8 +6785,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n = 90/180 = 0.500 mol<br>
-              m = 0.500/0.500 = 1.00 mol/kg<br>
+              n = <span class="frac"><span class="n">90</span><span class="d">180</span></span> = 0.500 mol<br>
+              m = <span class="frac"><span class="n">0.500</span><span class="d">0.500</span></span> = 1.00 mol/kg<br>
               ΔT_f = 1.86 × 1.00 × 1 = 1.86°C<br>
               T_f = 0 − 1.86 = <strong>−1.86°C</strong><br>
               💡 ของหวานเข้มข้นจึงเย็นกว่า 0°C โดยไม่แข็ง
@@ -6813,7 +6817,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               Ethylene glycol = ตัวละลายที่ละลายดีในน้ำ → ทำงานเป็น <strong>antifreeze</strong><br>
               ลด T_f ของน้ำหม้อน้ำ → ไม่แข็งในฤดูหนาว (ป้องกันท่อแตก)<br>
               เพิ่ม T_b → ไม่เดือดในฤดูร้อน<br>
-              💡 ผสม 50/50 → T_f ≈ −37°C, T_b ≈ 108°C
+              💡 ผสม <span class="frac"><span class="n">50</span><span class="d">50</span></span> → T_f ≈ −37°C, T_b ≈ 108°C
             </div>
           </details>
         </div>
@@ -6920,7 +6924,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>ขั้นที่ 1 — ใช้สมการการเจือจาง:</strong><br>
               M₁V₁ = M₂V₂<br>
               12.0 M × 25.0 mL = 0.100 M × V₂<br>
-              V₂ = (12.0 × 25.0) / 0.100 = <strong>3000 mL = 3.00 L</strong><br><br>
+              V₂ = <span class="frac"><span class="n">(12.0 × 25.0)</span><span class="d">0.100</span></span> = <strong>3000 mL = 3.00 L</strong><br><br>
               <strong>ขั้นที่ 2 — ปริมาตรน้ำที่ต้องเติม:</strong><br>
               V(น้ำ) = 3000 − 25.0 = <strong>2975 mL ≈ 2.98 L</strong><br><br>
               <strong>วิธีเจือจางที่ปลอดภัย (หลัก AAA):</strong><br>
@@ -6929,7 +6933,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               2) ค่อยๆ เทกรด HCl 25.0 mL ลงในน้ำ (ช้าๆ คนตลอด)<br>
               3) เติมน้ำจนครบ 3.00 L ใน volumetric flask<br><br>
               <strong>ตรวจสอบเร็ว:</strong> mol(HCl) = 12.0 × 0.025 = 0.300 mol<br>
-              C ใหม่ = 0.300/3.00 = 0.100 M ✓<br>
+              C ใหม่ = <span class="frac"><span class="n">0.300</span><span class="d">3.00</span></span> = 0.100 M ✓<br>
               ⚠️ ถ้าเทน้ำลงกรด → ความร้อนจะทำให้กรดสาดใส่ผิวหนัง
             </div>
           </details>
@@ -6947,7 +6951,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>สูตร/แนวคิดที่ใช้:</strong> ΔTf = i × Kf × m ; i(glucose) = 1 (ไม่แตกตัว)<br><br>
               <strong>ขั้นที่ 1 — หา mol glucose:</strong><br>
-              n(glucose) = 90.0 / 180.16 = <strong>0.4996 mol ≈ 0.500 mol</strong><br><br>
+              n(glucose) = <span class="frac"><span class="n">90.0</span><span class="d">180.16</span></span> = <strong>0.4996 mol ≈ 0.500 mol</strong><br><br>
               <strong>ขั้นที่ 2 — หา molality (m):</strong><br>
               m = n / kg(solvent) = 0.500 mol / 0.500 kg = <strong>1.00 mol/kg</strong><br><br>
               <strong>ขั้นที่ 3 — คำนวณ ΔTf:</strong><br>
@@ -7114,8 +7118,8 @@ html, body { max-width:100%; overflow-x:hidden; }
           <div class="formula-label">ตัวอย่างโจทย์ปริมาณสัมพันธ์</div>
           N₂(g) + 3H₂(g) → 2NH₃(g)<br>
           ถ้ามี N₂ 14.0 g จะได้ NH₃ กี่กรัม?<br>
-          n(N₂) = 14.0/28.0 = 0.500 mol<br>
-          n(NH₃) = 0.500 × (2/1) = 1.00 mol<br>
+          n(N₂) = <span class="frac"><span class="n">14.0</span><span class="d">28.0</span></span> = 0.500 mol<br>
+          n(NH₃) = 0.500 × (<span class="frac"><span class="n">2</span><span class="d">1</span></span>) = 1.00 mol<br>
           m(NH₃) = 1.00 × 17.0 = 17.0 g
         </div>
         <div class="note-box">
@@ -7162,10 +7166,10 @@ html, body { max-width:100%; overflow-x:hidden; }
           <div class="formula-label">วิธีหาสารกำหนดปริมาณ</div>
           2H₂(g) + O₂(g) → 2H₂O(g)<br>
           มี H₂ 5.0 mol และ O₂ 3.0 mol<br>
-          เทียบ H₂: 5.0/2 = 2.5   O₂: 3.0/1 = 3.0<br>
+          เทียบ H₂: <span class="frac"><span class="n">5.0</span><span class="d">2</span></span> = 2.5   O₂: <span class="frac"><span class="n">3.0</span><span class="d">1</span></span> = 3.0<br>
           H₂ ให้ค่าน้อยกว่า → H₂ คือสารกำหนดปริมาณ<br>
-          n(H₂O) = 5.0 × (2/2) = 5.0 mol<br>
-          O₂ เหลือ = 3.0 - 5.0/2 = 0.5 mol
+          n(H₂O) = 5.0 × (<span class="frac"><span class="n">2</span><span class="d">2</span></span>) = 5.0 mol<br>
+          O₂ เหลือ = 3.0 - <span class="frac"><span class="n">5.0</span><span class="d">2</span></span> = 0.5 mol
         </div>
         <h4>ผลได้และร้อยละผลได้</h4>
         <div class="formula-box">
@@ -7173,7 +7177,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           %yield = (actual yield / theoretical yield) × 100%<br>
           <br>
           ตัวอย่าง: ปฏิกิริยาผลิต NH₃ ได้ทางทฤษฎี 17.0 g แต่ได้จริง 13.6 g<br>
-          %yield = (13.6/17.0) × 100 = 80.0%
+          %yield = (<span class="frac"><span class="n">13.6</span><span class="d">17.0</span></span>) × 100 = 80.0%
         </div>
         <h4>สาเหตุที่ผลได้ต่ำกว่าทางทฤษฎี</h4>
         <ul>
@@ -7287,7 +7291,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               K: 1=1 ✓<br>
               Cl: 1=1 ✓<br>
-              O: ฝั่งซ้ายมี 3 (จาก KClO₃) → ฝั่งขวาต้องมี 3 → ใส่ 3/2 O₂<br>
+              O: ฝั่งซ้ายมี 3 (จาก KClO₃) → ฝั่งขวาต้องมี 3 → ใส่ <span class="frac"><span class="n">3</span><span class="d">2</span></span> O₂<br>
               คูณทุกตัวด้วย 2 เพื่อไม่ให้มีเศษส่วน:<br>
               <strong>2KClO₃ → 2KCl + 3O₂</strong>
             </div>
@@ -7316,7 +7320,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               อัตราส่วน H₂ : NH₃ = 3 : 2<br>
-              n(NH₃) = 6 × (2/3) = <strong>4 mol</strong>
+              n(NH₃) = 6 × (<span class="frac"><span class="n">2</span><span class="d">3</span></span>) = <strong>4 mol</strong>
             </div>
           </details>
         </div>
@@ -7340,7 +7344,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               อัตรา KClO₃ : O₂ = 2 : 3<br>
-              n(O₂) = 4 × (3/2) = <strong>6 mol</strong>
+              n(O₂) = 4 × (<span class="frac"><span class="n">3</span><span class="d">2</span></span>) = <strong>6 mol</strong>
             </div>
           </details>
         </div>
@@ -7351,7 +7355,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              H₂ : O₂ = 2 : 1 → O₂ = 4/2 = <strong>2 mol</strong><br>
+              H₂ : O₂ = 2 : 1 → O₂ = <span class="frac"><span class="n">4</span><span class="d">2</span></span> = <strong>2 mol</strong><br>
               H₂ : H₂O = 2 : 2 → H₂O = <strong>4 mol</strong>
             </div>
           </details>
@@ -7365,8 +7369,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(N₂) = 14.0/28 = 0.500 mol<br>
-              n(NH₃) = 0.500 × (2/1) = 1.00 mol<br>
+              n(N₂) = <span class="frac"><span class="n">14.0</span><span class="d">28</span></span> = 0.500 mol<br>
+              n(NH₃) = 0.500 × (<span class="frac"><span class="n">2</span><span class="d">1</span></span>) = 1.00 mol<br>
               m(NH₃) = 1.00 × 17 = <strong>17.0 g</strong>
             </div>
           </details>
@@ -7379,7 +7383,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               C + O₂ → CO₂<br>
-              n(C) = 12.0/12 = 1.00 mol<br>
+              n(C) = <span class="frac"><span class="n">12.0</span><span class="d">12</span></span> = 1.00 mol<br>
               n(CO₂) = 1.00 mol (อัตรา 1:1)<br>
               m(CO₂) = 1.00 × 44 = <strong>44.0 g</strong>
             </div>
@@ -7393,7 +7397,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               CaCO₃ → CaO + CO₂<br>
-              n(CaCO₃) = 50.0/100 = 0.500 mol<br>
+              n(CaCO₃) = <span class="frac"><span class="n">50.0</span><span class="d">100</span></span> = 0.500 mol<br>
               n(CaO) = 0.500 mol (อัตรา 1:1)<br>
               m(CaO) = 0.500 × 56 = <strong>28.0 g</strong>
             </div>
@@ -7406,7 +7410,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(Mg) = 4.8/24 = 0.200 mol<br>
+              n(Mg) = <span class="frac"><span class="n">4.8</span><span class="d">24</span></span> = 0.200 mol<br>
               n(MgCl₂) = 0.200 mol (อัตรา 1:1)<br>
               m(MgCl₂) = 0.200 × 95 = <strong>19.0 g</strong>
             </div>
@@ -7421,7 +7425,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(Zn) = 6.5/65 = 0.100 mol<br>
+              n(Zn) = <span class="frac"><span class="n">6.5</span><span class="d">65</span></span> = 0.100 mol<br>
               n(H₂) = 0.100 mol (อัตรา 1:1)<br>
               V(H₂) = 0.100 × 22.4 = <strong>2.24 L</strong>
             </div>
@@ -7434,8 +7438,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(KClO₃) = 24.5/122.5 = 0.200 mol<br>
-              n(O₂) = 0.200 × (3/2) = 0.300 mol<br>
+              n(KClO₃) = <span class="frac"><span class="n">24.5</span><span class="d">122.5</span></span> = 0.200 mol<br>
+              n(O₂) = 0.200 × (<span class="frac"><span class="n">3</span><span class="d">2</span></span>) = 0.300 mol<br>
               V(O₂) = 0.300 × 22.4 = <strong>6.72 L</strong>
             </div>
           </details>
@@ -7447,8 +7451,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(C) = 6.0/12 = 0.50 mol → n(CO₂) = 0.50 mol<br>
-              V = nRT/P = (0.50)(0.0821)(300)/2 = 12.32/2 = <strong>6.16 L</strong><br>
+              n(C) = <span class="frac"><span class="n">6.0</span><span class="d">12</span></span> = 0.50 mol → n(CO₂) = 0.50 mol<br>
+              V = <span class="frac"><span class="n">nRT</span><span class="d">P</span></span> = <span class="frac"><span class="n">(0.50)(0.0821)(300)</span><span class="d">2</span></span> = <span class="frac"><span class="n">12.32</span><span class="d">2</span></span> = <strong>6.16 L</strong><br>
               💡 ใช้ PV=nRT เมื่อไม่ใช่ STP
             </div>
           </details>
@@ -7462,7 +7466,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               ที่ STP: ปริมาตรเป็นสัดส่วนกับโมล (Avogadro)<br>
               อัตรา 2H₂ : 1O₂ : 2H₂O = 2:1:2<br>
-              V(O₂) = 4.0 × (1/2) = <strong>2.0 L</strong><br>
+              V(O₂) = 4.0 × (<span class="frac"><span class="n">1</span><span class="d">2</span></span>) = <strong>2.0 L</strong><br>
               V(H₂O ไอ) = 4.0 L<br>
               💡 ที่อุณหภูมิและความดันเดียวกัน V ทำตัวเหมือน mol
             </div>
@@ -7477,10 +7481,10 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              เทียบ: H₂: 5.0/2 = 2.5 · O₂: 3.0/1 = 3.0<br>
+              เทียบ: H₂: <span class="frac"><span class="n">5.0</span><span class="d">2</span></span> = 2.5 · O₂: <span class="frac"><span class="n">3.0</span><span class="d">1</span></span> = 3.0<br>
               ค่าน้อยสุด = H₂ (2.5) → <strong>H₂ คือ limiting reagent</strong><br>
-              n(H₂O) = 5.0 × (2/2) = <strong>5.0 mol</strong><br>
-              O₂ เหลือ = 3.0 − 5.0/2 = <strong>0.5 mol</strong>
+              n(H₂O) = 5.0 × (<span class="frac"><span class="n">2</span><span class="d">2</span></span>) = <strong>5.0 mol</strong><br>
+              O₂ เหลือ = 3.0 − <span class="frac"><span class="n">5.0</span><span class="d">2</span></span> = <strong>0.5 mol</strong>
             </div>
           </details>
         </div>
@@ -7491,9 +7495,9 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(N₂) = 28/28 = 1.0 mol<br>
-              n(H₂) = 9/2 = 4.5 mol<br>
-              เทียบ: N₂: 1.0/1 = 1.0 · H₂: 4.5/3 = 1.5<br>
+              n(N₂) = <span class="frac"><span class="n">28</span><span class="d">28</span></span> = 1.0 mol<br>
+              n(H₂) = <span class="frac"><span class="n">9</span><span class="d">2</span></span> = 4.5 mol<br>
+              เทียบ: N₂: <span class="frac"><span class="n">1.0</span><span class="d">1</span></span> = 1.0 · H₂: <span class="frac"><span class="n">4.5</span><span class="d">3</span></span> = 1.5<br>
               ⇒ <strong>N₂ คือ limiting</strong><br>
               n(NH₃) = 1.0 × 2 = 2.0 mol → m = 2.0 × 17 = <strong>34 g</strong>
             </div>
@@ -7506,7 +7510,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              เทียบ: Mg: 0.10/1 = 0.10 · HCl: 0.30/2 = 0.15<br>
+              เทียบ: Mg: <span class="frac"><span class="n">0.10</span><span class="d">1</span></span> = 0.10 · HCl: <span class="frac"><span class="n">0.30</span><span class="d">2</span></span> = 0.15<br>
               <strong>Mg คือ limiting</strong> (น้อยสุด)<br>
               n(H₂) = 0.10 mol → V = 0.10 × 22.4 = <strong>2.24 L</strong><br>
               HCl ใช้ไป = 0.10 × 2 = 0.20 mol → เหลือ = 0.30 − 0.20 = <strong>0.10 mol</strong>
@@ -7537,7 +7541,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               %yield = (actual / theoretical) × 100<br>
-              = (13.6/17.0) × 100 = <strong>80.0%</strong>
+              = (<span class="frac"><span class="n">13.6</span><span class="d">17.0</span></span>) × 100 = <strong>80.0%</strong>
             </div>
           </details>
         </div>
@@ -7561,7 +7565,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               theoretical = actual / (%yield/100)<br>
-              = 9.0 / 0.60 = <strong>15.0 g</strong>
+              = <span class="frac"><span class="n">9.0</span><span class="d">0.60</span></span> = <strong>15.0 g</strong>
             </div>
           </details>
         </div>
@@ -7658,8 +7662,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               <strong>Atom Economy</strong> = (มวลผลิตภัณฑ์ที่ต้องการ / มวลรวมสารตั้งต้น) × 100<br>
-              (i) Cl₂ จาก MnO₂+HCl: ผลิตภัณฑ์ Cl₂ = 71 g · สารตั้งต้น = 87 + 4(36.5) = 233 → AE = 71/233 = 30.5%<br>
-              (ii) Cl₂ จาก NaCl/H₂O: Cl₂ = 71 · ตั้งต้น = 117 + 36 = 153 → AE = 71/153 = 46%<br>
+              (i) Cl₂ จาก MnO₂+HCl: ผลิตภัณฑ์ Cl₂ = 71 g · สารตั้งต้น = 87 + 4(36.5) = 233 → AE = <span class="frac"><span class="n">71</span><span class="d">233</span></span> = 30.5%<br>
+              (ii) Cl₂ จาก NaCl/H₂O: Cl₂ = 71 · ตั้งต้น = 117 + 36 = 153 → AE = <span class="frac"><span class="n">71</span><span class="d">153</span></span> = 46%<br>
               + (ii) ได้ผลิตภัณฑ์มีค่า NaOH/H₂ ด้วย → <strong>(ii) Chlor-alkali ดีกว่า</strong>
             </div>
           </details>
@@ -7671,10 +7675,10 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(salicylic) = 13.8/138 = 0.100 mol<br>
+              n(salicylic) = <span class="frac"><span class="n">13.8</span><span class="d">138</span></span> = 0.100 mol<br>
               theoretical n(aspirin) = 0.100 mol (อัตรา 1:1)<br>
               theoretical mass = 0.100 × 180 = 18.0 g<br>
-              %yield = (16.2/18.0) × 100 = <strong>90%</strong>
+              %yield = (<span class="frac"><span class="n">16.2</span><span class="d">18.0</span></span>) × 100 = <strong>90%</strong>
             </div>
           </details>
         </div>
@@ -7715,11 +7719,11 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>สูตร/แนวคิดที่ใช้:</strong> หาร n แต่ละสารด้วยสัมประสิทธิ์ → ค่าต่ำสุด = limiting<br><br>
               <strong>ขั้นที่ 1 — หา mol ของแต่ละสาร:</strong><br>
-              n(Mg) = 4.86 / 24.31 = <strong>0.2000 mol</strong><br>
-              n(O₂) = 4.80 / 32.00 = <strong>0.1500 mol</strong><br><br>
+              n(Mg) = <span class="frac"><span class="n">4.86</span><span class="d">24.31</span></span> = <strong>0.2000 mol</strong><br>
+              n(O₂) = <span class="frac"><span class="n">4.80</span><span class="d">32.00</span></span> = <strong>0.1500 mol</strong><br><br>
               <strong>ขั้นที่ 2 — หารด้วยสัมประสิทธิ์เพื่อเปรียบ:</strong><br>
-              Mg: 0.2000 / 2 = <strong>0.1000</strong><br>
-              O₂: 0.1500 / 1 = <strong>0.1500</strong><br>
+              Mg: <span class="frac"><span class="n">0.2000</span><span class="d">2</span></span> = <strong>0.1000</strong><br>
+              O₂: <span class="frac"><span class="n">0.1500</span><span class="d">1</span></span> = <strong>0.1500</strong><br>
               ค่าต่ำสุดคือ Mg → <strong>Mg คือ Limiting Reagent</strong><br><br>
               <strong>ขั้นที่ 3 (ข) — theoretical yield ของ MgO:</strong><br>
               อัตราส่วน Mg:MgO = 2:2 = 1:1<br>
@@ -7727,7 +7731,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               M(MgO) = 24.31 + 16.00 = 40.31 g/mol<br>
               m(MgO) = 0.2000 × 40.31 = <strong>8.06 g</strong><br><br>
               <strong>ขั้นที่ 4 (ค) — O₂ ที่ใช้จริงและที่เหลือ:</strong><br>
-              O₂ ที่ใช้ = n(Mg)/2 = 0.2000/2 = 0.1000 mol<br>
+              O₂ ที่ใช้ = n(Mg)/2 = <span class="frac"><span class="n">0.2000</span><span class="d">2</span></span> = 0.1000 mol<br>
               O₂ เหลือ = 0.1500 − 0.1000 = 0.0500 mol<br>
               m(O₂ เหลือ) = 0.0500 × 32.00 = <strong>1.60 g</strong><br><br>
               <strong>ตรวจสอบเร็ว (อนุรักษ์มวล):</strong><br>
@@ -7750,14 +7754,14 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>สูตร/แนวคิดที่ใช้:</strong> %yield = (actual yield / theoretical yield) × 100<br><br>
               <strong>ขั้นที่ 1 — ตรวจสอบอัตราส่วน:</strong><br>
-              n(Na) = 4.60 / 23.0 = 0.200 mol<br>
-              n(Cl₂) = 7.10 / 71.0 = 0.100 mol<br>
+              n(Na) = <span class="frac"><span class="n">4.60</span><span class="d">23.0</span></span> = 0.200 mol<br>
+              n(Cl₂) = <span class="frac"><span class="n">7.10</span><span class="d">71.0</span></span> = 0.100 mol<br>
               อัตราส่วน Na:Cl₂ ต้องการ = 2:1 → ตรงพอดี ✓ (ไม่มี limiting reagent)<br><br>
               <strong>ขั้นที่ 2 — theoretical yield:</strong><br>
               n(NaCl) = n(Na) = 0.200 mol (อัตรา 2:2)<br>
               m(NaCl) theoretical = 0.200 × 58.5 = <strong>11.7 g</strong><br><br>
               <strong>ขั้นที่ 3 — %yield:</strong><br>
-              %yield = (10.5 / 11.7) × 100 = <strong>89.7% ≈ 90%</strong><br><br>
+              %yield = (<span class="frac"><span class="n">10.5</span><span class="d">11.7</span></span>) × 100 = <strong>89.7% ≈ 90%</strong><br><br>
               <strong>สาเหตุที่ %yield < 100%:</strong><br>
               • สูญเสียสารระหว่างถ่ายโอนหรือกรอง<br>
               • ปฏิกิริยาข้างเคียง (side reactions)<br>
@@ -7780,15 +7784,15 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>สูตร/แนวคิดที่ใช้:</strong> g → mol → mole ratio → mol → g (ผ่าน mol เสมอ)<br><br>
               <strong>ขั้นที่ 1 — n(Fe):</strong><br>
-              n(Fe) = 55.8 / 55.85 ≈ <strong>1.00 mol</strong><br><br>
+              n(Fe) = <span class="frac"><span class="n">55.8</span><span class="d">55.85</span></span> ≈ <strong>1.00 mol</strong><br><br>
               <strong>ขั้นที่ 2 (ก) — n(Fe₂O₃) จาก mole ratio:</strong><br>
               อัตราส่วน Fe:Fe₂O₃ = 4:2 = 2:1<br>
-              n(Fe₂O₃) = 1.00 × (2/4) = <strong>0.500 mol</strong><br><br>
+              n(Fe₂O₃) = 1.00 × (<span class="frac"><span class="n">2</span><span class="d">4</span></span>) = <strong>0.500 mol</strong><br><br>
               <strong>ขั้นที่ 3 (ข) — m(Fe₂O₃):</strong><br>
               m(Fe₂O₃) = 0.500 × 159.7 = <strong>79.9 g</strong><br><br>
               <strong>ขั้นที่ 4 (ค) — O₂ ที่ใช้ไป:</strong><br>
               อัตราส่วน Fe:O₂ = 4:3<br>
-              n(O₂) = 1.00 × (3/4) = 0.750 mol<br>
+              n(O₂) = 1.00 × (<span class="frac"><span class="n">3</span><span class="d">4</span></span>) = 0.750 mol<br>
               m(O₂) = 0.750 × 32.00 = <strong>24.0 g</strong><br><br>
               <strong>ตรวจสอบ (อนุรักษ์มวล):</strong><br>
               m(Fe) + m(O₂) = 55.8 + 24.0 = 79.8 g ≈ 79.9 g(Fe₂O₃) ✓<br>
@@ -8090,8 +8094,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="formula-box">
               <div class="formula-label">การแปลงหน่วยอุณหภูมิ</div>
               K = °C + 273.15<br>
-              °C = 5/9 × (°F − 32)<br>
-              °F = 9/5 × °C + 32<br>
+              °C = <span class="frac"><span class="n">5</span><span class="d">9</span></span> × (°F − 32)<br>
+              °F = <span class="frac"><span class="n">9</span><span class="d">5</span></span> × °C + 32<br>
               <br>
               ตัวอย่าง: 27°C = 300 K<br>
               น้ำเดือด: 100°C = 373 K<br>
@@ -8173,7 +8177,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           P₁V₁ = P₂V₂ = P₃V₃ = ...<br>
           <br>
           ตัวอย่าง: แก๊ส 400 cm³ ที่ P = 0.8 atm → ถ้า P เพิ่มเป็น 1.0 atm<br>
-          V₂ = P₁V₁/P₂ = (0.8 × 400)/1.0 = 320 cm³
+          V₂ = P₁V₁/P₂ = <span class="frac"><span class="n">(0.8 × 400)</span><span class="d">1.0</span></span> = 320 cm³
         </div>
         <!-- Boyle's Law Visual — piston animation -->
         <div style="background:#F0FDF4;border-radius:12px;padding:16px;margin:10px 0;">
@@ -8236,10 +8240,10 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="formula-box">
           <div class="formula-label">กฎของชาร์ล (n, P คงที่)</div>
           V ∝ T  →  V/T = constant<br>
-          V₁/T₁ = V₂/T₂ = V₃/T₃ = ...<br>
+          <span class="frac"><span class="n">V₁</span><span class="d">T₁</span></span> = <span class="frac"><span class="n">V₂</span><span class="d">T₂</span></span> = V₃/T₃ = ...<br>
           <br>
           ตัวอย่าง: H₂ ที่ 27°C (= 300 K) มีปริมาตร 10 L<br>
-          ที่ 57°C (= 330 K): V₂ = V₁T₂/T₁ = 10×330/300 = 11 L
+          ที่ 57°C (= 330 K): V₂ = V₁T₂/T₁ = 10×<span class="frac"><span class="n">330</span><span class="d">300</span></span> = 11 L
         </div>
         <!-- Charles Law Visual — balloon over flame -->
         <div style="background:#FEF2F2;border-radius:12px;padding:16px;margin:10px 0;">
@@ -8269,7 +8273,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <div style="font-size:11px;color:#7F1D1D;">V ↑↑</div>
             </div>
           </div>
-          <div class="tip-box" style="margin-top:14px;">💡 <strong>จำง่าย:</strong> อุณหภูมิ <em>เคลวิน</em> เพิ่ม → อนุภาคเคลื่อนเร็วขึ้น → ดันผนังลูกโป่งออก → ปริมาตรเพิ่ม · สูตร V₁/T₁ = V₂/T₂ ใช้ <strong>K เท่านั้น</strong> (อย่าใช้ °C)</div>
+          <div class="tip-box" style="margin-top:14px;">💡 <strong>จำง่าย:</strong> อุณหภูมิ <em>เคลวิน</em> เพิ่ม → อนุภาคเคลื่อนเร็วขึ้น → ดันผนังลูกโป่งออก → ปริมาตรเพิ่ม · สูตร <span class="frac"><span class="n">V₁</span><span class="d">T₁</span></span> = <span class="frac"><span class="n">V₂</span><span class="d">T₂</span></span> ใช้ <strong>K เท่านั้น</strong> (อย่าใช้ °C)</div>
         </div>
         <div class="note-box">⚠️ <strong>อุณหภูมิศูนย์สัมบูรณ์ (0 K = -273.15°C):</strong> จากกราฟ V vs T(°C) เมื่อต่อปลายกราฟออกไปจะตัดแกน X ที่ -273°C ซึ่งนักวิทยาศาสตร์กำหนดให้เท่ากับ 0 K เรียกว่า อุณหภูมิศูนย์สัมบูรณ์</div>
 
@@ -8282,7 +8286,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           P₁/T₁ = P₂/T₂ = P₃/T₃ = ...<br>
           <br>
           ตัวอย่าง: หลอดไฟที่ 22°C (= 295 K) มี P = 0.74 atm<br>
-          เมื่อเปิดไฟ T = 418 K: P₂ = 0.74×418/295 = 1.05 atm
+          เมื่อเปิดไฟ T = 418 K: P₂ = 0.74×<span class="frac"><span class="n">418</span><span class="d">295</span></span> = 1.05 atm
         </div>
         <!-- Gay-Lussac Visual — sealed container, V fixed, T changes -->
         <div style="background:#FFFBEB;border-radius:12px;padding:16px;margin:10px 0;">
@@ -8321,11 +8325,11 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h4>4️⃣ กฎรวมแก๊ส (Combined Gas Law)</h4>
         <div class="formula-box">
           <div class="formula-label">รวมกฎบอยล์ + กฎชาร์ล (n คงที่)</div>
-          P₁V₁/T₁ = P₂V₂/T₂ = ... = constant<br>
+          <span class="frac"><span class="n">P₁V₁</span><span class="d">T₁</span></span> = <span class="frac"><span class="n">P₂V₂</span><span class="d">T₂</span></span> = ... = constant<br>
           <br>
           ตัวอย่าง: ลูกโป่ง V=6.0L, P=1.0atm, T=27°C(300K) ลอยขึ้นสู่<br>
           บรรยากาศที่ P=0.50atm, T=-23°C(250K)<br>
-          V₂ = P₁V₁T₂ / (T₁P₂) = (1.0×6.0×250)/(300×0.50) = 10 L
+          V₂ = <span class="frac"><span class="n">P₁V₁T₂</span><span class="d">(T₁P₂)</span></span> = <span class="frac"><span class="n">(1.0×6.0×250)</span><span class="d">(300×0.50)</span></span> = 10 L
         </div>
 
         <!-- Avogadro's Law -->
@@ -8334,7 +8338,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="formula-box">
           <div class="formula-label">กฎอาโวกาโดร (P, T คงที่)</div>
           V ∝ n  →  V/n = constant<br>
-          V₁/n₁ = V₂/n₂<br>
+          <span class="frac"><span class="n">V₁</span><span class="d">n₁</span></span> = <span class="frac"><span class="n">V₂</span><span class="d">n₂</span></span><br>
           <br>
           ที่ STP (0°C, 1 atm): 1 mol → 22.4 L/mol <strong>(ค่ามาตรฐานที่ใช้ในตำราเรียนระดับมัธยมและ สสวท.)</strong><br>
           <span style="font-size:12px;color:#64748B;">หมายเหตุเสริม (ไม่ใช้ในการคำนวณทั่วไป): IUPAC ปี 1982 กำหนด STP ใหม่ = 0°C, 1 bar → 22.71 L/mol · SATP = 25°C, 1 bar → 24.79 L/mol</span><br>
@@ -8377,7 +8381,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <div style="font-size:11px;color:#4C1D95;">V = 67.2 L</div>
             </div>
           </div>
-          <div class="tip-box" style="margin-top:14px;">💡 <strong>จำง่าย:</strong> ที่ P และ T เดียวกัน จำนวนโมลเพิ่ม 2 เท่า → ปริมาตรเพิ่ม 2 เท่า · V₁/n₁ = V₂/n₂</div>
+          <div class="tip-box" style="margin-top:14px;">💡 <strong>จำง่าย:</strong> ที่ P และ T เดียวกัน จำนวนโมลเพิ่ม 2 เท่า → ปริมาตรเพิ่ม 2 เท่า · <span class="frac"><span class="n">V₁</span><span class="d">n₁</span></span> = <span class="frac"><span class="n">V₂</span><span class="d">n₂</span></span></div>
         </div>
       </div>
 
@@ -8402,14 +8406,14 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h4>การประยุกต์สมการ PV = nRT</h4>
         <table class="content-table">
           <tr><th>หาค่า</th><th>สูตร</th><th>หน่วย</th></tr>
-          <tr><td>ความดัน (P)</td><td>P = nRT/V</td><td>atm (ถ้าใช้ R = 0.08206)</td></tr>
-          <tr><td>ปริมาตร (V)</td><td>V = nRT/P</td><td>L</td></tr>
-          <tr><td>อุณหภูมิ (T)</td><td>T = PV/nR</td><td>K</td></tr>
-          <tr><td>โมล (n)</td><td>n = PV/RT</td><td>mol</td></tr>
-          <tr><td>มวล (g)</td><td>g = PVM/RT</td><td>g</td></tr>
-          <tr><td>มวลโมเลกุล (M)</td><td>M = gRT/PV</td><td>g/mol</td></tr>
+          <tr><td>ความดัน (P)</td><td>P = <span class="frac"><span class="n">nRT</span><span class="d">V</span></span></td><td>atm (ถ้าใช้ R = 0.08206)</td></tr>
+          <tr><td>ปริมาตร (V)</td><td>V = <span class="frac"><span class="n">nRT</span><span class="d">P</span></span></td><td>L</td></tr>
+          <tr><td>อุณหภูมิ (T)</td><td>T = <span class="frac"><span class="n">PV</span><span class="d">nR</span></span></td><td>K</td></tr>
+          <tr><td>โมล (n)</td><td>n = <span class="frac"><span class="n">PV</span><span class="d">RT</span></span></td><td>mol</td></tr>
+          <tr><td>มวล (g)</td><td>g = <span class="frac"><span class="n">PVM</span><span class="d">RT</span></span></td><td>g</td></tr>
+          <tr><td>มวลโมเลกุล (M)</td><td>M = <span class="frac"><span class="n">gRT</span><span class="d">PV</span></span></td><td>g/mol</td></tr>
           <tr><td>ความเข้มข้น (C)</td><td>C = P/RT = n/V</td><td>mol/L</td></tr>
-          <tr><td>ความหนาแน่น (d)</td><td>d = PM/RT</td><td>g/L</td></tr>
+          <tr><td>ความหนาแน่น (d)</td><td>d = <span class="frac"><span class="n">PM</span><span class="d">RT</span></span></td><td>g/L</td></tr>
         </table>
         <!-- Example -->
         <div class="note-box">⚠️ <strong>หมายเหตุเรื่อง STP:</strong> ในการคำนวณระดับมัธยม/สสวท. ให้ใช้ <strong>STP = 0°C, 1 atm, V_molar = 22.4 L/mol</strong> เป็นหลัก ส่วนนิยาม STP ใหม่ของ IUPAC (0°C, 1 bar → 22.71 L/mol) และ SATP (25°C, 1 bar → 24.79 L/mol) มีไว้เพื่อความครบถ้วน ไม่จำเป็นต้องใช้ในโจทย์ทั่วไป</div>
@@ -8417,7 +8421,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           💡 <strong>ตัวอย่าง:</strong> เติมแก๊สไนโตรเจนในยางรถยนต์ที่มีความจุ 12 L ให้มีความดัน <em>สัมบูรณ์ (absolute pressure)</em> 29.4 psi ที่ 27°C ต้องใช้แก๊สไนโตรเจนกี่กรัม?<br>
           <span style="font-size:12px;color:#64748B;">[หมายเหตุ: PV = nRT ต้องใช้ความดันสัมบูรณ์ ถ้าโจทย์ให้เป็น "ความดันเกจ (gauge pressure)" จากเครื่องวัดยางรถ ต้องบวกความดันบรรยากาศ ≈ 14.7 psi ก่อนนำมาคำนวณ]</span><br>
           แปลงหน่วย: P = 29.4 psi ÷ 14.696 = 2.00 atm, T = 27+273 = 300 K<br>
-          n = PV/RT = (2.00 × 12) / (0.08206 × 300) = 0.976 mol<br>
+          n = <span class="frac"><span class="n">PV</span><span class="d">RT</span></span> = <span class="frac"><span class="n">(2.00 × 12)</span><span class="d">(0.08206 × 300)</span></span> = 0.976 mol<br>
           m = n × M(N₂) = 0.976 × 28.02 = <strong>27.3 g</strong>
         </div>
       </div>
@@ -8432,27 +8436,27 @@ html, body { max-width:100%; overflow-x:hidden; }
           <div class="formula-label">โจทย์: ถุงลมนิรภัยใช้โซเดียมเอไซด์ 60.0 g สลายตัว ผลิตแก๊ส N₂ ที่ 80 °C และ 823 mmHg จะได้ N₂ กี่ลิตร</div>
           สมการ: 2NaN₃(s) → 2Na(s) + 3N₂(g)<br>
           ขั้น 1: หาโมล NaN₃ = 60.0 ÷ 65.02 = 0.923 mol<br>
-          ขั้น 2: โมล N₂ = 0.923 × (3/2) = 1.38 mol<br>
-          ขั้น 3: แปลงหน่วย P = 823/760 = 1.083 atm, T = 80 + 273 = 353 K<br>
-          ขั้น 4: V = nRT/P = (1.38)(0.0821)(353)/1.083 = <strong>36.9 L</strong>
+          ขั้น 2: โมล N₂ = 0.923 × (<span class="frac"><span class="n">3</span><span class="d">2</span></span>) = 1.38 mol<br>
+          ขั้น 3: แปลงหน่วย P = <span class="frac"><span class="n">823</span><span class="d">760</span></span> = 1.083 atm, T = 80 + 273 = 353 K<br>
+          ขั้น 4: V = <span class="frac"><span class="n">nRT</span><span class="d">P</span></span> = <span class="frac"><span class="n">(1.38)(0.0821)(353)</span><span class="d">1.083</span></span> = <strong>36.9 L</strong>
         </div>
         <div class="tip-box">💡 <strong>เทคนิค:</strong> ปริมาณสารสัมพันธ์ของแก๊ส = ปริมาณสารสัมพันธ์ปกติ + ใช้ PV=nRT แปลงระหว่าง n กับ V ที่ P, T ที่กำหนด · ถ้า P และ T เท่ากันทั้งระบบ ปริมาตรแก๊สแปรผันตรงกับจำนวนโมล (อาโวกาโดร) จึง <em>ใช้ปริมาตรแทนโมลในสมการได้เลย</em></div>
 
-        <h4>📏 ตัวอย่าง 2 — ความหนาแน่นของแก๊ส (d = PM/RT)</h4>
-        <p>จาก PV = nRT และ n = m/M เราจัดรูปได้ว่า <strong>d = m/V = PM/RT</strong></p>
+        <h4>📏 ตัวอย่าง 2 — ความหนาแน่นของแก๊ส (d = <span class="frac"><span class="n">PM</span><span class="d">RT</span></span>)</h4>
+        <p>จาก PV = nRT และ n = m/M เราจัดรูปได้ว่า <strong>d = m/V = <span class="frac"><span class="n">PM</span><span class="d">RT</span></span></strong></p>
         <div class="formula-box">
           <div class="formula-label">โจทย์: จงหาความหนาแน่นของแก๊ส CO₂ ที่ 0.990 atm และ 55 °C (M = 44.01 g/mol)</div>
           T = 55 + 273 = 328 K<br>
-          d = PM/RT = (0.990 × 44.01) / (0.0821 × 328) = <strong>1.62 g/L</strong>
+          d = <span class="frac"><span class="n">PM</span><span class="d">RT</span></span> = <span class="frac"><span class="n">(0.990 × 44.01)</span><span class="d">(0.0821 × 328)</span></span> = <strong>1.62 g/L</strong>
         </div>
         <div class="note-box">⚠️ <strong>หน่วย:</strong> ความหนาแน่นของแก๊สมักรายงานเป็น <strong>g/L</strong> (ไม่ใช่ g/mL เหมือนของเหลว) เพราะแก๊สเบามาก · เปรียบเทียบ: น้ำ ≈ 1000 g/L, CO₂ ≈ 1.6 g/L, อากาศ ≈ 1.2 g/L</div>
 
         <h4>🔍 ตัวอย่าง 3 — หามวลโมลาร์จากความหนาแน่น</h4>
         <div class="formula-box">
           <div class="formula-label">โจทย์: นักเคมีสังเคราะห์แก๊สสีเขียวเหลืองชนิดหนึ่ง วัดได้ d = 7.71 g/L ที่ 36 °C และ 2.88 atm จงหามวลโมลาร์และสูตรโมเลกุล</div>
-          จัดสมการใหม่: <strong>M = dRT/P</strong><br>
+          จัดสมการใหม่: <strong>M = <span class="frac"><span class="n">dRT</span><span class="d">P</span></span></strong><br>
           T = 36 + 273 = 309 K<br>
-          M = (7.71 × 0.0821 × 309) / 2.88 = <strong>67.9 g/mol</strong><br>
+          M = <span class="frac"><span class="n">(7.71 × 0.0821 × 309)</span><span class="d">2.88</span></span> = <strong>67.9 g/mol</strong><br>
           ลองสูตร: Cl(35.45) + 2O(16.00) = 67.45 g/mol → <strong>ClO₂</strong> ✓
         </div>
       </div>
@@ -8509,7 +8513,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="tip-box">💡 <strong>จำง่าย:</strong> เมื่อผสมแก๊สที่ไม่ทำปฏิกิริยา ความดันรวม = ผลบวกความดันย่อยของแต่ละแก๊ส · ความดันย่อย Pᵢ = Xᵢ × P_total (Xᵢ = เศษส่วนโมล) แต่ละแก๊สมีส่วนช่วยทำให้เกิดความดันของตัวเอง</div>
         <div class="tip-box">💡 <strong>ตัวอย่าง:</strong> ผสมแก๊ส H₂ 1.00 g, He 2.60 g, Ar 11.19 g ในภาชนะ 10.0 L ที่ 25°C<br>
         n(H₂)=0.496, n(He)=0.650, n(Ar)=0.280 mol, n_total=1.426 mol<br>
-        P_total = n_total×RT/V = (1.426×0.08206×298)/10.0 = <strong>3.49 atm</strong></div>
+        P_total = n_total×RT/V = <span class="frac"><span class="n">(1.426×0.08206×298)</span><span class="d">10.0</span></span> = <strong>3.49 atm</strong></div>
 
         <h4>💧 การเก็บแก๊สเหนือน้ำ (Collecting a Gas over Water)</h4>
         <p>เมื่อเก็บแก๊สที่ไม่ละลายน้ำโดยการแทนที่น้ำในขวดคว่ำ แก๊สที่เก็บได้ <em>ผสมกับไอน้ำเสมอ</em> ดังนั้นต้องใช้กฎดาลตัน:</p>
@@ -8524,7 +8528,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="tip-box">
           💡 <strong>ตัวอย่าง:</strong> เก็บ O₂ จากการสลายตัวของ KClO₃ เหนือน้ำที่ 24 °C ได้ปริมาตร 128 mL ความดันรวม 762 mmHg จงหามวล O₂ (P_H₂O ที่ 24 °C = 22.4 mmHg)<br>
           P_O₂ = 762 − 22.4 = 740 mmHg = 0.974 atm<br>
-          n = PV/RT = (0.974 × 0.128) / (0.0821 × 297) = 5.12 × 10⁻³ mol<br>
+          n = <span class="frac"><span class="n">PV</span><span class="d">RT</span></span> = <span class="frac"><span class="n">(0.974 × 0.128)</span><span class="d">(0.0821 × 297)</span></span> = 5.12 × 10⁻³ mol<br>
           m = 5.12 × 10⁻³ × 32.00 = <strong>0.164 g</strong>
         </div>
         <div class="note-box">⚠️ <strong>ข้อควรระวัง:</strong> วิธีนี้ใช้ได้กับแก๊สที่ <em>ไม่ละลายน้ำ</em> เช่น O₂, H₂, N₂ · ใช้ไม่ได้กับแก๊สที่ละลายน้ำสูง เช่น NH₃, HCl, SO₂ — เพราะแก๊สส่วนหนึ่งจะหายไปกับน้ำ</div>
@@ -8535,10 +8539,10 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h3>🌡️ ทฤษฎีจลน์และการกระจาย Maxwell-Boltzmann</h3>
         <div class="formula-box">
           <div class="formula-label">พลังงานจลน์เฉลี่ยและความเร็ว rms</div>
-          KE_avg = (3/2)RT   (ต่อ 1 mol)<br>
+          KE_avg = (<span class="frac"><span class="n">3</span><span class="d">2</span></span>)RT   (ต่อ 1 mol)<br>
           u_rms = √(3RT/M)   (M = มวลโมลาร์ kg/mol)<br>
           <br>
-          ตัวอย่าง N₂ ที่ 25°C: u_rms = √(3×8.314×298/0.028) = 515 m/s
+          ตัวอย่าง N₂ ที่ 25°C: u_rms = √(3×8.314×<span class="frac"><span class="n">298</span><span class="d">0.028</span></span>) = 515 m/s
         </div>
         <!-- Maxwell-Boltzmann distribution animation -->
         <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:16px;margin:10px 0;">
@@ -8578,10 +8582,10 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="formula-box">
           <div class="formula-label">กฎเกรแฮม</div>
           r ∝ 1/√M<br>
-          r₁/r₂ = √(M₂/M₁) = √(d₂/d₁)<br>
+          <span class="frac"><span class="n">r₁</span><span class="d">r₂</span></span> = √(M₂/M₁) = √(d₂/d₁)<br>
           <br>
           ตัวอย่าง เปรียบเทียบ H₂ (M=2) กับ O₂ (M=32):<br>
-          r(H₂)/r(O₂) = √(32/2) = √16 = 4<br>
+          r(H₂)/r(O₂) = √(<span class="frac"><span class="n">32</span><span class="d">2</span></span>) = √16 = 4<br>
           → H₂ แพร่ได้เร็วกว่า O₂ ถึง 4 เท่า
         </div>
         <!-- Graham Visual — light vs heavy gas race -->
@@ -8606,7 +8610,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <div class="gas-anim-dot graham-heavy" style="width:13px;height:13px;top:42px;left:90px; animation:gasAnimSlow 4.0s linear infinite 0.2s;"></div>
             </div>
           </div>
-          <div class="tip-box" style="margin-top:14px;">💡 <strong>จำง่าย:</strong> r ∝ 1/√M · มวลโมลน้อย → เร็ว · มวลโมลมาก → ช้า · H₂ มีมวลน้อยที่สุดจึงแพร่เร็วที่สุด · ตัวอย่าง: r(H₂)/r(O₂) = √(32/2) = 4 เท่า</div>
+          <div class="tip-box" style="margin-top:14px;">💡 <strong>จำง่าย:</strong> r ∝ 1/√M · มวลโมลน้อย → เร็ว · มวลโมลมาก → ช้า · H₂ มีมวลน้อยที่สุดจึงแพร่เร็วที่สุด · ตัวอย่าง: r(H₂)/r(O₂) = √(<span class="frac"><span class="n">32</span><span class="d">2</span></span>) = 4 เท่า</div>
         </div>
         <div class="two-col">
           <div>
@@ -8662,7 +8666,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h4 style="margin-top:14px;">📊 ตัวประกอบการอัด (Compressibility Factor, Z)</h4>
         <p style="font-size:13px;">ค่าทดสอบความเป็นอุดมคติของแก๊ส 1 โมล นิยามว่า:</p>
         <div class="formula-box">
-          <div class="formula-label">Z = PV / RT  (สำหรับ n = 1 mol)</div>
+          <div class="formula-label">Z = <span class="frac"><span class="n">PV</span><span class="d">RT</span></span>  (สำหรับ n = 1 mol)</div>
           • <strong>Z = 1</strong> → แก๊สประพฤติเหมือนอุดมคติ (เกิดที่ความดันต่ำ)<br>
           • <strong>Z &lt; 1</strong> → ปริมาตรจริง &lt; ปริมาตรที่คาด — แรงดึงดูดระหว่างโมเลกุลมีอิทธิพล (พบที่ความดันปานกลาง · อุณหภูมิต่ำ)<br>
           • <strong>Z &gt; 1</strong> → ปริมาตรจริง &gt; ปริมาตรที่คาด — ปริมาตรโมเลกุล (nb) ผลักดันสำคัญ (พบที่ความดันสูงมาก)
@@ -8759,7 +8763,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               P₁V₁ = P₂V₂<br>
               (380)(2.50) = (760)(V₂)<br>
-              V₂ = 950/760 = <strong>1.25 L</strong><br>
+              V₂ = <span class="frac"><span class="n">950</span><span class="d">760</span></span> = <strong>1.25 L</strong><br>
               สังเกต: ความดันเพิ่มเป็น 2 เท่า → ปริมาตรลดเหลือครึ่ง
             </div>
           </details>
@@ -8773,7 +8777,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               P₁V₁ = P₂V₂<br>
               (1.5)(6.0) = P₂(3.0)<br>
-              P₂ = 9.0/3.0 = <strong>3.0 atm</strong><br>
+              P₂ = <span class="frac"><span class="n">9.0</span><span class="d">3.0</span></span> = <strong>3.0 atm</strong><br>
               ปริมาตรลดครึ่ง → ความดันเพิ่ม 2 เท่า
             </div>
           </details>
@@ -8803,8 +8807,8 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               แปลง °C → K โดยบวก 273<br>
               T₁ = 27+273 = 300 K · T₂ = 127+273 = 400 K<br>
-              V₁/T₁ = V₂/T₂ → 2.5/300 = V₂/400<br>
-              V₂ = 2.5 × (400/300) = <strong>3.33 L</strong>
+              <span class="frac"><span class="n">V₁</span><span class="d">T₁</span></span> = <span class="frac"><span class="n">V₂</span><span class="d">T₂</span></span> → <span class="frac"><span class="n">2.5</span><span class="d">300</span></span> = V₂/400<br>
+              V₂ = 2.5 × (<span class="frac"><span class="n">400</span><span class="d">300</span></span>) = <strong>3.33 L</strong>
             </div>
           </details>
         </div>
@@ -8816,8 +8820,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               T₁ = 25+273 = 298 K · T₂ = −73+273 = 200 K<br>
-              V₁/T₁ = V₂/T₂<br>
-              V₂ = 4.0 × (200/298) = <strong>2.68 L</strong><br>
+              <span class="frac"><span class="n">V₁</span><span class="d">T₁</span></span> = <span class="frac"><span class="n">V₂</span><span class="d">T₂</span></span><br>
+              V₂ = 4.0 × (<span class="frac"><span class="n">200</span><span class="d">298</span></span>) = <strong>2.68 L</strong><br>
               อุณหภูมิลดลง → ปริมาตรลด
             </div>
           </details>
@@ -8843,7 +8847,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               T₁ = 293 K · T₂ = 373 K<br>
-              V₂ = 1,000 × (373/293) = <strong>1,273 L</strong><br>
+              V₂ = 1,000 × (<span class="frac"><span class="n">373</span><span class="d">293</span></span>) = <strong>1,273 L</strong><br>
               อากาศร้อนขยายตัว → ความหนาแน่นลด → บอลลูนลอย
             </div>
           </details>
@@ -8857,10 +8861,10 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              P₁V₁/T₁ = P₂V₂/T₂<br>
+              <span class="frac"><span class="n">P₁V₁</span><span class="d">T₁</span></span> = <span class="frac"><span class="n">P₂V₂</span><span class="d">T₂</span></span><br>
               T₁ = 298 K, T₂ = 323 K<br>
-              (1)(500)/298 = (2)(V₂)/323<br>
-              V₂ = (1 × 500 × 323)/(2 × 298) = <strong>271 mL</strong>
+              <span class="frac"><span class="n">(1)(500)</span><span class="d">298</span></span> = (2)(V₂)/323<br>
+              V₂ = <span class="frac"><span class="n">(1 × 500 × 323)</span><span class="d">(2 × 298)</span></span> = <strong>271 mL</strong>
             </div>
           </details>
         </div>
@@ -8872,9 +8876,9 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               T₁ = 273 K, T₂ = 373 K<br>
-              P₁V₁/T₁ = P₂V₂/T₂<br>
-              (1)(2.0)/273 = (2)(V₂)/373<br>
-              V₂ = (1 × 2.0 × 373)/(2 × 273) = <strong>1.37 L</strong>
+              <span class="frac"><span class="n">P₁V₁</span><span class="d">T₁</span></span> = <span class="frac"><span class="n">P₂V₂</span><span class="d">T₂</span></span><br>
+              <span class="frac"><span class="n">(1)(2.0)</span><span class="d">273</span></span> = (2)(V₂)/373<br>
+              V₂ = <span class="frac"><span class="n">(1 × 2.0 × 373)</span><span class="d">(2 × 273)</span></span> = <strong>1.37 L</strong>
             </div>
           </details>
         </div>
@@ -8887,7 +8891,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               T₁ = 298 K, T₂ = 233 K<br>
               V₂ = P₁V₁T₂/(P₂T₁)<br>
-              V₂ = (1.00 × 5.00 × 233)/(0.30 × 298) = 1165/89.4 = <strong>13.03 L ≈ 13 L</strong><br>
+              V₂ = <span class="frac"><span class="n">(1.00 × 5.00 × 233)</span><span class="d">(0.30 × 298)</span></span> = <span class="frac"><span class="n">1165</span><span class="d">89.4</span></span> = <strong>13.03 L ≈ 13 L</strong><br>
               💡 P ต่ำชนะ T ต่ำ → ปริมาตรขยายมาก
             </div>
           </details>
@@ -8900,8 +8904,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               T₁ = 300 K, T₂ = 280 K<br>
-              V₂ = (1.0 × 3.0 × 280)/(0.70 × 300)<br>
-              V₂ = 840/210 = <strong>4.0 L</strong><br>
+              V₂ = <span class="frac"><span class="n">(1.0 × 3.0 × 280)</span><span class="d">(0.70 × 300)</span></span><br>
+              V₂ = <span class="frac"><span class="n">840</span><span class="d">210</span></span> = <strong>4.0 L</strong><br>
               ลูกโป่งใหญ่ขึ้นบนยอดเขาเพราะความดันบรรยากาศต่ำ
             </div>
           </details>
@@ -8915,9 +8919,9 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              PV = nRT → P = nRT/V<br>
-              P = (0.500)(0.0821)(300)/5.00<br>
-              P = 12.315/5.00 = <strong>2.46 atm</strong>
+              PV = nRT → P = <span class="frac"><span class="n">nRT</span><span class="d">V</span></span><br>
+              P = <span class="frac"><span class="n">(0.500)(0.0821)(300)</span><span class="d">5.00</span></span><br>
+              P = <span class="frac"><span class="n">12.315</span><span class="d">5.00</span></span> = <strong>2.46 atm</strong>
             </div>
           </details>
         </div>
@@ -8928,9 +8932,9 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n = PV/RT<br>
+              n = <span class="frac"><span class="n">PV</span><span class="d">RT</span></span><br>
               T = 273 K<br>
-              n = (1.00 × 22.4)/(0.0821 × 273) = 22.4/22.41 ≈ <strong>1.00 mol</strong><br>
+              n = <span class="frac"><span class="n">(1.00 × 22.4)</span><span class="d">(0.0821 × 273)</span></span> = <span class="frac"><span class="n">22.4</span><span class="d">22.41</span></span> ≈ <strong>1.00 mol</strong><br>
               💡 จำให้ขึ้นใจ: ที่ STP แก๊ส 1 mol = 22.4 L
             </div>
           </details>
@@ -8943,8 +8947,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               T = 127+273 = 400 K<br>
-              V = nRT/P = (0.250 × 0.0821 × 400)/2.00<br>
-              V = 8.21/2.00 = <strong>4.11 L</strong>
+              V = <span class="frac"><span class="n">nRT</span><span class="d">P</span></span> = <span class="frac"><span class="n">(0.250 × 0.0821 × 400)</span><span class="d">2.00</span></span><br>
+              V = <span class="frac"><span class="n">8.21</span><span class="d">2.00</span></span> = <strong>4.11 L</strong>
             </div>
           </details>
         </div>
@@ -8955,10 +8959,10 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(N₂) = 14.0/28 = 0.500 mol<br>
+              n(N₂) = <span class="frac"><span class="n">14.0</span><span class="d">28</span></span> = 0.500 mol<br>
               T = 298 K<br>
-              P = nRT/V = (0.500 × 0.0821 × 298)/10.0<br>
-              P = 12.23/10.0 = <strong>1.22 atm</strong>
+              P = <span class="frac"><span class="n">nRT</span><span class="d">V</span></span> = <span class="frac"><span class="n">(0.500 × 0.0821 × 298)</span><span class="d">10.0</span></span><br>
+              P = <span class="frac"><span class="n">12.23</span><span class="d">10.0</span></span> = <strong>1.22 atm</strong>
             </div>
           </details>
         </div>
@@ -8972,8 +8976,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               n_total = 2.0 + 3.0 = 5.0 mol · T = 300 K<br>
-              P_total = (5.0 × 0.0821 × 300)/10.0 = <strong>12.3 atm</strong><br>
-              x(O₂) = 3.0/5.0 = 0.60<br>
+              P_total = <span class="frac"><span class="n">(5.0 × 0.0821 × 300)</span><span class="d">10.0</span></span> = <strong>12.3 atm</strong><br>
+              x(O₂) = <span class="frac"><span class="n">3.0</span><span class="d">5.0</span></span> = 0.60<br>
               P(O₂) = 0.60 × 12.3 = <strong>7.39 atm</strong>
             </div>
           </details>
@@ -8997,9 +9001,9 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              n(O₂) = 32/32 = 1.0 mol · n(N₂) = 28/28 = 1.0 mol<br>
+              n(O₂) = <span class="frac"><span class="n">32</span><span class="d">32</span></span> = 1.0 mol · n(N₂) = <span class="frac"><span class="n">28</span><span class="d">28</span></span> = 1.0 mol<br>
               n_total = 2.0 mol · T = 298 K<br>
-              P = nRT/V = (2.0 × 0.0821 × 298)/24.5 = 48.93/24.5 = <strong>2.00 atm</strong>
+              P = <span class="frac"><span class="n">nRT</span><span class="d">V</span></span> = <span class="frac"><span class="n">(2.0 × 0.0821 × 298)</span><span class="d">24.5</span></span> = <span class="frac"><span class="n">48.93</span><span class="d">24.5</span></span> = <strong>2.00 atm</strong>
             </div>
           </details>
         </div>
@@ -9026,8 +9030,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              r₁/r₂ = √(M₂/M₁)<br>
-              r(He)/r(O₂) = √(32/4) = √8 = <strong>2.83 เท่า</strong><br>
+              <span class="frac"><span class="n">r₁</span><span class="d">r₂</span></span> = √(M₂/M₁)<br>
+              r(He)/r(O₂) = √(<span class="frac"><span class="n">32</span><span class="d">4</span></span>) = √8 = <strong>2.83 เท่า</strong><br>
               He แพร่เร็วกว่า O₂ ประมาณ 2.83 เท่า
             </div>
           </details>
@@ -9039,7 +9043,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              r(H₂)/r(SO₂) = √(64/2) = √32 ≈ <strong>5.66 เท่า</strong><br>
+              r(H₂)/r(SO₂) = √(<span class="frac"><span class="n">64</span><span class="d">2</span></span>) = √32 ≈ <strong>5.66 เท่า</strong><br>
               H₂ แพร่เร็วกว่า SO₂ ประมาณ 5.66 เท่า
             </div>
           </details>
@@ -9052,7 +9056,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               M(NH₃) = 17, M(HCl) = 36.5<br>
-              r(NH₃)/r(HCl) = √(36.5/17) = √2.15 ≈ <strong>1.47</strong><br>
+              r(NH₃)/r(HCl) = √(<span class="frac"><span class="n">36.5</span><span class="d">17</span></span>) = √2.15 ≈ <strong>1.47</strong><br>
               NH₃ เคลื่อนเร็วกว่าประมาณ 1.47 เท่า<br>
               ⇒ ควันขาว NH₄Cl เกิดใกล้ปลาย <strong>HCl</strong> มากกว่า
             </div>
@@ -9068,7 +9072,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               r(X)/r(O₂) = √(M_O₂/M_X)<br>
               0.50 = √(32/M_X)<br>
               0.25 = 32/M_X<br>
-              M_X = 32/0.25 = <strong>128 g/mol</strong><br>
+              M_X = <span class="frac"><span class="n">32</span><span class="d">0.25</span></span> = <strong>128 g/mol</strong><br>
               (เช่น HI: M = 128 หรือใกล้เคียง)
             </div>
           </details>
@@ -9082,9 +9086,9 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              M = dRT/P<br>
+              M = <span class="frac"><span class="n">dRT</span><span class="d">P</span></span><br>
               T = 313 K<br>
-              M = (3.38 × 0.0821 × 313)/1.97 = <strong>44.1 g/mol</strong><br>
+              M = <span class="frac"><span class="n">(3.38 × 0.0821 × 313)</span><span class="d">1.97</span></span> = <strong>44.1 g/mol</strong><br>
               (สอดคล้องกับ C₃H₈ M=44.09 หรือ CO₂ M=44.01)
             </div>
           </details>
@@ -9098,7 +9102,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               d = PM/(RT)<br>
               M(CO₂) = 44.0 g/mol · T = 273 K<br>
-              d = (1.00 × 44.0)/(0.0821 × 273) = 44.0/22.41 = <strong>1.96 g/L</strong><br>
+              d = <span class="frac"><span class="n">(1.00 × 44.0)</span><span class="d">(0.0821 × 273)</span></span> = <span class="frac"><span class="n">44.0</span><span class="d">22.41</span></span> = <strong>1.96 g/L</strong><br>
               💡 CO₂ หนักกว่าอากาศ (1.29 g/L) จึงสะสมในที่ต่ำ
             </div>
           </details>
@@ -9111,8 +9115,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               d = 2.00 g / 1.00 L = 2.00 g/L<br>
-              M = dRT/P = (2.00 × 0.0821 × 298)/1.50<br>
-              M = 48.93/1.50 = <strong>32.6 g/mol</strong><br>
+              M = <span class="frac"><span class="n">dRT</span><span class="d">P</span></span> = <span class="frac"><span class="n">(2.00 × 0.0821 × 298)</span><span class="d">1.50</span></span><br>
+              M = <span class="frac"><span class="n">48.93</span><span class="d">1.50</span></span> = <strong>32.6 g/mol</strong><br>
               ⇒ น่าจะเป็น O₂ (M = 32)
             </div>
           </details>
@@ -9125,8 +9129,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               M(CH₄) = 16 g/mol · T = 300 K<br>
-              d = PM/RT = (2.00 × 16)/(0.0821 × 300)<br>
-              d = 32/24.63 = <strong>1.30 g/L</strong>
+              d = <span class="frac"><span class="n">PM</span><span class="d">RT</span></span> = <span class="frac"><span class="n">(2.00 × 16)</span><span class="d">(0.0821 × 300)</span></span><br>
+              d = <span class="frac"><span class="n">32</span><span class="d">24.63</span></span> = <strong>1.30 g/L</strong>
             </div>
           </details>
         </div>
@@ -9140,8 +9144,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               สมการ: 2NaN₃(s) → 2Na(s) + 3N₂(g)<br>
-              n(NaN₃) = 65.0/65.02 = 1.00 mol<br>
-              n(N₂) = 1.00 × (3/2) = 1.50 mol<br>
+              n(NaN₃) = <span class="frac"><span class="n">65.0</span><span class="d">65.02</span></span> = 1.00 mol<br>
+              n(N₂) = 1.00 × (<span class="frac"><span class="n">3</span><span class="d">2</span></span>) = 1.50 mol<br>
               V = 1.50 × 22.4 = <strong>33.6 L</strong>
             </div>
           </details>
@@ -9154,7 +9158,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               สมการ: CaCO₃(s) → CaO(s) + CO₂(g)<br>
-              n(CaCO₃) = 50.0/100 = 0.500 mol<br>
+              n(CaCO₃) = <span class="frac"><span class="n">50.0</span><span class="d">100</span></span> = 0.500 mol<br>
               n(CO₂) = 0.500 mol (อัตราส่วน 1:1)<br>
               V = 0.500 × 22.4 = <strong>11.2 L</strong>
             </div>
@@ -9168,7 +9172,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               สมการ: CH₄ + 2O₂ → CO₂ + 2H₂O<br>
-              n(CH₄) = 5.6/22.4 = 0.25 mol<br>
+              n(CH₄) = <span class="frac"><span class="n">5.6</span><span class="d">22.4</span></span> = 0.25 mol<br>
               n(CO₂) = 0.25 mol → V(CO₂) = 0.25 × 22.4 = <strong>5.6 L</strong><br>
               n(H₂O) = 0.50 mol → มวล H₂O = 0.50 × 18 = <strong>9.0 g</strong>
             </div>
@@ -9182,9 +9186,9 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               สมการ: Mg + 2HCl → MgCl₂ + H₂<br>
-              n(Mg) = 2.4/24 = 0.10 mol<br>
+              n(Mg) = <span class="frac"><span class="n">2.4</span><span class="d">24</span></span> = 0.10 mol<br>
               n(H₂) = 0.10 mol (อัตรา 1:1)<br>
-              V = nRT/P = (0.10 × 0.0821 × 298)/1.00 = <strong>2.45 L</strong>
+              V = <span class="frac"><span class="n">nRT</span><span class="d">P</span></span> = <span class="frac"><span class="n">(0.10 × 0.0821 × 298)</span><span class="d">1.00</span></span> = <strong>2.45 L</strong>
             </div>
           </details>
         </div>
@@ -9206,15 +9210,15 @@ html, body { max-width:100%; overflow-x:hidden; }
           <details class="solution-details">
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
-              <strong>สูตร/แนวคิดที่ใช้:</strong> กฎแก๊สรวม P₁V₁/T₁ = P₂V₂/T₂ (T ต้องเป็น Kelvin)<br><br>
+              <strong>สูตร/แนวคิดที่ใช้:</strong> กฎแก๊สรวม <span class="frac"><span class="n">P₁V₁</span><span class="d">T₁</span></span> = <span class="frac"><span class="n">P₂V₂</span><span class="d">T₂</span></span> (T ต้องเป็น Kelvin)<br><br>
               <strong>ขั้นที่ 1 — แปลง T เป็น Kelvin:</strong><br>
               T₁ = 20 + 273 = <strong>293 K</strong><br>
               T₂ = 35 + 273 = <strong>308 K</strong><br><br>
               <strong>ขั้นที่ 2 — แทนค่าในสมการ:</strong><br>
-              P₁V₁/T₁ = P₂V₂/T₂<br>
-              V₂ = P₁V₁T₂ / (T₁P₂)<br>
-              V₂ = (1.50 × 2.00 × 308) / (293 × 1.00)<br>
-              V₂ = 924 / 293 = <strong>3.15 L</strong><br><br>
+              <span class="frac"><span class="n">P₁V₁</span><span class="d">T₁</span></span> = <span class="frac"><span class="n">P₂V₂</span><span class="d">T₂</span></span><br>
+              V₂ = <span class="frac"><span class="n">P₁V₁T₂</span><span class="d">(T₁P₂)</span></span><br>
+              V₂ = <span class="frac"><span class="n">(1.50 × 2.00 × 308)</span><span class="d">(293 × 1.00)</span></span><br>
+              V₂ = <span class="frac"><span class="n">924</span><span class="d">293</span></span> = <strong>3.15 L</strong><br><br>
               <strong>ตรวจสอบเหตุผล:</strong><br>
               P ลดลง (1.50→1.00) → V เพิ่ม ✓<br>
               T เพิ่มขึ้น (293→308 K) → V เพิ่มอีก ✓<br>
@@ -9234,20 +9238,20 @@ html, body { max-width:100%; overflow-x:hidden; }
           <details class="solution-details">
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
-              <strong>สูตร/แนวคิดที่ใช้:</strong> PV = nRT → n = PV/RT<br><br>
+              <strong>สูตร/แนวคิดที่ใช้:</strong> PV = nRT → n = <span class="frac"><span class="n">PV</span><span class="d">RT</span></span><br><br>
               <strong>ขั้นที่ 1 — แปลง T:</strong><br>
               T = 25 + 273 = 298 K<br><br>
               <strong>ขั้นที่ 2 (ก) — หา n(O₂):</strong><br>
-              n = PV/RT = (120 × 10.0) / (0.08206 × 298)<br>
-              = 1200 / 24.45 = <strong>49.1 mol</strong><br><br>
+              n = <span class="frac"><span class="n">PV</span><span class="d">RT</span></span> = <span class="frac"><span class="n">(120 × 10.0)</span><span class="d">(0.08206 × 298)</span></span><br>
+              = <span class="frac"><span class="n">1200</span><span class="d">24.45</span></span> = <strong>49.1 mol</strong><br><br>
               <strong>ขั้นที่ 3 (ข) — มวล O₂:</strong><br>
               m = n × M = 49.1 × 32.00 = <strong>1571 g ≈ 1.57 kg</strong><br><br>
               <strong>ขั้นที่ 4 (ค) — ระยะเวลา:</strong><br>
               O₂ ที่ใช้ได้ที่ 1 atm, 25°C:<br>
-              V = nRT/P = 49.1 × 0.08206 × 298 / 1.00 = <strong>1200 L</strong><br>
+              V = <span class="frac"><span class="n">nRT</span><span class="d">P</span></span> = 49.1 × 0.08206 × <span class="frac"><span class="n">298</span><span class="d">1.00</span></span> = <strong>1200 L</strong><br>
               เวลา = 1200 L ÷ 2.00 L/min = 600 min = <strong>10.0 ชั่วโมง</strong><br><br>
               <strong>ตรวจสอบเร็ว:</strong> 49 mol × 22.4 L/mol (STP) ≈ 1098 L<br>
-              ที่ 25°C: ×(298/273) ≈ 1198 L ≈ 1200 L ✓
+              ที่ 25°C: ×(<span class="frac"><span class="n">298</span><span class="d">273</span></span>) ≈ 1198 L ≈ 1200 L ✓
             </div>
           </details>
         </div>
@@ -9267,15 +9271,15 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>ขั้นที่ 1 — แปลง T:</strong><br>
               T = 27 + 273 = 300 K<br><br>
               <strong>ขั้นที่ 2 (ก) — ความดันย่อย:</strong><br>
-              P(N₂) = n(N₂)RT/V = (0.800 × 0.08206 × 300) / 5.00<br>
-              = 19.69 / 5.00 = <strong>3.94 atm</strong><br><br>
-              P(O₂) = n(O₂)RT/V = (0.200 × 0.08206 × 300) / 5.00<br>
-              = 4.924 / 5.00 = <strong>0.985 atm</strong><br><br>
+              P(N₂) = n(N₂)RT/V = <span class="frac"><span class="n">(0.800 × 0.08206 × 300)</span><span class="d">5.00</span></span><br>
+              = <span class="frac"><span class="n">19.69</span><span class="d">5.00</span></span> = <strong>3.94 atm</strong><br><br>
+              P(O₂) = n(O₂)RT/V = <span class="frac"><span class="n">(0.200 × 0.08206 × 300)</span><span class="d">5.00</span></span><br>
+              = <span class="frac"><span class="n">4.924</span><span class="d">5.00</span></span> = <strong>0.985 atm</strong><br><br>
               <strong>ขั้นที่ 3 (ข) — ความดันรวม:</strong><br>
               P_total = P(N₂) + P(O₂) = 3.94 + 0.985 = <strong>4.93 atm</strong><br>
-              (ตรวจ: n_total = 1.000 mol → P = 1.000 × 0.08206 × 300/5.00 = 4.92 atm ✓)<br><br>
+              (ตรวจ: n_total = 1.000 mol → P = 1.000 × 0.08206 × <span class="frac"><span class="n">300</span><span class="d">5.00</span></span> = 4.92 atm ✓)<br><br>
               <strong>ขั้นที่ 4 (ค) — Mole Fraction:</strong><br>
-              X(O₂) = n(O₂) / n_total = 0.200 / 1.000 = <strong>0.200</strong><br>
+              X(O₂) = n(O₂) / n_total = <span class="frac"><span class="n">0.200</span><span class="d">1.000</span></span> = <strong>0.200</strong><br>
               💡 อากาศปกติมี X(O₂) ≈ 0.21 — สอดคล้องกับโจทย์นี้
             </div>
           </details>
@@ -9292,11 +9296,11 @@ html, body { max-width:100%; overflow-x:hidden; }
           <details class="solution-details">
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
-              <strong>สูตร/แนวคิดที่ใช้:</strong> กฎเกรแฮม: r₁/r₂ = √(M₂/M₁)<br>
+              <strong>สูตร/แนวคิดที่ใช้:</strong> กฎเกรแฮม: <span class="frac"><span class="n">r₁</span><span class="d">r₂</span></span> = √(M₂/M₁)<br>
               (แก๊สเบากว่า = แพร่เร็วกว่า)<br><br>
               <strong>ขั้นที่ 1 (ก) — อัตราส่วนอัตราแพร่:</strong><br>
               r(CH₄)/r(SO₂) = √(M(SO₂)/M(CH₄))<br>
-              = √(64.07/16.05)<br>
+              = √(<span class="frac"><span class="n">64.07</span><span class="d">16.05</span></span>)<br>
               = √(3.993)<br>
               = <strong>1.998 ≈ 2.00</strong><br>
               ∴ CH₄ แพร่เร็วกว่า SO₂ ถึง <strong>2 เท่า</strong><br><br>
@@ -9320,11 +9324,11 @@ html, body { max-width:100%; overflow-x:hidden; }
           • <strong>บอยล์:</strong> PV = ค่าคงที่ (T, n คงที่) — P↑ V↓<br>
           • <strong>ชาร์ล:</strong> V/T = ค่าคงที่ (P, n คงที่) — T↑ V↑<br>
           • <strong>เกย์-ลูสแซก:</strong> P/T = ค่าคงที่ (V, n คงที่) — T↑ P↑<br>
-          • <strong>กฎรวม:</strong> P₁V₁/T₁ = P₂V₂/T₂<br>
+          • <strong>กฎรวม:</strong> <span class="frac"><span class="n">P₁V₁</span><span class="d">T₁</span></span> = <span class="frac"><span class="n">P₂V₂</span><span class="d">T₂</span></span><br>
           • <strong>แก๊สอุดมคติ:</strong> PV = nRT (R = 0.0821 L·atm/mol·K)<br>
           • <strong>STP:</strong> 0°C, 1 atm → 22.4 L/mol<br>
           • <strong>ดาลตัน:</strong> P_total = P₁ + P₂ + ... | Pᵢ = xᵢ·P_total<br>
-          • <strong>เกรแฮม:</strong> r₁/r₂ = √(M₂/M₁)
+          • <strong>เกรแฮม:</strong> <span class="frac"><span class="n">r₁</span><span class="d">r₂</span></span> = √(M₂/M₁)
         </div>
         <h4>🪜 วิธีคิด PV = nRT ทีละขั้น</h4>
         <div class="tip-box">
@@ -9534,8 +9538,8 @@ html, body { max-width:100%; overflow-x:hidden; }
           การทดลอง 3: [NO] = 0.01, [O₂] = 0.03 mol/dm³ → rate = 0.021 mol·dm⁻³·s⁻¹<br>
           การทดลอง 4: [NO] = 0.02, [O₂] = 0.03 mol/dm³ → rate = 0.084 mol·dm⁻³·s⁻¹<br>
           <br>
-          เปรียบ 3 ↔ 4 ([NO] ×2, [O₂] เท่าเดิม): 0.084/0.021 = 4 = 2ˣ → <strong>x = 2</strong><br>
-          เปรียบ 1 ↔ 2 ([O₂] ×2, [NO] เท่าเดิม): 0.014/0.007 = 2 = 2ʸ → <strong>y = 1</strong><br>
+          เปรียบ 3 ↔ 4 ([NO] ×2, [O₂] เท่าเดิม): <span class="frac"><span class="n">0.084</span><span class="d">0.021</span></span> = 4 = 2ˣ → <strong>x = 2</strong><br>
+          เปรียบ 1 ↔ 2 ([O₂] ×2, [NO] เท่าเดิม): <span class="frac"><span class="n">0.014</span><span class="d">0.007</span></span> = 2 = 2ʸ → <strong>y = 1</strong><br>
           ∴ rate = k[NO]²[O₂] · อันดับรวม = 3<br>
           แทนค่า: k = 0.007 / ((0.01)²(0.01)) = <strong>7.00 × 10³ dm⁶·mol⁻²·s⁻¹</strong>
         </div>
@@ -9595,16 +9599,16 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="formula-box">
           <div class="formula-label">ความสัมพันธ์ระหว่างค่าคงที่อัตรา (k) กับอุณหภูมิ (T)</div>
           k = A · e^(−Eₐ/RT)<br>
-          ln k = ln A − (Eₐ/R)(1/T)<br>
-          ln(k₂/k₁) = (Eₐ/R)(1/T₁ − 1/T₂)<br>
+          ln k = ln A − (<span class="frac"><span class="n">Eₐ</span><span class="d">R</span></span>)(1/T)<br>
+          ln(<span class="frac"><span class="n">k₂</span><span class="d">k₁</span></span>) = (<span class="frac"><span class="n">Eₐ</span><span class="d">R</span></span>)(1/T₁ − 1/T₂)<br>
           (R = 8.314 J·mol⁻¹·K⁻¹ , T เป็นเคลวิน)
         </div>
-        <p>A = ปัจจัยความถี่ (frequency factor) สะท้อนความถี่และทิศทางการชน · กราฟ ln k vs 1/T เป็นเส้นตรง ความชัน = −Eₐ/R</p>
+        <p>A = ปัจจัยความถี่ (frequency factor) สะท้อนความถี่และทิศทางการชน · กราฟ ln k vs 1/T เป็นเส้นตรง ความชัน = −<span class="frac"><span class="n">Eₐ</span><span class="d">R</span></span></p>
         <div class="formula-box">
           <div class="formula-label">ตัวอย่างการคำนวณ Eₐ</div>
           ปฏิกิริยาหนึ่งที่ 25°C (298 K) มี k₁ = 2.0×10⁻³ s⁻¹<br>
           ที่ 35°C (308 K) มี k₂ = 4.0×10⁻³ s⁻¹<br>
-          ln(2) = (Eₐ/8.314)(1/298 − 1/308)<br>
+          ln(2) = (Eₐ/8.314)(<span class="frac"><span class="n">1</span><span class="d">298</span></span> − <span class="frac"><span class="n">1</span><span class="d">308</span></span>)<br>
           0.693 = (Eₐ/8.314)(1.09×10⁻⁴) → Eₐ ≈ 5.29×10⁴ J/mol = 52.9 kJ/mol
         </div>
       </div>
@@ -9662,9 +9666,9 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              −Δ[N₂O₅]/Δt = (0.400−0.200)/100 = 2.0×10⁻³ M/s<br>
-              อัตราตามสมการ = −(1/2)Δ[N₂O₅]/Δt = <strong>1.0×10⁻³ M/s</strong><br>
-              อัตราการเกิด O₂ = (1/1) × rate = <strong>1.0×10⁻³ M/s</strong>
+              −Δ[N₂O₅]/Δt = <span class="frac"><span class="n">(0.400−0.200)</span><span class="d">100</span></span> = 2.0×10⁻³ M/s<br>
+              อัตราตามสมการ = −(<span class="frac"><span class="n">1</span><span class="d">2</span></span>)Δ[N₂O₅]/Δt = <strong>1.0×10⁻³ M/s</strong><br>
+              อัตราการเกิด O₂ = (<span class="frac"><span class="n">1</span><span class="d">1</span></span>) × rate = <strong>1.0×10⁻³ M/s</strong>
             </div>
           </details>
         </div>
@@ -9675,7 +9679,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              ใช้หลัก: −Δ[N₂]/Δt = −(1/3)Δ[H₂]/Δt × 3 และ = (1/2)Δ[NH₃]/Δt × 2<br>
+              ใช้หลัก: −Δ[N₂]/Δt = −(<span class="frac"><span class="n">1</span><span class="d">3</span></span>)Δ[H₂]/Δt × 3 และ = (<span class="frac"><span class="n">1</span><span class="d">2</span></span>)Δ[NH₃]/Δt × 2<br>
               −Δ[H₂]/Δt = 3 × (1.0×10⁻³) = <strong>3.0×10⁻³ M/s</strong><br>
               Δ[NH₃]/Δt = 2 × (1.0×10⁻³) = <strong>2.0×10⁻³ M/s</strong>
             </div>
@@ -9729,8 +9733,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               k_A/k_B = exp((Ea_B − Ea_A)/RT)<br>
-              = exp((100 − 50) × 1000 / (8.314 × 298))<br>
-              = exp(50000/2477.6) = exp(20.18) ≈ <strong>5.8 × 10⁸ เท่า</strong><br>
+              = exp((100 − 50) × <span class="frac"><span class="n">1000</span><span class="d">(8.314 × 298)</span></span>)<br>
+              = exp(<span class="frac"><span class="n">50000</span><span class="d">2477.6</span></span>) = exp(20.18) ≈ <strong>5.8 × 10⁸ เท่า</strong><br>
               ⇒ Ea ที่ต่างกัน 50 kJ/mol ทำให้ rate ต่างนับร้อยล้านเท่า!
             </div>
           </details>
@@ -9907,8 +9911,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              จำนวนครึ่งชีวิตที่ผ่านไป: 24/8 = 3<br>
-              เหลือ = 100 × (1/2)³ = 100/8 = <strong>12.5 g</strong>
+              จำนวนครึ่งชีวิตที่ผ่านไป: <span class="frac"><span class="n">24</span><span class="d">8</span></span> = 3<br>
+              เหลือ = 100 × (<span class="frac"><span class="n">1</span><span class="d">2</span></span>)³ = <span class="frac"><span class="n">100</span><span class="d">8</span></span> = <strong>12.5 g</strong>
             </div>
           </details>
         </div>
@@ -9920,8 +9924,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               สมการอินทิเกรตอันดับ 2: 1/[A] − 1/[A]₀ = kt<br>
-              1/[A] = 1/0.50 + (0.10)(100) = 2 + 10 = 12<br>
-              [A] = 1/12 ≈ <strong>0.083 M</strong>
+              1/[A] = <span class="frac"><span class="n">1</span><span class="d">0.50</span></span> + (0.10)(100) = 2 + 10 = 12<br>
+              [A] = <span class="frac"><span class="n">1</span><span class="d">12</span></span> ≈ <strong>0.083 M</strong>
             </div>
           </details>
         </div>
@@ -9934,9 +9938,9 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              ln(k₂/k₁) = (Ea/R)(1/T₁ − 1/T₂)<br>
+              ln(<span class="frac"><span class="n">k₂</span><span class="d">k₁</span></span>) = (<span class="frac"><span class="n">Ea</span><span class="d">R</span></span>)(1/T₁ − 1/T₂)<br>
               T₁ = 300 K, T₂ = 320 K<br>
-              ln(4) = (Ea/8.314)(1/300 − 1/320)<br>
+              ln(4) = (Ea/8.314)(<span class="frac"><span class="n">1</span><span class="d">300</span></span> − <span class="frac"><span class="n">1</span><span class="d">320</span></span>)<br>
               1.386 = (Ea/8.314)(2.083×10⁻⁴)<br>
               Ea ≈ <strong>55.3 kJ/mol</strong>
             </div>
@@ -9949,9 +9953,9 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              ln(k₂/k₁) = ln(2) = 0.693<br>
-              ln(k₂/k₁) = (Ea/R)(1/T₁ − 1/T₂) = (Ea/8.314)(1/298 − 1/308)<br>
-              1/298 − 1/308 = 1.089×10⁻⁴<br>
+              ln(<span class="frac"><span class="n">k₂</span><span class="d">k₁</span></span>) = ln(2) = 0.693<br>
+              ln(<span class="frac"><span class="n">k₂</span><span class="d">k₁</span></span>) = (<span class="frac"><span class="n">Ea</span><span class="d">R</span></span>)(1/T₁ − 1/T₂) = (Ea/8.314)(<span class="frac"><span class="n">1</span><span class="d">298</span></span> − <span class="frac"><span class="n">1</span><span class="d">308</span></span>)<br>
+              <span class="frac"><span class="n">1</span><span class="d">298</span></span> − <span class="frac"><span class="n">1</span><span class="d">308</span></span> = 1.089×10⁻⁴<br>
               0.693 = Ea × 1.310×10⁻⁵<br>
               Ea ≈ 52,900 J/mol = <strong>52.9 kJ/mol</strong>
             </div>
@@ -9978,8 +9982,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              จากสมการ Arrhenius: ln k = (−Ea/R)(1/T) + ln A<br>
-              slope = −Ea/R → Ea = −slope × R<br>
+              จากสมการ Arrhenius: ln k = (−<span class="frac"><span class="n">Ea</span><span class="d">R</span></span>)(1/T) + ln A<br>
+              slope = −<span class="frac"><span class="n">Ea</span><span class="d">R</span></span> → Ea = −slope × R<br>
               Ea = 5,000 × 8.314 = 41,570 J/mol = <strong>41.6 kJ/mol</strong><br>
               💡 จุดตัดแกน Y = ln A
             </div>
@@ -10159,19 +10163,19 @@ html, body { max-width:100%; overflow-x:hidden; }
           <details class="solution-details">
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
-              <strong>สูตร/แนวคิดที่ใช้:</strong> ln(k₂/k₁) = (Eₐ/R)(1/T₁ − 1/T₂)<br><br>
+              <strong>สูตร/แนวคิดที่ใช้:</strong> ln(<span class="frac"><span class="n">k₂</span><span class="d">k₁</span></span>) = (<span class="frac"><span class="n">Eₐ</span><span class="d">R</span></span>)(1/T₁ − 1/T₂)<br><br>
               <strong>ขั้นที่ 1 — แปลง T เป็น Kelvin:</strong><br>
               T₁ = 25 + 273 = 298 K<br>
               T₂ = 45 + 273 = 318 K<br><br>
               <strong>ขั้นที่ 2 — คำนวณด้านซ้าย:</strong><br>
-              ln(k₂/k₁) = ln(6.00×10⁻²/1.50×10⁻²) = ln(4.00) = <strong>1.386</strong><br><br>
+              ln(<span class="frac"><span class="n">k₂</span><span class="d">k₁</span></span>) = ln(6.00×10⁻²/1.50×10⁻²) = ln(4.00) = <strong>1.386</strong><br><br>
               <strong>ขั้นที่ 3 — คำนวณส่วน (1/T₁ − 1/T₂):</strong><br>
-              1/298 − 1/318 = (318 − 298)/(298 × 318)<br>
+              <span class="frac"><span class="n">1</span><span class="d">298</span></span> − <span class="frac"><span class="n">1</span><span class="d">318</span></span> = <span class="frac"><span class="n">(318 − 298)</span><span class="d">(298 × 318)</span></span><br>
               = 20 / 94,764 = <strong>2.111×10⁻⁴ K⁻¹</strong><br><br>
               <strong>ขั้นที่ 4 — แก้หา Eₐ:</strong><br>
               1.386 = (Eₐ / 8.314) × 2.111×10⁻⁴<br>
-              Eₐ = 1.386 × 8.314 / 2.111×10⁻⁴<br>
-              Eₐ = 11.52 / 2.111×10⁻⁴ = 54,600 J/mol<br>
+              Eₐ = 1.386 × <span class="frac"><span class="n">8.314</span><span class="d">2.111</span></span>×10⁻⁴<br>
+              Eₐ = <span class="frac"><span class="n">11.52</span><span class="d">2.111</span></span>×10⁻⁴ = 54,600 J/mol<br>
               <strong>Eₐ = 54.6 kJ/mol</strong><br><br>
               <strong>ตรวจสอบเหตุผล:</strong><br>
               k เพิ่ม 4 เท่าเมื่อ T เพิ่ม 20°C → Eₐ ปานกลาง (~55 kJ/mol) สมเหตุสมผล ✓<br>
@@ -10194,18 +10198,18 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>สูตร/แนวคิดที่ใช้:</strong> t½ = 0.693/k; [A] = [A]₀·e^(−kt)<br><br>
               <strong>ขั้นที่ 1 (ก) — หา k:</strong><br>
-              k = 0.693 / t½ = 0.693 / 8.0 = <strong>0.0866 day⁻¹</strong><br><br>
+              k = 0.693 / t½ = <span class="frac"><span class="n">0.693</span><span class="d">8.0</span></span> = <strong>0.0866 day⁻¹</strong><br><br>
               <strong>ขั้นที่ 2 (ข) — กัมมันตภาพหลัง 24 วัน:</strong><br>
-              t = 24 วัน = 3 × t½ (24/8 = 3 ครึ่งชีวิต)<br>
-              A = A₀ × (½)³ = 400 × (1/8) = <strong>50.0 MBq</strong><br>
+              t = 24 วัน = 3 × t½ (<span class="frac"><span class="n">24</span><span class="d">8</span></span> = 3 ครึ่งชีวิต)<br>
+              A = A₀ × (½)³ = 400 × (<span class="frac"><span class="n">1</span><span class="d">8</span></span>) = <strong>50.0 MBq</strong><br>
               (หรือ A = 400 × e^(−0.0866 × 24) = 400 × e^(−2.078) = 400 × 0.125 = 50.0 MBq ✓)<br><br>
               <strong>ขั้นที่ 3 (ค) — เวลาให้เหลือ 25 MBq:</strong><br>
               ln(A/A₀) = −kt<br>
-              ln(25/400) = −0.0866 × t<br>
+              ln(<span class="frac"><span class="n">25</span><span class="d">400</span></span>) = −0.0866 × t<br>
               ln(0.0625) = −0.0866t<br>
               −2.773 = −0.0866t<br>
-              t = 2.773 / 0.0866 = <strong>32.0 วัน</strong><br>
-              (ตรวจสอบ: 25 = 400 × (½)^(t/8) → (½)^(t/8) = 1/16 → t/8 = 4 → t = 32 วัน ✓)<br><br>
+              t = <span class="frac"><span class="n">2.773</span><span class="d">0.0866</span></span> = <strong>32.0 วัน</strong><br>
+              (ตรวจสอบ: 25 = 400 × (½)^(t/8) → (½)^(t/8) = <span class="frac"><span class="n">1</span><span class="d">16</span></span> → t/8 = 4 → t = 32 วัน ✓)<br><br>
               💡 แพทย์ใช้ข้อมูลนี้กำหนดระยะแยกโรค (isolation period) ของผู้ป่วย
             </div>
           </details>
@@ -10224,14 +10228,14 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>สูตร/แนวคิดที่ใช้:</strong> t½ = 0.693/k; ln([A]/[A]₀) = −kt<br><br>
               <strong>ขั้นที่ 1 (ก) — t½:</strong><br>
-              t½ = 0.693 / 0.0231 = <strong>30.0 min</strong><br><br>
+              t½ = <span class="frac"><span class="n">0.693</span><span class="d">0.0231</span></span> = <strong>30.0 min</strong><br><br>
               <strong>ขั้นที่ 2 (ข) — เวลาที่ [A] เหลือ 12.5%:</strong><br>
-              12.5% = 1/8 = (1/2)³ → ผ่านไป 3 ครึ่งชีวิต<br>
+              12.5% = <span class="frac"><span class="n">1</span><span class="d">8</span></span> = (<span class="frac"><span class="n">1</span><span class="d">2</span></span>)³ → ผ่านไป 3 ครึ่งชีวิต<br>
               t = 3 × 30.0 = <strong>90.0 min</strong><br>
               ตรวจด้วยสมการ: ln(0.125) = −0.0231t → −2.079 = −0.0231t → t = 90.0 min ✓<br><br>
               <strong>ขั้นที่ 3 (ค) — t½ ใหม่เมื่อ k เพิ่ม 2 เท่า:</strong><br>
               k ใหม่ = 0.0462 min⁻¹ = 2 × k เดิม<br>
-              t½ ใหม่ = 0.693 / 0.0462 = <strong>15.0 min</strong><br>
+              t½ ใหม่ = <span class="frac"><span class="n">0.693</span><span class="d">0.0462</span></span> = <strong>15.0 min</strong><br>
               ⇒ k เพิ่ม 2× → t½ ลดครึ่ง (สัมพันธ์ผกผัน) ✓<br><br>
               💡 สำหรับ first-order เท่านั้นที่ t½ คงที่ (ไม่ขึ้นกับ [A]₀) —<br>
               zero-order: t½ = [A]₀/2k (ขึ้นกับ [A]₀); second-order: t½ = 1/(k[A]₀)
@@ -10248,7 +10252,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           • <strong>อัตรา:</strong> rate = −(1/a)Δ[A]/Δt = (1/c)Δ[C]/Δt<br>
           • <strong>กฎอัตรา:</strong> rate = k[A]ᵐ[B]ⁿ — <em>m, n หาได้จากการทดลองเท่านั้น</em><br>
           • <strong>ครึ่งชีวิตอันดับ 1:</strong> t½ = 0.693/k (คงที่ ไม่ขึ้นกับ [A]₀)<br>
-          • <strong>อาร์เรเนียส:</strong> ln(k₂/k₁) = (Eₐ/R)(1/T₁ − 1/T₂)<br>
+          • <strong>อาร์เรเนียส:</strong> ln(<span class="frac"><span class="n">k₂</span><span class="d">k₁</span></span>) = (<span class="frac"><span class="n">Eₐ</span><span class="d">R</span></span>)(1/T₁ − 1/T₂)<br>
           • <strong>4 ปัจจัย:</strong> ความเข้มข้น · พื้นที่ผิว · อุณหภูมิ · ตัวเร่ง<br>
           • <strong>ตัวเร่ง:</strong> ลด Eₐ ทั้ง 2 ทิศทาง · ไม่เปลี่ยน ΔH, K, ตำแหน่งสมดุล
         </div>
@@ -10479,7 +10483,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         <p>ความสัมพันธ์ระหว่าง K กับอุณหภูมิ ใช้เพื่อทำนายค่า K ที่อุณหภูมิอื่น</p>
         <div class="formula-box">
           <div class="formula-label">van't Hoff equation</div>
-          ln(K₂/K₁) = −(ΔH°/R)(1/T₂ − 1/T₁)<br>
+          ln(<span class="frac"><span class="n">K₂</span><span class="d">K₁</span></span>) = −(ΔH°/R)(1/T₂ − 1/T₁)<br>
           ปฏิกิริยาคาย (ΔH° &lt; 0): T ↑ → K ↓<br>
           ปฏิกิริยาดูด (ΔH° &gt; 0): T ↑ → K ↑
         </div>
@@ -10590,8 +10594,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               PCl₅(g) ⇌ PCl₃(g) + Cl₂(g)<br>
-              Kc = [PCl₃][Cl₂]/[PCl₅] = (0.20)(0.30)/1.5<br>
-              Kc = 0.060/1.5 = <strong>0.040</strong>
+              Kc = [PCl₃][Cl₂]/[PCl₅] = <span class="frac"><span class="n">(0.20)(0.30)</span><span class="d">1.5</span></span><br>
+              Kc = <span class="frac"><span class="n">0.060</span><span class="d">1.5</span></span> = <strong>0.040</strong>
             </div>
           </details>
         </div>
@@ -10604,7 +10608,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               Kc = [SO₃]² / ([SO₂]²[O₂])<br>
               Kc = (2.4)² / ((0.10)²(0.30))<br>
-              Kc = 5.76 / 0.003 = <strong>1.92 × 10³ M⁻¹</strong><br>
+              Kc = <span class="frac"><span class="n">5.76</span><span class="d">0.003</span></span> = <strong>1.92 × 10³ M⁻¹</strong><br>
               💡 K ใหญ่ → สมดุลเอียงไปทางผลิตภัณฑ์
             </div>
           </details>
@@ -10618,7 +10622,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               สูตร: Kp = Kc(RT)^Δn โดย Δn = (2) − (1+3) = −2<br>
               RT = 0.0821 × 500 = 41.05<br>
-              (RT)^(−2) = 1/(41.05)² = 1/1685 ≈ 5.93×10⁻⁴<br>
+              (RT)^(−2) = <span class="frac"><span class="n">1</span><span class="d">(41.05)</span></span>² = <span class="frac"><span class="n">1</span><span class="d">1685</span></span> ≈ 5.93×10⁻⁴<br>
               Kp = 5.0×10⁻² × 5.93×10⁻⁴ ≈ <strong>2.97×10⁻⁵</strong>
             </div>
           </details>
@@ -10647,7 +10651,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               เมื่อกลับสมการ → K' = 1/K<br>
-              K' = 1/4.0 = <strong>0.25</strong><br>
+              K' = <span class="frac"><span class="n">1</span><span class="d">4.0</span></span> = <strong>0.25</strong><br>
               💡 ถ้าเดิม K&gt;1 (เอียงผลิตภัณฑ์) เมื่อกลับสมการ K&lt;1 (เอียงสารตั้งต้น)
             </div>
           </details>
@@ -10700,7 +10704,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               Q = [NH₃]² / ([N₂][H₂]³) = (1.0)² / ((1.0)(2.0)³)<br>
-              Q = 1.0/8.0 = 0.125<br>
+              Q = <span class="frac"><span class="n">1.0</span><span class="d">8.0</span></span> = 0.125<br>
               Q (0.125) &lt; K (0.50) → ผลิตภัณฑ์น้อยเกิน<br>
               ⇒ <strong>เลื่อนไปข้างหน้า</strong> (สร้าง NH₃ เพิ่ม) จนกว่า Q = K
             </div>
@@ -10713,7 +10717,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              Q = [N₂O₄] / [NO₂]² = 2.0/(0.50)² = 2.0/0.25 = <strong>8.0</strong><br>
+              Q = [N₂O₄] / [NO₂]² = <span class="frac"><span class="n">2.0</span><span class="d">(0.50)</span></span>² = <span class="frac"><span class="n">2.0</span><span class="d">0.25</span></span> = <strong>8.0</strong><br>
               Q (8.0) &gt; K (4.0) → ผลิตภัณฑ์มากเกิน<br>
               ⇒ <strong>เลื่อนย้อนกลับ</strong> (สลาย N₂O₄ → NO₂)
             </div>
@@ -10726,7 +10730,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              Q = [C] / ([A][B]) = 0.10 / (0.10×0.10) = <strong>10</strong><br>
+              Q = [C] / ([A][B]) = <span class="frac"><span class="n">0.10</span><span class="d">(0.10×0.10)</span></span> = <strong>10</strong><br>
               Q = K = 10 → <strong>อยู่ที่สมดุลแล้ว</strong> ไม่เลื่อนสุทธิ<br>
               💡 บางครั้ง "บังเอิญ" ผสมสารแล้วเข้าสมดุลทันทีโดยไม่ต้องรอ
             </div>
@@ -10756,10 +10760,10 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               N₂ + 3H₂ ⇌ 2NH₃<br>
               I: [N₂]=1.00, [H₂]=1.00, [NH₃]=0<br>
-              ที่สมดุล [NH₃]=1.00/2.00=0.50 M<br>
+              ที่สมดุล [NH₃]=<span class="frac"><span class="n">1.00</span><span class="d">2.00</span></span>=0.50 M<br>
               C: −0.25, −0.75, +0.50<br>
               E: 0.75, 0.25, 0.50<br>
-              Kc = (0.50)²/((0.75)(0.25)³) = 0.25/0.01172<br>
+              Kc = (0.50)²/((0.75)(0.25)³) = <span class="frac"><span class="n">0.25</span><span class="d">0.01172</span></span><br>
               <strong>Kc ≈ 21.3 M⁻²</strong>
             </div>
           </details>
@@ -10809,7 +10813,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               C: −x, +2x<br>
               E: 1.0−x, 2x<br>
               Kc = (2x)² / (1.0−x) = 0.10 → 4x² + 0.10x − 0.10 = 0<br>
-              x = (−0.10 + √(0.01 + 1.6)) / 8 = (−0.10 + 1.269)/8 ≈ 0.146<br>
+              x = (−0.10 + √<span class="frac"><span class="n">(0.01 + 1.6))</span><span class="d">8</span></span> = (−0.10 + 1.269)/8 ≈ 0.146<br>
               [A] = 1.0 − 0.146 = <strong>0.854 M</strong>; [B] = 2×0.146 = <strong>0.292 M</strong>
             </div>
           </details>
@@ -10823,10 +10827,10 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              Kc = (2.0×1.0)/(4.0×3.0) = 1/6<br>
+              Kc = <span class="frac"><span class="n">(2.0×1.0)</span><span class="d">(4.0×3.0)</span></span> = <span class="frac"><span class="n">1</span><span class="d">6</span></span><br>
               หลังเติม: [A]=5.0, [B]=3.0, [C]=2.0, [D]=1.0<br>
-              Q = (2.0×1.0)/(5.0×3.0) = 2/15 ≈ 0.133 &lt; K → ไปข้างหน้า<br>
-              ICE: (2+x)(1+x)/((5−x)(3−x)) = 1/6 → 5x²+26x−3 = 0 → x ≈ 0.114<br>
+              Q = <span class="frac"><span class="n">(2.0×1.0)</span><span class="d">(5.0×3.0)</span></span> = <span class="frac"><span class="n">2</span><span class="d">15</span></span> ≈ 0.133 &lt; K → ไปข้างหน้า<br>
+              ICE: (2+x)(1+x)/((5−x)(3−x)) = <span class="frac"><span class="n">1</span><span class="d">6</span></span> → 5x²+26x−3 = 0 → x ≈ 0.114<br>
               [A]≈4.89, [B]≈2.89, [C]≈<strong>2.11</strong>, [D]≈<strong>1.11</strong>
             </div>
           </details>
@@ -10881,11 +10885,11 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              ln(K₂/K₁) = −(ΔH°/R)(1/T₂ − 1/T₁)<br>
-              = −(57000/8.314)(1/350 − 1/298)<br>
+              ln(<span class="frac"><span class="n">K₂</span><span class="d">K₁</span></span>) = −(ΔH°/R)(1/T₂ − 1/T₁)<br>
+              = −(<span class="frac"><span class="n">57000</span><span class="d">8.314</span></span>)(<span class="frac"><span class="n">1</span><span class="d">350</span></span> − <span class="frac"><span class="n">1</span><span class="d">298</span></span>)<br>
               = −6856 × (2.857×10⁻³ − 3.356×10⁻³)<br>
               = −6856 × (−4.99×10⁻⁴) = 3.421<br>
-              K₂/K₁ = e^3.421 ≈ 30.6<br>
+              <span class="frac"><span class="n">K₂</span><span class="d">K₁</span></span> = e^3.421 ≈ 30.6<br>
               K₂ = 0.15 × 30.6 ≈ <strong>4.59</strong><br>
               💡 ดูดความร้อน → K เพิ่มเมื่อ T เพิ่ม ✓
             </div>
@@ -11022,7 +11026,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               [H₂] = [I₂] = 0.200 − 0.156 = <strong>0.0441 M</strong><br>
               [HI] = 2 × 0.156 = <strong>0.312 M</strong><br><br>
               <strong>ตรวจสอบ:</strong><br>
-              Kc = (0.312)² / (0.0441)² = 0.0973 / 0.00195 = <strong>49.9 ≈ 50.0 ✓</strong>
+              Kc = (0.312)² / (0.0441)² = <span class="frac"><span class="n">0.0973</span><span class="d">0.00195</span></span> = <strong>49.9 ≈ 50.0 ✓</strong>
             </div>
           </details>
         </div>
@@ -11041,8 +11045,8 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>ขั้นที่ 1 (ก) — คำนวณ Q:</strong><br>
               Q = [NH₃]² / ([N₂][H₂]³)<br>
               = (0.100)² / (0.500 × (0.800)³)<br>
-              = 0.0100 / (0.500 × 0.512)<br>
-              = 0.0100 / 0.256 = <strong>3.9×10⁻²</strong><br><br>
+              = <span class="frac"><span class="n">0.0100</span><span class="d">(0.500 × 0.512)</span></span><br>
+              = <span class="frac"><span class="n">0.0100</span><span class="d">0.256</span></span> = <strong>3.9×10⁻²</strong><br><br>
               <strong>ขั้นที่ 2 (ข) — เปรียบกับ Kc:</strong><br>
               Q = 3.9×10⁻² &nbsp;&lt;&nbsp; Kc = 6.0×10⁻²<br>
               Q &lt; K → ระบบมีผลิตภัณฑ์น้อยกว่าสมดุล<br>
@@ -11459,7 +11463,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           กรณีพิเศษ: ถ้า [A⁻] = [HA] → log 1 = 0 → <strong>pH = pKa</strong><br>
           <br>
           <strong>ตัวอย่าง:</strong> บัฟเฟอร์ CH₃COOH 0.10 M + CH₃COONa 0.20 M (pKa = 4.74)<br>
-          pH = 4.74 + log(0.20/0.10) = 4.74 + 0.30 = <strong>5.04</strong>
+          pH = 4.74 + log(<span class="frac"><span class="n">0.20</span><span class="d">0.10</span></span>) = 4.74 + 0.30 = <strong>5.04</strong>
         </div>
         <div class="tip-box">💡 <strong>บัฟเฟอร์ในเลือดมนุษย์:</strong> H₂CO₃ / HCO₃⁻ (pKa ≈ 6.1) ควบคุม pH ของเลือดให้อยู่ในช่วง 7.35–7.45 · pH &lt; 7.35 = <em>acidosis</em> · pH &gt; 7.45 = <em>alkalosis</em> · นอกช่วง 6.8–7.8 อาจถึงแก่ชีวิต</div>
       </div>
@@ -11556,15 +11560,15 @@ html, body { max-width:100%; overflow-x:hidden; }
           <div class="formula-label">โจทย์: NaOH 1.00 M ปริมาตร 30.0 mL ทำให้สารละลาย HCl 60.0 mL สะเทินพอดี · จงหา M_HCl</div>
           ปฏิกิริยา 1:1 → ใช้สูตร M_a × V_a = M_b × V_b<br>
           M_HCl × 60.0 = 1.00 × 30.0<br>
-          M_HCl = 30.0 / 60.0 = <strong>0.500 M</strong>
+          M_HCl = <span class="frac"><span class="n">30.0</span><span class="d">60.0</span></span> = <strong>0.500 M</strong>
         </div>
         <h4>ตัวอย่างที่ 2 — อัตราส่วน <em>ไม่</em> เท่ากับ 1:1</h4>
         <div class="formula-box">
           <div class="formula-label">โจทย์: ใช้ NaOH 0.500 M ไทเทรต H₂SO₄ 25.0 mL หมดที่ 40.0 mL จงหา M_H₂SO₄</div>
           สมการ: H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O (อัตราส่วน 1:2)<br>
-          mol NaOH = 0.500 × (40.0/1000) = 0.0200 mol<br>
-          mol H₂SO₄ = (1/2) × mol NaOH = 0.0100 mol<br>
-          M_H₂SO₄ = 0.0100 / (25.0/1000) = <strong>0.400 M</strong>
+          mol NaOH = 0.500 × (<span class="frac"><span class="n">40.0</span><span class="d">1000</span></span>) = 0.0200 mol<br>
+          mol H₂SO₄ = (<span class="frac"><span class="n">1</span><span class="d">2</span></span>) × mol NaOH = 0.0100 mol<br>
+          M_H₂SO₄ = 0.0100 / (<span class="frac"><span class="n">25.0</span><span class="d">1000</span></span>) = <strong>0.400 M</strong>
         </div>
         <div class="note-box">⚠️ <strong>ข้อควรระวัง:</strong> สูตร M₁V₁ = M₂V₂ ใช้ได้เฉพาะเมื่อสารทำปฏิกิริยาในอัตราส่วน 1:1 เท่านั้น · ถ้าไม่ใช่ 1:1 ต้องใช้สโตอิคิโอเมตรีจากสัมประสิทธิ์ในสมการเคมีที่ดุลแล้ว</div>
         <h4>ลักษณะกราฟไทเทรตและการเลือกอินดิเคเตอร์</h4>
@@ -11922,7 +11926,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               [H⁺] ≈ √(Ka × C) = √(6.8×10⁻⁴ × 0.20) = √(1.36×10⁻⁴) = 1.17×10⁻² M<br>
-              %ionization = ([H⁺] / C) × 100% = (0.0117/0.20) × 100% = <strong>5.83%</strong><br>
+              %ionization = ([H⁺] / C) × 100% = (<span class="frac"><span class="n">0.0117</span><span class="d">0.20</span></span>) × 100% = <strong>5.83%</strong><br>
               💡 ยิ่งเจือจาง %ionization ยิ่งสูง (Ostwald's dilution law)
             </div>
           </details>
@@ -11994,7 +11998,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               ใช้สมการ Henderson–Hasselbalch:<br>
               pH = pKa + log([A⁻]/[HA])<br>
-              = 4.74 + log(0.10/0.10) = 4.74 + log(1) = 4.74 + 0<br>
+              = 4.74 + log(<span class="frac"><span class="n">0.10</span><span class="d">0.10</span></span>) = 4.74 + log(1) = 4.74 + 0<br>
               <strong>pH = 4.74</strong><br>
               💡 บัฟเฟอร์ที่ [A⁻] = [HA] → pH = pKa เสมอ
             </div>
@@ -12009,7 +12013,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               คู่คอนจูเกต: NH₄⁺ (กรด) / NH₃ (เบส)<br>
               pKa(NH₄⁺) = 14 − pKb(NH₃) = 14 − 4.74 = 9.26<br>
-              pH = pKa + log([NH₃]/[NH₄⁺]) = 9.26 + log(0.20/0.10)<br>
+              pH = pKa + log([NH₃]/[NH₄⁺]) = 9.26 + log(<span class="frac"><span class="n">0.20</span><span class="d">0.10</span></span>)<br>
               = 9.26 + log(2) = 9.26 + 0.30 = <strong>9.56</strong>
             </div>
           </details>
@@ -12026,7 +12030,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               HCl + NaOH → NaCl + H₂O (1:1)<br>
               M_a × V_a = M_b × V_b<br>
               0.20 × 25.0 = 0.10 × V_b<br>
-              V_b = 5.0/0.10 = <strong>50.0 mL</strong>
+              V_b = <span class="frac"><span class="n">5.0</span><span class="d">0.10</span></span> = <strong>50.0 mL</strong>
             </div>
           </details>
         </div>
@@ -12067,7 +12071,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O (อัตราส่วน 1:2)<br>
               mol NaOH = 0.10 × 0.0500 = 5.0×10⁻³ mol<br>
-              mol H₂SO₄ = (1/2) × mol NaOH = 2.5×10⁻³ mol<br>
+              mol H₂SO₄ = (<span class="frac"><span class="n">1</span><span class="d">2</span></span>) × mol NaOH = 2.5×10⁻³ mol<br>
               มวล H₂SO₄ = 2.5×10⁻³ × 98 = <strong>0.245 g</strong>
             </div>
           </details>
@@ -12150,14 +12154,14 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>สูตร/แนวคิดที่ใช้:</strong> Henderson-Hasselbalch: pH = pKa + log([A⁻]/[HA])<br><br>
               <strong>ขั้นที่ 1 (ก) — pH ของ buffer เริ่มต้น:</strong><br>
               [CH₃COOH] = 0.100 M, [CH₃COO⁻] = 0.100 M<br>
-              pH = 4.74 + log(0.100 / 0.100) = 4.74 + log(1.00) = 4.74 + 0 = <strong>4.74</strong><br>
+              pH = 4.74 + log(<span class="frac"><span class="n">0.100</span><span class="d">0.100</span></span>) = 4.74 + log(1.00) = 4.74 + 0 = <strong>4.74</strong><br>
               (เมื่อ [A⁻] = [HA] → pH = pKa เสมอ)<br><br>
               <strong>ขั้นที่ 2 (ข) — เติม HCl 0.0100 mol:</strong><br>
               HCl + CH₃COO⁻ → CH₃COOH + Cl⁻<br>
               CH₃COO⁻ เหลือ = 0.100 − 0.0100 = <strong>0.0900 mol</strong><br>
               CH₃COOH เหลือ = 0.100 + 0.0100 = <strong>0.110 mol</strong><br><br>
               <strong>ขั้นที่ 3 — pH ใหม่:</strong><br>
-              pH = 4.74 + log(0.0900 / 0.110)<br>
+              pH = 4.74 + log(<span class="frac"><span class="n">0.0900</span><span class="d">0.110</span></span>)<br>
               = 4.74 + log(0.818)<br>
               = 4.74 + (−0.087)<br>
               = <strong>4.65</strong><br><br>
@@ -12485,8 +12489,8 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="formula-box">
           <div class="formula-label">Zn + Cu²⁺ → Zn²⁺ + Cu, E°cell = +1.10 V · ที่ [Zn²⁺] = 1.0 M, [Cu²⁺] = 0.010 M</div>
           ขั้น 1: หา n → 2 (ดูจาก Zn → Zn²⁺ + 2e⁻)<br>
-          ขั้น 2: เขียน Q = [Zn²⁺] / [Cu²⁺] = 1.0 / 0.010 = 100<br>
-          ขั้น 3: E = 1.10 − (0.0592/2) × log(100)<br>
+          ขั้น 2: เขียน Q = [Zn²⁺] / [Cu²⁺] = <span class="frac"><span class="n">1.0</span><span class="d">0.010</span></span> = 100<br>
+          ขั้น 3: E = 1.10 − (<span class="frac"><span class="n">0.0592</span><span class="d">2</span></span>) × log(100)<br>
           ขั้น 4: E = 1.10 − 0.0296 × 2 = 1.10 − 0.0592 ≈ <strong>1.04 V</strong>
         </div>
         <div class="tip-box">💡 <strong>เข้าใจง่าย:</strong> ถ้า [ผลิตภัณฑ์] มากขึ้น → Q ใหญ่ → log Q บวก → E ลดลง (ระบบเข้าใกล้สมดุล) · ที่สมดุล Q = K → E = 0</div>
@@ -12578,7 +12582,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="formula-box">
           <div class="formula-label">สูตรสำคัญ</div>
           <strong>Q = I × t</strong>   (Q = ประจุ คูลอมบ์, I = กระแส แอมป์, t = เวลา วินาที)<br>
-          <strong>mol e⁻ = Q / F</strong>   (F = 96,485 C/mol)<br>
+          <strong>mol e⁻ = <span class="frac"><span class="n">Q</span><span class="d">F</span></span></strong>   (F = 96,485 C/mol)<br>
           <strong>m = (M × I × t) / (n × F)</strong>   (m = มวล กรัม, M = มวลโมล, n = e⁻ ต่อหนึ่งไอออนของผลิตภัณฑ์)
         </div>
         <h4>ตัวอย่างทีละขั้น: ชุบเงิน Ag</h4>
@@ -12898,7 +12902,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               log K = (n · E°cell) / 0.0592<br>
-              = (2 × 0.46) / 0.0592 = 15.54<br>
+              = <span class="frac"><span class="n">(2 × 0.46)</span><span class="d">0.0592</span></span> = 15.54<br>
               <strong>K = 10^15.54 ≈ 3.5×10¹⁵</strong><br>
               💡 K ใหญ่มาก = ปฏิกิริยาเอียงไปทางผลิตภัณฑ์อย่างมาก
             </div>
@@ -12941,8 +12945,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               สมการ Nernst: E = E° − (0.0592/n) log Q<br>
-              Q = [Zn²⁺]/[Cu²⁺] = 1.0/0.10 = 10<br>
-              E = 1.10 − (0.0592/2) log 10<br>
+              Q = [Zn²⁺]/[Cu²⁺] = <span class="frac"><span class="n">1.0</span><span class="d">0.10</span></span> = 10<br>
+              E = 1.10 − (<span class="frac"><span class="n">0.0592</span><span class="d">2</span></span>) log 10<br>
               = 1.10 − 0.0296(1) = <strong>1.07 V</strong><br>
               💡 ลด [Cu²⁺] → Q เพิ่ม → E ลดลงเล็กน้อย
             </div>
@@ -12955,7 +12959,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              Q = 0.010/1.0 = 0.010<br>
+              Q = <span class="frac"><span class="n">0.010</span><span class="d">1.0</span></span> = 0.010<br>
               E = 1.10 − 0.0296 × log(0.010)<br>
               = 1.10 − 0.0296 × (−2) = 1.10 + 0.0592 = <strong>1.16 V</strong><br>
               💡 ลด [Zn²⁺] → Q ลด → E เพิ่ม (เกิดผลิตภัณฑ์ Zn²⁺ ได้ดีขึ้น)
@@ -12969,8 +12973,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
-              0 = 1.10 − (0.0592/2) log Q<br>
-              log Q = 1.10/0.0296 = 37.16<br>
+              0 = 1.10 − (<span class="frac"><span class="n">0.0592</span><span class="d">2</span></span>) log Q<br>
+              log Q = <span class="frac"><span class="n">1.10</span><span class="d">0.0296</span></span> = 37.16<br>
               <strong>Q = 10³⁷</strong> — ใหญ่มหาศาล<br>
               💡 แสดงว่า K มหาศาล → เซลล์ทำงานต่อเนื่องนานก่อนดับ (จริงดับเพราะสารหมดก่อน)
             </div>
@@ -12985,7 +12989,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               ใช้ glass electrode ที่ไวต่อ [H⁺]<br>
               จากสมการ Nernst สำหรับครึ่งปฏิกิริยา 2H⁺ + 2e⁻ → H₂:<br>
-              E = E° − (0.0592/2) log(1/[H⁺]²) = E° + 0.0592 log [H⁺]<br>
+              E = E° − (<span class="frac"><span class="n">0.0592</span><span class="d">2</span></span>) log(1/[H⁺]²) = E° + 0.0592 log [H⁺]<br>
               E = E° − 0.0592 × <strong>pH</strong><br>
               ⇒ E แปรผันตรงกับ pH → วัด E ก็อ่าน pH ได้
             </div>
@@ -13001,8 +13005,8 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div class="solution-content">
               <strong>วิธีคิด:</strong><br>
               Q = I × t = 2.0 × (30 × 60) = 3,600 C<br>
-              mol e⁻ = Q/F = 3,600/96,485 = 0.0373 mol<br>
-              Cu²⁺ + 2e⁻ → Cu → mol Cu = 0.0373/2 = 0.0187 mol<br>
+              mol e⁻ = <span class="frac"><span class="n">Q</span><span class="d">F</span></span> = 3,600/96,485 = 0.0373 mol<br>
+              Cu²⁺ + 2e⁻ → Cu → mol Cu = <span class="frac"><span class="n">0.0373</span><span class="d">2</span></span> = 0.0187 mol<br>
               มวล Cu = 0.0187 × 63.5 = <strong>1.19 g</strong>
             </div>
           </details>
@@ -13016,7 +13020,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <strong>วิธีคิด:</strong><br>
               Q = 5.0 × (2 × 3600) = 36,000 C<br>
               mol e⁻ = 36,000/96,485 = 0.373 mol<br>
-              mol Al = 0.373/3 = 0.124 mol<br>
+              mol Al = <span class="frac"><span class="n">0.373</span><span class="d">3</span></span> = 0.124 mol<br>
               มวล Al = 0.124 × 27 = <strong>3.36 g</strong>
             </div>
           </details>
@@ -13157,7 +13161,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               Zn + Cu²⁺ → Zn²⁺ + Cu<br>
               Q = [Zn²⁺] / [Cu²⁺] = 0.100 / (1.00×10⁻³) = <strong>100</strong><br><br>
               <strong>ขั้นที่ 2 — แทนในสมการเนิร์นสต์:</strong><br>
-              E = 1.10 − (0.0592 / 2) × log(100)<br>
+              E = 1.10 − (<span class="frac"><span class="n">0.0592</span><span class="d">2</span></span>) × log(100)<br>
               = 1.10 − (0.0296) × 2.00<br>
               = 1.10 − 0.0592<br>
               = <strong>1.04 V</strong><br><br>
@@ -13179,18 +13183,18 @@ html, body { max-width:100%; overflow-x:hidden; }
           <details class="solution-details">
             <summary>เปิด/ปิด วิธีทำ</summary>
             <div class="solution-content">
-              <strong>สูตร/แนวคิดที่ใช้:</strong> Q = It; mol e⁻ = Q/F; mol metal = mol e⁻ / n<br><br>
+              <strong>สูตร/แนวคิดที่ใช้:</strong> Q = It; mol e⁻ = <span class="frac"><span class="n">Q</span><span class="d">F</span></span>; mol metal = mol e⁻ / n<br><br>
               <strong>ขั้นที่ 1 (ก) — ประจุรวม:</strong><br>
               t = 30.0 min × 60 s/min = 1800 s<br>
               Q = I × t = 2.50 A × 1800 s = <strong>4500 C</strong><br><br>
               <strong>ขั้นที่ 2 (ข) — mol e⁻:</strong><br>
-              mol e⁻ = Q / F = 4500 / 96,485 = <strong>0.04663 mol</strong><br><br>
+              mol e⁻ = <span class="frac"><span class="n">Q</span><span class="d">F</span></span> = 4500 / 96,485 = <strong>0.04663 mol</strong><br><br>
               <strong>ขั้นที่ 3 (ค) — mol Cu และมวล Cu:</strong><br>
               Cu²⁺ + 2e⁻ → Cu → n = 2<br>
-              mol Cu = mol e⁻ / 2 = 0.04663 / 2 = 0.02332 mol<br>
+              mol Cu = mol e⁻ / 2 = <span class="frac"><span class="n">0.04663</span><span class="d">2</span></span> = 0.02332 mol<br>
               m(Cu) = 0.02332 × 63.55 = <strong>1.48 g</strong><br><br>
               <strong>ตรวจสอบเร็ว:</strong><br>
-              สูตรตรง: m = MIt/(nF) = (63.55 × 2.50 × 1800)/(2 × 96485)<br>
+              สูตรตรง: m = <span class="frac"><span class="n">MIt</span><span class="d">(nF)</span></span> = <span class="frac"><span class="n">(63.55 × 2.50 × 1800)</span><span class="d">(2 × 96485)</span></span><br>
               = 285,975 / 192,970 = 1.48 g ✓<br>
               💡 ใช้คำนวณเวลาและกระแสที่ต้องการในการชุบโลหะให้ได้ความหนาตามต้องการ
             </div>
@@ -13221,12 +13225,12 @@ html, body { max-width:100%; overflow-x:hidden; }
               ขวา: +2 + 5(+3) + 0 = 2+15 = +17 ✓<br><br>
               <strong>ขั้นที่ 3 (ข) — มวล KMnO₄:</strong><br>
               M(FeSO₄) = 55.85 + 32.07 + 4(16.00) = <strong>151.92 g/mol</strong><br>
-              n(FeSO₄) = 28.0 / 151.92 = 0.1843 mol = n(Fe²⁺)<br><br>
+              n(FeSO₄) = <span class="frac"><span class="n">28.0</span><span class="d">151.92</span></span> = 0.1843 mol = n(Fe²⁺)<br><br>
               อัตราส่วน MnO₄⁻ : Fe²⁺ = 1 : 5<br>
-              n(KMnO₄) = 0.1843 / 5 = 0.03686 mol<br><br>
+              n(KMnO₄) = <span class="frac"><span class="n">0.1843</span><span class="d">5</span></span> = 0.03686 mol<br><br>
               M(KMnO₄) = 39.10 + 54.94 + 4(16.00) = <strong>158.04 g/mol</strong><br>
               m(KMnO₄) = 0.03686 × 158.04 = <strong>5.83 g</strong><br><br>
-              <strong>ตรวจสอบเร็ว:</strong> 28/152 ÷ 5 × 158 ≈ 0.184/5 × 158 ≈ 5.82 g ✓
+              <strong>ตรวจสอบเร็ว:</strong> <span class="frac"><span class="n">28</span><span class="d">152</span></span> ÷ 5 × 158 ≈ <span class="frac"><span class="n">0.184</span><span class="d">5</span></span> × 158 ≈ 5.82 g ✓
             </div>
           </details>
         </div>
@@ -13243,7 +13247,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           • <strong>E°cell = E°cathode − E°anode</strong><br>
           • <strong>ΔG° = −nFE°cell</strong> · E° &gt; 0 → ΔG° &lt; 0 → spontaneous · K &gt; 1<br>
           • <strong>เนิร์นสต์:</strong> E = E° − (0.0592/n) log Q (25°C)<br>
-          • <strong>ฟาราเดย์:</strong> Q = It · mol e⁻ = Q/F · m = MIt/(nF) · F = 96,485 C/mol<br>
+          • <strong>ฟาราเดย์:</strong> Q = It · mol e⁻ = <span class="frac"><span class="n">Q</span><span class="d">F</span></span> · m = <span class="frac"><span class="n">MIt</span><span class="d">(nF)</span></span> · F = 96,485 C/mol<br>
           • <strong>Salt bridge:</strong> เคลื่อนที่ของ <em>ไอออน</em> ไม่ใช่อิเล็กตรอน
         </div>
       </div>
@@ -14049,7 +14053,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               %yield = (14.1 g / 17.6 g) × 100% = <strong>80.1%</strong><br>
               เหตุที่ %yield &lt; 100%: ปฏิกิริยาผันกลับได้ (equilibrium), สูญเสียระหว่างแยก product<br><br>
               <strong>ขั้นที่ 4 — คำนวณ Atom Economy:</strong><br>
-              AE = 88.11 / (60.05 + 46.07) × 100% = 88.11 / 106.12 × 100% = <strong>83.0%</strong><br>
+              AE = <span class="frac"><span class="n">88.11</span><span class="d">(60.05 + 46.07)</span></span> × 100% = <span class="frac"><span class="n">88.11</span><span class="d">106.12</span></span> × 100% = <strong>83.0%</strong><br>
               by-product H₂O (18.02 g/mol) คิดเป็น 17.0% ที่ไม่ได้นำไปใช้<br><br>
               <strong>ตรวจสอบเร็ว:</strong> ตรวจ atom balance: C₂H₄O₂ + C₂H₆O → C₄H₈O₂ + H₂O<br>
               C: 2+2=4 ✓ H: 4+6=10=8+2 ✓ O: 2+1=3=2+1 ✓
@@ -14884,8 +14888,8 @@ html, body { max-width:100%; overflow-x:hidden; }
               (+ 18.02 g/mol สำหรับปลายโซ่ H−/−OH → 72,078 ≈ 72.1 kDa ✓)<br><br>
               <strong>ขั้นที่ 3 — Atom Economy:</strong><br>
               AE = MW(repeat unit) / MW(monomer) × 100%<br>
-              = 72.06 / 90.08 × 100% = <strong>80.0%</strong><br>
-              By-product: H₂O = 18.02 g/mol ต่อ monomer = 18.02/90.08 × 100% = 20.0% สูญเสีย<br><br>
+              = <span class="frac"><span class="n">72.06</span><span class="d">90.08</span></span> × 100% = <strong>80.0%</strong><br>
+              By-product: H₂O = 18.02 g/mol ต่อ monomer = <span class="frac"><span class="n">18.02</span><span class="d">90.08</span></span> × 100% = 20.0% สูญเสีย<br><br>
               💡 AE 80% ดีกว่า many synthetic polymer routes · by-product คือ H₂O (ไม่เป็นพิษ) ✓<br><br>
               <strong>ตรวจสอบเร็ว:</strong> C₃H₆O₃ → C₃H₄O₂ + H₂O<br>
               C: 3=3 ✓ H: 6=4+2 ✓ O: 3=2+1 ✓ (mass balance ✓)
@@ -15653,7 +15657,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               Atom Economy = (มวลผลิตภัณฑ์ที่ต้องการ / มวลสารตั้งต้นรวม) × 100<br>
               M(CH₃CH₂Br) = 109<br>
               M(ตั้งต้นรวม) = 46 (EtOH) + 81 (HBr) = 127<br>
-              <strong>AE = 109/127 × 100 = 85.8%</strong><br>
+              <strong>AE = <span class="frac"><span class="n">109</span><span class="d">127</span></span> × 100 = 85.8%</strong><br>
               💡 ที่เหลือ 14.2% เป็น H₂O — ของเสียที่ปลอดภัย ดีกว่าทิ้งสารพิษ
             </div>
           </details>
@@ -15693,7 +15697,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               C : CO₂ = 1 : 1 → n(CO₂) = 83.33 mol<br><br>
               <strong>ขั้นที่ 3 — แปลงเป็นมวล (M ของ CO₂ = 12 + 2×16 = 44):</strong><br>
               มวล CO₂ = 83.33 × 44 = 3666.7 g ≈ <strong>3.67 kg</strong><br><br>
-              <strong>ตรวจสอบเร็ว:</strong> เผา C 1 kg ได้ CO₂ = 44/12 = 3.67 เท่า — คาร์บอนทุก 1 หน่วยมวลกลายเป็น CO₂ ~3.7 หน่วยมวล (เพราะรวมมวล O₂ เข้ามา) นี่คือเหตุผลที่การเผาเชื้อเพลิงฟอสซิลปล่อย CO₂ มหาศาล ✓
+              <strong>ตรวจสอบเร็ว:</strong> เผา C 1 kg ได้ CO₂ = <span class="frac"><span class="n">44</span><span class="d">12</span></span> = 3.67 เท่า — คาร์บอนทุก 1 หน่วยมวลกลายเป็น CO₂ ~3.7 หน่วยมวล (เพราะรวมมวล O₂ เข้ามา) นี่คือเหตุผลที่การเผาเชื้อเพลิงฟอสซิลปล่อย CO₂ มหาศาล ✓
             </div>
           </details>
         </div>
