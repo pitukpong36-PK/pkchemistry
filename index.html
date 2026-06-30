@@ -5176,13 +5176,13 @@ html, body { max-width:100%; overflow-x:hidden; }
               <line x1="300" y1="245" x2="440" y2="245" stroke="#0F766E" stroke-width="2"/>
               <text x="300" y="260" fill="#0F766E" font-weight="700">NaCl(s)</text>
             </g>
-            <!-- steps -->
+            <!-- steps (วาดไล่ทีละขั้น ① → ⑤) -->
             <g stroke-width="1.6" fill="none">
-              <line x1="130" y1="230" x2="130" y2="180" stroke="#DC2626" marker-end="url(#ahu)"/>
-              <line x1="130" y1="180" x2="130" y2="140" stroke="#DC2626" marker-end="url(#ahu)"/>
-              <line x1="200" y1="140" x2="300" y2="80" stroke="#DC2626" marker-end="url(#ahu)"/>
-              <line x1="320" y1="60" x2="320" y2="120" stroke="#0EA5A4" marker-end="url(#ahd)"/>
-              <line x1="370" y1="60" x2="370" y2="243" stroke="#0F766E" stroke-width="2.2" marker-end="url(#ahd)"/>
+              <line x1="130" y1="230" x2="130" y2="180" stroke="#DC2626" marker-end="url(#ahu)" stroke-dasharray="200" stroke-dashoffset="200"><animate attributeName="stroke-dashoffset" from="200" to="0" dur="0.7s" begin="0.3s" fill="freeze"/></line>
+              <line x1="130" y1="180" x2="130" y2="140" stroke="#DC2626" marker-end="url(#ahu)" stroke-dasharray="200" stroke-dashoffset="200"><animate attributeName="stroke-dashoffset" from="200" to="0" dur="0.7s" begin="1.1s" fill="freeze"/></line>
+              <line x1="200" y1="140" x2="300" y2="80" stroke="#DC2626" marker-end="url(#ahu)" stroke-dasharray="200" stroke-dashoffset="200"><animate attributeName="stroke-dashoffset" from="200" to="0" dur="0.7s" begin="1.9s" fill="freeze"/></line>
+              <line x1="320" y1="60" x2="320" y2="120" stroke="#0EA5A4" marker-end="url(#ahd)" stroke-dasharray="200" stroke-dashoffset="200"><animate attributeName="stroke-dashoffset" from="200" to="0" dur="0.7s" begin="2.7s" fill="freeze"/></line>
+              <line x1="370" y1="60" x2="370" y2="243" stroke="#0F766E" stroke-width="2.2" marker-end="url(#ahd)" stroke-dasharray="200" stroke-dashoffset="200"><animate attributeName="stroke-dashoffset" from="200" to="0" dur="0.9s" begin="3.5s" fill="freeze"/></line>
             </g>
             <g font-size="9" fill="#374151">
               <text x="135" y="208">① ระเหิด ΔH<tspan dy="3" font-size="7">sub</tspan> +108</text>
@@ -5311,8 +5311,11 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div style="text-align:center;"><div class="pk-mol3d" data-mol="tetra" style="width:150px;height:150px;margin:0 auto;"></div><div style="font-size:11px;font-weight:700;color:#0F766E;">Tetrahedral · CH₄</div><div style="font-size:10px;color:#7C3AED;">109.5°</div></div>
             <div style="text-align:center;"><div class="pk-mol3d" data-mol="trig" style="width:150px;height:150px;margin:0 auto;"></div><div style="font-size:11px;font-weight:700;color:#B45309;">Trigonal planar · BF₃</div><div style="font-size:10px;color:#7C3AED;">120°</div></div>
             <div style="text-align:center;"><div class="pk-mol3d" data-mol="octa" style="width:150px;height:150px;margin:0 auto;"></div><div style="font-size:11px;font-weight:700;color:#7C3AED;">Octahedral · SF₆</div><div style="font-size:10px;color:#7C3AED;">90°</div></div>
+            <div style="text-align:center;"><div class="pk-mol3d" data-mol="co2" style="width:150px;height:150px;margin:0 auto;"></div><div style="font-size:11px;font-weight:700;color:#374151;">Linear · CO₂</div><div style="font-size:10px;color:#16A34A;">ไม่มีขั้ว (สมมาตร)</div></div>
+            <div style="text-align:center;"><div class="pk-mol3d" data-mol="water" style="width:150px;height:150px;margin:0 auto;"></div><div style="font-size:11px;font-weight:700;color:#DC2626;">Bent · H₂O</div><div style="font-size:10px;color:#DC2626;">มีขั้ว · 104.5°</div></div>
+            <div style="text-align:center;"><div class="pk-mol3d" data-mol="nh3" style="width:150px;height:150px;margin:0 auto;"></div><div style="font-size:11px;font-weight:700;color:#2563EB;">Pyramidal · NH₃</div><div style="font-size:10px;color:#2563EB;">มีขั้ว · 107°</div></div>
           </div>
-          <div style="font-size:10px;color:#6B7280;text-align:center;margin-top:6px;">หมุนแสดงความลึก 3 มิติ (อะตอมด้านหน้าใหญ่/สว่างกว่า) — เรนเดอร์สดในเว็บ ไม่ใช้ไลบรารีภายนอก</div>
+          <div style="font-size:10px;color:#6B7280;text-align:center;margin-top:6px;">หมุนแสดงความลึก 3 มิติ (อะตอมด้านหน้าใหญ่/สว่างกว่า) — เรนเดอร์สดในเว็บ ไม่ใช้ไลบรารีภายนอก · เทียบรูปร่าง → สภาพขั้ว</div>
         </div>
         <div class="formula-box">
           <div class="formula-label">📐 รูปร่างโมเลกุลทั้ง 6 แบบ (ภาพอ้างอิง)</div>
@@ -7170,13 +7173,13 @@ html, body { max-width:100%; overflow-x:hidden; }
             <text x="255" y="245" font-size="12" fill="#374151" text-anchor="middle">อุณหภูมิ (°C) →</text>
             <text x="22" y="125" font-size="11" fill="#374151" text-anchor="middle" transform="rotate(-90 22 125)">solubility (g/100g H₂O)</text>
             <!-- KNO3 — steep up -->
-            <path d="M 80 200 Q 200 160 320 80 L 430 40" stroke="#DC2626" stroke-width="2.5" fill="none"/>
+            <path d="M 80 200 Q 200 160 320 80 L 430 40" stroke="#DC2626" stroke-width="2.5" fill="none" stroke-dasharray="430" stroke-dashoffset="430"><animate attributeName="stroke-dashoffset" from="430" to="0" dur="1.8s" begin="0.3s" fill="freeze"/></path>
             <text x="380" y="55" font-size="11" fill="#DC2626" font-weight="600">KNO₃</text>
             <!-- NaCl — almost flat -->
-            <path d="M 80 130 Q 200 125 320 120 L 430 115" stroke="#0F766E" stroke-width="2.5" fill="none"/>
+            <path d="M 80 130 Q 200 125 320 120 L 430 115" stroke="#0F766E" stroke-width="2.5" fill="none" stroke-dasharray="370" stroke-dashoffset="370"><animate attributeName="stroke-dashoffset" from="370" to="0" dur="1.8s" begin="0.7s" fill="freeze"/></path>
             <text x="380" y="110" font-size="11" fill="#0F766E" font-weight="600">NaCl</text>
             <!-- O2 gas — slight down -->
-            <path d="M 80 180 Q 200 195 320 205 L 430 210" stroke="#1D4ED8" stroke-width="2.5" fill="none"/>
+            <path d="M 80 180 Q 200 195 320 205 L 430 210" stroke="#1D4ED8" stroke-width="2.5" fill="none" stroke-dasharray="370" stroke-dashoffset="370"><animate attributeName="stroke-dashoffset" from="370" to="0" dur="1.8s" begin="1.1s" fill="freeze"/></path>
             <text x="350" y="222" font-size="11" fill="#1D4ED8" font-weight="600">O₂ (แก๊ส)</text>
             <text x="100" y="60" font-size="10" fill="#374151">↑ ของแข็งส่วนใหญ่</text>
             <text x="100" y="73" font-size="10" fill="#374151">ละลายมากขึ้นเมื่อ T ↑</text>
@@ -8144,6 +8147,13 @@ html, body { max-width:100%; overflow-x:hidden; }
             <text x="378" y="118" font-size="10" fill="#7C3AED" font-weight="600">ΔH &gt; 0</text>
             <text x="378" y="130" font-size="9" fill="#7C3AED">(ดูดความร้อน)</text>
             <text x="405" y="20" font-size="11" fill="#0F766E" text-anchor="middle" font-weight="700">Endothermic</text>
+            <!-- ลูกบอลปฏิกิริยากลิ้งตามเส้นพลังงาน -->
+            <circle r="6" fill="#DC2626" stroke="#fff" stroke-width="1.3">
+              <animateMotion dur="3.4s" repeatCount="indefinite" path="M 50 80 L 100 80 Q 130 50 160 60 Q 195 80 230 150 L 240 150"/>
+            </circle>
+            <circle r="6" fill="#0F766E" stroke="#fff" stroke-width="1.3">
+              <animateMotion dur="3.4s" repeatCount="indefinite" path="M 320 150 L 370 150 Q 400 100 440 90 Q 470 90 500 75 L 510 75"/>
+            </circle>
           </svg>
         </div>
         <h4>เอนทาลปีปฏิกิริยา (ΔH) เบื้องต้น</h4>
@@ -11685,10 +11695,10 @@ html, body { max-width:100%; overflow-x:hidden; }
             <line x1="180" y1="200" x2="180" y2="30" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4,3"/>
             <text x="185" y="50" font-size="10" fill="#92400E" font-weight="600">เติม A</text>
             <!-- jump in A -->
-            <line x1="180" y1="100" x2="180" y2="60" stroke="#DC2626" stroke-width="2.5"/>
+            <line x1="180" y1="100" x2="180" y2="60" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="60" stroke-dashoffset="60"><animate attributeName="stroke-dashoffset" from="60" to="0" dur="0.5s" begin="0.4s" fill="freeze"/></line>
             <!-- Stage 2: shift right -->
-            <path d="M 180 60 Q 240 80 320 95 L 400 100" stroke="#DC2626" stroke-width="2.5" fill="none"/>
-            <path d="M 180 160 Q 240 145 320 130 L 400 125" stroke="#0F766E" stroke-width="2.5" fill="none"/>
+            <path d="M 180 60 Q 240 80 320 95 L 400 100" stroke="#DC2626" stroke-width="2.5" fill="none" stroke-dasharray="240" stroke-dashoffset="240"><animate attributeName="stroke-dashoffset" from="240" to="0" dur="1.6s" begin="1.0s" fill="freeze"/></path>
+            <path d="M 180 160 Q 240 145 320 130 L 400 125" stroke="#0F766E" stroke-width="2.5" fill="none" stroke-dasharray="240" stroke-dashoffset="240"><animate attributeName="stroke-dashoffset" from="240" to="0" dur="1.6s" begin="1.0s" fill="freeze"/></path>
             <line x1="400" y1="100" x2="450" y2="100" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="3,2"/>
             <line x1="400" y1="125" x2="450" y2="125" stroke="#0F766E" stroke-width="2.5" stroke-dasharray="3,2"/>
             <text x="350" y="85" font-size="10" fill="#374151" text-anchor="middle">สมดุลใหม่</text>
@@ -11725,11 +11735,11 @@ html, body { max-width:100%; overflow-x:hidden; }
             <text x="255" y="247" font-size="12" fill="#374151" text-anchor="middle">1/T (K⁻¹) →</text>
             <text x="22" y="125" font-size="12" fill="#374151" text-anchor="middle" transform="rotate(-90 22 125)">ln K</text>
             <!-- exothermic: positive slope (high <span class="frac"><span class="n">1</span><span class="d">T</span></span> = low T → high K) -->
-            <line x1="80" y1="60" x2="430" y2="190" stroke="#DC2626" stroke-width="2.5"/>
+            <line x1="80" y1="60" x2="430" y2="190" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="400" stroke-dashoffset="400"><animate attributeName="stroke-dashoffset" from="400" to="0" dur="1.8s" begin="0.4s" fill="freeze"/></line>
             <text x="100" y="50" font-size="11" fill="#DC2626" font-weight="600">คายความร้อน (ΔH &lt; 0)</text>
             <text x="100" y="65" font-size="10" fill="#DC2626">slope = -ΔH/R &gt; 0</text>
             <!-- endothermic: negative slope -->
-            <line x1="80" y1="190" x2="430" y2="60" stroke="#0F766E" stroke-width="2.5"/>
+            <line x1="80" y1="190" x2="430" y2="60" stroke="#0F766E" stroke-width="2.5" stroke-dasharray="400" stroke-dashoffset="400"><animate attributeName="stroke-dashoffset" from="400" to="0" dur="1.8s" begin="0.8s" fill="freeze"/></line>
             <text x="240" y="50" font-size="11" fill="#0F766E" font-weight="600">ดูดความร้อน (ΔH &gt; 0)</text>
             <text x="240" y="65" font-size="10" fill="#0F766E">slope = -ΔH/R &lt; 0</text>
             <!-- T arrows -->
@@ -12858,7 +12868,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <text x="55" y="63">12</text><text x="55" y="33">14</text>
             </g>
             <!-- curve: flat low pH, sharp jump at eq vol, flat high pH -->
-            <path d="M 70 225 L 200 215 L 240 205 L 250 135 L 260 60 L 300 50 L 450 40" stroke="#0F766E" stroke-width="2.8" fill="none"/>
+            <path d="M 70 225 L 200 215 L 240 205 L 250 135 L 260 60 L 300 50 L 450 40" stroke="#0F766E" stroke-width="2.8" fill="none" stroke-dasharray="520" stroke-dashoffset="520"><animate attributeName="stroke-dashoffset" from="520" to="0" dur="2.4s" begin="0.3s" fill="freeze"/></path>
             <!-- equivalence point marker -->
             <line x1="255" y1="30" x2="255" y2="240" stroke="#7C3AED" stroke-width="1.6" stroke-dasharray="4,3"/>
             <circle cx="255" cy="135" r="5" fill="#7C3AED"/>
@@ -12883,7 +12893,7 @@ html, body { max-width:100%; overflow-x:hidden; }
               <text x="55" y="63">12</text><text x="55" y="33">14</text>
             </g>
             <!-- buffer plateau then small jump up -->
-            <path d="M 70 195 Q 100 180 130 170 L 200 162 Q 240 158 250 105 L 265 60 L 300 50 L 450 40" stroke="#DC2626" stroke-width="2.8" fill="none"/>
+            <path d="M 70 195 Q 100 180 130 170 L 200 162 Q 240 158 250 105 L 265 60 L 300 50 L 450 40" stroke="#DC2626" stroke-width="2.8" fill="none" stroke-dasharray="520" stroke-dashoffset="520"><animate attributeName="stroke-dashoffset" from="520" to="0" dur="2.4s" begin="0.3s" fill="freeze"/></path>
             <!-- half-equivalence: pH = pKa -->
             <line x1="155" y1="30" x2="155" y2="240" stroke="#F59E0B" stroke-width="1.4" stroke-dasharray="3,3"/>
             <circle cx="155" cy="165" r="4" fill="#F59E0B"/>
@@ -17869,7 +17879,10 @@ let _pkMolRAF = null;
 const PK_MOL_DEFS = {
   tetra: { cn:'C', xn:'H', cc:'#0F766E', xc:'#9CA3AF', R:46, verts:[[1,1,1],[-1,-1,1],[-1,1,-1],[1,-1,-1]] },
   octa:  { cn:'S', xn:'F', cc:'#7C3AED', xc:'#A78BFA', R:48, verts:[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]] },
-  trig:  { cn:'B', xn:'F', cc:'#B45309', xc:'#FBBF24', R:48, verts:[[1,0,0],[-0.5,0.866,0],[-0.5,-0.866,0]] }
+  trig:  { cn:'B', xn:'F', cc:'#B45309', xc:'#FBBF24', R:48, verts:[[1,0,0],[-0.5,0.866,0],[-0.5,-0.866,0]] },
+  co2:   { cn:'C', xn:'O', cc:'#374151', xc:'#DC2626', R:52, verts:[[1,0,0],[-1,0,0]] },
+  water: { cn:'O', xn:'H', cc:'#DC2626', xc:'#CBD5E1', R:44, verts:[[0.79,-0.61,0],[-0.79,-0.61,0]] },
+  nh3:   { cn:'N', xn:'H', cc:'#2563EB', xc:'#CBD5E1', R:46, verts:[[0.94,-0.33,0],[-0.47,-0.33,0.82],[-0.47,-0.33,-0.82]] }
 };
 function pkInitChapterAnims(){
   if(_pkMolRAF){ cancelAnimationFrame(_pkMolRAF); _pkMolRAF=null; }
