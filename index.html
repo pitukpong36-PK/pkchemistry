@@ -7907,6 +7907,28 @@ html, body { max-width:100%; overflow-x:hidden; }
           ตัวอย่าง: C(s) + O₂(g) → CO₂(g)  ΔH = -393.5 <span class="frac"><span class="n">kJ</span><span class="d">mol</span></span>
         </div>
         <div class="tip-box">💡 <strong>ในอุตสาหกรรม:</strong> %yield สูงสำคัญมาก เช่น กระบวนการฮาเบอร์ผลิต NH₃ มี %yield ~15% ต่อรอบ แต่ recycling ทำให้ประสิทธิภาพรวมสูงขึ้น</div>
+        <h4>หา ΔH จากพลังงานพันธะ (Bond Energy)</h4>
+        <p style="font-size:13px;color:#374151;line-height:1.6;">อีกวิธีหา ΔH คือคิดจากพลังงานที่ใช้ <em>สลายพันธะ</em> (ดูดพลังงาน, +) และที่ได้จากการ <em>สร้างพันธะ</em> (คายพลังงาน, −)</p>
+        <div class="formula-box">
+          <div class="formula-label">ΔH = Σ(พลังงานสลายพันธะตั้งต้น) − Σ(พลังงานสร้างพันธะผลิตภัณฑ์)</div>
+          <em>คิดง่าย:</em> "สลายของเก่า (จ่ายพลังงาน) − สร้างของใหม่ (ได้พลังงานคืน)"<br>
+          ถ้าสร้างพันธะคืนได้มากกว่าที่จ่ายไปสลาย → ΔH ติดลบ (คายความร้อน)<br><br>
+          <em>หมายเหตุ:</em> วิธีนี้ใช้ค่าเฉลี่ยพลังงานพันธะ จึงได้ค่า ΔH โดยประมาณ (ต่างจาก ΔH°f ที่แม่นกว่า)
+        </div>
+        <h4>ความประหยัดอะตอม (Atom Economy) — เคมีสีเขียว</h4>
+        <p style="font-size:13px;color:#374151;line-height:1.6;">%yield บอกว่าได้ผลิตภัณฑ์ "มากแค่ไหนเทียบทฤษฎี" แต่ <strong>atom economy</strong> บอกว่าอะตอมจากสารตั้งต้นกลายเป็น <em>ผลิตภัณฑ์ที่ต้องการ</em> มากแค่ไหน (เหลือเป็นของเสียน้อย = เป็นมิตรต่อสิ่งแวดล้อม)</p>
+        <div class="formula-box">
+          <div class="formula-label">⚛️ Atom Economy</div>
+          % atom economy = <span class="frac"><span class="n">มวลโมลาร์ของผลิตภัณฑ์ที่ต้องการ</span><span class="d">ผลรวมมวลโมลาร์ของผลิตภัณฑ์ทั้งหมด</span></span> × 100<br>
+          <svg viewBox="0 0 520 80" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+            <text x="20" y="28" font-size="10" fill="#374151">ปฏิกิริยาเติม (addition) — อะตอมเข้าผลิตภัณฑ์เดียว:</text>
+            <rect x="20" y="34" width="300" height="20" fill="#0F766E"/>
+            <text x="170" y="48" font-size="10" fill="#FFF" text-anchor="middle">100% (ไม่มีของเสีย)</text>
+            <text x="340" y="48" font-size="9" fill="#0F766E">ดีต่อสิ่งแวดล้อม ✓</text>
+            <text x="20" y="72" font-size="9" fill="#B45309">ปฏิกิริยาแทนที่/ควบแน่น มักมีผลพลอยได้ → atom economy ต่ำกว่า</text>
+          </svg>
+        </div>
+        <div class="tip-box">💡 <strong>ต่างกัน:</strong> %yield วัดประสิทธิภาพ "การทำจริง" · atom economy วัดประสิทธิภาพ "การออกแบบปฏิกิริยา" — ปฏิกิริยาที่ดีควรสูงทั้งคู่ (เชื่อมโยงบทเคมีกับการแก้ปัญหา/สิ่งแวดล้อม)</div>
       </div>
 
       <div class="content-section">
@@ -8506,6 +8528,63 @@ html, body { max-width:100%; overflow-x:hidden; }
             </div>
           </details>
         </div>
+        <div class="problem-topic-header">📑 หมวด J — วิเคราะห์/สถานการณ์จริง <span class="prob-level lv3">🔴 ระดับ 3</span></div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J1 — สารกำหนดปริมาณ + %yield + สารเหลือ</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> ผสม N₂ 28 g กับ H₂ 8.0 g เพื่อผลิตแอมโมเนีย (N₂ + 3H₂ → 2NH₃) จงหา (ก) สารกำหนดปริมาณ (ข) มวล NH₃ สูงสุดทางทฤษฎี (ค) ถ้าได้จริง 20.4 g คิดเป็น %yield เท่าใด (ง) สารตั้งต้นที่เหลือกี่กรัม<br>
+            <strong>กำหนด:</strong> Mw: N₂=28, H₂=2, NH₃=17
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>โมลตั้งต้น:</strong> N₂ = 28/28 = 1.0 mol · H₂ = 8.0/2 = 4.0 mol<br>
+              <strong>ก) หาสารกำหนด:</strong> ต้องการ N₂:H₂ = 1:3 · มี 1.0 : 4.0 → H₂ เกิน (ใช้แค่ 3.0) → <strong>N₂ เป็นสารกำหนดปริมาณ</strong><br>
+              <strong>ข) NH₃ ทฤษฎี:</strong> 1.0 mol N₂ → 2.0 mol NH₃ → 2.0×17 = <strong>34 g</strong><br>
+              <strong>ค) %yield:</strong> (20.4/34)×100 = <strong>60%</strong><br>
+              <strong>ง) H₂ เหลือ:</strong> ใช้ไป 3.0 mol เหลือ 1.0 mol = 1.0×2 = <strong>2.0 g</strong><br><br>
+              <strong>ตรวจสอบ:</strong> สารกำหนดปริมาณ (N₂) ใช้หมด, H₂ เหลือ — ผลิตภัณฑ์คิดจากสารกำหนดเสมอ ✓
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J2 — หา ΔH จากเอนทาลปีการเกิด (ΔH°f)</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> จงหา ΔH ของการเผาไหม้มีเทน CH₄(g) + 2O₂(g) → CO₂(g) + 2H₂O(l)<br>
+            <strong>กำหนด ΔH°f (kJ/mol):</strong> CH₄ = −74.8, CO₂ = −393.5, H₂O(l) = −285.8, O₂ = 0
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>สูตร:</strong> ΔH = ΣΔH°f(ผลิตภัณฑ์) − ΣΔH°f(ตั้งต้น)<br><br>
+              ผลิตภัณฑ์: [(−393.5) + 2(−285.8)] = −393.5 − 571.6 = −965.1<br>
+              ตั้งต้น: [(−74.8) + 2(0)] = −74.8<br><br>
+              ΔH = −965.1 − (−74.8) = <strong>−890.3 kJ/mol</strong><br><br>
+              <strong>ตรวจสอบ:</strong> ΔH ติดลบมาก → การเผามีเทนคายความร้อนสูง (เป็นเชื้อเพลิงที่ดี) ✓ · ระวัง O₂ ธาตุอิสระมี ΔH°f = 0
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J3 — เปรียบเทียบ %yield กับ atom economy</h4>
+          <div class="problem-statement">
+            <strong>สถานการณ์:</strong> การผลิตเอทิลีนออกไซด์มี 2 เส้นทาง<br>
+            เส้นทาง A: 2C₂H₄ + O₂ → 2C₂H₄O (เติมออกซิเจน, ได้ผลิตภัณฑ์เดียว)<br>
+            เส้นทาง B: C₂H₄ + Cl₂ + ... → C₂H₄O + 2HCl (มีผลพลอยได้ HCl)<br>
+            ถามว่าเส้นทางใด "เป็นมิตรต่อสิ่งแวดล้อม" กว่า และอธิบายความต่างของ %yield กับ atom economy
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>เส้นทาง A</strong> เปลี่ยนอะตอมเกือบทั้งหมดเป็นผลิตภัณฑ์ที่ต้องการ (ไม่มีผลพลอยได้) → <strong>atom economy สูง (~100%)</strong><br>
+              <strong>เส้นทาง B</strong> มี HCl เป็นของเสีย → อะตอม Cl และ H กลายเป็นของทิ้ง → <strong>atom economy ต่ำ</strong><br><br>
+              → <strong>เส้นทาง A เป็นมิตรต่อสิ่งแวดล้อมกว่า</strong><br><br>
+              <strong>ความต่างของสองค่า:</strong><br>
+              • <em>%yield</em> = ทำได้จริงกี่ % เทียบทฤษฎี (เกี่ยวกับการสูญเสียระหว่างทำ/ปฏิกิริยาไม่สมบูรณ์)<br>
+              • <em>atom economy</em> = ออกแบบปฏิกิริยาให้อะตอมไปอยู่ในผลิตภัณฑ์ที่ต้องการกี่ % (เกี่ยวกับสมการ ไม่เกี่ยวกับการทำจริง)<br>
+              ปฏิกิริยาอาจมี %yield 100% แต่ atom economy ต่ำได้ ถ้าครึ่งหนึ่งของอะตอมกลายเป็นของเสียโดยการออกแบบ
+            </div>
+          </details>
+        </div>
       </div>
       <div class="content-section">
         <h3>🧠 สรุปจำง่าย + ความเข้าใจผิดที่พบบ่อย</h3>
@@ -8519,7 +8598,8 @@ html, body { max-width:100%; overflow-x:hidden; }
           • <strong>ΔH = ΣΔH°f(P) − ΣΔH°f(R)</strong><br>
           • <strong>Hess's Law:</strong> ΔH ของกระบวนการรวม = Σ ΔH ของขั้นย่อย<br>
           • <strong>คายความร้อน:</strong> ΔH < 0; ดูด: ΔH > 0<br>
-          • <strong>Atom Economy:</strong> (มวลผลิตภัณฑ์ที่ต้องการ / มวลตั้งต้นรวม) × 100<br>
+          • <strong>Atom Economy:</strong> (มวลผลิตภัณฑ์ที่ต้องการ / มวลผลิตภัณฑ์รวม) × 100<br>
+          • <strong>ΔH จากพลังงานพันธะ:</strong> Σสลายพันธะตั้งต้น − Σสร้างพันธะผลิตภัณฑ์<br>
           • <strong>STP แก๊ส:</strong> 1 mol = 22.4 L (ใช้กับโจทย์ stoichiometry แก๊ส)
         </div>
         <h4>⚠️ ความเข้าใจผิดที่พบบ่อย</h4>
@@ -8531,6 +8611,8 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>"ΔG° < 0 แปลว่าปฏิกิริยาเกิดเร็ว"</td><td>ผิด — ΔG บอก spontaneity (เกิดได้) แต่ไม่บอก rate (เกิดเร็ว)</td></tr>
           <tr><td>"ดุลแล้วใช้สัมประสิทธิ์เป็น m หรือ g ได้"</td><td>ผิด — สัมประสิทธิ์บอก <em>mole ratio</em> เท่านั้น · ต้องแปลงเป็น mole ก่อนเสมอ</td></tr>
           <tr><td>"คายความร้อนเร็วกว่าดูด"</td><td>ไม่จำเป็น — ขึ้นกับ Ea ไม่ใช่ ΔH</td></tr>
+          <tr><td>"%yield สูง = atom economy สูง"</td><td>คนละเรื่อง — %yield วัดการทำจริง · atom economy วัดการออกแบบปฏิกิริยา (ของเสียในสมการ)</td></tr>
+          <tr><td>"ผลิตภัณฑ์คิดจากสารที่มีมากกว่า"</td><td>ผิด — คิดจาก <em>สารกำหนดปริมาณ</em> (ตัวที่หมดก่อน) เสมอ</td></tr>
         </table>
         <div style="margin-top:14px;padding:14px 16px;background:linear-gradient(135deg,#CCFBF1 0%,#F0FDFA 100%);border-radius:10px;border-left:4px solid #14B8A6;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
