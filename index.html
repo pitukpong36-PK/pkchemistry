@@ -3336,6 +3336,36 @@ html, body { max-width:100%; overflow-x:hidden; }
       </div>
 
       <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>ต้องเจือจางกรดซัลฟิวริกเข้มข้น ควรทำอย่างไรจึงปลอดภัย?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">เทน้ำลงในกรด</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">เทกรดลงในน้ำ</button>
+            <button class="pk-opt" onclick="pkAns(this)">เทพร้อมกันทีเดียว</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>เทกรดลงน้ำ (Add Acid)</strong> — การละลายกรดคายความร้อนสูง ถ้าเทน้ำลงกรด น้ำผิวหน้าจะเดือดและกระเซ็นกรดออกมา จำว่า "A-A: Add Acid to water"</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>วัดมวลซ้ำ 3 ครั้งได้ค่าใกล้กันมาก แต่ทุกค่าห่างจากค่าจริงไปทางเดียวกัน ข้อมูลชุดนี้เป็นแบบใด?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">แม่นแต่ไม่เที่ยง</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">เที่ยงแต่ไม่แม่น</button>
+            <button class="pk-opt" onclick="pkAns(this)">ทั้งแม่นและเที่ยง</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>เที่ยงแต่ไม่แม่น</strong> ค่าซ้ำเกาะกลุ่มกัน (เที่ยง/precision) แต่เบนจากค่าจริงอย่างเป็นระบบ (ไม่แม่น/accuracy) — มักเกิดจาก systematic error เช่น เครื่องชั่งไม่ได้ปรับศูนย์</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 ลองเลื่อนอุณหภูมิ แล้วดูการแปลง °C → เคลวิน</div>
+          <input type="range" min="-50" max="150" step="1" value="25" oninput="var o=this.nextElementSibling;o.querySelector('.v1').textContent=this.value;o.querySelector('.v2').textContent=(+this.value+273).toFixed(0);">
+          <div class="pk-out">อุณหภูมิ = <b class="v1">25</b> °C → <b class="v2">298</b> K &nbsp;<span style="color:#9CA3AF;font-size:11px;">(T<sub>K</sub> = T<sub>°C</sub> + 273)</span></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('safety')">🧪 ลองแล็บ: ความปลอดภัย &amp; เลขนัยสำคัญ</button>
+          <button class="pk-game" onclick="PK.startQuiz('c1b1')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
+      <div class="content-section">
         <h3>🌍 การประยุกต์ใช้ความปลอดภัยและทักษะปฏิบัติการในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">ความปลอดภัยและการ <strong>วัด/บันทึกข้อมูลอย่างแม่นยำ</strong> ไม่ได้ใช้แค่ในห้องแล็บ — สัญลักษณ์ GHS อุปกรณ์ป้องกัน และเลขนัยสำคัญ อยู่รอบตัวเราทั้งในบ้าน โรงพยาบาล และโรงงาน</p>
         <div class="app-grid">
@@ -4764,6 +4794,36 @@ html, body { max-width:100%; overflow-x:hidden; }
         </div>
       </div>
       <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>ไอออน Fe²⁺ เกิดจากอะไร?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">ได้รับโปรตอน 2 ตัว</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">เสียอิเล็กตรอน 2 ตัว</button>
+            <button class="pk-opt" onclick="pkAns(this)">ได้รับอิเล็กตรอน 2 ตัว</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>เสียอิเล็กตรอน 2 ตัว</strong> — ในปฏิกิริยาเคมีจำนวนโปรตอนไม่เปลี่ยน (ถ้าโปรตอนเปลี่ยน = กลายเป็นธาตุใหม่/ปฏิกิริยานิวเคลียร์) ไอออนบวกเกิดจากการ "เสีย e⁻"</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>ในคาบเดียวกัน เมื่อเลขอะตอมเพิ่มขึ้น (ซ้าย→ขวา) รัศมีอะตอมจะ?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">เพิ่มขึ้น</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">ลดลง</button>
+            <button class="pk-opt" onclick="pkAns(this)">เท่าเดิม</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>ลดลง</strong> ประจุนิวเคลียสเพิ่มขึ้นแต่จำนวนชั้น (n) เท่าเดิม → นิวเคลียสดึงอิเล็กตรอนแน่นขึ้น อะตอมเล็กลง (F เล็กกว่า Li ในคาบ 2)</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 ลองปรับร้อยละของ ³⁵Cl แล้วดูมวลอะตอมเฉลี่ยถ่วงน้ำหนัก</div>
+          <input type="range" min="0" max="100" step="1" value="76" oninput="var o=this.nextElementSibling,x=+this.value/100;o.querySelector('.v1').textContent=this.value;o.querySelector('.v2').textContent=(100-this.value);o.querySelector('.v3').textContent=(35*x+37*(1-x)).toFixed(2);">
+          <div class="pk-out">³⁵Cl = <b class="v1">76</b>% · ³⁷Cl = <b class="v2">24</b>% → มวลเฉลี่ย = <b class="v3">35.48</b> u &nbsp;<span style="color:#9CA3AF;font-size:11px;">(ค่าจริง Cl ≈ 35.45)</span></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('atom')">🧪 ลองแล็บ: โครงสร้างอะตอม</button>
+          <button class="pk-game" onclick="PK.startQuiz('c1b2')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
+      <div class="content-section">
         <h3>🌍 การประยุกต์ใช้ธาตุในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">ธาตุแต่ละชนิดถูกนำมาใช้ประโยชน์ตาม <strong>สมบัติเฉพาะตัว</strong> ของมัน เช่น โลหะที่นำไฟฟ้าดีใช้ทำสายไฟ แก๊สเฉื่อยที่เบาใช้ทำลูกโป่ง ลองสังเกตว่าสมบัติของธาตุเชื่อมโยงกับการใช้งานอย่างไร</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;">
@@ -5336,6 +5396,36 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="tip-box">💡 <strong>ประยุกต์ใช้ในชีวิตจริง:</strong> พันธะไฮโดรเจนทำให้น้ำมีความตึงผิวสูง แมลงน้ำจึงเดินบนน้ำได้ | ดีเอ็นเอสองสายยึดกันด้วยพันธะไฮโดรเจน | สบู่ทำงานได้เพราะมีส่วนมีขั้วและไม่มีขั้วในโมเลกุลเดียวกัน</div>
       </div>
 
+      <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>CO₂ มีพันธะ C=O ที่มีขั้ว แต่ทำไมโมเลกุลทั้งหมดกลับไม่มีขั้ว?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">เพราะ C กับ O มี EN เท่ากัน</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">เพราะทรงเส้นตรงสมมาตร ขั้วหักล้างกัน</button>
+            <button class="pk-opt" onclick="pkAns(this)">เพราะ CO₂ เป็นแก๊ส</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>ทรงเส้นตรงสมมาตร</strong> — เวกเตอร์ขั้วของพันธะ C=O ทั้งสองชี้ตรงข้ามกันพอดี (180°) จึงหักล้าง → โมเลกุลไม่มีขั้ว · "มีพันธะมีขั้ว ≠ โมเลกุลมีขั้ว" ต้องดูรูปร่างด้วย</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>H₂O เดือดที่ 100°C ส่วน H₂S เดือดที่ −60°C ทั้งที่ H₂S หนักกว่า เพราะอะไร?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">H₂O มีพันธะไฮโดรเจน</button>
+            <button class="pk-opt" onclick="pkAns(this)">H₂O เป็นสารไอออนิก</button>
+            <button class="pk-opt" onclick="pkAns(this)">H₂S มีพันธะแข็งแรงกว่า</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>H₂O มีพันธะไฮโดรเจน</strong> (O-H···O) ซึ่งแรงกว่าแรงระหว่างโมเลกุลของ H₂S มาก จุดเดือดจึงสูงกว่า แม้มวลน้อยกว่า — จุดเดือดขึ้นกับ "แรงระหว่างโมเลกุล" ไม่ใช่แค่มวล</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 ลองปรับผลต่างอิเล็กโทรเนกาทิวิตี (ΔEN) แล้วดูชนิดพันธะที่ทำนาย</div>
+          <input type="range" min="0" max="3.3" step="0.1" value="0.4" oninput="var o=this.nextElementSibling,d=+this.value;o.querySelector('.v1').textContent=d.toFixed(1);o.querySelector('.v2').textContent=(d<0.4?'โคเวเลนต์ไม่มีขั้ว':d<1.7?'โคเวเลนต์มีขั้ว':'ไอออนิก');">
+          <div class="pk-out">ΔEN = <b class="v1">0.4</b> → ทำนายเป็นพันธะ <b class="v2">โคเวเลนต์มีขั้ว</b> &nbsp;<span style="color:#9CA3AF;font-size:11px;">(&lt;0.4 ไม่มีขั้ว · 0.4–1.7 มีขั้ว · &gt;1.7 ไอออนิก)</span></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('vsepr')">🧪 ลองแล็บ: VSEPR รูปร่างโมเลกุล</button>
+          <button class="pk-game" onclick="PK.startQuiz('c1b3')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
       <div class="content-section">
         <h3>🌍 การประยุกต์ใช้พันธะเคมีในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;"><strong>ชนิดของพันธะและแรงยึดเหนี่ยว</strong> เป็นตัวกำหนดสมบัติของสาร เช่น ความแข็ง จุดหลอมเหลว การนำไฟฟ้า และการละลาย ซึ่งนำไปสู่การใช้งานที่หลากหลาย</p>
@@ -6229,6 +6319,36 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="tip-box">💡 <strong>เชื่อมชีวิตจริง:</strong> ซองกันชื้น (ซิลิกาเจล) และ CuSO₄ ไร้น้ำ ใช้ตรวจ/ดูดความชื้น — เปลี่ยนสีเมื่อจับน้ำ เป็นหลักการไฮเดรตเดียวกัน</div>
       </div>
 
+      <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>1 โมลของ H₂ กับ 1 โมลของ O₂ มีอะไรที่เท่ากัน?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">มวล (กรัม)</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">จำนวนโมเลกุล</button>
+            <button class="pk-opt" onclick="pkAns(this)">ปริมาตรของแข็ง</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>จำนวนโมเลกุล</strong> — ทั้งคู่มี 6.02×10²³ โมเลกุล (1 โมล) เท่ากัน แต่มวลต่างกัน (H₂ = 2 g, O₂ = 32 g) เพราะมวลโมเลกุลต่างกัน</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>ในการวิเคราะห์การเผาไหม้ (หา C, H, O) เราหาจำนวนโมล O ของสารได้จาก?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">O ใน CO₂ โดยตรง</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">มวลส่วนต่าง (มวลสาร − C − H)</button>
+            <button class="pk-opt" onclick="pkAns(this)">O ใน H₂O โดยตรง</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>มวลส่วนต่าง</strong> เพราะ O ใน CO₂ และ H₂O ส่วนหนึ่งมาจาก O₂ ที่เติมเข้าไปเผา ไม่ใช่จากตัวสารทั้งหมด จึงต้องหา O จาก มวลสาร − มวล C − มวล H</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 ลองปรับจำนวนโมลของ CO₂ แล้วดูค่าที่แปลงไปพร้อมกัน</div>
+          <input type="range" min="0.5" max="5" step="0.5" value="2" oninput="var o=this.nextElementSibling,n=+this.value;o.querySelector('.v1').textContent=n.toFixed(1);o.querySelector('.v2').textContent=(n*44).toFixed(1);o.querySelector('.v3').textContent=(n*6.02).toFixed(2);o.querySelector('.v4').textContent=(n*22.4).toFixed(1);">
+          <div class="pk-out">โมล = <b class="v1">2.0</b> mol → มวล = <b class="v2">88.0</b> g · อนุภาค = <b class="v3">12.04</b>×10²³ · ปริมาตร STP = <b class="v4">44.8</b> L</div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('mole')">🧪 ลองแล็บ: แปลงโมล ↔ มวล ↔ อนุภาค</button>
+          <button class="pk-game" onclick="PK.startQuiz('c2b4')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
       <div class="content-section">
         <h3>🌍 การประยุกต์ใช้แนวคิดโมลในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">แนวคิด <strong>โมล/ปริมาณสาร</strong> เป็น "สะพาน" เชื่อมมวล (กรัม) กับจำนวนอนุภาค ใช้คำนวณปริมาณจริงทั้งในยา อาหาร เกษตร และอุตสาหกรรม</p>
