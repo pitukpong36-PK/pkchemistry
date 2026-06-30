@@ -16913,6 +16913,62 @@ html, body { max-width:100%; overflow-x:hidden; }
             </div>
           </details>
         </div>
+        <div class="problem-topic-header">📑 หมวด J — วิเคราะห์/สถานการณ์จริง <span class="prob-level lv3">🔴 ระดับ 3</span></div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J1 — คาร์บอนฟุตพรินต์จากการใช้ไฟฟ้า</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> บ้านหลังหนึ่งใช้ไฟฟ้า 500 kWh ต่อเดือน โรงไฟฟ้าถ่านหินปล่อย CO₂ 0.90 kg ต่อ kWh จงหา (ก) มวล CO₂ ที่ปล่อยต่อปี (ข) คิดเป็นจำนวนโมล CO₂ (ค) ถ้าปลูกต้นไม้ที่ดูดซับ CO₂ ได้ 21 kg/ต้น/ปี ต้องปลูกกี่ต้นเพื่อชดเชย<br>
+            <strong>กำหนด:</strong> Mw(CO₂) = 44 g/mol
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) CO₂ ต่อปี:</strong> 500 kWh/เดือน × 12 เดือน = 6000 kWh/ปี → CO₂ = 6000 × 0.90 = <strong>5400 kg/ปี</strong> (5.4 ตัน)<br><br>
+              <strong>ข) โมล CO₂:</strong> 5400 kg = 5.4×10⁶ g → mol = 5.4×10⁶/44 = <strong>1.23×10⁵ mol</strong><br><br>
+              <strong>ค) จำนวนต้นไม้:</strong> 5400 ÷ 21 = <strong>≈ 257 ต้น</strong><br><br>
+              <strong>ข้อคิด:</strong> บ้านเดียวต้องใช้ต้นไม้กว่า 250 ต้นชดเชย — เห็นภาพว่าทำไม "ลดการใช้" (ประหยัดไฟ/พลังงานสะอาด) จึงสำคัญกว่าการชดเชยอย่างเดียว
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J2 — pH ฝนกรดและการสะเทินดิน</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> ฝนกรดตัวอย่างมี [H⁺] = 1.0×10⁻⁴ M (จาก H₂SO₄ เป็นหลัก) จงหา (ก) pH ของฝน (ข) เทียบกับ pH ฝนปกติ (5.6) ว่าเป็นกรดมากกว่ากี่เท่า (ค) ถ้าจะสะเทินทะเลสาบกรดนี้ปริมาตร 1.0×10⁶ L ต้องใช้ปูนขาว CaCO₃ กี่กิโลกรัม<br>
+            <strong>กำหนด:</strong> Mw(CaCO₃)=100; CaCO₃ + H₂SO₄ → CaSO₄ + H₂O + CO₂ (1 mol CaCO₃ สะเทิน H⁺ ได้ 2 mol)
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) pH:</strong> = −log(1.0×10⁻⁴) = <strong>4.0</strong><br><br>
+              <strong>ข) เทียบความเป็นกรด:</strong> ฝนปกติ pH 5.6 → [H⁺] = 10⁻⁵·⁶ = 2.5×10⁻⁶ M<br>
+              อัตราส่วน = (1.0×10⁻⁴)/(2.5×10⁻⁶) = <strong>~40 เท่า</strong> (กรดมากกว่าฝนปกติ ~40 เท่า)<br><br>
+              <strong>ค) ปูนขาวที่ใช้:</strong> mol H⁺ ทั้งหมด = 1.0×10⁻⁴ × 1.0×10⁶ = 100 mol<br>
+              CaCO₃ สะเทิน H⁺ ได้ 2 mol ต่อ 1 mol → mol CaCO₃ = 100/2 = 50 mol → มวล = 50×100 = <strong>5000 g = 5.0 kg</strong><br><br>
+              <strong>หลักคิด:</strong> pH ต่างกัน 1 หน่วย = ความเข้มข้น H⁺ ต่าง 10 เท่า — เคมีเชิงปริมาณช่วยวางแผนแก้ปัญหาสิ่งแวดล้อมได้จริง
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J3 — ตัดสินใจเชิงเคมีสีเขียวแบบบูรณาการ</h4>
+          <div class="problem-statement">
+            <strong>สถานการณ์:</strong> โรงงานต้องเลือกกระบวนการผลิตสารชนิดหนึ่งจาก 2 ทางเลือก<br>
+            ทาง A: atom economy 95%, %yield 70%, ใช้ตัวทำละลายน้ำ, อุณหภูมิ 50°C<br>
+            ทาง B: atom economy 60%, %yield 95%, ใช้ตัวทำละลายอินทรีย์ระเหย, อุณหภูมิ 150°C<br>
+            จงวิเคราะห์ว่าทางใด "เป็นมิตรต่อสิ่งแวดล้อม" กว่า โดยพิจารณาหลักเคมีสีเขียว และอธิบายว่าทำไมการดูแค่ %yield จึงไม่พอ
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>วิเคราะห์ตามหลักเคมีสีเขียว:</strong><br>
+              • <em>Atom economy:</em> A (95%) ดีกว่า B (60%) มาก → A เปลี่ยนอะตอมเป็นผลิตภัณฑ์มากกว่า ของเสียน้อยกว่าโดยการออกแบบ<br>
+              • <em>ตัวทำละลาย:</em> A ใช้น้ำ (ปลอดภัย) · B ใช้ตัวทำละลายอินทรีย์ระเหย (VOC, เป็นพิษ/ติดไฟ)<br>
+              • <em>พลังงาน:</em> A 50°C ใช้พลังงานน้อยกว่า B 150°C<br>
+              • <em>%yield:</em> B (95%) ดูสูงกว่า A (70%) แต่...<br><br>
+              <strong>สรุป: ทาง A เป็นมิตรต่อสิ่งแวดล้อมกว่าชัดเจน</strong><br><br>
+              <strong>ทำไม %yield อย่างเดียวไม่พอ:</strong> %yield สูงบอกแค่ว่าได้ผลิตภัณฑ์มากเทียบทฤษฎี แต่ไม่บอกว่า (1) ของเสียจากการออกแบบปฏิกิริยา (atom economy) (2) ความเป็นพิษของตัวทำละลาย (3) พลังงานที่ใช้ — การประเมินที่ดีต้องดู "ตลอดวงจร" ไม่ใช่ตัวเลขเดียว ตรงตามหลักเคมีสีเขียว 12 ข้อ
+            </div>
+          </details>
+        </div>
       </div>
       <div class="content-section">
         <h3>🧠 สรุปจำง่าย + ความเข้าใจผิดที่พบบ่อย</h3>
@@ -16939,6 +16995,8 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>"surgical mask = N95"</td><td>ต่าง — N95 กรอง 95% ของ 0.3 μm; surgical กันแค่หยดน้ำลาย ~30% สำหรับ PM 2.5</td></tr>
           <tr><td>"trans fat เกิดธรรมชาติ"</td><td>ส่วนใหญ่จาก partial hydrogenation อุตสาหกรรม — WHO แนะ &lt; 1% พลังงาน</td></tr>
           <tr><td>"Renewable = Biodegradable เสมอ"</td><td>ผิด — bio-PE จากอ้อยยังไม่ย่อยสลาย; ดูฉลากให้ครบ</td></tr>
+          <tr><td>"%yield สูง = กระบวนการเป็นมิตรต่อสิ่งแวดล้อม"</td><td>ต้องดูตลอดวงจร: atom economy, ตัวทำละลาย, พลังงาน — ไม่ใช่แค่ %yield</td></tr>
+          <tr><td>"pH 4 กับ pH 5 กรดต่างกันนิดเดียว"</td><td>ต่างกัน 10 เท่าของ [H⁺] (สเกล log) — ฝนกรดอันตรายกว่าฝนปกติหลายสิบเท่า</td></tr>
         </table>
         <div style="margin-top:14px;padding:14px 16px;background:linear-gradient(135deg,#CCFBF1 0%,#F0FDFA 100%);border-radius:10px;border-left:4px solid #14B8A6;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
