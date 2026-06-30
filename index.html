@@ -13134,6 +13134,58 @@ html, body { max-width:100%; overflow-x:hidden; }
             </div>
           </details>
         </div>
+        <div class="problem-topic-header">📑 หมวด J — วิเคราะห์/สถานการณ์จริง <span class="prob-level lv3">🔴 ระดับ 3</span></div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J1 — บัฟเฟอร์และการต้านการเปลี่ยน pH</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> เตรียมบัฟเฟอร์จากกรดอะซิติก (CH₃COOH) 0.50 mol และโซเดียมอะซิเตต (CH₃COONa) 0.50 mol ในน้ำ 1.0 L (Ka = 1.8×10⁻⁵) จงหา (ก) pH ของบัฟเฟอร์ (ข) pH หลังเติม HCl 0.10 mol (สมมติปริมาตรคงที่)<br>
+            <strong>กำหนด:</strong> log(1.8) = 0.26, pKa = 4.74
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) สมการ Henderson-Hasselbalch:</strong> pH = pKa + log(<span class="frac"><span class="n">[เกลือ]</span><span class="d">[กรด]</span></span>)<br>
+              pH = 4.74 + log(0.50/0.50) = 4.74 + log(1) = 4.74 + 0 = <strong>4.74</strong><br><br>
+              <strong>ข) เติม HCl 0.10 mol:</strong> H⁺ ทำปฏิกิริยากับเบสคู่ (อะซิเตต): CH₃COO⁻ + H⁺ → CH₃COOH<br>
+              อะซิเตตลด: 0.50 − 0.10 = 0.40 mol · กรดเพิ่ม: 0.50 + 0.10 = 0.60 mol<br>
+              pH = 4.74 + log(0.40/0.60) = 4.74 + log(0.667) = 4.74 + (−0.176) = <strong>4.56</strong><br><br>
+              <strong>ข้อคิด:</strong> เติมกรดแก่ลงไป แต่ pH ลดแค่ 0.18 หน่วย (จาก 4.74 → 4.56) — ถ้าเติมลงน้ำเปล่า 0.10 mol H⁺/L จะได้ pH=1 แสดงพลังการ "ต้าน" ของบัฟเฟอร์ชัดเจน ✓
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J2 — pH และร้อยละการแตกตัวของกรดอ่อน</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> กรดอ่อน HA ความเข้มข้น 0.10 M มี Ka = 1.0×10⁻⁵ จงหา (ก) [H⁺] และ pH (ข) ร้อยละการแตกตัว (ค) ถ้าเจือจางเป็น 0.010 M ร้อยละการแตกตัวจะเพิ่มหรือลด
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) หา [H⁺]:</strong> [H⁺] ≈ √(Ka·C) = √(1.0×10⁻⁵ × 0.10) = √(1.0×10⁻⁶) = <strong>1.0×10⁻³ M</strong><br>
+              pH = −log(1.0×10⁻³) = <strong>3.0</strong><br><br>
+              <strong>ข) ร้อยละการแตกตัว:</strong> = ([H⁺]/C)×100 = (1.0×10⁻³/0.10)×100 = <strong>1.0%</strong><br><br>
+              <strong>ค) เจือจางเป็น 0.010 M:</strong> [H⁺] = √(1.0×10⁻⁵ × 0.010) = √(1.0×10⁻⁷) = 3.16×10⁻⁴<br>
+              ร้อยละ = (3.16×10⁻⁴/0.010)×100 = 3.16% → <strong>เพิ่มขึ้น</strong><br><br>
+              <strong>หลักคิด (กฎเจือจางของออสต์วาลด์):</strong> เจือจางกรดอ่อน → ร้อยละการแตกตัว <em>เพิ่ม</em> (แต่ [H⁺] ลดลง) — สอดคล้องเลอชาเตอลิเอ: เจือจางดันสมดุลไปทางแตกตัวมากขึ้น
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J3 — วิเคราะห์กราฟไทเทรตและเลือกอินดิเคเตอร์</h4>
+          <div class="problem-statement">
+            <strong>สถานการณ์:</strong> ไทเทรตกรดอะซิติก (อ่อน) 0.10 M ปริมาตร 25.0 mL ด้วย NaOH (แก่) 0.10 M จงตอบ (ก) ที่จุดกึ่งสมมูล (half-equivalence) pH เท่ากับเท่าใด (ข) ที่จุดสมมูล pH มากกว่าหรือน้อยกว่า 7 เพราะอะไร (ค) ควรเลือกอินดิเคเตอร์ใด<br>
+            <strong>กำหนด:</strong> pKa(CH₃COOH) = 4.74
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) จุดกึ่งสมมูล:</strong> ที่จุดนี้ [กรด]=[เบสคู่] → pH = pKa = <strong>4.74</strong> (จุดที่บัฟเฟอร์แข็งแรงที่สุด)<br><br>
+              <strong>ข) จุดสมมูล:</strong> ได้เกลือ CH₃COONa ทั้งหมด · อะซิเตต (เบสคู่ของกรดอ่อน) ไฮโดรไลซ์น้ำให้ OH⁻ → <strong>pH &gt; 7 (เบสเล็กน้อย ~8.7)</strong><br><br>
+              <strong>ค) อินดิเคเตอร์:</strong> เลือก <strong>ฟีนอล์ฟทาลีน (pH 8.2–10.0)</strong> เพราะช่วงเปลี่ยนสีคร่อมจุดสมมูลที่ pH&gt;7 · ❌ ไม่ใช้ methyl orange (เปลี่ยนสีในช่วงกรด ไกลจากจุดสมมูล)<br><br>
+              <strong>หลักคิด:</strong> ชนิดเกลือที่จุดสมมูลกำหนด pH — กรดอ่อน+เบสแก่ → จุดสมมูลเป็นเบส → เลือกอินดิเคเตอร์ที่เปลี่ยนสีฝั่งเบส
+            </div>
+          </details>
+        </div>
       </div>
 
       <div class="content-section">
