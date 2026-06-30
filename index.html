@@ -7224,6 +7224,36 @@ html, body { max-width:100%; overflow-x:hidden; }
       </div>
 
       <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>โมลาริตี (M) คำนวณจากปริมาตรของอะไร?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">ปริมาตรตัวทำละลาย (น้ำ)</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">ปริมาตรสารละลายทั้งหมด</button>
+            <button class="pk-opt" onclick="pkAns(this)">ปริมาตรตัวถูกละลาย</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>ปริมาตรสารละลายทั้งหมด</strong> — M = โมล ÷ ลิตรของสารละลาย<em>รวม</em> ไม่ใช่ปริมาตรน้ำที่เติม · ส่วนโมแลลิตี (m) ใช้มวลตัวทำละลาย (kg)</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>เติมน้ำลงในสารละลาย (เจือจาง) จำนวนโมลของตัวถูกละลายจะ?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">เพิ่มขึ้น</button>
+            <button class="pk-opt" onclick="pkAns(this)">ลดลง</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">เท่าเดิม</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>เท่าเดิม</strong> เติมน้ำเพิ่มแค่ปริมาตร โมลตัวถูกละลายไม่เปลี่ยน → นี่คือเหตุผลที่ใช้สูตร M₁V₁ = M₂V₂ ได้ (โมลคงที่)</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 เจือจาง HCl 12 M ปริมาตร 50 mL — ลองปรับปริมาตรสุดท้าย ดูความเข้มข้นใหม่</div>
+          <input type="range" min="100" max="2000" step="50" value="600" oninput="var o=this.nextElementSibling;o.querySelector('.v1').textContent=this.value;o.querySelector('.v2').textContent=(12*50/this.value).toFixed(2);">
+          <div class="pk-out">เติมน้ำจนครบ <b class="v1">600</b> mL → ความเข้มข้นใหม่ = <b class="v2">1.00</b> M &nbsp;<span style="color:#9CA3AF;font-size:11px;">(M₁V₁ = M₂V₂)</span></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('dilute')">🧪 ลองแล็บ: เจือจางสารละลาย</button>
+          <button class="pk-game" onclick="PK.startQuiz('c2b5')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
+      <div class="content-section">
         <h3>🌍 การประยุกต์ใช้สารละลายในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">สารละลายอยู่รอบตัวเรา การควบคุม <strong>ความเข้มข้น</strong> ให้พอเหมาะสำคัญทั้งในการแพทย์ อาหาร และการทำความสะอาด</p>
         <div class="app-grid">
@@ -8130,6 +8160,36 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="tip-box">💡 <strong>ต่างกัน:</strong> %yield วัดประสิทธิภาพ "การทำจริง" · atom economy วัดประสิทธิภาพ "การออกแบบปฏิกิริยา" — ปฏิกิริยาที่ดีควรสูงทั้งคู่ (เชื่อมโยงบทเคมีกับการแก้ปัญหา/สิ่งแวดล้อม)</div>
       </div>
 
+      <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>เมื่อมีสารตั้งต้นสองชนิด ปริมาณผลิตภัณฑ์คำนวณจากสารใด?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">สารที่มีจำนวนโมลมากกว่า</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">สารกำหนดปริมาณ (ที่หมดก่อน)</button>
+            <button class="pk-opt" onclick="pkAns(this)">ค่าเฉลี่ยของทั้งสอง</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>สารกำหนดปริมาณ</strong> — ตัวที่หมดก่อนเป็นตัวจำกัดผลิตภัณฑ์ (หาได้โดยหารโมลด้วยสัมประสิทธิ์ แล้วดูค่าน้อยสุด) สารอีกตัวจะเหลือ</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>ปฏิกิริยาที่ทำได้ %yield 100% จะมี atom economy 100% เสมอหรือไม่?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">ใช่ เสมอ</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">ไม่เสมอ</button>
+            <button class="pk-opt" onclick="pkAns(this)">ขึ้นกับอุณหภูมิ</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>ไม่เสมอ</strong> %yield วัด "การทำจริง" · atom economy วัด "การออกแบบปฏิกิริยา" — ถ้าสมการมีผลพลอยได้ (ของเสีย) atom economy จะต่ำ แม้ %yield = 100%</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 เผามีเทน CH₄ + 2O₂ → CO₂ + 2H₂O — ลองปรับโมล CH₄ ดู CO₂ และน้ำที่ได้</div>
+          <input type="range" min="0.5" max="10" step="0.5" value="2" oninput="var o=this.nextElementSibling,n=+this.value;o.querySelector('.v1').textContent=n.toFixed(1);o.querySelector('.v2').textContent=(n*44).toFixed(1);o.querySelector('.v3').textContent=(n*2*18).toFixed(1);">
+          <div class="pk-out">CH₄ = <b class="v1">2.0</b> mol → CO₂ = <b class="v2">88.0</b> g · H₂O = <b class="v3">72.0</b> g &nbsp;<span style="color:#9CA3AF;font-size:11px;">(1:1 CO₂, 1:2 H₂O)</span></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('stoich')">🧪 ลองแล็บ: ปริมาณสัมพันธ์ / สารกำหนดปริมาณ</button>
+          <button class="pk-game" onclick="PK.startQuiz('c2b6')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
       <div class="content-section">
         <h3>🌍 การประยุกต์ใช้ปริมาณสัมพันธ์ในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">การคำนวณ <strong>สัดส่วนสารตั้งต้น-ผลิตภัณฑ์</strong> และหาสารกำหนดปริมาณ ใช้จริงตั้งแต่ในครัวจนถึงโรงงานและความปลอดภัย</p>
@@ -9688,6 +9748,36 @@ html, body { max-width:100%; overflow-x:hidden; }
       </div>
 
       <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>แก๊สที่เก็บเหนือน้ำ ใช้ความดันใดในการคำนวณ PV=nRT?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">ความดันรวมที่วัดได้</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">ความดันแก๊สแห้ง = รวม − ไอน้ำ</button>
+            <button class="pk-opt" onclick="pkAns(this)">ความดันไอน้ำ</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>หักความดันไอน้ำออกก่อน</strong> — แก๊สที่เก็บเหนือน้ำจะ "เปียก" เสมอ P(แก๊สแห้ง) = P(รวม) − P(ไอน้ำ) จึงนำไปใช้ใน PV=nRT ได้ถูก</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>เพิ่มอุณหภูมิแก๊สในภาชนะปิด (ปริมาตรคงที่) ความดันจะ?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">เพิ่มขึ้น</button>
+            <button class="pk-opt" onclick="pkAns(this)">ลดลง</button>
+            <button class="pk-opt" onclick="pkAns(this)">เท่าเดิม</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>เพิ่มขึ้น</strong> (กฎเกย์-ลูสแซก: P/T คงที่) อุณหภูมิสูง โมเลกุลเคลื่อนเร็วขึ้น ชนผนังแรงและบ่อยขึ้น → ความดันเพิ่ม (เหตุผลที่ห้ามเผากระป๋องสเปรย์)</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 กฎของบอยล์ (T, n คงที่): แก๊ส 1 atm 10 L — ลองบีบปริมาตร ดูความดัน</div>
+          <input type="range" min="1" max="10" step="0.5" value="10" oninput="var o=this.nextElementSibling;o.querySelector('.v1').textContent=(+this.value).toFixed(1);o.querySelector('.v2').textContent=(10/this.value).toFixed(2);">
+          <div class="pk-out">ปริมาตร = <b class="v1">10.0</b> L → ความดัน = <b class="v2">1.00</b> atm &nbsp;<span style="color:#9CA3AF;font-size:11px;">(P₁V₁ = P₂V₂ = 10)</span></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('gas')">🧪 ลองแล็บ: กฎของแก๊ส (PV=nRT)</button>
+          <button class="pk-game" onclick="PK.startQuiz('c3b7')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
+      <div class="content-section">
         <h3>🌍 การประยุกต์ใช้สมบัติของแก๊สในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">ความสัมพันธ์ระหว่าง <strong>ความดัน-ปริมาตร-อุณหภูมิ</strong> ของแก๊ส อธิบายอุปกรณ์และปรากฏการณ์รอบตัวได้มากมาย</p>
         <div class="app-grid">
@@ -10668,6 +10758,36 @@ html, body { max-width:100%; overflow-x:hidden; }
       </div>
 
       <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>ตัวเร่งปฏิกิริยา (catalyst) ทำให้ได้ผลิตภัณฑ์มากขึ้นหรือไม่?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">มากขึ้น เพราะเพิ่มผลผลิต</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">ไม่ — เพียงทำให้เร็วขึ้น</button>
+            <button class="pk-opt" onclick="pkAns(this)">น้อยลง เพราะถูกใช้ไป</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>เพียงทำให้เร็วขึ้น</strong> — ตัวเร่งลดพลังงานกระตุ้น (Eₐ) ทั้งขาไปและขากลับเท่ากัน ไม่เปลี่ยน ΔH, K หรือตำแหน่งสมดุล · ตัวเร่งไม่ถูกใช้หมด (ได้คืน)</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>โดยทั่วไป เมื่อเพิ่มอุณหภูมิขึ้น 10°C อัตราการเกิดปฏิกิริยาจะ?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">เพิ่มประมาณ 2 เท่า</button>
+            <button class="pk-opt" onclick="pkAns(this)">ลดลงครึ่งหนึ่ง</button>
+            <button class="pk-opt" onclick="pkAns(this)">เท่าเดิม</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>เพิ่มประมาณ 2 เท่า</strong> (กฎคร่าว ๆ) เพราะอุณหภูมิสูงขึ้น โมเลกุลมีพลังงานเกิน Eₐ มากขึ้น และชนกันบ่อย/แรงขึ้น (อาร์เรเนียส) — เหตุผลที่อาหารบูดเร็วในที่ร้อน</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 กฎคร่าว ๆ: อัตราเพิ่ม 2 เท่าต่อ 10°C — ลองปรับอุณหภูมิจาก 25°C</div>
+          <input type="range" min="25" max="85" step="5" value="25" oninput="var o=this.nextElementSibling;o.querySelector('.v1').textContent=this.value;o.querySelector('.v2').textContent=Math.pow(2,(this.value-25)/10).toFixed(1);">
+          <div class="pk-out">อุณหภูมิ = <b class="v1">25</b> °C → อัตราเป็นประมาณ <b class="v2">1.0</b> เท่าของเดิม &nbsp;<span style="color:#9CA3AF;font-size:11px;">(rate ≈ 2^(ΔT/10))</span></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('rate')">🧪 ลองแล็บ: อัตราการเกิดปฏิกิริยา</button>
+          <button class="pk-game" onclick="PK.startQuiz('c3b8')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
+      <div class="content-section">
         <h3>🌍 การประยุกต์ใช้อัตราการเกิดปฏิกิริยาในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">เราควบคุม <strong>ความเร็วของปฏิกิริยา</strong> ตลอดเวลา — เร่งให้เร็วขึ้น (ตัวเร่ง พื้นที่ผิว) หรือชะลอให้ช้าลง (ความเย็น สารกันบูด)</p>
         <div class="app-grid">
@@ -11612,6 +11732,36 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="tip-box">💡 <strong>ความเชื่อมโยงกับเทอร์โมไดนามิกส์:</strong> ΔG° = −RT ln K (ใช้ที่ <em>สภาวะมาตรฐาน</em> เท่านั้น) ดังนั้น K &gt; 1 ↔ ΔG° &lt; 0 (เกิดเองที่สภาวะมาตรฐาน) · K = 1 ↔ ΔG° = 0 · K &lt; 1 ↔ ΔG° &gt; 0<br>สำหรับสภาวะ <em>ไม่มาตรฐาน</em> ใช้: ΔG = ΔG° + RT ln Q · ที่ภาวะสมดุล Q = K → ΔG = 0</div>
       </div>
 
+      <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>เพิ่มความเข้มข้นสารตั้งต้นในระบบสมดุล ค่าคงที่สมดุล K จะ?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">เพิ่มขึ้น</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">ไม่เปลี่ยน</button>
+            <button class="pk-opt" onclick="pkAns(this)">ลดลง</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>ไม่เปลี่ยน</strong> — ตำแหน่งสมดุลเลื่อนไปข้างหน้าเพื่อชดเชย แต่ค่า K คงเดิม · <em>มีเพียงอุณหภูมิ</em> เท่านั้นที่ทำให้ K เปลี่ยนค่า</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>ปฏิกิริยาคายความร้อน (ΔH&lt;0) เมื่อเพิ่มอุณหภูมิ สมดุลจะเลื่อนไปทางใด?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">ขวา (ได้ผลิตภัณฑ์มากขึ้น)</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">ซ้าย (กลับเป็นสารตั้งต้น)</button>
+            <button class="pk-opt" onclick="pkAns(this)">ไม่เลื่อน</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>ซ้าย</strong> มองความร้อนเป็น "ผลิตภัณฑ์" ของปฏิกิริยาคายความร้อน เพิ่มอุณหภูมิ = เพิ่มผลิตภัณฑ์ → เลื่อนไปทิศดูดความร้อน (ซ้าย) และ K ลดลง</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 ระบบ A + B ⇌ 2C (K=49, ให้ [A]=[B]=1) — ลองปรับ [C] ดูทิศที่สมดุลจะเลื่อน</div>
+          <input type="range" min="0" max="12" step="0.5" value="7" oninput="var o=this.nextElementSibling,c=+this.value,Q=c*c;o.querySelector('.v1').textContent=c.toFixed(1);o.querySelector('.v2').textContent=Q.toFixed(1);o.querySelector('.v3').textContent=(Q<49?'Q<K → เลื่อนขวา (สร้าง C)':Q>49?'Q>K → เลื่อนซ้าย (สลาย C)':'Q=K → สมดุลพอดี');">
+          <div class="pk-out">[C] = <b class="v1">7.0</b> → Q = [C]²/([A][B]) = <b class="v2">49.0</b> → <b class="v3">Q=K → สมดุลพอดี</b></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('equil')">🧪 ลองแล็บ: สมดุลเคมี (เลอชาเตอลิเอ)</button>
+          <button class="pk-game" onclick="PK.startQuiz('c3b9')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
       <div class="content-section">
         <h3>🌍 การประยุกต์ใช้สมดุลเคมีในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">หลัก <strong>เลอชาเตอลิเอ</strong> ใช้ปรับภาวะ (ความเข้มข้น ความดัน อุณหภูมิ) เพื่อเลื่อนสมดุลไปทางที่ต้องการ ทั้งในร่างกาย ธรรมชาติ และอุตสาหกรรม</p>
