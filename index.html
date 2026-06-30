@@ -14216,6 +14216,57 @@ html, body { max-width:100%; overflow-x:hidden; }
             </div>
           </details>
         </div>
+        <div class="problem-topic-header">📑 หมวด J — วิเคราะห์/สถานการณ์จริง <span class="prob-level lv3">🔴 ระดับ 3</span></div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J1 — เชื่อม E°cell → ΔG° → K</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> เซลล์กัลวานิก Zn|Zn²⁺ || Cu²⁺|Cu มี E°(Zn²⁺/Zn) = −0.76 V และ E°(Cu²⁺/Cu) = +0.34 V จงหา (ก) E°cell (ข) ΔG° (ค) ค่าคงที่สมดุล K ที่ 298 K<br>
+            <strong>กำหนด:</strong> F = 96500 C/mol, n = 2, ΔG° = −nFE°, log K = nE°/0.0592
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) E°cell:</strong> = E°(แคโทด) − E°(แอโนด) = (+0.34) − (−0.76) = <strong>+1.10 V</strong> (บวก → เกิดเองได้)<br><br>
+              <strong>ข) ΔG°:</strong> = −nFE° = −(2)(96500)(1.10) = <strong>−2.12×10⁵ J = −212 kJ</strong> (ลบ → spontaneous ✓)<br><br>
+              <strong>ค) หา K:</strong> log K = nE°/0.0592 = (2)(1.10)/0.0592 = 2.20/0.0592 = 37.2<br>
+              K = 10^37.2 = <strong>~1.6×10³⁷</strong> (ใหญ่มาก → ปฏิกิริยาเกิดเกือบสมบูรณ์)<br><br>
+              <strong>ตรวจสอบความสอดคล้อง:</strong> E° บวก ↔ ΔG° ลบ ↔ K มาก — ทั้งสามตัวบอกเรื่องเดียวกัน (ปฏิกิริยาเกิดเองและเกือบสมบูรณ์) ✓
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J2 — สมการเนิร์นสต์ (ไม่ใช่สภาวะมาตรฐาน)</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> เซลล์ Zn|Zn²⁺(0.10 M) || Cu²⁺(1.0 M)|Cu (E°cell = +1.10 V) จงหา Ecell ที่ความเข้มข้นนี้ ที่ 298 K<br>
+            <strong>กำหนด:</strong> Ecell = E°cell − (0.0592/n)·log Q, n = 2
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>เขียน Q:</strong> ปฏิกิริยา Zn + Cu²⁺ → Zn²⁺ + Cu → Q = <span class="frac"><span class="n">[Zn²⁺]</span><span class="d">[Cu²⁺]</span></span> = <span class="frac"><span class="n">0.10</span><span class="d">1.0</span></span> = 0.10<br><br>
+              <strong>เนิร์นสต์:</strong> Ecell = 1.10 − (0.0592/2)·log(0.10)<br>
+              = 1.10 − (0.0296)(−1) = 1.10 + 0.0296 = <strong>+1.13 V</strong><br><br>
+              <strong>ตีความ:</strong> [Zn²⁺] ต่ำกว่ามาตรฐาน → Q &lt; 1 → log Q ติดลบ → Ecell <em>สูงกว่า</em> E°cell เล็กน้อย (สอดคล้องเลอชาเตอลิเอ: ผลิตภัณฑ์น้อย ดันปฏิกิริยาไปข้างหน้า แรงดันไฟเพิ่ม) ✓
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J3 — กฎฟาราเดย์ในการชุบโลหะ</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> ชุบเงิน (Ag) บนช้อนโดยผ่านกระแส 2.0 A เป็นเวลา 30 นาที ในสารละลาย AgNO₃ จงหา (ก) ประจุไฟฟ้าทั้งหมด (ข) มวลเงินที่เคลือบ (ค) ถ้าเปลี่ยนเป็นชุบทองแดง (Cu²⁺) ด้วยประจุเท่ากัน จะได้ Cu กี่กรัม<br>
+            <strong>กำหนด:</strong> F = 96500 C/mol, Ag⁺ + e⁻ → Ag (Mw Ag=108), Cu²⁺ + 2e⁻ → Cu (Mw Cu=64)
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) ประจุ:</strong> Q = I·t = 2.0 × (30×60) = 2.0 × 1800 = <strong>3600 C</strong><br>
+              <strong>โมลอิเล็กตรอน:</strong> = Q/F = 3600/96500 = 0.0373 mol e⁻<br><br>
+              <strong>ข) มวล Ag:</strong> Ag⁺ + e⁻ → Ag (1 e⁻ ต่อ 1 Ag) → mol Ag = 0.0373 → มวล = 0.0373×108 = <strong>4.03 g</strong><br><br>
+              <strong>ค) มวล Cu:</strong> Cu²⁺ + 2e⁻ → Cu (2 e⁻ ต่อ 1 Cu) → mol Cu = 0.0373/2 = 0.01865 → มวล = 0.01865×64 = <strong>1.19 g</strong><br><br>
+              <strong>หลักคิด:</strong> ประจุเท่ากันให้โมลอิเล็กตรอนเท่ากัน แต่มวลโลหะต่างกันตาม "ประจุของไอออน" (Cu²⁺ ต้องใช้ 2 e⁻ ต่ออะตอม จึงได้โมลน้อยกว่า)
+            </div>
+          </details>
+        </div>
       </div>
 
       <div class="content-section">
