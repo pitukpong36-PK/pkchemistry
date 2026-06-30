@@ -3185,6 +3185,49 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="tip-box">
           💡 <strong>จำกฎคำนวณง่าย ๆ:</strong> "<strong>บวก-ลบ นับจุด</strong> (ทศนิยม) · <strong>คูณ-หาร นับตัว</strong> (เลขนัยสำคัญ)"
         </div>
+        <h4>ความไม่แน่นอนของการวัด (Uncertainty) และการอ่านสเกล</h4>
+        <p style="font-size:13px;color:#374151;line-height:1.6;">ทุกการวัดมี <strong>ความไม่แน่นอน</strong> เสมอ ตัวเลขที่อ่านได้ตัวสุดท้ายเป็น <em>ตัวประมาณ</em> (estimated digit) เพราะตาเราต้องคาดเดาระหว่างขีดสเกลที่เล็กที่สุด หลักสากลคือบันทึกได้ <strong>ละเอียดกว่าขีดสเกลที่เล็กที่สุดอีก 1 ตำแหน่ง</strong> และรายงานค่าความไม่แน่นอน ≈ <strong>±ครึ่งหนึ่งของขีดเล็กที่สุด</strong> (สำหรับเครื่องมืออ่านสเกล)</p>
+        <div class="formula-box">
+          <div class="formula-label">📐 การอ่านสเกลไม้บรรทัด — ตัวเลขประมาณตัวสุดท้าย</div>
+          <svg viewBox="0 0 520 150" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+            <!-- ruler body -->
+            <rect x="30" y="40" width="460" height="46" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+            <!-- major ticks every 92px = 1 cm (5 intervals: 0..5) -->
+            <g stroke="#92400E" stroke-width="1.5">
+              <line x1="30" y1="40" x2="30" y2="74"/>
+              <line x1="122" y1="40" x2="122" y2="74"/>
+              <line x1="214" y1="40" x2="214" y2="74"/>
+              <line x1="306" y1="40" x2="306" y2="74"/>
+              <line x1="398" y1="40" x2="398" y2="74"/>
+              <line x1="490" y1="40" x2="490" y2="74"/>
+            </g>
+            <!-- minor ticks every ~18.4px = 0.2 cm -->
+            <g stroke="#B45309" stroke-width="0.8">
+              <line x1="48.4" y1="40" x2="48.4" y2="58"/><line x1="66.8" y1="40" x2="66.8" y2="58"/><line x1="85.2" y1="40" x2="85.2" y2="58"/><line x1="103.6" y1="40" x2="103.6" y2="58"/>
+              <line x1="140.4" y1="40" x2="140.4" y2="58"/><line x1="158.8" y1="40" x2="158.8" y2="58"/><line x1="177.2" y1="40" x2="177.2" y2="58"/><line x1="195.6" y1="40" x2="195.6" y2="58"/>
+              <line x1="232.4" y1="40" x2="232.4" y2="58"/><line x1="250.8" y1="40" x2="250.8" y2="58"/><line x1="269.2" y1="40" x2="269.2" y2="58"/><line x1="287.6" y1="40" x2="287.6" y2="58"/>
+            </g>
+            <!-- numbers -->
+            <g font-size="11" fill="#92400E" text-anchor="middle" font-weight="700">
+              <text x="30" y="100">0</text><text x="122" y="100">1</text><text x="214" y="100">2</text><text x="306" y="100">3</text><text x="398" y="100">4</text><text x="490" y="100">5 cm</text>
+            </g>
+            <!-- object end pointer at ~2.74 cm -->
+            <line x1="282" y1="20" x2="282" y2="86" stroke="#DC2626" stroke-width="2"/>
+            <polygon points="282,18 277,8 287,8" fill="#DC2626"/>
+            <text x="282" y="132" font-size="11" fill="#DC2626" text-anchor="middle" font-weight="700">อ่านได้ ≈ 2.74 cm</text>
+            <text x="370" y="30" font-size="9.5" fill="#374151">ขีดเล็กสุด = 0.2 cm</text>
+            <text x="370" y="42" font-size="9.5" fill="#0F766E">"4" = ตัวประมาณ → ±0.1 cm</text>
+          </svg>
+          ปลายวัตถุอยู่ระหว่างขีด 2.6 และ 2.8 cm → อ่านแน่ใจ "2.7" และ <em>ประมาณ</em> ตัวถัดไปเป็น "4" → รายงาน <strong>2.74 ± 0.1 cm</strong> (3 เลขนัยสำคัญ)
+        </div>
+        <h4>ร้อยละความคลาดเคลื่อน (Percent Error)</h4>
+        <div class="formula-box">
+          <div class="formula-label">เชื่อม "ความแม่น" เข้ากับตัวเลข</div>
+          ร้อยละความคลาดเคลื่อน = <span class="frac"><span class="n">|ค่าที่วัดได้ − ค่าจริง|</span><span class="d">ค่าจริง</span></span> × 100%<br><br>
+          <em>ตัวอย่าง:</em> วัดความหนาแน่นของน้ำได้ 0.985 g/cm³ ค่าจริง 1.000 g/cm³<br>
+          = <span class="frac"><span class="n">|0.985 − 1.000|</span><span class="d">1.000</span></span> × 100% = <strong>1.5%</strong> → ยิ่งน้อยยิ่งแม่น
+        </div>
+        <div class="tip-box">💡 <strong>แยกให้ออก:</strong> ร้อยละความคลาดเคลื่อน (percent error) บอก <em>ความแม่น</em> (ใกล้ค่าจริงไหม) ส่วนความไม่แน่นอน ± และการกระจายของค่าซ้ำ ๆ บอก <em>ความเที่ยง</em> (วัดซ้ำแล้วใกล้กันไหม)</div>
         <h4>หน่วย SI และแฟกเตอร์เปลี่ยนหน่วย</h4>
         <table class="content-table">
           <tr><th>ปริมาณ</th><th>หน่วย SI</th><th>สัญลักษณ์</th></tr>
@@ -3850,6 +3893,64 @@ html, body { max-width:100%; overflow-x:hidden; }
             </div>
           </details>
         </div>
+        <div class="problem-topic-header">📑 หมวด J — วิเคราะห์/สถานการณ์จริง <span class="prob-level lv3">🔴 ระดับ 3</span></div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J1 — อุบัติเหตุในแล็บ: ตัดสินใจหลายขั้น</h4>
+          <div class="problem-statement">
+            <strong>สถานการณ์:</strong> ระหว่างเจือจาง H₂SO₄ เข้มข้น เพื่อนเทน้ำลงในขวดกรด ทำให้สารกระเด็นโดนแขนและหก 50 mL บนโต๊ะ จงตอบ<br>
+            ก) เพื่อนทำผิดขั้นตอนใด และที่ถูกต้องคืออะไร (พร้อมเหตุผลเชิงพลังงาน)<br>
+            ข) ลำดับการปฐมพยาบาลแขนที่โดนกรด<br>
+            ค) จะทำให้กรดที่หกบนโต๊ะเป็นกลางก่อนเช็ดทิ้งด้วยสารใด และเขียนแนวคิดปฏิกิริยา
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) ขั้นตอนที่ผิด:</strong> เท "น้ำลงกรด" — ต้องเท <strong>กรดลงน้ำ</strong> (Add Acid, A-A)<br>
+              เหตุผล: การละลายกรดในน้ำคายความร้อนสูงมาก ถ้าเทน้ำลงกรด น้ำปริมาณน้อยที่ผิวจะร้อนจัดจนเดือดทันที → กระเซ็นกรด · การเทกรดลงน้ำ (น้ำมาก) ช่วยกระจายความร้อนให้เจือจาง<br><br>
+              <strong>ข) ปฐมพยาบาลแขน:</strong> ① ถอดเครื่องประดับ/เสื้อบริเวณนั้น → ② ล้างด้วยน้ำสะอาดไหลผ่าน <strong>≥ 15 นาที</strong> → ③ ห้ามทาครีม/เบกกิ้งโซดาลงแผลโดยตรง (ความร้อนจากการสะเทินทำแผลแย่ลง) → ④ แจ้งครูและไปพบแพทย์<br><br>
+              <strong>ค) ทำกรดที่หกให้เป็นกลาง:</strong> โรยผง <strong>โซเดียมไบคาร์บอเนต (NaHCO₃)</strong> ซึ่งเป็นเบสอ่อน ปลอดภัยกว่าเบสแก่<br>
+              แนวคิดปฏิกิริยา: H₂SO₄ + 2NaHCO₃ → Na₂SO₄ + 2H₂O + 2CO₂↑ (ฟองแก๊สบอกว่ายังสะเทินอยู่ หยุดเมื่อไม่เกิดฟอง)<br><br>
+              <strong>สรุปแนวคิด:</strong> ความปลอดภัย = ป้องกัน (ทำถูกขั้นตอน) + ตอบสนอง (ปฐมพยาบาล) + จัดการของเสีย (สะเทินก่อนทิ้ง)
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J2 — รายงานผลแล็บ: เลขนัยสำคัญ + ความคลาดเคลื่อน</h4>
+          <div class="problem-statement">
+            <strong>สถานการณ์:</strong> นักเรียนหามวลของสาร 3 ครั้งได้ 12.46, 12.44, 12.51 g และวัดปริมาตรด้วยกระบอกตวง (ขีดเล็กสุด 1 mL) ได้ 5.0 mL เพื่อหาความหนาแน่น โดยค่าจริงของสารคือ 2.40 g/cm³ จงตอบ<br>
+            ก) มวลเฉลี่ยควรรายงานกี่เลขนัยสำคัญ<br>
+            ข) ความหนาแน่นที่คำนวณได้ (ใส่ SF ให้ถูก)<br>
+            ค) ร้อยละความคลาดเคลื่อน และข้อมูลชุดนี้ "แม่น" หรือ "เที่ยง" มากกว่ากัน
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) มวลเฉลี่ย:</strong> (12.46 + 12.44 + 12.51) ÷ 3 = 37.41 ÷ 3 = 12.47 g (ข้อมูลมีทศนิยม 2 ตำแหน่ง → รายงาน <strong>12.47 g</strong>, 4 SF)<br><br>
+              <strong>ข) ความหนาแน่น:</strong> ปริมาตร 5.0 mL มีเพียง <strong>2 SF</strong> (ตัวจำกัด)<br>
+              ρ = <span class="frac"><span class="n">มวล</span><span class="d">ปริมาตร</span></span> = <span class="frac"><span class="n">12.47 g</span><span class="d">5.0 cm³</span></span> = 2.494 → ปัดเหลือ 2 SF = <strong>2.5 g/cm³</strong><br><br>
+              <strong>ค) ร้อยละความคลาดเคลื่อน:</strong> = <span class="frac"><span class="n">|2.5 − 2.40|</span><span class="d">2.40</span></span> × 100% ≈ <strong>4%</strong><br>
+              ค่าวัดมวล 3 ครั้งใกล้กันมาก (เกาะกลุ่ม) → <strong>เที่ยงสูง</strong> · แต่ผลรวมเบนจากค่าจริง ~4% → ความแม่นปานกลาง โดยตัวจำกัดความแม่นคือปริมาตรที่อ่านได้หยาบ (กระบอกตวงขีด 1 mL)<br><br>
+              <strong>ข้อคิด:</strong> ผลลัพธ์ "แม่น" ได้ไม่เกินเครื่องมือที่หยาบที่สุดในการทดลอง — ถ้าอยากแม่นขึ้น ควรเปลี่ยนไปใช้บิวเรต/ปิเปตแทนกระบอกตวง
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J3 — ออกแบบการแยกของผสม 3 องค์ประกอบ</h4>
+          <div class="problem-statement">
+            <strong>สถานการณ์:</strong> มีของผสมแข็งของ เกลือแกง (NaCl, ละลายน้ำ) + ทราย (SiO₂, ไม่ละลายน้ำ) + ผงเหล็ก (Fe) จงออกแบบลำดับขั้นตอนแยกให้ได้ทั้ง 3 อย่างคืนมาในสภาพแยกจากกัน พร้อมบอกสมบัติที่ใช้ในแต่ละขั้น
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ลำดับการแยก (ใช้สมบัติที่ต่างกันทีละอย่าง):</strong><br>
+              ① <strong>ใช้แม่เหล็ก</strong> ดูดผงเหล็กออกก่อน — อาศัยสมบัติ <em>ความเป็นแม่เหล็ก</em> (เฉพาะ Fe)<br>
+              ② เติมน้ำลงของผสมที่เหลือ (NaCl + ทราย) คนให้เกลือละลาย แล้ว <strong>กรอง</strong> — อาศัย <em>การละลายน้ำต่างกัน</em> → ทรายค้างบนกระดาษกรอง, ได้น้ำเกลือเป็นสารกรอง<br>
+              ③ นำน้ำเกลือไป <strong>ระเหยแห้ง</strong> (evaporation) — อาศัย <em>จุดเดือดต่างกัน</em> น้ำระเหยไป เหลือผลึก NaCl<br><br>
+              <strong>ผลลัพธ์:</strong> ได้ Fe (ขั้น ①), ทราย (ขั้น ②), NaCl (ขั้น ③) แยกกันครบ<br>
+              <strong>หลักคิดทั่วไป:</strong> แยกของผสมหลายองค์ประกอบ = ไล่จัดการ "สมบัติที่ต่างกันมากที่สุด" ก่อน (แม่เหล็ก → การละลาย → จุดเดือด) ทีละสมบัติ
+            </div>
+          </details>
+        </div>
       </div>
 
       <div class="content-section">
@@ -3865,6 +3966,9 @@ html, body { max-width:100%; overflow-x:hidden; }
           • <strong>°C → K:</strong> T(K) = T(°C) + 273<br>
           • <strong>STP:</strong> 0°C, 1 atm (273 K, 101,325 Pa)<br>
           • <strong>เทคนิคแยกสาร:</strong> Filtration (ขนาด), Distillation (จุดเดือด), Chromatography (สัมพรรคภาพ), Evaporation (ระเหย)<br>
+          • <strong>อ่านสเกล:</strong> บันทึกละเอียดกว่าขีดเล็กสุด 1 ตำแหน่ง (ตัวสุดท้าย = ตัวประมาณ) ความไม่แน่นอน ≈ ±ครึ่งขีดเล็กสุด<br>
+          • <strong>ร้อยละความคลาดเคลื่อน:</strong> |วัด−จริง| ÷ จริง × 100% (ยิ่งน้อยยิ่งแม่น)<br>
+          • <strong>แยกของผสมหลายอย่าง:</strong> ไล่จัดการสมบัติที่ต่างกันมากสุดก่อน (แม่เหล็ก → ละลาย → จุดเดือด) ทีละขั้น<br>
           • <strong>วิธีการทาง Sci:</strong> ตั้งปัญหา → สมมติฐาน → ทดลอง → วิเคราะห์ → สรุป → เผยแพร่
         </div>
         <h4>⚠️ ความเข้าใจผิดที่พบบ่อย</h4>
@@ -3876,6 +3980,9 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>"ลิตมัส = pH meter"</td><td>ลิตมัสบอกแค่กรด/เบส · pH meter วัดค่าตัวเลข pH ได้แม่น</td></tr>
           <tr><td>"PM 2.5 = PM 10"</td><td>ต่างกัน — PM 2.5 เล็กกว่า อันตรายกว่าเพราะลงปอดลึก</td></tr>
           <tr><td>"ทดลองครั้งเดียวพอ"</td><td>ผิด — ต้องทำซ้ำ ≥ 3 ครั้ง → เฉลี่ย ลด random error</td></tr>
+          <tr><td>"วัดได้ค่าเป๊ะ ไม่มีความคลาดเคลื่อน"</td><td>ทุกการวัดมีความไม่แน่นอน ตัวเลขตัวสุดท้ายเป็นตัวประมาณเสมอ → ต้องรายงาน ±</td></tr>
+          <tr><td>"ใช้เครื่องมือละเอียดขึ้น ผลแม่นขึ้นแน่"</td><td>ความแม่นถูกจำกัดด้วยเครื่องมือที่ <em>หยาบที่สุด</em> ในการทดลอง — ต้องอัปเกรดจุดนั้น</td></tr>
+          <tr><td>"percent error น้อย = เที่ยง"</td><td>percent error น้อย = <em>แม่น</em> (ใกล้ค่าจริง) · ความเที่ยงดูที่ค่าซ้ำ ๆ เกาะกลุ่มกันไหม</td></tr>
         </table>
         <div style="margin-top:14px;padding:14px 16px;background:linear-gradient(135deg,#CCFBF1 0%,#F0FDFA 100%);border-radius:10px;border-left:4px solid #14B8A6;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
@@ -18778,6 +18885,7 @@ const GameHub = window.GameHub = {};
 GameHub._cur='hub'; GameHub._winCtx=null;
 GameHub.open = (g)=>{
   $('gameHub').style.display='none';
+  $('winOverlay').classList.remove('open');
   ['marble','snake','match','rpg','bingo','chemle','ions','titrate','alchemy'].forEach(k=>{ const el=$(k+'Game'); if(el) el.style.display=(k===g)?'':'none'; });
   GameHub._cur=g;
   if(g==='marble') Game.toMenu();
