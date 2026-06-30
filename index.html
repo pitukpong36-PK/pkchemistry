@@ -12920,6 +12920,36 @@ html, body { max-width:100%; overflow-x:hidden; }
       </div>
 
       <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>สารละลายบัฟเฟอร์ทำหน้าที่อะไร?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">ทำให้สารละลายเป็นกลาง (pH 7)</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">ต้านการเปลี่ยน pH เมื่อเติมกรด/เบสเล็กน้อย</button>
+            <button class="pk-opt" onclick="pkAns(this)">เพิ่มความเข้มข้นของกรด</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>ต้านการเปลี่ยน pH</strong> — บัฟเฟอร์ (กรดอ่อน + เบสคู่) ดูดซับ H⁺/OH⁻ ที่เติมเข้าไป ทำให้ pH เปลี่ยนน้อยมาก · เลือดคนเราเป็นบัฟเฟอร์ (pH ~7.4)</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>ไทเทรตกรดอ่อน (เช่น CH₃COOH) ด้วยเบสแก่ (NaOH) ที่จุดสมมูล pH จะเป็นอย่างไร?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">น้อยกว่า 7 (กรด)</button>
+            <button class="pk-opt" onclick="pkAns(this)">เท่ากับ 7 (กลาง)</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">มากกว่า 7 (เบส)</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>มากกว่า 7</strong> ที่จุดสมมูลได้เกลือ (เช่น CH₃COONa) เบสคู่ของกรดอ่อนไฮโดรไลซ์น้ำให้ OH⁻ → pH&gt;7 จึงเลือกฟีนอล์ฟทาลีนเป็นอินดิเคเตอร์</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 ลองปรับความเข้มข้น [H⁺] = 10⁻ⁿ แล้วดู pH และความเป็นกรด-เบส</div>
+          <input type="range" min="1" max="13" step="1" value="7" oninput="var o=this.nextElementSibling,n=+this.value;o.querySelector('.v1').textContent=n;o.querySelector('.v2').textContent=n;o.querySelector('.v3').textContent=(n<7?'กรด':n>7?'เบส':'กลาง');">
+          <div class="pk-out">[H⁺] = 10⁻<b class="v1">7</b> M → pH = <b class="v2">7</b> → สารละลายเป็น <b class="v3">กลาง</b> &nbsp;<span style="color:#9CA3AF;font-size:11px;">(pH = −log[H⁺])</span></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('titrate')">🧪 ลองแล็บ: ไทเทรตกรด-เบส</button>
+          <button class="pk-game" onclick="PK.startQuiz('c4b10')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
+      <div class="content-section">
         <h3>🌍 การประยุกต์ใช้กรด-เบสในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">กรด-เบสอยู่รอบตัวทั้งในอาหาร ของใช้ และร่างกาย การควบคุม <strong>ค่า pH</strong> และปฏิกิริยาสะเทินมีความสำคัญมาก</p>
         <div class="app-grid">
@@ -14009,6 +14039,36 @@ html, body { max-width:100%; overflow-x:hidden; }
       </div>
 
       <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>ในเซลล์ไฟฟ้าเคมี ขั้ว "แอโนด" เกิดปฏิกิริยาอะไร?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">รีดักชัน (รับอิเล็กตรอน)</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">ออกซิเดชัน (ให้อิเล็กตรอน)</button>
+            <button class="pk-opt" onclick="pkAns(this)">ไม่เกิดปฏิกิริยา</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>ออกซิเดชัน</strong> — จำว่า "An Ox" (Anode = Oxidation) อิเล็กตรอนไหลออกจากแอโนดไปยังแคโทด (ที่เกิดรีดักชัน "Red Cat")</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>ถ้า E°cell ของเซลล์เป็นค่าบวก แสดงว่าปฏิกิริยา?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">เกิดเองได้ (spontaneous)</button>
+            <button class="pk-opt" onclick="pkAns(this)">ไม่เกิดเอง ต้องใช้ไฟฟ้า</button>
+            <button class="pk-opt" onclick="pkAns(this)">อยู่ที่สมดุลพอดี</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>เกิดเองได้</strong> E°cell บวก ↔ ΔG° ลบ ↔ K มาก (ทั้งสามบอกเรื่องเดียวกัน) · ถ้า E° ลบ ปฏิกิริยาไม่เกิดเอง ต้องป้อนไฟ (อิเล็กโทรไลซิส)</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 ลองปรับ E°cell (n=2 อิเล็กตรอน) แล้วดูพลังงานอิสระ ΔG° = −nFE°</div>
+          <input type="range" min="0.1" max="2.5" step="0.05" value="1.1" oninput="var o=this.nextElementSibling,E=+this.value;o.querySelector('.v1').textContent=E.toFixed(2);o.querySelector('.v2').textContent=(-2*96500*E/1000).toFixed(0);">
+          <div class="pk-out">E°cell = <b class="v1">1.10</b> V → ΔG° = <b class="v2">-212</b> kJ &nbsp;<span style="color:#9CA3AF;font-size:11px;">(ติดลบ = เกิดเองได้)</span></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('electro')">🧪 ลองแล็บ: เซลล์ไฟฟ้าเคมี (กัลวานิก)</button>
+          <button class="pk-game" onclick="PK.startQuiz('c4b11')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
+      <div class="content-section">
         <h3>🌍 การประยุกต์ใช้เคมีไฟฟ้าในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">เคมีไฟฟ้าอยู่รอบตัวเรา ทั้ง <strong>เซลล์กัลวานิก</strong> ที่เปลี่ยนพลังงานเคมีเป็นไฟฟ้า (แบตเตอรี่ เซลล์เชื้อเพลิง) และ <strong>เซลล์อิเล็กโทรไลต์</strong> ที่ใช้ไฟฟ้าขับปฏิกิริยา (ชุบโลหะ แยกสารด้วยไฟฟ้า)</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;">
@@ -14949,6 +15009,36 @@ html, body { max-width:100%; overflow-x:hidden; }
       </div>
 
       <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>ออกซิไดซ์แอลกอฮอล์ปฐมภูมิ (1°) จะได้สารใดก่อน?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">คีโตน (ketone)</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">แอลดีไฮด์ (aldehyde)</button>
+            <button class="pk-opt" onclick="pkAns(this)">ไม่ถูกออกซิไดซ์</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>แอลดีไฮด์</strong> แล้วออกซิไดซ์ต่อเป็นกรดคาร์บอกซิลิก · จำว่า 1° → aldehyde → acid · 2° → ketone (หยุด) · 3° → ไม่ถูกออกซิไดซ์</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>โพรพีน (CH₃−CH=CH₂) + HBr ตามกฎ Markovnikov — Br จะเกาะคาร์บอนใด?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">คาร์บอนที่มี H มากกว่า</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">คาร์บอนที่มี H น้อยกว่า</button>
+            <button class="pk-opt" onclick="pkAns(this)">เกาะทั้งสองคาร์บอน</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>คาร์บอนที่มี H น้อยกว่า</strong> (กฎ Markovnikov: "รวยยิ่งรวย" H ไปเติม C ที่มี H มากอยู่แล้ว) → ได้ 2-bromopropane เป็นผลิตภัณฑ์หลัก</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 แอลเคน CₙH₂ₙ₊₂ — ลองปรับจำนวนคาร์บอน (n) ดูสูตรโมเลกุล</div>
+          <input type="range" min="1" max="10" step="1" value="3" oninput="var o=this.nextElementSibling,n=+this.value;o.querySelector('.v1').textContent=n;o.querySelector('.v2').textContent=n;o.querySelector('.v3').textContent=(2*n+2);o.querySelector('.v4').textContent=(n*12+(2*n+2)).toFixed(0);">
+          <div class="pk-out">n = <b class="v1">3</b> → สูตร C<b class="v2">3</b>H<b class="v3">8</b> · มวลโมเลกุล = <b class="v4">44</b> g/mol &nbsp;<span style="color:#9CA3AF;font-size:11px;">(H = 2n+2)</span></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('organic')">🧪 ลองแล็บ: เคมีอินทรีย์ (หมู่ฟังก์ชัน)</button>
+          <button class="pk-game" onclick="PK.startQuiz('c5b12')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
+      <div class="content-section">
         <h3>🌍 การประยุกต์ใช้เคมีอินทรีย์ในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">สารประกอบคาร์บอน (อินทรีย์) อยู่ในแทบทุกสิ่ง — เชื้อเพลิง อาหาร ยา เครื่องสำอาง และพลาสติก โดยมี <strong>หมู่ฟังก์ชัน</strong> กำหนดสมบัติ</p>
         <div class="app-grid">
@@ -15757,6 +15847,36 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="tip-box">💡 ยางธรรมชาติ = cis-1,4-polyisoprene | วัลคาไนเซชัน (ใส่ S) → ยางแข็งแรงทนน้ำมัน | PLA (polylactic acid) จากแป้ง — ย่อยสลายได้ทางชีวภาพ ตัวอย่างเคมีสีเขียว</div>
       </div>
 
+      <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>PET และไนลอนเกิดจากการเกิดพอลิเมอร์แบบใด?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">แบบเติม (addition)</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">แบบควบแน่น (condensation, ปล่อยน้ำ)</button>
+            <button class="pk-opt" onclick="pkAns(this)">ไม่ใช่พอลิเมอร์</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>แบบควบแน่น</strong> — มอนอเมอร์มี 2 หมู่ฟังก์ชัน (−COOH กับ −OH/−NH₂) ต่อกันแล้วปล่อยน้ำออก · ส่วน PE/PP/PVC เกิดแบบเติม (มอนอเมอร์มีพันธะคู่ C=C ไม่มีของเสีย)</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>เมื่อสายโซ่พอลิเมอร์ยาวขึ้น (องศาพอลิเมอไรเซชัน DP สูงขึ้น) สมบัติจะเป็นอย่างไร?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">แข็งแรงขึ้น จุดหลอมสูงขึ้น</button>
+            <button class="pk-opt" onclick="pkAns(this)">อ่อนลง จุดหลอมต่ำลง</button>
+            <button class="pk-opt" onclick="pkAns(this)">ไม่เปลี่ยนแปลง</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>แข็งแรงขึ้น</strong> สายยิ่งยาว แรงระหว่างโมเลกุล (เช่น London) ยิ่งสะสมมาก ทำให้พอลิเมอร์แข็งแรงและจุดหลอมเหลวสูงกว่ามอนอเมอร์มาก</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 พอลิเอทิลีน (หน่วยซ้ำ −CH₂CH₂− = 28 g/mol) — ลองปรับ DP ดูมวลโมเลกุล</div>
+          <input type="range" min="100" max="5000" step="100" value="2500" oninput="var o=this.nextElementSibling,dp=+this.value;o.querySelector('.v1').textContent=dp;o.querySelector('.v2').textContent=(dp*28).toLocaleString();o.querySelector('.v3').textContent=(dp*2).toLocaleString();">
+          <div class="pk-out">DP = <b class="v1">2500</b> หน่วย → มวลโมเลกุล ≈ <b class="v2">70,000</b> g/mol · จำนวนคาร์บอน = <b class="v3">5,000</b> อะตอม</div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('polymer')">🧪 ลองแล็บ: พอลิเมอร์</button>
+          <button class="pk-game" onclick="PK.startQuiz('c5b13')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
+      </div>
       <div class="content-section">
         <h3>🌍 การประยุกต์ใช้พอลิเมอร์ในชีวิตประจำวัน</h3>
         <p style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:12px;">พอลิเมอร์แต่ละชนิดถูกเลือกใช้ตาม <strong>สมบัติ</strong> เช่น ความเหนียว ความใส ทนความร้อน เป็นฉนวน หรือย่อยสลายได้ ลองสังเกตว่าโครงสร้าง (เทอร์มอพลาสติก/เทอร์มอเซต) สัมพันธ์กับการใช้งานอย่างไร</p>
@@ -16712,6 +16832,37 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>"H₂SO₄ ให้ H⁺ 1 ตัวเหมือน HCl"</td><td>ให้ 2 ตัว (ไดโปรติก) — ความเข้มข้นเท่ากันจึงทำให้ pH ต่ำกว่า HCl</td></tr>
         </table>
         <div class="tip-box">💡 <strong>เคล็ดสอบ:</strong> โจทย์คำนวณสิ่งแวดล้อมส่วนใหญ่ "ซ่อน" สูตรพื้นฐานจากบทก่อน — combustion ใช้โมล (บท 4), pH ใช้กรดเบส (บท 10), E = hc/λ ใช้โครงสร้างอะตอม (บท 2). บทนี้แค่นำมา <em>ประยุกต์</em> กับปัญหาจริง</div>
+      </div>
+
+      <div class="content-section">
+        <h3>🎮 ลองโต้ตอบ &amp; เช็คความเข้าใจ</h3>
+        <div class="pk-check">
+          <div class="pk-q"><span class="pk-tag">เช็คเข้าใจ</span>การประเมินว่ากระบวนการผลิต "เป็นมิตรต่อสิ่งแวดล้อม" ดูแค่ %yield สูงพอหรือไม่?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">พอแล้ว ถ้า %yield สูงก็ดี</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">ไม่พอ ต้องดู atom economy/ตัวทำละลาย/พลังงานด้วย</button>
+            <button class="pk-opt" onclick="pkAns(this)">ดูแค่ราคาต้นทุน</button>
+          </div>
+          <div class="pk-fb" hidden>✅ <strong>ไม่พอ</strong> — เคมีสีเขียวมองทั้งวงจร: ปริมาณของเสีย (atom economy), ความเป็นพิษของตัวทำละลาย, พลังงานที่ใช้ และการย่อยสลาย ไม่ใช่แค่ %yield</div>
+        </div>
+        <div class="pk-check pk-predict">
+          <div class="pk-q"><span class="pk-tag">ทำนายก่อน</span>pH ของฝนกรดต่างจากฝนปกติ 1 หน่วย หมายความว่าความเข้มข้น H⁺ ต่างกันกี่เท่า?</div>
+          <div class="pk-opts">
+            <button class="pk-opt" onclick="pkAns(this)">1 เท่า (นิดเดียว)</button>
+            <button class="pk-opt" data-c="1" onclick="pkAns(this)">10 เท่า</button>
+            <button class="pk-opt" onclick="pkAns(this)">100 เท่า</button>
+          </div>
+          <div class="pk-fb" hidden>→ <strong>10 เท่า</strong> pH เป็นสเกลลอการิทึม (ฐาน 10) ต่าง 1 หน่วย = [H⁺] ต่าง 10 เท่า · ฝน pH 4 จึงเป็นกรดมากกว่าฝนปกติ pH 5.6 หลายสิบเท่า</div>
+        </div>
+        <div class="pk-slider">
+          <div class="pk-q">🧮 คาร์บอนฟุตพรินต์: โรงไฟฟ้าถ่านหินปล่อย CO₂ 0.9 kg/kWh — ลองปรับการใช้ไฟต่อเดือน</div>
+          <input type="range" min="100" max="1000" step="50" value="500" oninput="var o=this.nextElementSibling,k=+this.value;o.querySelector('.v1').textContent=k;o.querySelector('.v2').textContent=(k*12*0.9).toLocaleString();o.querySelector('.v3').textContent=Math.round(k*12*0.9/21);">
+          <div class="pk-out">ใช้ไฟ <b class="v1">500</b> kWh/เดือน → CO₂ ≈ <b class="v2">5,400</b> kg/ปี · ต้องปลูกต้นไม้ชดเชย ≈ <b class="v3">257</b> ต้น &nbsp;<span style="color:#9CA3AF;font-size:11px;">(ต้นไม้ดูด ~21 kg/ปี)</span></div>
+        </div>
+        <div class="pk-cta">
+          <button class="pk-lab" onclick="showPage('lab');Lab.open('enviro')">🧪 ลองแล็บ: เคมีกับสิ่งแวดล้อม</button>
+          <button class="pk-game" onclick="PK.startQuiz('c6b14')">📝 ทำแบบทดสอบบทนี้</button>
+        </div>
       </div>
 
       <div class="content-section">
