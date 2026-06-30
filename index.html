@@ -6917,6 +6917,32 @@ html, body { max-width:100%; overflow-x:hidden; }
           3. <strong>ลืมแปลงหน่วยปริมาตร</strong> — สูตร M ใช้หน่วย <em>ลิตร</em> ถ้าโจทย์ให้ mL ต้อง ÷1000 ก่อน<br>
           4. <strong>ใช้ M₁V₁=M₂V₂ ผิดที่</strong> — สูตรนี้ใช้ได้เพราะ "โมลของตัวถูกละลายคงที่" (แค่เติมน้ำเพิ่มปริมาตร) อย่านำไปใช้กับกรณีที่มีปฏิกิริยาทำให้โมลเปลี่ยน
         </div>
+        <h4>การแปลงระหว่างหน่วยความเข้มข้น (ใช้ความหนาแน่น)</h4>
+        <p style="font-size:13px;color:#374151;line-height:1.6;">การข้ามระหว่าง %w/w (ใช้มวล) กับ M (ใช้ปริมาตร) ต้องใช้ <strong>ความหนาแน่น (d)</strong> เป็นสะพานเชื่อมมวล↔ปริมาตร และใช้ <strong>Mw</strong> เชื่อมมวล↔โมล</p>
+        <div class="formula-box">
+          <div class="formula-label">🔁 แผนผังเชื่อมหน่วยความเข้มข้น</div>
+          <svg viewBox="0 0 520 130" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+            <rect x="20" y="50" width="110" height="34" rx="8" fill="#FEE2E2" stroke="#DC2626"/>
+            <text x="75" y="71" font-size="11" fill="#7F1D1D" text-anchor="middle" font-weight="700">%w/w</text>
+            <rect x="205" y="50" width="110" height="34" rx="8" fill="#DBEAFE" stroke="#2563EB"/>
+            <text x="260" y="71" font-size="11" fill="#1E40AF" text-anchor="middle" font-weight="700">M (mol/L)</text>
+            <rect x="390" y="50" width="110" height="34" rx="8" fill="#CCFBF1" stroke="#0F766E"/>
+            <text x="445" y="71" font-size="11" fill="#0F766E" text-anchor="middle" font-weight="700">m (mol/kg)</text>
+            <line x1="130" y1="67" x2="205" y2="67" stroke="#374151" stroke-width="1.6" marker-start="url(#ms5)" marker-end="url(#me5)"/>
+            <text x="167" y="44" font-size="9" fill="#374151" text-anchor="middle">d, Mw</text>
+            <line x1="315" y1="67" x2="390" y2="67" stroke="#374151" stroke-width="1.6" marker-start="url(#ms5)" marker-end="url(#me5)"/>
+            <text x="352" y="44" font-size="9" fill="#374151" text-anchor="middle">d</text>
+            <text x="260" y="110" font-size="9.5" fill="#B45309" text-anchor="middle">d = สะพานมวล↔ปริมาตร · Mw = สะพานมวล↔โมล</text>
+            <defs>
+              <marker id="me5" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M1,1 L6,4 L1,7" fill="none" stroke="#374151" stroke-width="1.3"/></marker>
+              <marker id="ms5" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M7,1 L2,4 L7,7" fill="none" stroke="#374151" stroke-width="1.3"/></marker>
+            </defs>
+          </svg>
+          <em>ตัวอย่าง:</em> กรด HCl 36.5% w/w ความหนาแน่น 1.18 g/mL หา M<br>
+          คิดจากสารละลาย 1 L = 1000 mL → มวล = 1000×1.18 = 1180 g → มวล HCl = 1180×0.365 = 430.7 g<br>
+          mol HCl = 430.7 ÷ 36.5 = 11.8 mol → <strong>M = 11.8 mol/L</strong>
+        </div>
+        <div class="tip-box">💡 <strong>เคล็ดลับ:</strong> เริ่มจาก "สมมติสารละลาย 1 L (หรือ 100 g)" แล้วไล่หามวล→โมล จะแปลงหน่วยได้ทุกกรณีโดยไม่ต้องจำสูตรรวม</div>
       </div>
       <div class="content-section">
         <h3>🌡️ ความสามารถในการละลายและปัจจัย</h3>
@@ -7591,6 +7617,56 @@ html, body { max-width:100%; overflow-x:hidden; }
             </div>
           </details>
         </div>
+        <div class="problem-topic-header">📑 หมวด J — วิเคราะห์/สถานการณ์จริง <span class="prob-level lv3">🔴 ระดับ 3</span></div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J1 — แปลง %w/w → M ด้วยความหนาแน่น</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> กรดซัลฟิวริกเข้มข้นในขวด ระบุ 98.0% w/w ความหนาแน่น 1.84 g/mL จงหา (ก) โมลาริตี (M) (ข) ถ้าต้องการเตรียม H₂SO₄ 1.0 M ปริมาตร 250 mL ต้องดูดกรดเข้มข้นกี่ mL<br>
+            <strong>กำหนด:</strong> Mw(H₂SO₄)=98
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) หา M:</strong> สมมติสารละลาย 1 L = 1000 mL → มวล = 1000×1.84 = 1840 g<br>
+              มวล H₂SO₄ = 1840×0.980 = 1803 g → mol = 1803÷98 = 18.4 mol → <strong>M = 18.4 mol/L</strong><br><br>
+              <strong>ข) เจือจาง:</strong> M₁V₁ = M₂V₂ → V₁ = (1.0×250)/18.4 = <strong>13.6 mL</strong><br>
+              ดูดกรดเข้มข้น 13.6 mL <em>เทลงในน้ำ</em> แล้วเติมจนครบ 250 mL (ความปลอดภัย: กรดลงน้ำเสมอ)<br><br>
+              <strong>ตรวจสอบ:</strong> กรดเข้มข้นทั่วไป ~18 M สอดคล้องค่ามาตรฐาน ✓
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J2 — คำนวณปริมาณตกผลึกจากกราฟการละลาย</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> KNO₃ ละลายได้ 110 g ต่อน้ำ 100 g ที่ 60°C และ 32 g ต่อน้ำ 100 g ที่ 20°C ถ้าเตรียมสารละลายอิ่มตัวที่ 60°C โดยใช้น้ำ 200 g แล้วทำให้เย็นลงถึง 20°C จงหามวล KNO₃ ที่ตกผลึกออกมา
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ที่ 60°C (น้ำ 200 g):</strong> ละลายได้ = 110 × (200/100) = 220 g<br>
+              <strong>ที่ 20°C (น้ำ 200 g):</strong> ละลายได้ = 32 × (200/100) = 64 g<br><br>
+              <strong>KNO₃ ที่ตกผลึก</strong> = 220 − 64 = <strong>156 g</strong><br><br>
+              <strong>หลักคิด:</strong> น้ำคงที่ → ส่วนเกินที่ละลายไม่ได้เมื่อเย็นลงจะตกผลึก = (ละลายได้ที่ T สูง − ที่ T ต่ำ) · นี่คือหลักการ recrystallization เพื่อทำสารให้บริสุทธิ์
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J3 — หามวลโมเลกุลจากการลดจุดเยือกแข็ง</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> ละลายสารไม่แตกตัว (i=1) มวล 6.00 g ในน้ำ 100 g พบว่าจุดเยือกแข็งลดลง 0.62°C จงหามวลโมเลกุลของสาร และเดาว่าน่าจะเป็นสารใด<br>
+            <strong>กำหนด:</strong> Kf(น้ำ) = 1.86 °C/m
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>หาโมแลลิตี:</strong> ΔTf = Kf·m·i → m = 0.62/(1.86×1) = 0.333 mol/kg<br>
+              <strong>หาโมลของสาร:</strong> น้ำ 100 g = 0.100 kg → mol = m × kg = 0.333×0.100 = 0.0333 mol<br>
+              <strong>หามวลโมเลกุล:</strong> Mw = มวล/mol = 6.00/0.0333 = <strong>180 g/mol</strong><br><br>
+              น่าจะเป็น <strong>กลูโคส (C₆H₁₂O₆, Mw=180)</strong> ซึ่งไม่แตกตัว (i=1) ตรงเงื่อนไข<br><br>
+              <strong>หลักคิด:</strong> สมบัติคอลิเกทีฟใช้ "ย้อนหา Mw" ของสารที่ไม่รู้จักได้ เป็นวิธีคลาสสิกในการหามวลโมเลกุล
+            </div>
+          </details>
+        </div>
       </div>
       <div class="content-section">
         <h3>🧠 สรุปจำง่าย + ความเข้าใจผิดที่พบบ่อย</h3>
@@ -7616,6 +7692,8 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>"i ของ NaCl = 1"</td><td>ผิด — NaCl แตกตัวเป็น Na⁺ + Cl⁻ → i ≈ 2</td></tr>
           <tr><td>"ออสโมซิสคือการกรอง"</td><td>ไม่ใช่ — ออสโมซิสคือน้ำไหลผ่านเยื่อกึ่งซึมผ่านได้ จากเจือจาง → เข้มข้น (ไม่ใช้กรอง)</td></tr>
           <tr><td>"น้ำเกลือ IV = น้ำบริสุทธิ์"</td><td>ผิด — IV ใช้ 0.9% NaCl (isotonic) ไม่ใช่น้ำกลั่นบริสุทธิ์ (hypotonic จะทำให้เม็ดเลือดแตก)</td></tr>
+          <tr><td>"แปลง %w/w → M ได้เลยโดยไม่ใช้ d"</td><td>ต้องใช้ความหนาแน่นเป็นสะพานมวล↔ปริมาตร จึงข้ามหน่วยได้ถูก</td></tr>
+          <tr><td>"ตกผลึกคิดจากมวลรวมที่ละลาย"</td><td>คิดจาก <em>ผลต่าง</em> ของความสามารถละลายที่ T สูงกับ T ต่ำ (น้ำคงที่)</td></tr>
         </table>
         <div style="margin-top:14px;padding:14px 16px;background:linear-gradient(135deg,#CCFBF1 0%,#F0FDFA 100%);border-radius:10px;border-left:4px solid #14B8A6;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
