@@ -4051,6 +4051,52 @@ html, body { max-width:100%; overflow-x:hidden; }
           3. <strong>ไอออนบวกเกิดจาก "เสียอิเล็กตรอน" ไม่ใช่ "ได้โปรตอน"</strong> — จำนวนโปรตอนไม่เปลี่ยนในปฏิกิริยาเคมี (ถ้าโปรตอนเปลี่ยน = ปฏิกิริยานิวเคลียร์ กลายเป็นธาตุใหม่)<br>
           4. <strong>มวลอะตอมในตารางเป็นค่าเฉลี่ยถ่วงน้ำหนัก</strong> ของไอโซโทป ไม่ใช่เลขมวลของไอโซโทปตัวใดตัวหนึ่ง — Cl = 35.45 แต่ไม่มีอะตอม Cl ตัวไหนหนัก 35.45 จริง
         </div>
+        <h4>สเปกตรัมเส้นและการเปลี่ยนระดับพลังงาน (Atomic Spectra)</h4>
+        <p style="font-size:13px;color:#374151;line-height:1.6;">หลักฐานสำคัญที่ยืนยันว่าพลังงานของอิเล็กตรอนเป็น <strong>ค่าไม่ต่อเนื่อง (quantized)</strong> คือ <em>สเปกตรัมเส้น</em> เมื่ออะตอมได้รับพลังงาน อิเล็กตรอนกระโดดขึ้นสู่ระดับสูง (สถานะกระตุ้น) แล้วตกกลับลง <strong>คายพลังงานออกเป็นโฟตอน</strong> ที่มีความถี่เฉพาะ → เห็นเป็นเส้นสีคม ๆ ไม่ใช่แถบต่อเนื่อง</p>
+        <div class="formula-box">
+          <div class="formula-label">📊 แผนภาพระดับพลังงาน + การเปลี่ยนระดับของไฮโดรเจน</div>
+          <svg viewBox="0 0 520 230" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+            <!-- energy levels: closer together as n increases -->
+            <g stroke="#374151" stroke-width="1.6">
+              <line x1="70" y1="190" x2="300" y2="190"/>
+              <line x1="70" y1="120" x2="300" y2="120"/>
+              <line x1="70" y1="78" x2="300" y2="78"/>
+              <line x1="70" y1="54" x2="300" y2="54"/>
+              <line x1="70" y1="40" x2="300" y2="40"/>
+            </g>
+            <g font-size="11" fill="#374151" text-anchor="end">
+              <text x="62" y="194">n=1</text><text x="62" y="124">n=2</text><text x="62" y="82">n=3</text><text x="62" y="58">n=4</text><text x="62" y="44">n=∞</text>
+            </g>
+            <!-- Lyman (to n=1, UV) -->
+            <line x1="120" y1="120" x2="120" y2="190" stroke="#7C3AED" stroke-width="2" marker-end="url(#ah2)"/>
+            <line x1="140" y1="78" x2="140" y2="190" stroke="#7C3AED" stroke-width="2" marker-end="url(#ah2)"/>
+            <text x="120" y="212" font-size="9" fill="#7C3AED" text-anchor="middle">Lyman (UV)</text>
+            <!-- Balmer (to n=2, visible) -->
+            <line x1="210" y1="78" x2="210" y2="120" stroke="#DC2626" stroke-width="2" marker-end="url(#ah2)"/>
+            <line x1="235" y1="54" x2="235" y2="120" stroke="#0EA5A4" stroke-width="2" marker-end="url(#ah2)"/>
+            <text x="222" y="212" font-size="9" fill="#DC2626" text-anchor="middle">Balmer (แสงที่เห็นได้)</text>
+            <defs>
+              <marker id="ah2" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto">
+                <path d="M1,1 L4,6 L7,1" fill="none" stroke="context-stroke" stroke-width="1.4"/>
+              </marker>
+            </defs>
+            <!-- formula side -->
+            <g font-size="12" fill="#0F766E">
+              <text x="330" y="70" font-weight="700">E = hf = hc/λ</text>
+            </g>
+            <g font-size="10.5" fill="#374151">
+              <text x="330" y="95">h = 6.63×10⁻³⁴ J·s</text>
+              <text x="330" y="113">c = 3.00×10⁸ m/s</text>
+              <text x="330" y="135">ΔE มาก → λ สั้น (พลังงานสูง)</text>
+              <text x="330" y="153">ΔE น้อย → λ ยาว (พลังงานต่ำ)</text>
+              <text x="330" y="178" fill="#7C3AED">ตกถึง n=1 → ΔE มาก → UV</text>
+              <text x="330" y="196" fill="#DC2626">ตกถึง n=2 → แสงที่ตาเห็น</text>
+            </g>
+          </svg>
+          ระยะห่างของระดับพลังงานจะ <strong>ถี่ขึ้นเมื่อ n สูงขึ้น</strong> (เข้าใกล้ขีดจำกัด n=∞ ซึ่งคือพลังงานไอออไนเซชัน)
+        </div>
+        <div class="tip-box">💡 <strong>เชื่อมชีวิตจริง:</strong> สีเปลวไฟของธาตุ (เปลวทดสอบ flame test) — Na ให้สีเหลือง, K ให้สีม่วง, Cu ให้สีเขียว — เกิดจากการคายโฟตอนนี้ และเป็นหลักการเดียวกับ <em>ดอกไม้ไฟ</em> และ <em>หลอดไฟนีออน</em></div>
+        <div class="note-box">⚠️ <strong>มักสับสน:</strong> "ดูดพลังงาน" คืออิเล็กตรอนขึ้นระดับสูง (absorption) · "คายแสง/เห็นสี" คือตกลงระดับต่ำ (emission) — สีที่ตาเห็นจากการทดสอบเปลวไฟคือ <em>การคาย</em> ไม่ใช่การดูด</div>
       </div>
       <div class="content-section">
         <h3>🔬 การจัดเรียงอิเล็กตรอนและออร์บิทัล</h3>
@@ -4162,6 +4208,33 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>จุดหลอมเหลว/เดือด</td><td>ซับซ้อน (ขึ้นกับชนิดพันธะ)</td><td>—</td><td>โลหะแอลคาไลลดลงในหมู่</td></tr>
         </table>
         <div class="note-box">⚠️ <strong>ข้อยกเว้น IE₁:</strong> Be > B (2s² เสถียรกว่า 2p¹) และ N > O (2p³ half-filled เสถียร) ต้องจำไว้สำหรับการสอบ</div>
+        <div class="formula-box">
+          <div class="formula-label">🧭 แผนที่แนวโน้มตารางธาตุ — จำทิศเดียวจบ</div>
+          <svg viewBox="0 0 520 250" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+            <!-- table outline -->
+            <rect x="70" y="40" width="380" height="150" rx="6" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5"/>
+            <text x="260" y="32" font-size="11" fill="#1E40AF" text-anchor="middle" font-weight="700">ตารางธาตุ (มุมมองทิศทางแนวโน้ม)</text>
+            <!-- across arrow (left to right) -->
+            <line x1="80" y1="208" x2="440" y2="208" stroke="#DC2626" stroke-width="2.5" marker-end="url(#ahR)"/>
+            <text x="260" y="226" font-size="10" fill="#DC2626" text-anchor="middle" font-weight="700">ในคาบ → (Z เพิ่ม): รัศมี↓  IE↑  EN↑</text>
+            <!-- down arrow (top to bottom) -->
+            <line x1="56" y1="48" x2="56" y2="182" stroke="#0F766E" stroke-width="2.5" marker-end="url(#ahD)"/>
+            <text x="20" y="120" font-size="10" fill="#0F766E" text-anchor="middle" font-weight="700" transform="rotate(-90 20 120)">ในหมู่ ↓ (n เพิ่ม): รัศมี↑  IE↓  EN↓</text>
+            <!-- corner callouts -->
+            <circle cx="105" cy="160" r="20" fill="#0F766E" opacity="0.85"/>
+            <text x="105" y="158" font-size="9" fill="#FFF" text-anchor="middle">โลหะ</text>
+            <text x="105" y="169" font-size="8" fill="#FFF" text-anchor="middle">(ซ้ายล่าง)</text>
+            <circle cx="420" cy="70" r="20" fill="#7C3AED" opacity="0.85"/>
+            <text x="420" y="68" font-size="9" fill="#FFF" text-anchor="middle">อโลหะ</text>
+            <text x="420" y="79" font-size="8" fill="#FFF" text-anchor="middle">(ขวาบน)</text>
+            <text x="420" y="108" font-size="8.5" fill="#374151" text-anchor="middle">F = EN สูงสุด</text>
+            <defs>
+              <marker id="ahR" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M1,1 L8,5 L1,9" fill="none" stroke="#DC2626" stroke-width="1.6"/></marker>
+              <marker id="ahD" markerWidth="10" markerHeight="10" refX="5" refY="7" orient="auto"><path d="M1,1 L5,8 L9,1" fill="none" stroke="#0F766E" stroke-width="1.6"/></marker>
+            </defs>
+          </svg>
+          <strong>จำง่าย:</strong> F (ขวาบน) คือ "ตัวสุด" ของรัศมีเล็ก-IE สูง-EN สูง · Fr/Cs (ซ้ายล่าง) คือ "ตัวสุด" ของรัศมีใหญ่-IE ต่ำ-EN ต่ำ
+        </div>
         <h4>สมบัติของหมู่สำคัญ</h4>
         <table class="content-table">
           <tr><th>หมู่</th><th>ชื่อ</th><th>ตัวอย่าง</th><th>สมบัติเด่น</th></tr>
@@ -4797,6 +4870,59 @@ html, body { max-width:100%; overflow-x:hidden; }
             </div>
           </details>
         </div>
+        <div class="problem-topic-header">📑 หมวด J — วิเคราะห์/สถานการณ์จริง <span class="prob-level lv3">🔴 ระดับ 3</span></div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J1 — ระบุธาตุจากค่าพลังงานไอออไนเซชันตามลำดับ</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> ธาตุ X ในคาบที่ 3 มีค่าพลังงานไอออไนเซชันตามลำดับ (kJ/mol) ดังนี้ IE₁=738, IE₂=1451, <strong>IE₃=7733</strong>, IE₄=10543 จงระบุว่า X คือธาตุใด และมีเวเลนซ์อิเล็กตรอนกี่ตัว พร้อมเหตุผล
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>แนวคิด:</strong> มองหา "การกระโดดครั้งใหญ่" ของค่า IE — เมื่อค่าพุ่งสูงผิดปกติ แปลว่าเริ่มดึงอิเล็กตรอนจาก <em>ชั้นถัดเข้าไป</em> (ชั้นเต็มที่เสถียร)<br><br>
+              ดูอัตราเพิ่ม: 738 → 1451 (×2) → <strong>7733 (×5.3 กระโดดใหญ่!)</strong> → 10543<br>
+              การกระโดดเกิดที่ IE₃ แปลว่า เอา e⁻ ออกได้ "ง่าย" 2 ตัวแรก แต่ตัวที่ 3 ยากมาก → มีเวเลนซ์อิเล็กตรอน <strong>2 ตัว</strong><br>
+              ธาตุคาบ 3 ที่มี 2 เวเลนซ์ e⁻ = <strong>แมกนีเซียม (Mg, Z=12)</strong> การจัดเรียง [Ne]3s²<br><br>
+              <strong>ยืนยัน:</strong> หลังเสีย 2 e⁻ → Mg²⁺ = [Ne] (ชั้นเต็มเสถียรมาก) จึงเสีย e⁻ ตัวที่ 3 ยากมาก ตรงกับการกระโดดที่ IE₃ ✓
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J2 — คำนวณความยาวคลื่นแสงที่ปล่อยออกมา</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> อิเล็กตรอนในอะตอมไฮโดรเจนตกจากระดับ n=3 ลงสู่ n=2 ปล่อยโฟตอนที่มีพลังงาน ΔE = 3.03×10⁻¹⁹ J จงหา (ก) ความยาวคลื่นของแสง (ข) แสงนี้อยู่ในช่วงใด และเป็นเส้นในอนุกรมใด<br>
+            <strong>กำหนด:</strong> h = 6.63×10⁻³⁴ J·s, c = 3.00×10⁸ m/s
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>สูตร:</strong> E = <span class="frac"><span class="n">hc</span><span class="d">λ</span></span> → λ = <span class="frac"><span class="n">hc</span><span class="d">E</span></span><br><br>
+              λ = <span class="frac"><span class="n">(6.63×10⁻³⁴)(3.00×10⁸)</span><span class="d">3.03×10⁻¹⁹</span></span> = <span class="frac"><span class="n">1.989×10⁻²⁵</span><span class="d">3.03×10⁻¹⁹</span></span> = 6.56×10⁻⁷ m<br>
+              = <strong>656 nm</strong><br><br>
+              <strong>ข) ตีความ:</strong> 656 nm อยู่ในช่วง <strong>แสงที่ตาเห็นได้ (สีแดง)</strong> · ตกลงสู่ n=2 → เป็นเส้นใน <strong>อนุกรม Balmer</strong> (เส้น Hα สีแดงอันโด่งดัง)<br><br>
+              <strong>ตรวจสอบเร็ว:</strong> ΔE ค่อนข้างน้อย (ตก n=3→2 ใกล้กัน) → λ ยาว → อยู่ในช่วงแสงเห็นได้ ✓ ถ้าตกถึง n=1 (Lyman) ΔE จะมากกว่า λ สั้นกว่า → UV
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J3 — พยากรณ์สมบัติธาตุที่ยังไม่รู้จัก</h4>
+          <div class="problem-statement">
+            <strong>สถานการณ์:</strong> ธาตุ Q อยู่หมู่ 2 คาบ 5 (Z=38) จงทำนาย (ก) การจัดเรียงอิเล็กตรอนแบบย่อ (ข) สูตรของออกไซด์และคลอไรด์ที่เกิดได้ (ค) เปรียบเทียบความว่องไวกับ Ca และ Mg พร้อมเหตุผล
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ระบุธาตุ:</strong> หมู่ 2 คาบ 5 Z=38 = <strong>สตรอนเชียม (Sr)</strong><br><br>
+              <strong>ก) การจัดเรียง:</strong> [Kr]5s² → มีเวเลนซ์ 2 e⁻ ในชั้น 5s<br><br>
+              <strong>ข) สูตรสารประกอบ:</strong> หมู่ 2 ให้ไอออน Q²⁺<br>
+              • ออกไซด์: O²⁻ → <strong>SrO</strong> (อัตราส่วน 1:1)<br>
+              • คลอไรด์: Cl⁻ → <strong>SrCl₂</strong> (อัตราส่วน 1:2)<br><br>
+              <strong>ค) ความว่องไว:</strong> ในหมู่ 2 ความว่องไวเพิ่มลงล่าง (รัศมีใหญ่ขึ้น เสีย e⁻ ง่ายขึ้น IE ต่ำลง)<br>
+              ลำดับ: <strong>Sr &gt; Ca &gt; Mg</strong> (Sr อยู่ล่างสุดในสามตัวนี้ จึงว่องไวที่สุด)<br><br>
+              <strong>หลักคิด:</strong> ตำแหน่งในตารางธาตุ → การจัดเรียง e⁻ → ประจุไอออน → สูตรสารประกอบ + แนวโน้มความว่องไว ทั้งหมดเชื่อมโยงกัน
+            </div>
+          </details>
+        </div>
       </div>
       <div class="content-section">
         <h3>🧠 สรุปจำง่าย + ความเข้าใจผิดที่พบบ่อย</h3>
@@ -4811,7 +4937,10 @@ html, body { max-width:100%; overflow-x:hidden; }
           • <strong>Cu, Cr ข้อยกเว้น:</strong> Cu [Ar]3d¹⁰4s¹, Cr [Ar]3d⁵4s¹ (เสถียร half/full-filled)<br>
           • <strong>Block:</strong> s (หมู่ 1-2), p (13-18), d (3-12 transition), f (lanthanide/actinide)<br>
           • <strong>แนวโน้ม:</strong> รัศมี ↓→ ↑↓; IE ↑→ ↓↓; EN ↑→ ↓↓; F มี EN สูงสุด<br>
-          • <strong>เขียน config ไอออน:</strong> เอา 4s ออกก่อน 3d (สำหรับ d-block)
+          • <strong>เขียน config ไอออน:</strong> เอา 4s ออกก่อน 3d (สำหรับ d-block)<br>
+          • <strong>สเปกตรัมเส้น:</strong> e⁻ ตกระดับ → คายโฟตอน E = hf = hc/λ (ΔE มาก → λ สั้น)<br>
+          • <strong>อนุกรมของ H:</strong> ตกถึง n=1 = Lyman (UV) · ตกถึง n=2 = Balmer (แสงเห็นได้)<br>
+          • <strong>การกระโดดของ IE:</strong> ตำแหน่งที่ค่าพุ่งผิดปกติ = จำนวนเวเลนซ์อิเล็กตรอน
         </div>
         <h4>⚠️ ความเข้าใจผิดที่พบบ่อย</h4>
         <table class="content-table">
@@ -4822,6 +4951,9 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>"IE₁ เพิ่มขึ้นเรื่อย ๆ ทางขวา"</td><td>มีข้อยกเว้น: Be>B, N>O (half-filled เสถียร)</td></tr>
           <tr><td>"แก๊สมีตระกูลไม่ทำปฏิกิริยาเลย"</td><td>Kr, Xe ทำปฏิกิริยากับ F ได้ (XeF₂, XeF₄, KrF₂)</td></tr>
           <tr><td>"Bohr orbit = quantum orbital"</td><td>orbit เป็นวงกลมแน่นอน · orbital เป็น probability cloud (ตำแหน่งไม่แน่นอน)</td></tr>
+          <tr><td>"สเปกตรัมของธาตุเป็นแถบสีต่อเนื่อง"</td><td>เป็น <em>เส้นสีเฉพาะ</em> (line spectrum) เพราะพลังงาน e⁻ เป็นค่าไม่ต่อเนื่อง — แต่ละธาตุมีลายเส้นเฉพาะตัว</td></tr>
+          <tr><td>"สีเปลวไฟเกิดจากการดูดพลังงาน"</td><td>เกิดจากการ <em>คาย</em> โฟตอนเมื่อ e⁻ ตกลงระดับต่ำ (emission) ไม่ใช่การดูด</td></tr>
+          <tr><td>"การกระโดดของ IE ดูที่ค่าสูงสุด"</td><td>ดูที่ "อัตราเพิ่มที่กระโดดผิดปกติ" ต่างหาก — บอกจำนวนเวเลนซ์ e⁻ (เริ่มเจาะชั้นใน)</td></tr>
         </table>
         <div style="margin-top:14px;padding:14px 16px;background:linear-gradient(135deg,#CCFBF1 0%,#F0FDFA 100%);border-radius:10px;border-left:4px solid #14B8A6;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
