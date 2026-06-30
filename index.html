@@ -11052,6 +11052,67 @@ html, body { max-width:100%; overflow-x:hidden; }
             </div>
           </details>
         </div>
+        <div class="problem-topic-header">📑 หมวด J — วิเคราะห์/สถานการณ์จริง <span class="prob-level lv3">🔴 ระดับ 3</span></div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J1 — หากฎอัตราจากข้อมูลการทดลอง</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> ปฏิกิริยา A + B → ผลิตภัณฑ์ มีข้อมูลอัตราเริ่มต้นดังนี้<br>
+            <table style="border-collapse:collapse;font-size:12px;margin:6px 0;">
+              <tr style="background:#f1f5f9"><th style="border:1px solid #ccc;padding:4px">การทดลอง</th><th style="border:1px solid #ccc;padding:4px">[A] (M)</th><th style="border:1px solid #ccc;padding:4px">[B] (M)</th><th style="border:1px solid #ccc;padding:4px">อัตรา (M/s)</th></tr>
+              <tr><td style="border:1px solid #ccc;padding:4px">1</td><td style="border:1px solid #ccc;padding:4px">0.10</td><td style="border:1px solid #ccc;padding:4px">0.10</td><td style="border:1px solid #ccc;padding:4px">2.0×10⁻³</td></tr>
+              <tr><td style="border:1px solid #ccc;padding:4px">2</td><td style="border:1px solid #ccc;padding:4px">0.20</td><td style="border:1px solid #ccc;padding:4px">0.10</td><td style="border:1px solid #ccc;padding:4px">8.0×10⁻³</td></tr>
+              <tr><td style="border:1px solid #ccc;padding:4px">3</td><td style="border:1px solid #ccc;padding:4px">0.10</td><td style="border:1px solid #ccc;padding:4px">0.20</td><td style="border:1px solid #ccc;padding:4px">4.0×10⁻³</td></tr>
+            </table>
+            จงหา (ก) อันดับเทียบ A และ B (ข) กฎอัตรา และอันดับรวม (ค) ค่าคงที่อัตรา k
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) อันดับเทียบ A:</strong> เทียบ exp1→2: [A] เพิ่ม 2 เท่า [B] คงที่ → อัตราเพิ่ม 8.0/2.0 = 4 เท่า → 2ˣ=4 → <strong>x=2</strong><br>
+              <strong>อันดับเทียบ B:</strong> เทียบ exp1→3: [B] เพิ่ม 2 เท่า [A] คงที่ → อัตราเพิ่ม 4.0/2.0 = 2 เท่า → 2ʸ=2 → <strong>y=1</strong><br><br>
+              <strong>ข) กฎอัตรา:</strong> rate = k[A]²[B] · อันดับรวม = 2+1 = <strong>3</strong><br><br>
+              <strong>ค) หา k (ใช้ exp1):</strong> 2.0×10⁻³ = k(0.10)²(0.10) = k(0.001) → k = <strong>2.0 M⁻²s⁻¹</strong><br><br>
+              <strong>ตรวจสอบ:</strong> หน่วยของ k สำหรับอันดับรวม 3 = M⁻²s⁻¹ ✓ (M^(1−n)·s⁻¹ เมื่อ n=3)
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J2 — สมการอาร์เรเนียส 2 อุณหภูมิ</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> ค่าคงที่อัตราของปฏิกิริยาเพิ่มจาก k₁ ที่ 300 K เป็น 4 เท่า (k₂ = 4k₁) ที่ 320 K จงหาพลังงานกระตุ้น Ea<br>
+            <strong>กำหนด:</strong> R = 8.314 J/mol·K, ln4 = 1.386
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>สูตรอาร์เรเนียส 2 จุด:</strong> ln(<span class="frac"><span class="n">k₂</span><span class="d">k₁</span></span>) = <span class="frac"><span class="n">Ea</span><span class="d">R</span></span>(<span class="frac"><span class="n">1</span><span class="d">T₁</span></span> − <span class="frac"><span class="n">1</span><span class="d">T₂</span></span>)<br><br>
+              ln4 = (Ea/8.314)(1/300 − 1/320)<br>
+              1/300 − 1/320 = 0.003333 − 0.003125 = 2.083×10⁻⁴<br>
+              1.386 = (Ea/8.314)(2.083×10⁻⁴)<br>
+              Ea = (1.386 × 8.314)/(2.083×10⁻⁴) = 11.52/2.083×10⁻⁴ = <strong>5.53×10⁴ J/mol ≈ 55.3 kJ/mol</strong><br><br>
+              <strong>ตรวจสอบ:</strong> Ea เป็นบวก (ต้องใช้พลังงานกระตุ้น) และอยู่ในช่วง 40–150 kJ/mol ตามปกติ ✓
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J3 — กลไกปฏิกิริยาและขั้นกำหนดอัตรา</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> ปฏิกิริยา 2NO₂ + F₂ → 2NO₂F เสนอกลไก 2 ขั้น<br>
+            ขั้น 1 (ช้า): NO₂ + F₂ → NO₂F + F<br>
+            ขั้น 2 (เร็ว): NO₂ + F → NO₂F<br>
+            จงหา (ก) กฎอัตราที่กลไกนี้ทำนาย (ข) สารตัวกลาง (intermediate) คือตัวใด (ค) เหตุใดอันดับรวมจึงไม่เท่ากับสัมประสิทธิ์ในสมการรวม
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>ก) กฎอัตรา:</strong> อัตราถูกกำหนดโดย <em>ขั้นที่ช้าที่สุด (rate-determining step)</em> คือขั้น 1<br>
+              → rate = k[NO₂][F₂] (อันดับรวม = 2)<br><br>
+              <strong>ข) สารตัวกลาง:</strong> <strong>F</strong> (อะตอมฟลูออรีน) — เกิดในขั้น 1 แล้วถูกใช้หมดในขั้น 2 ไม่ปรากฏในสมการรวม<br><br>
+              <strong>ค) เหตุผล:</strong> อันดับปฏิกิริยาขึ้นกับ <em>กลไก</em> (โดยเฉพาะขั้นช้า) ไม่ใช่สัมประสิทธิ์ในสมการรวม — สมการรวมมี NO₂ สัมประสิทธิ์ 2 แต่ขั้นช้าใช้ NO₂ แค่ 1 โมเลกุล อันดับเทียบ NO₂ จึงเป็น 1 ไม่ใช่ 2<br><br>
+              <strong>หลักคิด:</strong> "ขั้นช้าคือคอขวด" — อัตรารวมเร็วได้ไม่เกินขั้นที่ช้าที่สุด เหมือนรถติดที่จุดแคบสุดของถนน
+            </div>
+          </details>
+        </div>
       </div>
 
       <div class="content-section">
@@ -11083,6 +11144,8 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>สับสน intermediate กับ activated complex</td><td><em>Activated complex</em> = ยอดเขาพลังงาน (อายุสั้น) · <em>Intermediate</em> = หุบเขาระหว่างยอด (อาจตรวจวัดได้)</td></tr>
           <tr><td>"T↑ 10°C → rate × 2 เสมอ"</td><td>เป็นกฎคร่าว ๆ — ปฏิกิริยาที่มี Eₐ ต่ำมากหรือสูงมากจะไม่เป็นไปตามนี้</td></tr>
           <tr><td>"ตัวเร่งทำให้ Eₐ ของขาไปลดลง แต่ขากลับเท่าเดิม"</td><td>ผิด — ลดลงเท่ากันทั้งสองทิศทาง</td></tr>
+          <tr><td>"หน่วยของ k เหมือนกันทุกอันดับ"</td><td>ต่างกัน — อันดับ 1 = s⁻¹, อันดับ 2 = M⁻¹s⁻¹, อันดับ 3 = M⁻²s⁻¹ (M^(1−n)·s⁻¹)</td></tr>
+          <tr><td>"t½ ของทุกปฏิกิริยาคงที่"</td><td>คงที่เฉพาะอันดับ 1 · อันดับ 0 และ 2 ขึ้นกับ [A]₀</td></tr>
         </table>
         <div style="margin-top:14px;padding:14px 16px;background:linear-gradient(135deg,#CCFBF1 0%,#F0FDFA 100%);border-radius:10px;border-left:4px solid #14B8A6;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
