@@ -5037,6 +5037,47 @@ html, body { max-width:100%; overflow-x:hidden; }
           <li><span class="li-dot sc-dot"></span>วัฏจักรบอร์น-ฮาเบอร์ใช้กฎเฮสส์คำนวณพลังงานแลตทิซทางอ้อม</li>
           <li><span class="li-dot sc-dot"></span>แลตทิซใหญ่ → สารละลายยากขึ้น เช่น MgO มีแลตทิซสูงกว่า NaCl มาก</li>
         </ul>
+        <div class="formula-box">
+          <div class="formula-label">🔄 วัฏจักรบอร์น-ฮาเบอร์ของ NaCl (กฎเฮสส์)</div>
+          <svg viewBox="0 0 520 270" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+            <!-- levels -->
+            <g font-size="10" fill="#374151">
+              <line x1="60" y1="230" x2="200" y2="230" stroke="#374151" stroke-width="1.5"/>
+              <text x="60" y="245">Na(s) + ½Cl₂(g)</text>
+              <line x1="60" y1="180" x2="200" y2="180" stroke="#374151" stroke-width="1.5"/>
+              <text x="60" y="174">Na(g) + ½Cl₂(g)</text>
+              <line x1="60" y1="140" x2="200" y2="140" stroke="#374151" stroke-width="1.5"/>
+              <text x="60" y="134">Na(g) + Cl(g)</text>
+              <line x1="300" y1="60" x2="440" y2="60" stroke="#374151" stroke-width="1.5"/>
+              <text x="300" y="54">Na⁺(g) + Cl⁻(g)</text>
+              <line x1="300" y1="245" x2="440" y2="245" stroke="#0F766E" stroke-width="2"/>
+              <text x="300" y="260" fill="#0F766E" font-weight="700">NaCl(s)</text>
+            </g>
+            <!-- steps -->
+            <g stroke-width="1.6" fill="none">
+              <line x1="130" y1="230" x2="130" y2="180" stroke="#DC2626" marker-end="url(#ahu)"/>
+              <line x1="130" y1="180" x2="130" y2="140" stroke="#DC2626" marker-end="url(#ahu)"/>
+              <line x1="200" y1="140" x2="300" y2="80" stroke="#DC2626" marker-end="url(#ahu)"/>
+              <line x1="320" y1="60" x2="320" y2="120" stroke="#0EA5A4" marker-end="url(#ahd)"/>
+              <line x1="370" y1="60" x2="370" y2="243" stroke="#0F766E" stroke-width="2.2" marker-end="url(#ahd)"/>
+            </g>
+            <g font-size="9" fill="#374151">
+              <text x="135" y="208">① ระเหิด ΔH<tspan dy="3" font-size="7">sub</tspan> +108</text>
+              <text x="135" y="162">② สลายพันธะ ½×242 = +121</text>
+              <text x="205" y="105" fill="#DC2626">③ IE₁(Na) +496</text>
+              <text x="325" y="100" fill="#0EA5A4">④ EA(Cl) −349</text>
+              <text x="378" y="160" fill="#0F766E" font-weight="700">⑤ แลตทิซ U = ?</text>
+            </g>
+            <text x="100" y="25" font-size="10.5" fill="#1E40AF" font-weight="700">ΔH°f(NaCl) = −411 = ①+②+③+④+U</text>
+            <text x="100" y="40" font-size="10.5" fill="#0F766E" font-weight="700">→ U = −411 −(108+121+496−349) = −787 kJ/mol</text>
+            <defs>
+              <marker id="ahu" markerWidth="9" markerHeight="9" refX="4" refY="2" orient="auto"><path d="M1,7 L4,1 L7,7" fill="none" stroke="context-stroke" stroke-width="1.4"/></marker>
+              <marker id="ahd" markerWidth="9" markerHeight="9" refX="4" refY="7" orient="auto"><path d="M1,2 L4,8 L7,2" fill="none" stroke="context-stroke" stroke-width="1.4"/></marker>
+            </defs>
+          </svg>
+          <strong>หลักคิด:</strong> พลังงานจาก "ทางตรง" (ΔH°f) = ผลรวมของ "ทางอ้อม" ทุกขั้น → ย้ายข้างหาพลังงานแลตทิซ U ที่วัดตรง ๆ ไม่ได้
+        </div>
+        <div class="tip-box">💡 <strong>แลตทิซแรงแค่ไหน?</strong> U ∝ <span class="frac"><span class="n">(ประจุ⁺ × ประจุ⁻)</span><span class="d">ระยะระหว่างไอออน</span></span> → ประจุยิ่งมาก/ไอออนยิ่งเล็ก แลตทิซยิ่งแรง เช่น MgO (2+,2−) ≫ NaCl (1+,1−) ทำให้ MgO จุดหลอมเหลวสูงกว่ามาก (2852°C vs 801°C)</div>
       </div>
       <div class="content-section">
         <h3>🤝 พันธะโคเวเลนต์ (Covalent Bond)</h3>
@@ -5880,6 +5921,58 @@ html, body { max-width:100%; overflow-x:hidden; }
             </div>
           </details>
         </div>
+        <div class="problem-topic-header">📑 หมวด J — วิเคราะห์/สถานการณ์จริง <span class="prob-level lv3">🔴 ระดับ 3</span></div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J1 — ทำนายรูปร่าง → ขั้ว → แรงระหว่างโมเลกุล → จุดเดือด</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> พิจารณาโมเลกุล CO₂, H₂O และ NH₃ จงวิเคราะห์ตามลำดับ (ก) รูปร่างตาม VSEPR และมุมพันธะ (ข) โมเลกุลมีขั้วหรือไม่ (ค) แรงระหว่างโมเลกุลหลัก (ง) เรียงลำดับจุดเดือดจากต่ำไปสูง พร้อมเหตุผล
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <table style="border-collapse:collapse;font-size:12px;margin:4px 0;">
+                <tr style="background:#f1f5f9"><th style="border:1px solid #ccc;padding:4px">โมเลกุล</th><th style="border:1px solid #ccc;padding:4px">รูปร่าง/มุม</th><th style="border:1px solid #ccc;padding:4px">ขั้ว</th><th style="border:1px solid #ccc;padding:4px">IMF หลัก</th></tr>
+                <tr><td style="border:1px solid #ccc;padding:4px">CO₂</td><td style="border:1px solid #ccc;padding:4px">เส้นตรง 180° (AX₂)</td><td style="border:1px solid #ccc;padding:4px">ไม่มีขั้ว (ขั้วหักล้าง)</td><td style="border:1px solid #ccc;padding:4px">London</td></tr>
+                <tr><td style="border:1px solid #ccc;padding:4px">NH₃</td><td style="border:1px solid #ccc;padding:4px">พีระมิดฐานสามเหลี่ยม 107° (AX₃E)</td><td style="border:1px solid #ccc;padding:4px">มีขั้ว</td><td style="border:1px solid #ccc;padding:4px">H-bond</td></tr>
+                <tr><td style="border:1px solid #ccc;padding:4px">H₂O</td><td style="border:1px solid #ccc;padding:4px">มุมงอ 104.5° (AX₂E₂)</td><td style="border:1px solid #ccc;padding:4px">มีขั้วมาก</td><td style="border:1px solid #ccc;padding:4px">H-bond (แรงสุด)</td></tr>
+              </table>
+              <strong>ง) เรียงจุดเดือด (ต่ำ→สูง):</strong> CO₂ (−78°C, ระเหิด) &lt; NH₃ (−33°C) &lt; H₂O (100°C)<br>
+              <strong>เหตุผล:</strong> CO₂ มีแค่ London จึงต่ำสุด · NH₃ และ H₂O มี H-bond แต่ H₂O มี 2 H และ 2 คู่โดดเดี่ยว สร้างเครือข่าย H-bond ได้หนาแน่นกว่า NH₃ จุดเดือดจึงสูงสุด<br><br>
+              <strong>หลักคิดลูกโซ่:</strong> โครงสร้าง e⁻ → รูปร่าง (VSEPR) → ขั้ว → ชนิด IMF → สมบัติ (จุดเดือด) เป็นเส้นทางเดียวกันทั้งบท
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J2 — คำนวณพลังงานแลตทิซด้วยวัฏจักรบอร์น-ฮาเบอร์</h4>
+          <div class="problem-statement">
+            <strong>โจทย์:</strong> จงหาพลังงานแลตทิซ (U) ของ KCl จากข้อมูล (kJ/mol): ΔH°f(KCl) = −437, ΔH ระเหิด K = +89, IE₁(K) = +419, พลังงานสลายพันธะ ½Cl₂ = +122, EA(Cl) = −349
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>กฎเฮสส์:</strong> ΔH°f = ΔH(ระเหิด) + IE₁ + ½D(Cl₂) + EA + U<br>
+              −437 = 89 + 419 + 122 + (−349) + U<br>
+              −437 = 281 + U<br>
+              U = −437 − 281 = <strong>−718 kJ/mol</strong><br><br>
+              <strong>ตรวจสอบ:</strong> U เป็นลบ (คายพลังงาน) เพราะการรวมไอออนเป็นผลึกเสถียร ✓ · U(KCl)=−718 มีค่าน้อยกว่า U(NaCl)=−787 เพราะ K⁺ ใหญ่กว่า Na⁺ ระยะไอออนไกลขึ้น แรงดึงดูดอ่อนลง ✓
+            </div>
+          </details>
+        </div>
+        <div class="problem-card">
+          <h4>โจทย์ที่ J3 — อธิบายสมบัติของสารจากชนิดพันธะ</h4>
+          <div class="problem-statement">
+            <strong>สถานการณ์:</strong> สาร 3 ชนิด มีสมบัติดังนี้ — X: จุดหลอมเหลวสูงมาก นำไฟฟ้าได้เมื่อหลอมเหลว เปราะ · Y: จุดหลอมเหลวต่ำ ไม่นำไฟฟ้า ละลายในตัวทำละลายไม่มีขั้ว · Z: เป็นมันวาว นำไฟฟ้าได้ทั้งของแข็ง ตีเป็นแผ่นได้ จงระบุชนิดพันธะของแต่ละสารพร้อมอธิบายว่าสมบัติเชื่อมโยงกับโครงสร้างอย่างไร
+          </div>
+          <details class="solution-details">
+            <summary>เปิด/ปิด วิธีทำ</summary>
+            <div class="solution-content">
+              <strong>X = สารประกอบไอออนิก</strong> (เช่น NaCl): จุดหลอมสูงเพราะแลตทิซแรง · นำไฟฟ้าเมื่อหลอม/ละลายเพราะไอออนเคลื่อนที่ได้ · เปราะเพราะเมื่อเลื่อนชั้น ไอออนประจุเดียวกันมาชิดกันแล้วผลัก<br><br>
+              <strong>Y = สารโคเวเลนต์โมเลกุล</strong> (เช่น I₂, แนฟทาลีน): จุดหลอมต่ำเพราะยึดกันด้วย IMF อ่อน · ไม่นำไฟฟ้าเพราะไม่มีไอออน/e⁻ อิสระ · ละลายในตัวทำละลายไม่มีขั้ว (like dissolves like)<br><br>
+              <strong>Z = โลหะ (พันธะโลหะ)</strong>: นำไฟฟ้าได้ทุกสถานะเพราะมี "ทะเลอิเล็กตรอน" เคลื่อนที่อิสระ · ตีเป็นแผ่น/ดึงเป็นเส้นได้เพราะชั้นไอออนบวกเลื่อนผ่านกันได้โดยทะเล e⁻ ยังยึดไว้ · เป็นมันวาวเพราะ e⁻ อิสระสะท้อนแสง<br><br>
+              <strong>หลักคิด:</strong> "สมบัติบอกชนิดพันธะ" — การนำไฟฟ้า + จุดหลอมเหลว + ความเหนียว/เปราะ คือลายนิ้วมือของพันธะแต่ละชนิด
+            </div>
+          </details>
+        </div>
       </div>
       <div class="content-section">
         <h3>🧠 สรุปจำง่าย + ความเข้าใจผิดที่พบบ่อย</h3>
@@ -5893,7 +5986,10 @@ html, body { max-width:100%; overflow-x:hidden; }
           • <strong>ขั้วโมเลกุล:</strong> มีพันธะมีขั้ว + ทรงไม่สมมาตร = polar<br>
           • <strong>IMF เรียงแรง→อ่อน:</strong> Ion-Dipole > H-bond > Dipole-Dipole > London<br>
           • <strong>H-bond:</strong> H ติด F/O/N + lone pair ของ F/O/N โมเลกุลข้างเคียง<br>
-          • <strong>Formal charge:</strong> FC = VE − (lone e⁻) − ½(bonding e⁻)
+          • <strong>Formal charge:</strong> FC = VE − (lone e⁻) − ½(bonding e⁻)<br>
+          • <strong>Born-Haber:</strong> ΔH°f = ระเหิด + IE + ½D + EA + U → ใช้หา U ที่วัดตรงไม่ได้<br>
+          • <strong>ลูกโซ่ทำนายสมบัติ:</strong> config → รูปร่าง → ขั้ว → IMF → จุดเดือด<br>
+          • <strong>สมบัติบอกพันธะ:</strong> นำไฟฟ้า + จุดหลอม + เหนียว/เปราะ = ลายนิ้วมือของพันธะ
         </div>
         <h4>⚠️ ความเข้าใจผิดที่พบบ่อย</h4>
         <table class="content-table">
@@ -5904,6 +6000,8 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>"VSEPR บอกชนิดพันธะ"</td><td>ไม่ — VSEPR ใช้ผลักของ e⁻ pair กำหนดรูปร่าง 3D เท่านั้น</td></tr>
           <tr><td>"diamond กับ graphite เหมือนกัน"</td><td>ไม่ — ทั้งคู่เป็น C แต่ diamond sp³ แข็ง · graphite sp² อ่อน (แผ่นเลื่อนกันได้)</td></tr>
           <tr><td>"ของแข็งไอออนิกนำไฟฟ้าได้"</td><td>ผิด — แข็งไม่นำ; ต้องหลอม (melted) หรือละลายน้ำ (aq) ให้ไอออนเคลื่อนได้</td></tr>
+          <tr><td>"พลังงานแลตทิซเป็นค่าบวก"</td><td>เป็นลบ (คายพลังงาน) เพราะรวมไอออนเป็นผลึกแล้วเสถียรขึ้น</td></tr>
+          <tr><td>"H₂O เดือดสูงเพราะโมเลกุลหนัก"</td><td>ไม่ใช่มวล — เพราะ H-bond ที่หนาแน่น (เบากว่า H₂S ด้วยซ้ำแต่เดือดสูงกว่ามาก)</td></tr>
         </table>
         <div style="margin-top:14px;padding:14px 16px;background:linear-gradient(135deg,#CCFBF1 0%,#F0FDFA 100%);border-radius:10px;border-left:4px solid #14B8A6;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
