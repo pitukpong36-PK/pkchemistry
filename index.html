@@ -5399,6 +5399,15 @@ html, body { max-width:100%; overflow-x:hidden; }
           <strong>เหตุผล:</strong> H มี δ⁺ (เพราะ O เป็น EN สูง) ส่วน O มี δ⁻ และมี lone pair — เกิดแรงดึงดูดอย่างแรง<br>
           ⇒ <em>น้ำมีจุดเดือดสูง (100°C)</em> มาก เมื่อเทียบกับ H₂S (-60°C) ที่มวลใกล้กัน
         </div>
+        <div class="formula-box">
+          <div class="formula-label">🧊 แบบจำลอง 3 มิติหมุนได้ — เปรียบเทียบแรงระหว่างโมเลกุล 3 ชนิด (เส้นประ = แรงดึงดูดระหว่างโมเลกุล)</div>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:flex-start;padding:8px 0;">
+            <div style="text-align:center;"><div class="pk-imf3d" data-imf="hbond" style="width:210px;height:150px;margin:0 auto;"></div><div style="font-size:11.5px;font-weight:700;color:#2563EB;">พันธะไฮโดรเจน</div><div style="font-size:10px;color:#374151;">O–H · · · O (น้ำ) · ~20 kJ/mol</div><div style="font-size:9.5px;color:#DC2626;font-weight:700;">แรงที่สุด</div></div>
+            <div style="text-align:center;"><div class="pk-imf3d" data-imf="dipole" style="width:210px;height:150px;margin:0 auto;"></div><div style="font-size:11.5px;font-weight:700;color:#0F766E;">แรงระหว่างขั้ว (Dipole–Dipole)</div><div style="font-size:10px;color:#374151;">δ⁺H · · · Cl δ⁻ (HCl)</div><div style="font-size:9.5px;color:#B45309;font-weight:700;">ปานกลาง</div></div>
+            <div style="text-align:center;"><div class="pk-imf3d" data-imf="london" style="width:210px;height:150px;margin:0 auto;"></div><div style="font-size:11.5px;font-weight:700;color:#7C3AED;">แรงลอนดอน (London)</div><div style="font-size:10px;color:#374151;">ไดโพลชั่วคราว/เหนี่ยวนำ (I₂)</div><div style="font-size:9.5px;color:#16A34A;font-weight:700;">อ่อนสุด · มีทุกโมเลกุล</div></div>
+          </div>
+          <div style="font-size:10px;color:#6B7280;text-align:center;margin-top:4px;">เส้นประ = แรงดึงดูด<strong>ระหว่าง</strong>โมเลกุล · เส้นทึบ = พันธะ<strong>ภายใน</strong>โมเลกุล (ไม่ขาดเวลาหลอม/เดือด) — เรนเดอร์ 3D สดในเว็บ</div>
+        </div>
         <table class="content-table">
           <tr><th>ประเภท</th><th>เกิดในโมเลกุล</th><th>ความแรง</th><th>ผลต่อสมบัติ</th></tr>
           <tr><td>พันธะไฮโดรเจน (H-bond)</td><td>N-H, O-H, F-H กับ N, O, F</td><td>แรงที่สุด (~20 <span class="frac"><span class="n">kJ</span><span class="d">mol</span></span>)</td><td>H₂O มีจุดเดือดสูงผิดปกติ (100°C)</td></tr>
@@ -17914,17 +17923,43 @@ const PK_MOL_DEFS = {
   water: { cn:'O', xn:'H', cc:'#DC2626', xc:'#CBD5E1', R:44, verts:[[0.79,-0.61,0],[-0.79,-0.61,0]] },
   nh3:   { cn:'N', xn:'H', cc:'#2563EB', xc:'#CBD5E1', R:46, verts:[[0.94,-0.33,0],[-0.47,-0.33,0.82],[-0.47,-0.33,-0.82]] }
 };
+// ฉากแรงระหว่างโมเลกุล (2 โมเลกุล + เส้นประ = แรงระหว่างโมเลกุล) หมุน 3D
+const PK_IMF_DEFS = {
+  hbond:  { R:24, fc:'#2563EB',
+    atoms:[ {x:-2.4,y:0,z:0,r:13,fill:'#DC2626',label:'O',lc:'#fff'},
+            {x:-1.3,y:0,z:0,r:8,fill:'#CBD5E1',label:'H',lc:'#1f2937'},
+            {x:-3.15,y:0.9,z:0.25,r:8,fill:'#CBD5E1',label:'H',lc:'#1f2937'},
+            {x:0.3,y:0,z:0,r:13,fill:'#DC2626',label:'O',lc:'#fff'},
+            {x:1.05,y:0.85,z:0.3,r:8,fill:'#CBD5E1',label:'H',lc:'#1f2937'},
+            {x:1.05,y:-0.85,z:-0.3,r:8,fill:'#CBD5E1',label:'H',lc:'#1f2937'} ],
+    bonds:[[0,1],[0,2],[3,4],[3,5]], forces:[[1,3]] },
+  dipole: { R:24, fc:'#0F766E',
+    atoms:[ {x:-3.0,y:0,z:0,r:14,fill:'#16A34A',label:'Cl',lc:'#fff'},
+            {x:-1.9,y:0,z:0,r:8,fill:'#CBD5E1',label:'H',lc:'#1f2937'},
+            {x:0.5,y:0,z:0,r:14,fill:'#16A34A',label:'Cl',lc:'#fff'},
+            {x:1.6,y:0,z:0,r:8,fill:'#CBD5E1',label:'H',lc:'#1f2937'} ],
+    bonds:[[0,1],[2,3]], forces:[[1,2]] },
+  london: { R:28, fc:'#A855F7',
+    atoms:[ {x:-2.1,y:0.62,z:0,r:14,fill:'#7C3AED',label:'I',lc:'#fff'},
+            {x:-2.1,y:-0.62,z:0,r:14,fill:'#7C3AED',label:'I',lc:'#fff'},
+            {x:1.2,y:0.62,z:0,r:14,fill:'#7C3AED',label:'I',lc:'#fff'},
+            {x:1.2,y:-0.62,z:0,r:14,fill:'#7C3AED',label:'I',lc:'#fff'} ],
+    bonds:[[0,1],[2,3]], forces:[[0,2],[1,3]] }
+};
 function pkInitChapterAnims(){
   if(_pkMolRAF){ cancelAnimationFrame(_pkMolRAF); _pkMolRAF=null; }
   const mols = Array.from(document.querySelectorAll('#chap-body .pk-mol3d'));
-  if(!mols.length) return;
+  const imfs = Array.from(document.querySelectorAll('#chap-body .pk-imf3d'));
+  if(!mols.length && !imfs.length) return;
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const states = mols.map(el=>({ el, type:(el.dataset.mol||'tetra'), a: Math.random()*6 }));
+  const states = mols.map(el=>({ el, kind:'mol', type:(el.dataset.mol||'tetra'), a: Math.random()*6 }))
+    .concat(imfs.map(el=>({ el, kind:'imf', type:(el.dataset.imf||'hbond'), a: Math.random()*6 })));
   function frame(){
     if(!states[0].el.isConnected) { _pkMolRAF=null; return; }
     const active = document.getElementById('page-chapter').classList.contains('active');
     if(active) states.forEach(s=>{
       if(!reduce) s.a += 0.011;
+      if(s.kind==='imf'){ pkRenderIMF(s); return; }
       const d = PK_MOL_DEFS[s.type] || PK_MOL_DEFS.tetra;
       const cx=70, cy=70, f=210, ax=0.42, ay=s.a;
       let atoms=[{x:0,y:0,z:0,r:13,fill:d.cc,label:d.cn,lc:'#fff'}];
@@ -17950,6 +17985,35 @@ function pkInitChapterAnims(){
     _pkMolRAF = requestAnimationFrame(frame);
   }
   frame();
+}
+// เรนเดอร์ฉากแรงระหว่างโมเลกุล (คู่โมเลกุล + เส้นประแรง) หมุน 3D รอบจุดกึ่งกลางฉาก
+function pkRenderIMF(s){
+  const d = PK_IMF_DEFS[s.type] || PK_IMF_DEFS.hbond;
+  const cx=100, cy=68, f=260, ax=0.38, ay=s.a;
+  let pts = d.atoms.map(a=>({ x:a.x*d.R, y:a.y*d.R, z:a.z*d.R, r:a.r, fill:a.fill, label:a.label, lc:a.lc }));
+  let mx=0,my=0,mz=0; pts.forEach(p=>{ mx+=p.x; my+=p.y; mz+=p.z; });
+  mx/=pts.length; my/=pts.length; mz/=pts.length;
+  pts.forEach(p=>{ p.x-=mx; p.y-=my; p.z-=mz;
+    let x1=p.x*Math.cos(ay)+p.z*Math.sin(ay), z1=-p.x*Math.sin(ay)+p.z*Math.cos(ay);
+    let y2=p.y*Math.cos(ax)-z1*Math.sin(ax), z2=p.y*Math.sin(ax)+z1*Math.cos(ax);
+    p.px=x1; p.py=y2; p.pz=z2; p.sc=f/(f-z2);
+  });
+  const P=i=>({ X:cx+pts[i].px*pts[i].sc, Y:cy+pts[i].py*pts[i].sc, sc:pts[i].sc });
+  let bonds='';
+  d.bonds.forEach(b=>{ const a=P(b[0]), c=P(b[1]);
+    bonds += '<line x1="'+a.X.toFixed(1)+'" y1="'+a.Y.toFixed(1)+'" x2="'+c.X.toFixed(1)+'" y2="'+c.Y.toFixed(1)+'" stroke="#94A3B8" stroke-width="'+(3*((a.sc+c.sc)/2)).toFixed(1)+'" stroke-linecap="round"/>';
+  });
+  let forces='';
+  d.forces.forEach(b=>{ const a=P(b[0]), c=P(b[1]);
+    forces += '<line x1="'+a.X.toFixed(1)+'" y1="'+a.Y.toFixed(1)+'" x2="'+c.X.toFixed(1)+'" y2="'+c.Y.toFixed(1)+'" stroke="'+d.fc+'" stroke-width="2" stroke-dasharray="4,3" stroke-linecap="round" opacity="0.85"/>';
+  });
+  let circs='';
+  pts.slice().sort((u,v)=>u.pz-v.pz).forEach(p=>{
+    const X=cx+p.px*p.sc, Y=cy+p.py*p.sc, RR=p.r*p.sc;
+    circs += '<circle cx="'+X.toFixed(1)+'" cy="'+Y.toFixed(1)+'" r="'+RR.toFixed(1)+'" fill="'+p.fill+'" opacity="'+(0.6+0.32*(p.sc-0.85)).toFixed(2)+'"/>'+
+             '<text x="'+X.toFixed(1)+'" y="'+(Y+3*p.sc).toFixed(1)+'" font-size="'+(8.5*p.sc).toFixed(1)+'" fill="'+p.lc+'" text-anchor="middle" font-weight="700">'+p.label+'</text>';
+  });
+  s.el.innerHTML = '<svg viewBox="0 0 200 136" style="width:100%;max-width:230px;display:block;margin:0 auto;">'+bonds+forces+circs+'</svg>';
 }
 function showChapter(chapterId) {
   const ch = chapters[chapterId];
