@@ -4089,6 +4089,39 @@ html, body { max-width:100%; overflow-x:hidden; }
       </div>
       <div class="content-section">
         <h3>⚛️ แบบจำลองอะตอม</h3>
+        <div class="formula-box">
+          <div class="formula-label">🧬 วิวัฒนาการแบบจำลองอะตอม (3 มิติ · ลากเพื่อหมุน 🖐️)</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:flex-start;margin:6px 0 2px;">
+            <div style="text-align:center;width:126px;">
+              <div class="pk-atom3d" data-atom="dalton" style="width:120px;height:120px;margin:0 auto;"></div>
+              <div style="font-size:11.5px;font-weight:700;color:#5B21B6;">Dalton · 1803</div>
+              <div style="font-size:9.5px;color:#374151;">ทรงกลมตัน แบ่งแยกไม่ได้</div>
+            </div>
+            <div style="text-align:center;width:126px;">
+              <div class="pk-atom3d" data-atom="thomson" style="width:120px;height:120px;margin:0 auto;"></div>
+              <div style="font-size:11.5px;font-weight:700;color:#DC2626;">Thomson · 1897</div>
+              <div style="font-size:9.5px;color:#374151;">พุดดิ้ง · ประจุ + และ e⁻(−) กระจายทั่ว</div>
+            </div>
+            <div style="text-align:center;width:126px;">
+              <div class="pk-atom3d" data-atom="rutherford" style="width:120px;height:120px;margin:0 auto;"></div>
+              <div style="font-size:11.5px;font-weight:700;color:#B45309;">Rutherford · 1911</div>
+              <div style="font-size:9.5px;color:#374151;">นิวเคลียสเล็ก · e⁻ วนไกล</div>
+            </div>
+            <div style="text-align:center;width:126px;">
+              <div class="pk-atom3d" data-atom="bohr" style="width:120px;height:120px;margin:0 auto;"></div>
+              <div style="font-size:11.5px;font-weight:700;color:#0F766E;">Bohr · 1913</div>
+              <div style="font-size:9.5px;color:#374151;">e⁻ วนในวงพลังงานแน่นอน</div>
+            </div>
+            <div style="text-align:center;width:126px;">
+              <div class="pk-atom3d" data-atom="quantum" style="width:120px;height:120px;margin:0 auto;"></div>
+              <div style="font-size:11.5px;font-weight:700;color:#7C3AED;">Quantum · 1926</div>
+              <div style="font-size:9.5px;color:#374151;">กลุ่มหมอก e⁻ (ออร์บิทัล)</div>
+            </div>
+          </div>
+          <div style="font-size:11.5px;color:#374151;line-height:1.7;text-align:center;">
+            แต่ละแบบจำลองหมุน 3 มิติ (ลาก/แตะแล้วลากได้) — เห็นการเปลี่ยนความคิดจาก <strong>ก้อนตัน</strong> → <strong>e⁻ ฝังในประจุบวก</strong> → <strong>นิวเคลียสเล็กที่ว่างเปล่ารอบข้าง</strong> → <strong>วงโคจรพลังงานแน่นอน</strong> → <strong>กลุ่มความน่าจะเป็น</strong>
+          </div>
+        </div>
         <table class="content-table">
           <tr><th>นักวิทยาศาสตร์</th><th>ปี</th><th>แบบจำลอง</th><th>การทดลองสำคัญ</th></tr>
           <tr><td>ดอลตัน (Dalton)</td><td>1803</td><td>ทรงกลมแข็งแบ่งแยกไม่ได้</td><td>ศึกษากฎทางเคมี</td></tr>
@@ -18193,16 +18226,74 @@ function pkRenderOrb(s){
   }
   s.el.innerHTML = '<svg viewBox="0 0 140 140" style="width:100%;max-width:150px;display:block;margin:0 auto;">'+defs+body+'</svg>';
 }
+// เรนเดอร์แบบจำลองอะตอม 3 มิติ (dalton/thomson/rutherford/bohr/quantum) — หมุนแกนเอียง + อิเล็กตรอนโคจรตามเวลา s.t
+function pkRenderAtom(s){
+  const cx=70, cy=70, f=240, ax=s.ax, ay=s.a, th=s.t||0, t=s.type, uid=s.uid||t;
+  if(!s._built){ s._built=true;
+    let x=1234+(t.charCodeAt(0)||7)*97; const rnd=()=>{ x=(x*1103515245+12345)&0x7fffffff; return x/0x7fffffff; };
+    const onSphere=R=>{ const u=rnd()*2-1, ph=rnd()*Math.PI*2, rr=Math.sqrt(1-u*u); return [R*rr*Math.cos(ph),R*rr*Math.sin(ph),R*u]; };
+    if(t==='thomson'){ s._e=[]; s._pos=[];
+      for(let i=0;i<8;i++) s._e.push(onSphere(10+rnd()*26));
+      for(let i=0;i<8;i++) s._pos.push(onSphere(8+rnd()*28)); }
+    if(t==='quantum'){ s._cloud=[]; for(let i=0;i<150;i++){ const R=48*Math.pow(rnd(),0.7), p=onSphere(1); s._cloud.push([p[0]*R,p[1]*R,p[2]*R,R]); } }
+  }
+  const pts=[]; let disc=null;
+  function ring(R,tilt,n,fill,rr,op,phase){
+    for(let k=0;k<n;k++){ const a=phase+2*Math.PI*k/n, xx=R*Math.cos(a), yy=R*Math.sin(a);
+      pts.push({x:xx, y:yy*Math.cos(tilt), z:yy*Math.sin(tilt), r:rr, fill:fill, op:op}); }
+  }
+  function orbE(R,tilt,phase,fill){ const xx=R*Math.cos(phase), yy=R*Math.sin(phase);
+    pts.push({x:xx, y:yy*Math.cos(tilt), z:yy*Math.sin(tilt), r:3.1, fill:fill, op:1, glow:true}); }
+  if(t==='dalton'){
+    disc={R:40, fill:'url(#at'+uid+')', op:1, stroke:'#4C1D95', hl:true};
+  } else if(t==='thomson'){
+    disc={R:44, fill:'url(#at'+uid+')', op:0.28, stroke:'#F87171'};
+    s._pos.forEach(p=>pts.push({x:p[0],y:p[1],z:p[2],r:4,fill:'#DC2626',op:0.92,sign:'+'}));
+    s._e.forEach((p,i)=>{ const a=th*0.5+i, xx=p[0]*Math.cos(a)+p[2]*Math.sin(a), zz=-p[0]*Math.sin(a)+p[2]*Math.cos(a);
+      pts.push({x:xx,y:p[1],z:zz,r:4,fill:'#2563EB',op:1,sign:'−',glow:true}); });
+  } else if(t==='rutherford'){
+    pts.push({x:0,y:0,z:0,r:9,fill:'#DC2626',op:1,glow:true,nuc:true});
+    ring(46,0.5,40,'#93C5FD',0.9,0.5,0); orbE(46,0.5,th*2.2,'#2563EB');
+    ring(46,-0.7,40,'#93C5FD',0.9,0.5,0); orbE(46,-0.7,th*2.6+2,'#2563EB');
+  } else if(t==='bohr'){
+    pts.push({x:0,y:0,z:0,r:7,fill:'#DC2626',op:1,glow:true,nuc:true});
+    const TL=0.5, sh=[[22,TL,2,th*2.4],[38,TL,8,th*1.8],[54,TL,1,th*1.3]];
+    sh.forEach(o=>{ ring(o[0],o[1],44,'#CBD5E1',0.8,0.45,0);
+      for(let k=0;k<o[2];k++) orbE(o[0],o[1],o[3]+2*Math.PI*k/o[2],'#2563EB'); });
+  } else { // quantum
+    pts.push({x:0,y:0,z:0,r:5,fill:'#DC2626',op:1,glow:true,nuc:true});
+    s._cloud.forEach(p=>pts.push({x:p[0],y:p[1],z:p[2],r:1.3,fill:'#7C3AED',op:0.5-0.006*p[3]}));
+  }
+  function proj(p){ const x1=p.x*Math.cos(ay)+p.z*Math.sin(ay), z1=-p.x*Math.sin(ay)+p.z*Math.cos(ay);
+    const y2=p.y*Math.cos(ax)-z1*Math.sin(ax), z2=p.y*Math.sin(ax)+z1*Math.cos(ax), sc=f/(f-z2);
+    return {X:cx+x1*sc, Y:cy+y2*sc, sc:sc, z:z2, p:p}; }
+  let body='';
+  if(disc){ body+='<circle cx="'+cx+'" cy="'+cy+'" r="'+disc.R+'" fill="'+disc.fill+'" opacity="'+disc.op+'" stroke="'+disc.stroke+'" stroke-width="1"/>';
+    if(disc.hl) body+='<ellipse cx="'+(cx-12)+'" cy="'+(cy-13)+'" rx="11" ry="7" fill="#FFFFFF" opacity="0.4"/>'; }
+  pts.map(proj).sort((a,b)=>a.z-b.z).forEach(o=>{
+    const R=(o.p.r*o.sc).toFixed(1), op=Math.max(0.06,Math.min(1,o.p.op)).toFixed(2);
+    const sign=o.p.sign||(o.p.nuc?'+':null);
+    if(o.p.glow) body+='<circle cx="'+o.X.toFixed(1)+'" cy="'+o.Y.toFixed(1)+'" r="'+(o.p.r*o.sc*1.7).toFixed(1)+'" fill="'+o.p.fill+'" opacity="0.18"/>';
+    body+='<circle cx="'+o.X.toFixed(1)+'" cy="'+o.Y.toFixed(1)+'" r="'+R+'" fill="'+o.p.fill+'" opacity="'+op+'"/>';
+    if(sign) body+='<text x="'+o.X.toFixed(1)+'" y="'+(o.Y+o.p.r*o.sc*0.5).toFixed(1)+'" font-size="'+(o.p.r*o.sc*(sign.length>1?0.95:1.6)).toFixed(1)+'" fill="#fff" text-anchor="middle" font-weight="700">'+sign+'</text>';
+  });
+  let defs='';
+  if(t==='dalton') defs='<defs><radialGradient id="at'+uid+'" cx="0.35" cy="0.3" r="0.85"><stop offset="0" stop-color="#DDD6FE"/><stop offset="0.6" stop-color="#8B5CF6"/><stop offset="1" stop-color="#4C1D95"/></radialGradient></defs>';
+  else if(t==='thomson') defs='<defs><radialGradient id="at'+uid+'" cx="0.4" cy="0.35" r="0.8"><stop offset="0" stop-color="#FECACA"/><stop offset="1" stop-color="#F87171"/></radialGradient></defs>';
+  s.el.innerHTML='<svg viewBox="0 0 140 140" style="width:100%;max-width:150px;display:block;margin:0 auto;">'+defs+body+'</svg>';
+}
 function pkInitChapterAnims(){
   if(_pkMolRAF){ cancelAnimationFrame(_pkMolRAF); _pkMolRAF=null; }
   const mols = Array.from(document.querySelectorAll('#chap-body .pk-mol3d'));
   const imfs = Array.from(document.querySelectorAll('#chap-body .pk-imf3d'));
   const orbs = Array.from(document.querySelectorAll('#chap-body .pk-orb3d'));
-  if(!mols.length && !imfs.length && !orbs.length) return;
+  const atoms = Array.from(document.querySelectorAll('#chap-body .pk-atom3d'));
+  if(!mols.length && !imfs.length && !orbs.length && !atoms.length) return;
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const states = mols.map(el=>({ el, kind:'mol', type:(el.dataset.mol||'tetra'), a: Math.random()*6 }))
     .concat(imfs.map(el=>({ el, kind:'imf', type:(el.dataset.imf||'hbond'), a: Math.random()*6 })))
-    .concat(orbs.map((el,i)=>({ el, kind:'orb', type:(el.dataset.orb||'p'), a: Math.random()*6, uid:(el.dataset.orb||'p')+i })));
+    .concat(orbs.map((el,i)=>({ el, kind:'orb', type:(el.dataset.orb||'p'), a: Math.random()*6, uid:(el.dataset.orb||'p')+i })))
+    .concat(atoms.map((el,i)=>({ el, kind:'atom', type:(el.dataset.atom||'bohr'), a: Math.random()*6, t: Math.random()*6, uid:(el.dataset.atom||'bohr')+i })));
   states.forEach(pkAttachDrag);
   function frame(){
     if(!states[0].el.isConnected) { _pkMolRAF=null; return; }
@@ -18211,6 +18302,7 @@ function pkInitChapterAnims(){
       if(!reduce && s.auto) s.a += 0.011;
       if(s.kind==='imf'){ pkRenderIMF(s); return; }
       if(s.kind==='orb'){ pkRenderOrb(s); return; }
+      if(s.kind==='atom'){ if(!reduce) s.t=(s.t||0)+0.03; pkRenderAtom(s); return; }
       const d = PK_MOL_DEFS[s.type] || PK_MOL_DEFS.tetra;
       const cx=70, cy=70, f=210, ax=s.ax, ay=s.a;
       let atoms=[{x:0,y:0,z:0,r:13,fill:d.cc,label:d.cn,lc:'#fff'}];
