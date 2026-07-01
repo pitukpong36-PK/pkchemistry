@@ -4186,35 +4186,32 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h3>🔬 การจัดเรียงอิเล็กตรอนและออร์บิทัล</h3>
         <h4>ออร์บิทัลและหลักการเติมอิเล็กตรอน</h4>
         <div class="formula-box">
-          <div class="formula-label">🔮 รูปร่างออร์บิทัล s และ p</div>
-          <svg viewBox="0 0 480 220" style="width:100%;max-width:520px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <!-- s orbital: sphere -->
-            <circle cx="80" cy="110" r="40" fill="#7C3AED" opacity="0.4" stroke="#5B21B6" stroke-width="1.5"/>
-            <circle cx="80" cy="110" r="3" fill="#000"/>
-            <text x="80" y="180" font-size="14" fill="#5B21B6" font-weight="700" text-anchor="middle">s</text>
-            <text x="80" y="200" font-size="10" fill="#374151" text-anchor="middle">ทรงกลม</text>
-            <!-- p_x -->
-            <ellipse cx="170" cy="80" rx="20" ry="32" fill="#0F766E" opacity="0.5" stroke="#134E4A" stroke-width="1.5" transform="rotate(90 170 110)"/>
-            <ellipse cx="205" cy="80" rx="20" ry="32" fill="#0F766E" opacity="0.5" stroke="#134E4A" stroke-width="1.5" transform="rotate(90 205 110)"/>
-            <circle cx="187" cy="110" r="3" fill="#000"/>
-            <text x="187" y="180" font-size="14" fill="#134E4A" font-weight="700" text-anchor="middle">p_x</text>
-            <text x="187" y="200" font-size="10" fill="#374151" text-anchor="middle">ดัมเบล แกน x</text>
-            <!-- p_y -->
-            <ellipse cx="285" cy="80" rx="20" ry="32" fill="#DC2626" opacity="0.5" stroke="#7F1D1D" stroke-width="1.5"/>
-            <ellipse cx="285" cy="140" rx="20" ry="32" fill="#DC2626" opacity="0.5" stroke="#7F1D1D" stroke-width="1.5"/>
-            <circle cx="285" cy="110" r="3" fill="#000"/>
-            <text x="285" y="180" font-size="14" fill="#7F1D1D" font-weight="700" text-anchor="middle">p_y</text>
-            <text x="285" y="200" font-size="10" fill="#374151" text-anchor="middle">ดัมเบล แกน y</text>
-            <!-- p_z (diagonal for 3D feel) -->
-            <ellipse cx="385" cy="80" rx="14" ry="28" fill="#F59E0B" opacity="0.5" stroke="#92400E" stroke-width="1.5" transform="rotate(45 385 110)"/>
-            <ellipse cx="385" cy="140" rx="14" ry="28" fill="#F59E0B" opacity="0.5" stroke="#92400E" stroke-width="1.5" transform="rotate(45 385 110)"/>
-            <circle cx="385" cy="110" r="3" fill="#000"/>
-            <text x="385" y="180" font-size="14" fill="#92400E" font-weight="700" text-anchor="middle">p_z</text>
-            <text x="385" y="200" font-size="10" fill="#374151" text-anchor="middle">ดัมเบล แกน z</text>
-            <!-- header -->
-            <text x="240" y="25" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">ออร์บิทัล s = 1 รูป (ทรงกลม) · ออร์บิทัล p = 3 รูป (ดัมเบล 3 แกน)</text>
-            <text x="240" y="42" font-size="10" fill="#374151" text-anchor="middle">s บรรจุได้ 2 e⁻ · p (3 orbitals) บรรจุได้รวม 6 e⁻</text>
-          </svg>
+          <div class="formula-label">🔮 รูปร่างออร์บิทัล s, p, d, f (3 มิติจริง · ลากเพื่อหมุน 🖐️)</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:flex-start;margin:6px 0 2px;">
+            <div style="text-align:center;width:132px;">
+              <div class="pk-orb3d" data-orb="s" style="width:128px;height:128px;margin:0 auto;"></div>
+              <div style="font-size:12px;font-weight:700;color:#5B21B6;">s · Sphere</div>
+              <div style="font-size:10px;color:#374151;">1 ออร์บิทัล · 2 e⁻</div>
+            </div>
+            <div style="text-align:center;width:132px;">
+              <div class="pk-orb3d" data-orb="p" style="width:128px;height:128px;margin:0 auto;"></div>
+              <div style="font-size:12px;font-weight:700;color:#B45309;">p · Dumbbell</div>
+              <div style="font-size:10px;color:#374151;">3 ออร์บิทัล · 6 e⁻</div>
+            </div>
+            <div style="text-align:center;width:132px;">
+              <div class="pk-orb3d" data-orb="d" style="width:128px;height:128px;margin:0 auto;"></div>
+              <div style="font-size:12px;font-weight:700;color:#0F766E;">d · Cloverleaf</div>
+              <div style="font-size:10px;color:#374151;">5 ออร์บิทัล · 10 e⁻</div>
+            </div>
+            <div style="text-align:center;width:132px;">
+              <div class="pk-orb3d" data-orb="f" style="width:128px;height:128px;margin:0 auto;"></div>
+              <div style="font-size:12px;font-weight:700;color:#5B21B6;">f · 8-lobed</div>
+              <div style="font-size:10px;color:#374151;">7 ออร์บิทัล · 14 e⁻</div>
+            </div>
+          </div>
+          <div style="font-size:11.5px;color:#374151;line-height:1.7;text-align:center;">
+            แต่ละภาพหมุนรอบ<strong>แกนเอียงแบบ 3 มิติจริง</strong> (มีเพอร์สเปกทีฟ) · <strong>ลาก/แตะแล้วลาก</strong>เพื่อหมุนเอง · เป็น<strong>รูปตัวแทน</strong>ของแต่ละชนิด: s = Sphere (ทรงกลม), p = Dumbbell (ดัมเบล), d = Cloverleaf · d<sub>xy</sub> (สี่พู), f = f<sub>xyz</sub> (แปดพู) — จำนวนออร์บิทัลจริงคือ s:1 p:3 d:5 f:7
+          </div>
         </div>
         <table class="content-table">
           <tr><th>ออร์บิทัล</th><th>รูปร่าง</th><th>จำนวนออร์บิทัล</th><th>e⁻ สูงสุด</th></tr>
@@ -4223,6 +4220,72 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>d</td><td>ซับซ้อน</td><td>5</td><td>10</td></tr>
           <tr><td>f</td><td>ซับซ้อนมาก</td><td>7</td><td>14</td></tr>
         </table>
+        <div class="formula-box">
+          <div class="formula-label">🎬 อนิเมชัน: การเติมอิเล็กตรอนในซับเชลล์ s, p, d, f</div>
+          <svg viewBox="0 0 520 300" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+          <text x="260" y="22" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">การเติมอิเล็กตรอนในซับเชลล์ s p d f — กฎฮุนด์ (กระจายก่อน) + เพาลี (จับคู่ spin ตรงข้าม)</text>
+          <text x="260" y="38" font-size="9.5" fill="#6B7280" text-anchor="middle">↑ เติมทีละตัวจนครบทุกกล่องก่อน แล้วจึงเติม ↓ จับคู่ · ไล่ตามพลังงาน s→p→d→f</text>
+          <text x="52" y="75" font-size="20" fill="#B45309" font-weight="700" text-anchor="middle">s</text>
+          <rect x="96" y="52" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#B45309" stroke-width="1.6"/>
+          <text x="140" y="74" font-size="12" fill="#B45309" font-weight="700">2 e⁻</text>
+          <text x="52" y="135" font-size="20" fill="#5B21B6" font-weight="700" text-anchor="middle">p</text>
+          <rect x="96" y="112" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#5B21B6" stroke-width="1.6"/>
+          <rect x="134" y="112" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#5B21B6" stroke-width="1.6"/>
+          <rect x="172" y="112" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#5B21B6" stroke-width="1.6"/>
+          <text x="216" y="134" font-size="12" fill="#5B21B6" font-weight="700">6 e⁻</text>
+          <text x="52" y="195" font-size="20" fill="#14532D" font-weight="700" text-anchor="middle">d</text>
+          <rect x="96" y="172" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#14532D" stroke-width="1.6"/>
+          <rect x="134" y="172" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#14532D" stroke-width="1.6"/>
+          <rect x="172" y="172" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#14532D" stroke-width="1.6"/>
+          <rect x="210" y="172" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#14532D" stroke-width="1.6"/>
+          <rect x="248" y="172" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#14532D" stroke-width="1.6"/>
+          <text x="292" y="194" font-size="12" fill="#14532D" font-weight="700">10 e⁻</text>
+          <text x="52" y="255" font-size="20" fill="#7F1D1D" font-weight="700" text-anchor="middle">f</text>
+          <rect x="96" y="232" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#7F1D1D" stroke-width="1.6"/>
+          <rect x="134" y="232" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#7F1D1D" stroke-width="1.6"/>
+          <rect x="172" y="232" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#7F1D1D" stroke-width="1.6"/>
+          <rect x="210" y="232" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#7F1D1D" stroke-width="1.6"/>
+          <rect x="248" y="232" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#7F1D1D" stroke-width="1.6"/>
+          <rect x="286" y="232" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#7F1D1D" stroke-width="1.6"/>
+          <rect x="324" y="232" width="30" height="34" rx="3" fill="#FFFFFF" stroke="#7F1D1D" stroke-width="1.6"/>
+          <text x="368" y="254" font-size="12" fill="#7F1D1D" font-weight="700">14 e⁻</text>
+          <text x="105.6" y="76.5" font-size="18" fill="#B45309" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.02;0.032;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="116.4" y="76.5" font-size="18" fill="#B45309" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.0458;0.0578;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="105.6" y="136.5" font-size="18" fill="#5B21B6" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.0716;0.0836;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="143.6" y="136.5" font-size="18" fill="#5B21B6" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.0974;0.1094;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="181.6" y="136.5" font-size="18" fill="#5B21B6" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.1232;0.1352;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="116.4" y="136.5" font-size="18" fill="#5B21B6" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.149;0.161;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="154.4" y="136.5" font-size="18" fill="#5B21B6" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.1748;0.1868;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="192.4" y="136.5" font-size="18" fill="#5B21B6" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2006;0.2126;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="105.6" y="196.5" font-size="18" fill="#14532D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2265;0.2385;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="143.6" y="196.5" font-size="18" fill="#14532D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2523;0.2643;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="181.6" y="196.5" font-size="18" fill="#14532D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2781;0.2901;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="219.6" y="196.5" font-size="18" fill="#14532D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3039;0.3159;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="257.6" y="196.5" font-size="18" fill="#14532D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3297;0.3417;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="116.4" y="196.5" font-size="18" fill="#14532D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3555;0.3675;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="154.4" y="196.5" font-size="18" fill="#14532D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3813;0.3933;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="192.4" y="196.5" font-size="18" fill="#14532D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4071;0.4191;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="230.4" y="196.5" font-size="18" fill="#14532D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4329;0.4449;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="268.4" y="196.5" font-size="18" fill="#14532D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4587;0.4707;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="105.6" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4845;0.4965;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="143.6" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5103;0.5223;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="181.6" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5361;0.5481;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="219.6" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5619;0.5739;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="257.6" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5877;0.5997;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="295.6" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.6135;0.6255;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="333.6" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↑<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.6394;0.6514;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="116.4" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.6652;0.6772;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="154.4" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.691;0.703;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="192.4" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.7168;0.7288;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="230.4" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.7426;0.7546;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="268.4" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.7684;0.7804;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="306.4" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.7942;0.8062;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          <text x="344.4" y="256.5" font-size="18" fill="#7F1D1D" text-anchor="middle" font-weight="700" opacity="0">↓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.82;0.832;0.94;1" dur="12.0s" repeatCount="indefinite"/></text>
+          </svg>
+          <div style="font-size:12px;color:#374151;line-height:1.7;margin-top:6px;">
+            สังเกต: อิเล็กตรอนเติม <strong>ทีละตัวแบบ spin เดียวกัน (↑) จนครบทุกกล่องก่อน</strong> (กฎฮุนด์) แล้วจึงย้อนกลับมา <strong>จับคู่ด้วย spin ตรงข้าม (↓)</strong> (หลักเพาลี) · ความจุเพิ่มทีละ 4: s=2, p=6, d=10, f=14
+          </div>
+        </div>
         <div class="formula-box">
           <div class="formula-label">ลำดับพลังงานออร์บิทัล (Aufbau order)</div>
           1s &lt; 2s &lt; 2p &lt; 3s &lt; 3p &lt; 4s &lt; 3d &lt; 4p &lt; 5s &lt; 4d ...<br>
@@ -4244,34 +4307,261 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h4>โครงสร้างตารางธาตุ</h4>
         <div class="formula-box">
           <div class="formula-label">📊 บล็อกในตารางธาตุ (s, p, d, f)</div>
-          <svg viewBox="0 0 540 260" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <!-- s block: columns 1-2 -->
-            <rect x="20" y="40" width="80" height="180" fill="#FBBF24" opacity="0.4" stroke="#92400E" stroke-width="1.5"/>
-            <text x="60" y="135" font-size="22" fill="#92400E" font-weight="700" text-anchor="middle">s</text>
-            <text x="60" y="155" font-size="11" fill="#92400E" text-anchor="middle">หมู่ 1-2</text>
-            <text x="60" y="170" font-size="9" fill="#92400E" text-anchor="middle">โลหะแอลคาไล/</text>
-            <text x="60" y="182" font-size="9" fill="#92400E" text-anchor="middle">แอลคาไลน์</text>
-            <!-- d block: columns 3-12, period 4-7 only -->
-            <rect x="120" y="80" width="200" height="140" fill="#86EFAC" opacity="0.4" stroke="#14532D" stroke-width="1.5"/>
-            <text x="220" y="155" font-size="22" fill="#14532D" font-weight="700" text-anchor="middle">d</text>
-            <text x="220" y="175" font-size="11" fill="#14532D" text-anchor="middle">หมู่ 3-12 · ทรานสิชัน</text>
-            <text x="220" y="190" font-size="9" fill="#14532D" text-anchor="middle">Fe Cu Ni Au Ag ...</text>
-            <!-- p block: columns 13-18 -->
-            <rect x="340" y="40" width="180" height="180" fill="#A78BFA" opacity="0.4" stroke="#5B21B6" stroke-width="1.5"/>
-            <text x="430" y="130" font-size="22" fill="#5B21B6" font-weight="700" text-anchor="middle">p</text>
-            <text x="430" y="150" font-size="11" fill="#5B21B6" text-anchor="middle">หมู่ 13-18</text>
-            <text x="430" y="165" font-size="9" fill="#5B21B6" text-anchor="middle">C N O F Cl ...</text>
-            <text x="430" y="180" font-size="9" fill="#5B21B6" text-anchor="middle">แก๊สมีตระกูล</text>
-            <!-- f block: below -->
-            <rect x="120" y="222" width="380" height="30" fill="#FCA5A5" opacity="0.4" stroke="#7F1D1D" stroke-width="1.5"/>
-            <text x="310" y="243" font-size="14" fill="#7F1D1D" font-weight="700" text-anchor="middle">f — แลนทาไนด์ + แอกทิไนด์</text>
-            <!-- title -->
-            <text x="270" y="22" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">บล็อกในตารางธาตุ — บอกว่า valence e⁻ อยู่ใน sub-shell ใด</text>
-            <!-- periods H/He hint -->
-            <rect x="20" y="40" width="20" height="20" fill="none" stroke="#374151" stroke-width="1" stroke-dasharray="2,2"/>
-            <text x="30" y="55" font-size="9" fill="#374151" text-anchor="middle" font-weight="700">H</text>
-            <rect x="500" y="40" width="20" height="20" fill="none" stroke="#374151" stroke-width="1" stroke-dasharray="2,2"/>
-            <text x="510" y="55" font-size="9" fill="#374151" text-anchor="middle" font-weight="700">He</text>
+                    <svg viewBox="0 0 500 320" style="width:100%;max-width:600px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+          <defs><linearGradient id="gs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FEF3C7"/><stop offset="1" stop-color="#FBBF24"/></linearGradient><linearGradient id="gp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDE9FE"/><stop offset="1" stop-color="#A78BFA"/></linearGradient><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D1FAE5"/><stop offset="1" stop-color="#34D399"/></linearGradient><linearGradient id="gf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE4E6"/><stop offset="1" stop-color="#FB7185"/></linearGradient></defs>
+          <text x="250" y="20" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">ตารางธาตุจริง — แบ่งเป็นบล็อก s / p / d / f ตามซับเชลล์ที่รับเวเลนซ์ e⁻</text>
+          <text x="35" y="66" font-size="8" fill="#9CA3AF" text-anchor="middle">1</text>
+          <text x="35" y="91" font-size="8" fill="#9CA3AF" text-anchor="middle">2</text>
+          <text x="35" y="116" font-size="8" fill="#9CA3AF" text-anchor="middle">3</text>
+          <text x="35" y="140" font-size="8" fill="#9CA3AF" text-anchor="middle">4</text>
+          <text x="35" y="164" font-size="8" fill="#9CA3AF" text-anchor="middle">5</text>
+          <text x="35" y="189" font-size="8" fill="#9CA3AF" text-anchor="middle">6</text>
+          <text x="35" y="214" font-size="8" fill="#9CA3AF" text-anchor="middle">7</text>
+          <rect x="44.0" y="52.0" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="55.5" y="66.5" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">H</text>
+          <rect x="460.5" y="52.0" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="472.0" y="66.5" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">He</text>
+          <rect x="44.0" y="76.5" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="55.5" y="91.0" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">Li</text>
+          <rect x="68.5" y="76.5" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="80.0" y="91.0" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">Be</text>
+          <rect x="338.0" y="76.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="349.5" y="91.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">B</text>
+          <rect x="362.5" y="76.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="374.0" y="91.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">C</text>
+          <rect x="387.0" y="76.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="398.5" y="91.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">N</text>
+          <rect x="411.5" y="76.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="423.0" y="91.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">O</text>
+          <rect x="436.0" y="76.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="447.5" y="91.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">F</text>
+          <rect x="460.5" y="76.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="472.0" y="91.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Ne</text>
+          <rect x="44.0" y="101.0" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="55.5" y="115.5" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">Na</text>
+          <rect x="68.5" y="101.0" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="80.0" y="115.5" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">Mg</text>
+          <rect x="338.0" y="101.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="349.5" y="115.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Al</text>
+          <rect x="362.5" y="101.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="374.0" y="115.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Si</text>
+          <rect x="387.0" y="101.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="398.5" y="115.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">P</text>
+          <rect x="411.5" y="101.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="423.0" y="115.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">S</text>
+          <rect x="436.0" y="101.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="447.5" y="115.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Cl</text>
+          <rect x="460.5" y="101.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="472.0" y="115.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Ar</text>
+          <rect x="44.0" y="125.5" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="55.5" y="140.0" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">K</text>
+          <rect x="68.5" y="125.5" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="80.0" y="140.0" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">Ca</text>
+          <rect x="93.0" y="125.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="104.5" y="140.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Sc</text>
+          <rect x="117.5" y="125.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="129.0" y="140.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Ti</text>
+          <rect x="142.0" y="125.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="153.5" y="140.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">V</text>
+          <rect x="166.5" y="125.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="178.0" y="140.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Cr</text>
+          <rect x="191.0" y="125.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="202.5" y="140.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Mn</text>
+          <rect x="215.5" y="125.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="227.0" y="140.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Fe</text>
+          <rect x="240.0" y="125.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="251.5" y="140.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Co</text>
+          <rect x="264.5" y="125.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="276.0" y="140.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Ni</text>
+          <rect x="289.0" y="125.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="300.5" y="140.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Cu</text>
+          <rect x="313.5" y="125.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="325.0" y="140.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Zn</text>
+          <rect x="338.0" y="125.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="349.5" y="140.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Ga</text>
+          <rect x="362.5" y="125.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="374.0" y="140.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Ge</text>
+          <rect x="387.0" y="125.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="398.5" y="140.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">As</text>
+          <rect x="411.5" y="125.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="423.0" y="140.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Se</text>
+          <rect x="436.0" y="125.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="447.5" y="140.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Br</text>
+          <rect x="460.5" y="125.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="472.0" y="140.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Kr</text>
+          <rect x="44.0" y="150.0" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="55.5" y="164.5" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">Rb</text>
+          <rect x="68.5" y="150.0" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="80.0" y="164.5" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">Sr</text>
+          <rect x="93.0" y="150.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="104.5" y="164.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Y</text>
+          <rect x="117.5" y="150.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="129.0" y="164.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Zr</text>
+          <rect x="142.0" y="150.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="153.5" y="164.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Nb</text>
+          <rect x="166.5" y="150.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="178.0" y="164.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Mo</text>
+          <rect x="191.0" y="150.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="202.5" y="164.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Tc</text>
+          <rect x="215.5" y="150.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="227.0" y="164.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Ru</text>
+          <rect x="240.0" y="150.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="251.5" y="164.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Rh</text>
+          <rect x="264.5" y="150.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="276.0" y="164.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Pd</text>
+          <rect x="289.0" y="150.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="300.5" y="164.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Ag</text>
+          <rect x="313.5" y="150.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="325.0" y="164.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Cd</text>
+          <rect x="338.0" y="150.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="349.5" y="164.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">In</text>
+          <rect x="362.5" y="150.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="374.0" y="164.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Sn</text>
+          <rect x="387.0" y="150.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="398.5" y="164.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Sb</text>
+          <rect x="411.5" y="150.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="423.0" y="164.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Te</text>
+          <rect x="436.0" y="150.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="447.5" y="164.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">I</text>
+          <rect x="460.5" y="150.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="472.0" y="164.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Xe</text>
+          <rect x="44.0" y="174.5" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="55.5" y="189.0" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">Cs</text>
+          <rect x="68.5" y="174.5" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="80.0" y="189.0" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">Ba</text>
+          <rect x="93.0" y="174.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="104.5" y="189.0" font-size="8" fill="#881337" text-anchor="middle" font-weight="700">La</text>
+          <rect x="117.5" y="174.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="129.0" y="189.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Hf</text>
+          <rect x="142.0" y="174.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="153.5" y="189.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Ta</text>
+          <rect x="166.5" y="174.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="178.0" y="189.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">W</text>
+          <rect x="191.0" y="174.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="202.5" y="189.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Re</text>
+          <rect x="215.5" y="174.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="227.0" y="189.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Os</text>
+          <rect x="240.0" y="174.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="251.5" y="189.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Ir</text>
+          <rect x="264.5" y="174.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="276.0" y="189.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Pt</text>
+          <rect x="289.0" y="174.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="300.5" y="189.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Au</text>
+          <rect x="313.5" y="174.5" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="325.0" y="189.0" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Hg</text>
+          <rect x="338.0" y="174.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="349.5" y="189.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Tl</text>
+          <rect x="362.5" y="174.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="374.0" y="189.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Pb</text>
+          <rect x="387.0" y="174.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="398.5" y="189.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Bi</text>
+          <rect x="411.5" y="174.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="423.0" y="189.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Po</text>
+          <rect x="436.0" y="174.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="447.5" y="189.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">At</text>
+          <rect x="460.5" y="174.5" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="472.0" y="189.0" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Rn</text>
+          <rect x="44.0" y="199.0" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="55.5" y="213.5" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">Fr</text>
+          <rect x="68.5" y="199.0" width="23" height="23" rx="3" fill="url(#gs)" stroke="#92400E" stroke-width="0.8"/>
+          <text x="80.0" y="213.5" font-size="8" fill="#78350F" text-anchor="middle" font-weight="700">Ra</text>
+          <rect x="93.0" y="199.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="104.5" y="213.5" font-size="8" fill="#881337" text-anchor="middle" font-weight="700">Ac</text>
+          <rect x="117.5" y="199.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="129.0" y="213.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Rf</text>
+          <rect x="142.0" y="199.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="153.5" y="213.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Db</text>
+          <rect x="166.5" y="199.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="178.0" y="213.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Sg</text>
+          <rect x="191.0" y="199.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="202.5" y="213.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Bh</text>
+          <rect x="215.5" y="199.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="227.0" y="213.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Hs</text>
+          <rect x="240.0" y="199.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="251.5" y="213.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Mt</text>
+          <rect x="264.5" y="199.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="276.0" y="213.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Ds</text>
+          <rect x="289.0" y="199.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="300.5" y="213.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Rg</text>
+          <rect x="313.5" y="199.0" width="23" height="23" rx="3" fill="url(#gd)" stroke="#047857" stroke-width="0.8"/>
+          <text x="325.0" y="213.5" font-size="8" fill="#065F46" text-anchor="middle" font-weight="700">Cn</text>
+          <rect x="338.0" y="199.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="349.5" y="213.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Nh</text>
+          <rect x="362.5" y="199.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="374.0" y="213.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Fl</text>
+          <rect x="387.0" y="199.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="398.5" y="213.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Mc</text>
+          <rect x="411.5" y="199.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="423.0" y="213.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Lv</text>
+          <rect x="436.0" y="199.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="447.5" y="213.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Ts</text>
+          <rect x="460.5" y="199.0" width="23" height="23" rx="3" fill="url(#gp)" stroke="#5B21B6" stroke-width="0.8"/>
+          <text x="472.0" y="213.5" font-size="8" fill="#4C1D95" text-anchor="middle" font-weight="700">Og</text>
+          <rect x="117.5" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="129.0" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Ce</text>
+          <rect x="142.0" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="153.5" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Pr</text>
+          <rect x="166.5" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="178.0" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Nd</text>
+          <rect x="191.0" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="202.5" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Pm</text>
+          <rect x="215.5" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="227.0" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Sm</text>
+          <rect x="240.0" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="251.5" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Eu</text>
+          <rect x="264.5" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="276.0" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Gd</text>
+          <rect x="289.0" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="300.5" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Tb</text>
+          <rect x="313.5" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="325.0" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Dy</text>
+          <rect x="338.0" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="349.5" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Ho</text>
+          <rect x="362.5" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="374.0" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Er</text>
+          <rect x="387.0" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="398.5" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Tm</text>
+          <rect x="411.5" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="423.0" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Yb</text>
+          <rect x="436.0" y="233.0" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="447.5" y="247.5" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Lu</text>
+          <rect x="117.5" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="129.0" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Th</text>
+          <rect x="142.0" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="153.5" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Pa</text>
+          <rect x="166.5" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="178.0" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">U</text>
+          <rect x="191.0" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="202.5" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Np</text>
+          <rect x="215.5" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="227.0" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Pu</text>
+          <rect x="240.0" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="251.5" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Am</text>
+          <rect x="264.5" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="276.0" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Cm</text>
+          <rect x="289.0" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="300.5" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Bk</text>
+          <rect x="313.5" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="325.0" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Cf</text>
+          <rect x="338.0" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="349.5" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Es</text>
+          <rect x="362.5" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="374.0" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Fm</text>
+          <rect x="387.0" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="398.5" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Md</text>
+          <rect x="411.5" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="423.0" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">No</text>
+          <rect x="436.0" y="257.5" width="23" height="23" rx="3" fill="url(#gf)" stroke="#9F1239" stroke-width="0.8"/>
+          <text x="447.5" y="272.0" font-size="7.5" fill="#881337" text-anchor="middle" font-weight="700">Lr</text>
+          <line x1="104.5" y1="197.5" x2="129.0" y2="233.0" stroke="#FB7185" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.7"/>
+          <rect x="42.0" y="50.0" width="51.5" height="174.0" rx="5" fill="#92400E" fill-opacity="0.14" stroke="#92400E" stroke-width="2.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.02;0.04;0.23;0.25;1" dur="12s" repeatCount="indefinite"/></rect>
+          <rect x="91.0" y="123.5" width="247.5" height="100.5" rx="5" fill="#047857" fill-opacity="0.14" stroke="#047857" stroke-width="2.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.27;0.29000000000000004;0.48;0.5;1" dur="12s" repeatCount="indefinite"/></rect>
+          <rect x="336.0" y="50.0" width="149.5" height="174.0" rx="5" fill="#5B21B6" fill-opacity="0.14" stroke="#5B21B6" stroke-width="2.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.52;0.54;0.73;0.75;1" dur="12s" repeatCount="indefinite"/></rect>
+          <rect x="115.5" y="231.0" width="345.5" height="51.5" rx="5" fill="#9F1239" fill-opacity="0.14" stroke="#9F1239" stroke-width="2.5" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.77;0.79;0.96;0.98;1" dur="12s" repeatCount="indefinite"/></rect>
+          <text x="250" y="312" font-size="10.5" fill="#92400E" text-anchor="middle" font-weight="700" opacity="0">บล็อก s — เวเลนซ์ e⁻ อยู่ในออร์บิทัล ns · หมู่ 1-2 (โลหะแอลคาไล/แอลคาไลน์เอิร์ท)<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.02;0.04;0.23;0.25;1" dur="12s" repeatCount="indefinite"/></text>
+          <text x="250" y="312" font-size="10.5" fill="#047857" text-anchor="middle" font-weight="700" opacity="0">บล็อก d — เติม e⁻ ใน (n−1)d · หมู่ 3-12 โลหะทรานสิชัน (Fe Cu Ag Au ...)<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.27;0.29000000000000004;0.48;0.5;1" dur="12s" repeatCount="indefinite"/></text>
+          <text x="250" y="312" font-size="10.5" fill="#5B21B6" text-anchor="middle" font-weight="700" opacity="0">บล็อก p — เวเลนซ์ e⁻ อยู่ใน np · หมู่ 13-18 (อโลหะ/ธาตุกึ่งโลหะ/แก๊สมีตระกูล)<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.52;0.54;0.73;0.75;1" dur="12s" repeatCount="indefinite"/></text>
+          <text x="250" y="312" font-size="10.5" fill="#9F1239" text-anchor="middle" font-weight="700" opacity="0">บล็อก f — เติม e⁻ ใน (n−2)f · แลนทาไนด์ + แอกทิไนด์<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.77;0.79;0.96;0.98;1" dur="12s" repeatCount="indefinite"/></text>
           </svg>
         </div>
         <ul>
@@ -4293,29 +4583,57 @@ html, body { max-width:100%; overflow-x:hidden; }
         </table>
         <div class="note-box">⚠️ <strong>ข้อยกเว้น IE₁:</strong> Be > B (2s² เสถียรกว่า 2p¹) และ N > O (2p³ half-filled เสถียร) ต้องจำไว้สำหรับการสอบ</div>
         <div class="formula-box">
-          <div class="formula-label">🧭 แผนที่แนวโน้มตารางธาตุ — จำทิศเดียวจบ</div>
-          <svg viewBox="0 0 520 250" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <!-- table outline -->
-            <rect x="70" y="40" width="380" height="150" rx="6" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5"/>
-            <text x="260" y="32" font-size="11" fill="#1E40AF" text-anchor="middle" font-weight="700">ตารางธาตุ (มุมมองทิศทางแนวโน้ม)</text>
-            <!-- across arrow (left to right) -->
-            <line x1="80" y1="208" x2="440" y2="208" stroke="#DC2626" stroke-width="2.5" marker-end="url(#ahR)"/>
-            <text x="260" y="226" font-size="10" fill="#DC2626" text-anchor="middle" font-weight="700">ในคาบ → (Z เพิ่ม): รัศมี↓  IE↑  EN↑</text>
-            <!-- down arrow (top to bottom) -->
-            <line x1="56" y1="48" x2="56" y2="182" stroke="#0F766E" stroke-width="2.5" marker-end="url(#ahD)"/>
-            <text x="20" y="120" font-size="10" fill="#0F766E" text-anchor="middle" font-weight="700" transform="rotate(-90 20 120)">ในหมู่ ↓ (n เพิ่ม): รัศมี↑  IE↓  EN↓</text>
-            <!-- corner callouts -->
-            <circle cx="105" cy="160" r="20" fill="#0F766E" opacity="0.85"/>
-            <text x="105" y="158" font-size="9" fill="#FFF" text-anchor="middle">โลหะ</text>
-            <text x="105" y="169" font-size="8" fill="#FFF" text-anchor="middle">(ซ้ายล่าง)</text>
-            <circle cx="420" cy="70" r="20" fill="#7C3AED" opacity="0.85"/>
-            <text x="420" y="68" font-size="9" fill="#FFF" text-anchor="middle">อโลหะ</text>
-            <text x="420" y="79" font-size="8" fill="#FFF" text-anchor="middle">(ขวาบน)</text>
-            <text x="420" y="108" font-size="8.5" fill="#374151" text-anchor="middle">F = EN สูงสุด</text>
+          <div class="formula-label">🧭 แผนที่แนวโน้มตารางธาตุ (เคลื่อนไหว) — จำทิศเดียวจบ</div>
+          <svg viewBox="0 0 520 290" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
             <defs>
-              <marker id="ahR" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><path d="M1,1 L8,5 L1,9" fill="none" stroke="#DC2626" stroke-width="1.6"/></marker>
-              <marker id="ahD" markerWidth="10" markerHeight="10" refX="5" refY="7" orient="auto"><path d="M1,1 L5,8 L9,1" fill="none" stroke="#0F766E" stroke-width="1.6"/></marker>
+              <linearGradient id="trendGrad" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stop-color="#CCFBF1"/>
+                <stop offset="0.5" stop-color="#E9F1FF"/>
+                <stop offset="1" stop-color="#E9D5FF"/>
+              </linearGradient>
+              <marker id="ahR2" markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,5 L0,10 Z" fill="#DC2626"/></marker>
+              <marker id="ahD2" markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,5 L0,10 Z" fill="#0F766E"/></marker>
             </defs>
+            <!-- table body with diagonal trend gradient -->
+            <rect x="95" y="60" width="360" height="158" rx="8" fill="url(#trendGrad)" stroke="#93C5FD" stroke-width="1.5"/>
+            <!-- faint grid to suggest groups/periods -->
+            <g stroke="#93C5FD" stroke-width="0.6" opacity="0.4">
+              <line x1="135" y1="60" x2="135" y2="218"/><line x1="175" y1="60" x2="175" y2="218"/><line x1="215" y1="60" x2="215" y2="218"/><line x1="255" y1="60" x2="255" y2="218"/><line x1="295" y1="60" x2="295" y2="218"/><line x1="335" y1="60" x2="335" y2="218"/><line x1="375" y1="60" x2="375" y2="218"/><line x1="415" y1="60" x2="415" y2="218"/>
+              <line x1="95" y1="92" x2="455" y2="92"/><line x1="95" y1="124" x2="455" y2="124"/><line x1="95" y1="156" x2="455" y2="156"/><line x1="95" y1="188" x2="455" y2="188"/>
+            </g>
+            <text x="275" y="50" font-size="11" fill="#1E40AF" text-anchor="middle" font-weight="700">ตารางธาตุ — ทิศทางแนวโน้มสมบัติ</text>
+            <!-- animated shrinking atom across a period -->
+            <circle cy="104" fill="#0F766E" opacity="0.35" stroke="#0F766E" stroke-width="1.4" r="24" cx="140">
+              <animate attributeName="cx" values="140;225;315;400" keyTimes="0;0.33;0.66;1" dur="4.5s" repeatCount="indefinite"/>
+              <animate attributeName="r"  values="24;18;13;9"       keyTimes="0;0.33;0.66;1" dur="4.5s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;0.4;0.4;0.4;0" keyTimes="0;0.06;0.5;0.9;1" dur="4.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cy="104" fill="#134E4A" r="3" cx="140">
+              <animate attributeName="cx" values="140;225;315;400" keyTimes="0;0.33;0.66;1" dur="4.5s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.06;0.5;0.9;1" dur="4.5s" repeatCount="indefinite"/>
+            </circle>
+            <text x="275" y="150" font-size="9.5" fill="#134E4A" text-anchor="middle">อะตอมหดลงเมื่อไปทางขวาในคาบ (รัศมี↓)</text>
+            <!-- pulsing corner anchors: Cs (metal) & F (nonmetal) -->
+            <circle cx="126" cy="190" r="17" fill="#0F766E"><animate attributeName="opacity" values="0.75;0.95;0.75" dur="2s" repeatCount="indefinite"/></circle>
+            <text x="126" y="187" font-size="10" fill="#FFF" text-anchor="middle" font-weight="700">Cs</text>
+            <text x="126" y="199" font-size="7.5" fill="#FFF" text-anchor="middle">รัศมีใหญ่</text>
+            <circle cx="428" cy="90" r="16" fill="#7C3AED"><animate attributeName="opacity" values="0.75;0.95;0.75" dur="2s" repeatCount="indefinite"/></circle>
+            <text x="428" y="88" font-size="11" fill="#FFF" text-anchor="middle" font-weight="700">F</text>
+            <text x="428" y="99" font-size="7.5" fill="#FFF" text-anchor="middle">EN สูงสุด</text>
+            <!-- across arrow (left to right) with moving pulse -->
+            <line x1="100" y1="246" x2="450" y2="246" stroke="#DC2626" stroke-width="2.5" marker-end="url(#ahR2)"/>
+            <circle cy="246" r="4.5" fill="#DC2626" cx="100">
+              <animate attributeName="cx" values="100;445" keyTimes="0;1" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.85;1" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <text x="275" y="266" font-size="10" fill="#DC2626" text-anchor="middle" font-weight="700">ในคาบ → (Z เพิ่ม): รัศมีอะตอม↓  IE↑  EN↑</text>
+            <!-- down arrow (top to bottom) with moving pulse -->
+            <line x1="72" y1="66" x2="72" y2="214" stroke="#0F766E" stroke-width="2.5" marker-end="url(#ahD2)"/>
+            <circle cx="72" r="4.5" fill="#0F766E" cy="66">
+              <animate attributeName="cy" values="66;209" keyTimes="0;1" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.85;1" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <text x="26" y="140" font-size="9.5" fill="#0F766E" text-anchor="middle" font-weight="700" transform="rotate(-90 26 140)">ในหมู่ ↓ (n เพิ่ม): รัศมี↑  IE↓  EN↓</text>
           </svg>
           <strong>จำง่าย:</strong> F (ขวาบน) คือ "ตัวสุด" ของรัศมีเล็ก-IE สูง-EN สูง · Fr/Cs (ซ้ายล่าง) คือ "ตัวสุด" ของรัศมีใหญ่-IE ต่ำ-EN ต่ำ
         </div>
@@ -17836,14 +18154,55 @@ const PK_IMF_DEFS = {
     bonds:[[1,2],[1,3],[4,5],[4,6],[7,8],[7,9],[10,11],[10,12]],
     forces:[[0,1],[0,4],[0,7],[0,10]] }
 };
+// ออร์บิทัล s/p/d/f หมุน 3 มิติจริง (แกนเอียง + เพอร์สเปกทีฟ) — แต่ละกลีบเป็นเวกเตอร์ทิศ แล้วฉายลง 2D
+const PK_ORB_DEFS = {
+  s: { kind:'sphere', cl:'#EDE9FE', cm:'#8B5CF6', cd:'#4C1D95' },
+  p: { cl:'#FDE68A', cm:'#F59E0B', cd:'#B45309', dc:30, alen:30, awid:15,
+       lobes:[[0,0,1],[0,0,-1]] },                       // ดัมเบล (แกน z)
+  d: { cl:'#99F6E4', cm:'#14B8A6', cd:'#0F766E', dc:28, alen:28, awid:14,
+       lobes:[[0.707,0.707,0],[0.707,-0.707,0],[-0.707,0.707,0],[-0.707,-0.707,0]] }, // d_xy สี่กลีบ
+  f: { cl:'#DDD6FE', cm:'#8B5CF6', cd:'#5B21B6', dc:24, alen:24, awid:12,
+       lobes:[[0.577,0.577,0.577],[0.577,0.577,-0.577],[0.577,-0.577,0.577],[0.577,-0.577,-0.577],
+              [-0.577,0.577,0.577],[-0.577,0.577,-0.577],[-0.577,-0.577,0.577],[-0.577,-0.577,-0.577]] } // f_xyz แปดกลีบ
+};
+// เรนเดอร์ออร์บิทัล 3 มิติ: หมุนเวกเตอร์ทิศของแต่ละกลีบด้วย yaw(ay)+tilt(ax) แล้วฉายเพอร์สเปกทีฟ + เรียงลึก
+function pkRenderOrb(s){
+  const d = PK_ORB_DEFS[s.type] || PK_ORB_DEFS.p;
+  const cx=70, cy=70, f=200, ax=s.ax, ay=s.a, uid=s.uid||s.type;
+  const defs = '<defs><radialGradient id="og'+uid+'" cx="0.35" cy="0.32" r="0.85">'+
+    '<stop offset="0" stop-color="'+d.cl+'"/><stop offset="0.6" stop-color="'+d.cm+'"/><stop offset="1" stop-color="'+d.cd+'"/></radialGradient></defs>';
+  let body='';
+  if(d.kind==='sphere'){
+    body = '<circle cx="'+cx+'" cy="'+cy+'" r="34" fill="url(#og'+uid+')"/>'+
+           '<ellipse cx="'+(cx-12)+'" cy="'+(cy-13)+'" rx="10" ry="6" fill="#FFFFFF" opacity="0.4"/>'+
+           '<circle cx="'+cx+'" cy="'+cy+'" r="3" fill="#1f2937"/>';
+  } else {
+    const L = d.lobes.map(u=>{
+      const x1=u[0]*Math.cos(ay)+u[2]*Math.sin(ay), z1=-u[0]*Math.sin(ay)+u[2]*Math.cos(ay);
+      const y2=u[1]*Math.cos(ax)-z1*Math.sin(ax),   z2=u[1]*Math.sin(ax)+z1*Math.cos(ax);
+      const sc=f/(f-d.dc*z2), inP=Math.hypot(x1,y2);
+      return { X:cx+d.dc*x1*sc, Y:cy+d.dc*y2*sc, rx:Math.hypot(d.alen*inP,d.awid*z2)*sc,
+               ry:d.awid*sc, ang:Math.atan2(y2,x1)*180/Math.PI, cz:d.dc*z2, sc:sc };
+    }).sort((a,b)=>a.cz-b.cz);
+    L.forEach(l=>{
+      const op=Math.max(0.4,Math.min(0.95,0.55+0.45*(l.sc-0.85))).toFixed(2);
+      body += '<g transform="translate('+l.X.toFixed(1)+','+l.Y.toFixed(1)+') rotate('+l.ang.toFixed(1)+')">'+
+              '<ellipse cx="0" cy="0" rx="'+l.rx.toFixed(1)+'" ry="'+l.ry.toFixed(1)+'" fill="url(#og'+uid+')" opacity="'+op+'" stroke="'+d.cd+'" stroke-width="0.7"/></g>';
+    });
+    body += '<circle cx="'+cx+'" cy="'+cy+'" r="3.5" fill="#1f2937"/>';
+  }
+  s.el.innerHTML = '<svg viewBox="0 0 140 140" style="width:100%;max-width:150px;display:block;margin:0 auto;">'+defs+body+'</svg>';
+}
 function pkInitChapterAnims(){
   if(_pkMolRAF){ cancelAnimationFrame(_pkMolRAF); _pkMolRAF=null; }
   const mols = Array.from(document.querySelectorAll('#chap-body .pk-mol3d'));
   const imfs = Array.from(document.querySelectorAll('#chap-body .pk-imf3d'));
-  if(!mols.length && !imfs.length) return;
+  const orbs = Array.from(document.querySelectorAll('#chap-body .pk-orb3d'));
+  if(!mols.length && !imfs.length && !orbs.length) return;
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const states = mols.map(el=>({ el, kind:'mol', type:(el.dataset.mol||'tetra'), a: Math.random()*6 }))
-    .concat(imfs.map(el=>({ el, kind:'imf', type:(el.dataset.imf||'hbond'), a: Math.random()*6 })));
+    .concat(imfs.map(el=>({ el, kind:'imf', type:(el.dataset.imf||'hbond'), a: Math.random()*6 })))
+    .concat(orbs.map((el,i)=>({ el, kind:'orb', type:(el.dataset.orb||'p'), a: Math.random()*6, uid:(el.dataset.orb||'p')+i })));
   states.forEach(pkAttachDrag);
   function frame(){
     if(!states[0].el.isConnected) { _pkMolRAF=null; return; }
@@ -17851,6 +18210,7 @@ function pkInitChapterAnims(){
     if(active) states.forEach(s=>{
       if(!reduce && s.auto) s.a += 0.011;
       if(s.kind==='imf'){ pkRenderIMF(s); return; }
+      if(s.kind==='orb'){ pkRenderOrb(s); return; }
       const d = PK_MOL_DEFS[s.type] || PK_MOL_DEFS.tetra;
       const cx=70, cy=70, f=210, ax=s.ax, ay=s.a;
       let atoms=[{x:0,y:0,z:0,r:13,fill:d.cc,label:d.cn,lc:'#fff'}];
