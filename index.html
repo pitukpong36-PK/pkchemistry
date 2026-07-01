@@ -9578,45 +9578,15 @@ html, body { max-width:100%; overflow-x:hidden; }
           Pᵢ = Xᵢ × P_total  (Xᵢ = เศษส่วนโมลของแก๊ส i = nᵢ/n_total)<br>
           P_total × V = n_total × RT
         </div>
-        <!-- Dalton visualization (SVG containers with colored particles) -->
-        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0;">
-          <div style="text-align:center;flex:1;min-width:120px;">
-            <div class="dalton-jar" style="border:2px solid #3B82F6;">
-              <div class="gas-anim-dot" style="top:10px;left:14px;width:11px;height:11px;background:#3B82F6;color:#3B82F6;animation:gasAnimSlow 2.4s linear infinite 0s;"></div>
-              <div class="gas-anim-dot" style="top:30px;left:54px;width:11px;height:11px;background:#3B82F6;color:#3B82F6;animation:gasAnimSlow 2.2s linear infinite 0.4s;"></div>
-              <div class="gas-anim-dot" style="top:50px;left:24px;width:11px;height:11px;background:#3B82F6;color:#3B82F6;animation:gasAnimSlow 2.6s linear infinite 0.7s;"></div>
-            </div>
-            <div style="font-size:11px;color:#1E40AF;margin-top:6px;font-weight:600;">H₂ เพียวๆ</div>
-            <div style="font-size:10px;color:#1E40AF;">P₁ = 2.4 atm</div>
-          </div>
+        <!-- Dalton visualization: SVG + SMIL อนุภาคเด้งในกรอบ -->
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;margin:10px 0;">
+          <div style="text-align:center;flex:1;min-width:110px;"><svg viewBox="0 0 120 90" style="width:100%;max-width:150px;display:block;margin:0 auto;background:#0F172A;border-radius:10px;border:2px solid #3B82F6;"><circle r="5" fill="#3B82F6" opacity="0.92"><animate attributeName="cx" values="93;26;15;93" dur="2.2s" repeatCount="indefinite"/><animate attributeName="cy" values="47;43;40;47" dur="1.9s" repeatCount="indefinite"/></circle><circle r="5" fill="#3B82F6" opacity="0.92"><animate attributeName="cx" values="106;81;23;106" dur="2.1s" repeatCount="indefinite"/><animate attributeName="cy" values="66;16;15;66" dur="2.1s" repeatCount="indefinite"/></circle><circle r="5" fill="#3B82F6" opacity="0.92"><animate attributeName="cx" values="89;15;83;89" dur="2.5s" repeatCount="indefinite"/><animate attributeName="cy" values="37;65;40;37" dur="2.1s" repeatCount="indefinite"/></circle></svg><div style="font-size:11px;color:#1E40AF;margin-top:6px;font-weight:600;">H₂ เพียว ๆ (3 อนุภาค)</div><div style="font-size:10px;color:#1E40AF;">P₁ = 3.0 atm</div></div>
           <div style="font-size:28px;color:#F59E0B;font-weight:700;">+</div>
-          <div style="text-align:center;flex:1;min-width:120px;">
-            <div class="dalton-jar" style="border:2px solid #F97316;">
-              <div class="gas-anim-dot" style="top:8px;left:20px; width:11px;height:11px;background:#F97316;color:#F97316;animation:gasAnimSlow 2.2s linear infinite 0s;"></div>
-              <div class="gas-anim-dot" style="top:24px;left:48px;width:11px;height:11px;background:#F97316;color:#F97316;animation:gasAnimSlow 2.0s linear infinite 0.3s;"></div>
-              <div class="gas-anim-dot" style="top:40px;left:14px;width:11px;height:11px;background:#F97316;color:#F97316;animation:gasAnimSlow 2.4s linear infinite 0.5s;"></div>
-              <div class="gas-anim-dot" style="top:56px;left:42px;width:11px;height:11px;background:#F97316;color:#F97316;animation:gasAnimSlow 2.6s linear infinite 0.7s;"></div>
-              <div class="gas-anim-dot" style="top:62px;left:62px;width:11px;height:11px;background:#F97316;color:#F97316;animation:gasAnimSlow 2.1s linear infinite 0.1s;"></div>
-            </div>
-            <div style="font-size:11px;color:#C2410C;margin-top:6px;font-weight:600;">He เพียวๆ</div>
-            <div style="font-size:10px;color:#C2410C;">P₂ = 6.0 atm</div>
-          </div>
+          <div style="text-align:center;flex:1;min-width:110px;"><svg viewBox="0 0 120 90" style="width:100%;max-width:150px;display:block;margin:0 auto;background:#0F172A;border-radius:10px;border:2px solid #F97316;"><circle r="5" fill="#F97316" opacity="0.92"><animate attributeName="cx" values="12;32;101;12" dur="2.2s" repeatCount="indefinite"/><animate attributeName="cy" values="66;55;47;66" dur="2.9s" repeatCount="indefinite"/></circle><circle r="5" fill="#F97316" opacity="0.92"><animate attributeName="cx" values="55;25;23;55" dur="3.0s" repeatCount="indefinite"/><animate attributeName="cy" values="60;24;57;60" dur="2.5s" repeatCount="indefinite"/></circle><circle r="5" fill="#F97316" opacity="0.92"><animate attributeName="cx" values="17;105;70;17" dur="2.7s" repeatCount="indefinite"/><animate attributeName="cy" values="27;60;22;27" dur="2.8s" repeatCount="indefinite"/></circle><circle r="5" fill="#F97316" opacity="0.92"><animate attributeName="cx" values="91;58;85;91" dur="2.8s" repeatCount="indefinite"/><animate attributeName="cy" values="36;20;17;36" dur="2.7s" repeatCount="indefinite"/></circle><circle r="5" fill="#F97316" opacity="0.92"><animate attributeName="cx" values="22;41;24;22" dur="2.8s" repeatCount="indefinite"/><animate attributeName="cy" values="60;47;70;60" dur="2.2s" repeatCount="indefinite"/></circle></svg><div style="font-size:11px;color:#C2410C;margin-top:6px;font-weight:600;">He เพียว ๆ (5 อนุภาค)</div><div style="font-size:10px;color:#C2410C;">P₂ = 5.0 atm</div></div>
           <div style="font-size:28px;color:#F59E0B;font-weight:700;">=</div>
-          <div style="text-align:center;flex:1;min-width:120px;">
-            <div class="dalton-jar" style="border:2px solid #22C55E;">
-              <div class="gas-anim-dot" style="top:10px;left:14px;width:11px;height:11px;background:#3B82F6;color:#3B82F6;animation:gasAnimSlow 2.4s linear infinite 0s;"></div>
-              <div class="gas-anim-dot" style="top:30px;left:54px;width:11px;height:11px;background:#3B82F6;color:#3B82F6;animation:gasAnimSlow 2.2s linear infinite 0.4s;"></div>
-              <div class="gas-anim-dot" style="top:50px;left:24px;width:11px;height:11px;background:#3B82F6;color:#3B82F6;animation:gasAnimSlow 2.6s linear infinite 0.7s;"></div>
-              <div class="gas-anim-dot" style="top:8px;left:42px; width:11px;height:11px;background:#F97316;color:#F97316;animation:gasAnimFast 2.2s linear infinite 0s;"></div>
-              <div class="gas-anim-dot" style="top:26px;left:18px;width:11px;height:11px;background:#F97316;color:#F97316;animation:gasAnimFast 2.0s linear infinite 0.3s;"></div>
-              <div class="gas-anim-dot" style="top:46px;left:52px;width:11px;height:11px;background:#F97316;color:#F97316;animation:gasAnimFast 2.4s linear infinite 0.5s;"></div>
-              <div class="gas-anim-dot" style="top:62px;left:34px;width:11px;height:11px;background:#F97316;color:#F97316;animation:gasAnimFast 2.6s linear infinite 0.7s;"></div>
-              <div class="gas-anim-dot" style="top:68px;left:60px;width:11px;height:11px;background:#F97316;color:#F97316;animation:gasAnimFast 2.1s linear infinite 0.1s;"></div>
-            </div>
-            <div style="font-size:11px;color:#16A34A;margin-top:6px;font-weight:700;">แก๊สผสม</div>
-            <div style="font-size:10px;color:#16A34A;font-weight:700;">P_total = P₁ + P₂ = 8.4 atm</div>
-          </div>
+          <div style="text-align:center;flex:1;min-width:110px;"><svg viewBox="0 0 120 90" style="width:100%;max-width:150px;display:block;margin:0 auto;background:#0F172A;border-radius:10px;border:2px solid #22C55E;"><circle r="5" fill="#3B82F6" opacity="0.92"><animate attributeName="cx" values="59;57;38;59" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cy" values="46;21;33;46" dur="2.1s" repeatCount="indefinite"/></circle><circle r="5" fill="#3B82F6" opacity="0.92"><animate attributeName="cx" values="71;60;46;71" dur="2.3s" repeatCount="indefinite"/><animate attributeName="cy" values="40;53;19;40" dur="1.8s" repeatCount="indefinite"/></circle><circle r="5" fill="#3B82F6" opacity="0.92"><animate attributeName="cx" values="52;63;46;52" dur="2.3s" repeatCount="indefinite"/><animate attributeName="cy" values="20;39;52;20" dur="2.4s" repeatCount="indefinite"/></circle><circle r="5" fill="#F97316" opacity="0.92"><animate attributeName="cx" values="94;70;30;94" dur="2.9s" repeatCount="indefinite"/><animate attributeName="cy" values="45;29;43;45" dur="2.4s" repeatCount="indefinite"/></circle><circle r="5" fill="#F97316" opacity="0.92"><animate attributeName="cx" values="107;86;66;107" dur="3.2s" repeatCount="indefinite"/><animate attributeName="cy" values="63;58;40;63" dur="2.0s" repeatCount="indefinite"/></circle><circle r="5" fill="#F97316" opacity="0.92"><animate attributeName="cx" values="75;23;108;75" dur="2.8s" repeatCount="indefinite"/><animate attributeName="cy" values="18;26;31;18" dur="2.8s" repeatCount="indefinite"/></circle><circle r="5" fill="#F97316" opacity="0.92"><animate attributeName="cx" values="66;88;20;66" dur="2.6s" repeatCount="indefinite"/><animate attributeName="cy" values="61;60;71;61" dur="3.0s" repeatCount="indefinite"/></circle><circle r="5" fill="#F97316" opacity="0.92"><animate attributeName="cx" values="13;99;104;13" dur="2.1s" repeatCount="indefinite"/><animate attributeName="cy" values="26;46;55;26" dur="2.3s" repeatCount="indefinite"/></circle></svg><div style="font-size:11px;color:#16A34A;margin-top:6px;font-weight:700;">แก๊สผสม (8 อนุภาค)</div><div style="font-size:10px;color:#16A34A;font-weight:700;">P_total = P₁+P₂ = 8.0 atm</div></div>
         </div>
+        <div style="font-size:10.5px;color:#64748B;text-align:center;margin:-2px 0 6px;">อนุภาคแต่ละสีเคลื่อนที่ชนผนังเองอิสระ · จำนวนอนุภาค (โมล) ∝ ความดันย่อย → รวมกันได้ P_total</div>
         <div class="tip-box">💡 <strong>จำง่าย:</strong> เมื่อผสมแก๊สที่ไม่ทำปฏิกิริยา ความดันรวม = ผลบวกความดันย่อยของแต่ละแก๊ส · ความดันย่อย Pᵢ = Xᵢ × P_total (Xᵢ = เศษส่วนโมล) แต่ละแก๊สมีส่วนช่วยทำให้เกิดความดันของตัวเอง</div>
         <div class="tip-box">💡 <strong>ตัวอย่าง:</strong> ผสมแก๊ส H₂ 1.00 g, He 2.60 g, Ar 11.19 g ในภาชนะ 10.0 L ที่ 25°C<br>
         n(H₂)=0.496, n(He)=0.650, n(Ar)=0.280 mol, n_total=1.426 mol<br>
