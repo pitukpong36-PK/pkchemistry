@@ -1704,6 +1704,14 @@ html, body { max-width:100%; overflow-x:hidden; }
 .pk-replay{font-family:inherit;font-size:11.5px;font-weight:700;color:#0F766E;background:#fff;border:1.5px solid #99F6E4;border-radius:20px;padding:4px 14px;cursor:pointer;transition:all .15s;}
 .pk-replay:hover{background:#CCFBF1;border-color:#0F766E;}
 .pk-replay:active{transform:scale(.94);}
+/* แผงภาพเคลื่อนไหว/กราฟจากบทเรียน ที่แทรกในห้องแล็บ */
+.lab-anim-panel{margin-top:16px;border:1px solid #CCFBF1;border-radius:12px;background:#F0FDFA;overflow:hidden;}
+.lab-anim-panel>summary{cursor:pointer;list-style:none;padding:11px 16px;font-weight:700;font-size:13.5px;color:#0F766E;user-select:none;}
+.lab-anim-panel>summary::-webkit-details-marker{display:none;}
+.lab-anim-panel>summary::before{content:"▸ ";font-size:11px;}
+.lab-anim-panel[open]>summary::before{content:"▾ ";}
+.lab-anim-body{padding:2px 14px 14px;}
+.lab-anim-body .formula-box{margin:10px 0;}
 .nfpa-b{font-family:inherit;font-weight:700;font-size:12px;min-width:26px;padding:5px 8px;margin:2px;border:1.5px solid #cbd5e1;border-radius:6px;background:#fff;color:#334155;cursor:pointer;transition:all .12s;}.nfpa-b:hover{border-color:#94a3b8;}.nfpa-b.on{background:#334155;color:#fff;border-color:#334155;}.nfpa-preset{font-family:inherit;font-weight:600;font-size:12px;padding:6px 11px;margin:3px;border:1.5px solid #99F6E4;border-radius:16px;background:#fff;color:#0F766E;cursor:pointer;transition:all .12s;}.nfpa-preset:hover{background:#CCFBF1;border-color:#0F766E;}
 </style>
 </head>
@@ -2078,7 +2086,7 @@ html, body { max-width:100%; overflow-x:hidden; }
   <div class="tools-wrap">
     <h2>🧪 ห้องปฏิบัติการเชิงโต้ตอบ</h2>
     <div class="tools-sub">ทดลองเคมีด้วยตัวเอง — ปรับค่าแล้วเห็นผลทันที (สร้างในเว็บเอง ใช้ออฟไลน์ได้)</div>
-    <div class="tool-card"><div id="labRoot"></div></div>
+    <div class="tool-card"><div id="labRoot"></div><div id="labAnim"></div></div>
   </div>
 </div>
 
@@ -21224,8 +21232,31 @@ const LAB_PRESETS = [
   {n:'SF₄',x:4,e:1,a:'S'},{n:'XeF₄',x:4,e:2,a:'Xe'}
 ];
 let LST = { x:4, e:0, atom:'A' };
+/* ── ภาพเคลื่อนไหว/กราฟจากบทเรียน: ดึงกล่อง .formula-box ที่มี SMIL จากเทมเพลตบทมาแสดงในแล็บ ── */
+Lab._animCache = {};
+Lab._chapAnimHTML = (labId)=>{
+  if(Lab._animCache[labId]!==undefined) return Lab._animCache[labId];
+  const cid = LAB_CHAP[labId]; let out='';
+  const tpl = cid && document.getElementById('chap-tpl-'+cid);
+  if(tpl){
+    const d = document.createElement('div'); d.innerHTML = tpl.textContent;
+    d.querySelectorAll('.formula-box').forEach(box=>{
+      if(box.querySelector('animate, animateMotion, animateTransform')) out += box.outerHTML;
+    });
+  }
+  Lab._animCache[labId] = out; return out;
+};
+Lab._renderAnimPanel = (labId)=>{
+  const el = document.getElementById('labAnim'); if(!el) return;
+  const html = Lab._chapAnimHTML(labId);
+  if(!html){ el.innerHTML=''; return; }
+  el.innerHTML = '<details class="lab-anim-panel"><summary>🎬 ภาพเคลื่อนไหว/กราฟจากบทเรียน</summary><div class="lab-anim-body">'+html+'</div></details>';
+  const d = el.querySelector('details');
+  if(d) d.addEventListener('toggle', ()=>{ if(d.open) el.querySelectorAll('.pk-replay').forEach(b=>pkReplay(b)); });
+};
 Lab.openHub = ()=>{
   Lab._stopAnim();
+  const _a=document.getElementById('labAnim'); if(_a) _a.innerHTML='';
   let h='<div style="font-size:13px;color:var(--muted);margin-bottom:14px;">เลือกแล็บด้านล่างเพื่อเริ่มทดลอง — แต่ละแล็บจับคู่กับบทเรียน</div>';
   h+='<div class="lab-hub">';
   LABS.forEach(L=>{ h+='<div class="lab-card" onclick="Lab.open(\''+L.id+'\')"><div class="lc-ic">'+L.ic+'</div><div class="lc-ch">'+L.ch+'</div><h4>'+L.name+'</h4><p>'+L.desc+'</p></div>'; });
@@ -21236,6 +21267,7 @@ Lab.openHub = ()=>{
 Lab.open = (id)=>{
   Lab._stopAnim();
   Lab._curId = id;
+  Lab._renderAnimPanel(id);
   if(id==='safety'){ SAF={mode:'ghs', sym:0, num:'0.04060', dp:2, qi:0, qans:null, qopts:[]}; Lab.renderSafety(); return; }
   if(id==='mole'){ MOL={sub:0, mol:1.0, mode:'free', target:36.0}; Lab.renderMole(); return; }
   if(id==='atom'){ const e=ELEMENTS[5]; AT={z:6, n:Math.round(e[4])-6, ch:0}; Lab.renderAtom(); }
@@ -21369,6 +21401,19 @@ const _GHS=[
   {ic:'🐟', n:'อันตรายต่อสิ่งแวดล้อม', m:'เป็นพิษต่อสัตว์น้ำ/ระบบนิเวศ',         ex:'สารกำจัดศัตรูพืช, โลหะหนัก (Hg, Pb)'}
 ];
 Lab._diamond=(ic)=>'<svg viewBox="0 0 60 60" width="46" height="46" style="display:block;margin:0 auto;"><rect x="12" y="12" width="36" height="36" rx="5" transform="rotate(45 30 30)" fill="#fff" stroke="#dc2626" stroke-width="4"/><text x="30" y="38" font-size="20" text-anchor="middle">'+ic+'</text></svg>';
+/* พิกโตแกรม GHS จริงจากบทที่ 1 (c1b1) — เรียงตรงกับ _GHS[0..8] · แคชไว้ · ถ้าดึงไม่ได้ fallback เป็น _diamond */
+Lab._ghsCache=null;
+Lab._ghsPicto=(i,sz)=>{
+  if(Lab._ghsCache===null){
+    Lab._ghsCache=[];
+    const tpl=document.getElementById('chap-tpl-c1b1');
+    if(tpl){ const d=document.createElement('div'); d.innerHTML=tpl.textContent;
+      d.querySelectorAll('svg[aria-label^="GHS"]').forEach(sv=>{ sv.setAttribute('style','width:100%;height:100%;display:block;'); Lab._ghsCache.push(sv.outerHTML); }); }
+  }
+  const px=sz||52, svg=Lab._ghsCache[i];
+  if(!svg) return Lab._diamond(_GHS[i]?_GHS[i].ic:'❓');
+  return '<div style="width:'+px+'px;height:'+px+'px;margin:0 auto;">'+svg+'</div>';
+};
 Lab.renderSafety=()=>{
   let h=Lab._labHead('🦺 ความปลอดภัย & เลขนัยสำคัญ');
   h+='<div class="vs-presets">'
@@ -21387,7 +21432,7 @@ Lab.safQuizNew=()=>{ SAF.mode='quiz'; SAF.qi=Math.floor(Math.random()*_GHS.lengt
 Lab.safAns=(i)=>{ SAF.qans=i; Lab.renderSafety(); };
 Lab._safQuiz=()=>{ const cor=SAF.qi, ans=SAF.qans;
   let g='<div style="font-size:12px;color:var(--muted);margin:8px 0 12px;">สัญลักษณ์ GHS นี้หมายถึงอะไร? เลือกคำตอบ</div>';
-  g+='<div style="text-align:center;margin-bottom:12px;">'+Lab._diamond(_GHS[cor].ic)+'</div>';
+  g+='<div style="text-align:center;margin-bottom:12px;">'+Lab._ghsPicto(cor,96)+'</div>';
   g+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">';
   SAF.qopts.forEach(oi=>{ let bg='var(--white)', bd='var(--border)';
     if(ans!==null){ if(oi===cor){bg='#f0fdf4';bd='#16a34a';} else if(oi===ans){bg='#fef2f2';bd='#dc2626';} }
@@ -21403,10 +21448,10 @@ Lab._safGHS=()=>{
   g+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(76px,1fr));gap:8px;">';
   _GHS.forEach((x,i)=>{ const on=i===SAF.sym;
     g+='<button onclick="Lab.safSym('+i+')" style="cursor:pointer;background:'+(on?'#fef2f2':'var(--white)')+';border:2px solid '+(on?'#dc2626':'var(--border)')+';border-radius:12px;padding:8px 4px;font-family:inherit;">'
-      +Lab._diamond(x.ic)+'<div style="font-size:10px;margin-top:4px;color:var(--text);line-height:1.2;">'+x.n+'</div></button>';
+      +Lab._ghsPicto(i,54)+'<div style="font-size:10px;margin-top:4px;color:var(--text);line-height:1.2;">'+x.n+'</div></button>';
   });
   g+='</div>';
-  g+='<div class="vs-info" style="margin-top:14px;"><div style="display:flex;align-items:center;gap:12px;">'+Lab._diamond(s.ic)
+  g+='<div class="vs-info" style="margin-top:14px;"><div style="display:flex;align-items:center;gap:12px;">'+Lab._ghsPicto(SAF.sym,56)
     +'<div><div style="font-family:Prompt,sans-serif;font-weight:700;font-size:16px;">'+s.n+'</div>'
     +'<div style="font-size:12.5px;color:var(--muted);">'+s.m+'</div></div></div>'
     +'<div class="vs-stat" style="margin-top:10px;"><span>ตัวอย่างสาร</span><b style="text-align:right;max-width:62%;">'+s.ex+'</b></div></div>';
