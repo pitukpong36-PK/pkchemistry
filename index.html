@@ -5358,7 +5358,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div style="text-align:center;"><div class="pk-mol3d" data-mol="water" style="width:150px;height:150px;margin:0 auto;"></div><div style="font-size:11px;font-weight:700;color:#DC2626;">Bent · H₂O</div><div style="font-size:10px;color:#DC2626;">มีขั้ว · 104.5°</div></div>
             <div style="text-align:center;"><div class="pk-mol3d" data-mol="nh3" style="width:150px;height:150px;margin:0 auto;"></div><div style="font-size:11px;font-weight:700;color:#2563EB;">Pyramidal · NH₃</div><div style="font-size:10px;color:#2563EB;">มีขั้ว · 107°</div></div>
           </div>
-          <div style="font-size:10px;color:#6B7280;text-align:center;margin-top:6px;">หมุนแสดงความลึก 3 มิติ (อะตอมด้านหน้าใหญ่/สว่างกว่า) — เรนเดอร์สดในเว็บ ไม่ใช้ไลบรารีภายนอก · เทียบรูปร่าง → สภาพขั้ว</div>
+          <div style="font-size:10px;color:#6B7280;text-align:center;margin-top:6px;">🖐️ ลากด้วยนิ้ว/เมาส์เพื่อหมุนเอง (หมุนอัตโนมัติจนกว่าจะแตะ) · อะตอมด้านหน้าใหญ่/สว่างกว่า — เรนเดอร์ 3D สดในเว็บ · เทียบรูปร่าง → สภาพขั้ว</div>
         </div>
         <div class="formula-box">
           <div class="formula-label">📐 รูปร่างโมเลกุลทั้ง 6 แบบ (ภาพอ้างอิง)</div>
@@ -5446,7 +5446,7 @@ html, body { max-width:100%; overflow-x:hidden; }
             <div style="text-align:center;"><div class="pk-imf3d" data-imf="london" style="width:210px;height:150px;margin:0 auto;"></div><div style="font-size:11.5px;font-weight:700;color:#7C3AED;">แรงลอนดอน (London)</div><div style="font-size:10px;color:#374151;">ไดโพลชั่วคราว/เหนี่ยวนำ (I₂)</div><div style="font-size:9.5px;color:#16A34A;font-weight:700;">อ่อนสุด · มีทุกโมเลกุล</div></div>
             <div style="text-align:center;"><div class="pk-imf3d" data-imf="iondip" style="width:210px;height:150px;margin:0 auto;"></div><div style="font-size:11.5px;font-weight:700;color:#EA580C;">ไอออน–ไดโพล (Ion–Dipole)</div><div style="font-size:10px;color:#374151;">Na⁺ ล้อมด้วยน้ำ (O δ⁻ ชี้เข้า)</div><div style="font-size:9.5px;color:#DC2626;font-weight:700;">แรงมาก · หัวใจการละลาย</div></div>
           </div>
-          <div style="font-size:10px;color:#6B7280;text-align:center;margin-top:4px;">เส้นประ = แรงดึงดูด<strong>ระหว่าง</strong>โมเลกุล · เส้นทึบ = พันธะ<strong>ภายใน</strong>โมเลกุล (ไม่ขาดเวลาหลอม/เดือด) — เรนเดอร์ 3D สดในเว็บ</div>
+          <div style="font-size:10px;color:#6B7280;text-align:center;margin-top:4px;">เส้นประ = แรงดึงดูด<strong>ระหว่าง</strong>โมเลกุล · เส้นทึบ = พันธะ<strong>ภายใน</strong>โมเลกุล (ไม่ขาดเวลาหลอม/เดือด) — 🖐️ ลากเพื่อหมุนเอง · เรนเดอร์ 3D สดในเว็บ</div>
         </div>
         <table class="content-table">
           <tr><th>ประเภท</th><th>เกิดในโมเลกุล</th><th>ความแรง</th><th>ผลต่อสมบัติ</th></tr>
@@ -18018,14 +18018,15 @@ function pkInitChapterAnims(){
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const states = mols.map(el=>({ el, kind:'mol', type:(el.dataset.mol||'tetra'), a: Math.random()*6 }))
     .concat(imfs.map(el=>({ el, kind:'imf', type:(el.dataset.imf||'hbond'), a: Math.random()*6 })));
+  states.forEach(pkAttachDrag);
   function frame(){
     if(!states[0].el.isConnected) { _pkMolRAF=null; return; }
     const active = document.getElementById('page-chapter').classList.contains('active');
     if(active) states.forEach(s=>{
-      if(!reduce) s.a += 0.011;
+      if(!reduce && s.auto) s.a += 0.011;
       if(s.kind==='imf'){ pkRenderIMF(s); return; }
       const d = PK_MOL_DEFS[s.type] || PK_MOL_DEFS.tetra;
-      const cx=70, cy=70, f=210, ax=0.42, ay=s.a;
+      const cx=70, cy=70, f=210, ax=s.ax, ay=s.a;
       let atoms=[{x:0,y:0,z:0,r:13,fill:d.cc,label:d.cn,lc:'#fff'}];
       d.verts.forEach(v=>atoms.push({x:v[0]*d.R,y:v[1]*d.R,z:v[2]*d.R,r:9,fill:d.xc,label:d.xn,lc:'#1f2937'}));
       atoms.forEach(p=>{
@@ -18053,7 +18054,7 @@ function pkInitChapterAnims(){
 // เรนเดอร์ฉากแรงระหว่างโมเลกุล (คู่โมเลกุล + เส้นประแรง) หมุน 3D รอบจุดกึ่งกลางฉาก
 function pkRenderIMF(s){
   const d = PK_IMF_DEFS[s.type] || PK_IMF_DEFS.hbond;
-  const cx=100, cy=72, f=260, ax=0.38, ay=s.a;
+  const cx=100, cy=72, f=260, ax=s.ax, ay=s.a;
   let pts = d.atoms.map(a=>({ x:a.x*d.R, y:a.y*d.R, z:a.z*d.R, r:a.r, fill:a.fill, label:a.label, lc:a.lc }));
   let mx=0,my=0,mz=0; pts.forEach(p=>{ mx+=p.x; my+=p.y; mz+=p.z; });
   mx/=pts.length; my/=pts.length; mz/=pts.length;
@@ -18078,6 +18079,31 @@ function pkRenderIMF(s){
              '<text x="'+X.toFixed(1)+'" y="'+(Y+3*p.sc).toFixed(1)+'" font-size="'+(8.5*p.sc).toFixed(1)+'" fill="'+p.lc+'" text-anchor="middle" font-weight="700">'+p.label+'</text>';
   });
   s.el.innerHTML = '<svg viewBox="0 0 200 144" style="width:100%;max-width:230px;display:block;margin:0 auto;">'+bonds+forces+circs+'</svg>';
+}
+// ลากด้วยนิ้ว/เมาส์เพื่อหมุนโมเลกุล 3D (แนวนอน=yaw, แนวตั้ง=เอียง) — หยุดหมุนอัตโนมัติเมื่อผู้ใช้เริ่มลาก
+function pkAttachDrag(s){
+  s.ax = (s.kind==='imf') ? 0.38 : 0.42;
+  s.auto = true;
+  const el = s.el;
+  el.style.touchAction = 'none';
+  el.style.cursor = 'grab';
+  el.title = 'ลากเพื่อหมุน 🖐️';
+  el.addEventListener('pointerdown', function(ev){
+    s.dragging = true; s.auto = false; s.lastX = ev.clientX; s.lastY = ev.clientY;
+    el.style.cursor = 'grabbing';
+    if(el.setPointerCapture){ try{ el.setPointerCapture(ev.pointerId); }catch(e){} }
+    ev.preventDefault();
+  });
+  el.addEventListener('pointermove', function(ev){
+    if(!s.dragging) return;
+    s.a  += (ev.clientX - s.lastX) * 0.01;
+    s.ax += (ev.clientY - s.lastY) * 0.01;
+    if(s.ax > 1.4) s.ax = 1.4; else if(s.ax < -1.4) s.ax = -1.4;
+    s.lastX = ev.clientX; s.lastY = ev.clientY;
+  });
+  const end = function(){ s.dragging = false; el.style.cursor = 'grab'; };
+  el.addEventListener('pointerup', end);
+  el.addEventListener('pointercancel', end);
 }
 function showChapter(chapterId) {
   const ch = chapters[chapterId];
