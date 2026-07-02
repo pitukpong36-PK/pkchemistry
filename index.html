@@ -6626,35 +6626,85 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h4>โมล (Mole) และเลขอาโวกาโดร</h4>
         <div class="formula-box">
           <div class="formula-label">🔀 แผนผังการแปลงหน่วย (Mole Conversion Map)</div>
-          <svg viewBox="0 0 540 280" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <!-- Central node: mol -->
-            <ellipse cx="270" cy="140" rx="60" ry="35" fill="#FBBF24" stroke="#92400E" stroke-width="2.5"/>
-            <text x="270" y="135" font-size="16" fill="#92400E" text-anchor="middle" font-weight="700">mol</text>
-            <text x="270" y="155" font-size="9" fill="#92400E" text-anchor="middle">(n)</text>
-            <!-- Top: Mass -->
-            <ellipse cx="270" cy="40" rx="65" ry="28" fill="#A78BFA" opacity="0.7" stroke="#5B21B6" stroke-width="2"/>
-            <text x="270" y="45" font-size="13" fill="#5B21B6" text-anchor="middle" font-weight="700">มวล (กรัม)</text>
-            <line x1="270" y1="68" x2="270" y2="105" stroke="#374151" stroke-width="2"/>
-            <text x="280" y="90" font-size="10" fill="#374151">÷ Mw (mol = g/Mw)</text>
-            <text x="280" y="103" font-size="10" fill="#374151">× Mw (g = n·Mw)</text>
-            <!-- Left: Particles -->
-            <ellipse cx="100" cy="140" rx="60" ry="28" fill="#86EFAC" opacity="0.7" stroke="#14532D" stroke-width="2"/>
-            <text x="100" y="138" font-size="12" fill="#14532D" text-anchor="middle" font-weight="700">จำนวนอนุภาค</text>
-            <text x="100" y="152" font-size="9" fill="#14532D" text-anchor="middle">(N)</text>
-            <line x1="160" y1="140" x2="210" y2="140" stroke="#374151" stroke-width="2"/>
-            <text x="155" y="125" font-size="10" fill="#374151">÷ Nₐ</text>
-            <text x="155" y="160" font-size="10" fill="#374151">× Nₐ</text>
-            <!-- Right: Volume gas -->
-            <ellipse cx="440" cy="140" rx="60" ry="28" fill="#FCA5A5" opacity="0.7" stroke="#7F1D1D" stroke-width="2"/>
-            <text x="440" y="138" font-size="12" fill="#7F1D1D" text-anchor="middle" font-weight="700">ปริมาตรแก๊ส</text>
-            <text x="440" y="152" font-size="9" fill="#7F1D1D" text-anchor="middle">(V)</text>
-            <line x1="330" y1="140" x2="380" y2="140" stroke="#374151" stroke-width="2"/>
-            <text x="338" y="125" font-size="10" fill="#374151">÷ 22.4</text>
-            <text x="338" y="160" font-size="10" fill="#374151">× 22.4 (STP)</text>
-            <!-- Bottom: Notes -->
-            <text x="270" y="220" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">Nₐ = 6.022 × 10²³ · STP: 0°C, 1 atm = 22.4 L/mol</text>
-            <text x="270" y="240" font-size="10" fill="#374151" text-anchor="middle">หรือใช้ V_m = 24.5 L/mol ที่ 25°C, 1 atm</text>
-            <text x="270" y="258" font-size="10" fill="#7C3AED" text-anchor="middle" font-weight="600">เคล็ดลับ: หาทุกอย่างผ่าน "mol" เสมอ</text>
+                              <svg viewBox="0 0 560 306" style="width:100%;max-width:600px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+            <defs>
+              <linearGradient id="gMol" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FDE68A"/><stop offset="1" stop-color="#F59E0B"/></linearGradient>
+              <linearGradient id="gMass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDE9FE"/><stop offset="1" stop-color="#A78BFA"/></linearGradient>
+              <linearGradient id="gPart" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D1FAE5"/><stop offset="1" stop-color="#34D399"/></linearGradient>
+              <linearGradient id="gVol" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE4E6"/><stop offset="1" stop-color="#FB7185"/></linearGradient>
+              <marker id="mkA" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9 Z" fill="#6B7280"/></marker>
+            </defs>
+            <text x="280" y="16" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">แผนผังการแปลงหน่วยโมล — ทุกเส้นทางผ่าน "mol"</text>
+
+            <line x1="280" y1="70" x2="280" y2="104" stroke="#9CA3AF" stroke-width="2" marker-start="url(#mkA)" marker-end="url(#mkA)"/>
+            <line x1="158" y1="150" x2="234" y2="150" stroke="#9CA3AF" stroke-width="2" marker-start="url(#mkA)" marker-end="url(#mkA)"/>
+            <line x1="402" y1="150" x2="326" y2="150" stroke="#9CA3AF" stroke-width="2" marker-start="url(#mkA)" marker-end="url(#mkA)"/>
+            <text x="306" y="82" font-size="10" fill="#6B7280" font-weight="700">×Mw</text>
+            <text x="306" y="99" font-size="10" fill="#6B7280" font-weight="700">÷Mw</text>
+            <text x="196" y="141" font-size="10" fill="#6B7280" text-anchor="middle" font-weight="700">÷Nₐ</text>
+            <text x="196" y="165" font-size="10" fill="#6B7280" text-anchor="middle" font-weight="700">×Nₐ</text>
+            <text x="364" y="141" font-size="10" fill="#6B7280" text-anchor="middle" font-weight="700">÷22.4</text>
+            <text x="364" y="165" font-size="10" fill="#6B7280" text-anchor="middle" font-weight="700">×22.4</text>
+
+            <circle cx="280" cy="150" r="44" fill="#F59E0B" opacity="0.25">
+              <animate attributeName="r" values="44;58;44" dur="2.4s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.3;0;0.3" dur="2.4s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="280" cy="150" r="44" fill="url(#gMol)" stroke="#92400E" stroke-width="2.5"/>
+            <text x="280" y="150" font-size="20" fill="#78350F" text-anchor="middle" font-weight="700">mol</text>
+            <text x="280" y="168" font-size="11" fill="#92400E" text-anchor="middle" font-weight="700">(n)</text>
+
+            <rect x="215" y="22" width="130" height="46" rx="12" fill="url(#gMass)" stroke="#5B21B6" stroke-width="2"/>
+            <text x="280" y="42" font-size="13" fill="#4C1D95" text-anchor="middle" font-weight="700">มวล (กรัม)</text>
+            <text x="280" y="58" font-size="10" fill="#5B21B6" text-anchor="middle">g</text>
+
+            <rect x="15" y="126" width="140" height="48" rx="12" fill="url(#gPart)" stroke="#065F46" stroke-width="2"/>
+            <text x="85" y="146" font-size="12" fill="#065F46" text-anchor="middle" font-weight="700">จำนวนอนุภาค</text>
+            <text x="85" y="162" font-size="10" fill="#047857" text-anchor="middle">N</text>
+
+            <rect x="405" y="126" width="140" height="48" rx="12" fill="url(#gVol)" stroke="#9F1239" stroke-width="2"/>
+            <text x="475" y="146" font-size="12" fill="#9F1239" text-anchor="middle" font-weight="700">ปริมาตรแก๊ส</text>
+            <text x="475" y="162" font-size="10" fill="#BE123C" text-anchor="middle">V (STP)</text>
+
+            <!-- courier: Mass -> mol -> Particles -> mol -> Volume -->
+            <circle r="7" fill="url(#gMol)" stroke="#92400E" stroke-width="1.5" opacity="0">
+              <animateMotion dur="12s" repeatCount="indefinite" calcMode="linear"
+                path="M280,72 L280,150 L155,150 L280,150 L405,150"
+                keyPoints="0;0.172;0.172;0.448;0.448;0.724;0.724;1;1"
+                keyTimes="0;0.14;0.22;0.40;0.50;0.62;0.68;0.86;1"/>
+              <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.04;0.5;0.94;1" dur="12s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- calculation strip (branch from 2 mol) -->
+            <text x="150" y="226" font-size="9.5" fill="#9CA3AF" text-anchor="middle">ตัวอย่าง: H₂O (Mw = 18)</text>
+            <g opacity="0.35">
+              <animate attributeName="opacity" values="0.35;1;1;0.35;0.35" keyTimes="0;0.02;0.16;0.22;1" dur="12s" repeatCount="indefinite"/>
+              <rect x="34" y="248" width="72" height="26" rx="8" fill="url(#gMass)" stroke="#5B21B6" stroke-width="1.5"/>
+              <text x="70" y="266" font-size="12.5" fill="#4C1D95" text-anchor="middle" font-weight="700">36 g</text>
+            </g>
+            <line x1="108" y1="261" x2="146" y2="261" stroke="#9CA3AF" stroke-width="1.8" marker-end="url(#mkA)"/>
+            <text x="127" y="255" font-size="8.5" fill="#6B7280" text-anchor="middle" font-weight="700">÷18</text>
+            <g opacity="0.35">
+              <animate attributeName="opacity" values="0.35;0.35;1;1;0.35;0.35" keyTimes="0;0.12;0.16;0.70;0.76;1" dur="12s" repeatCount="indefinite"/>
+              <rect x="148" y="248" width="66" height="26" rx="8" fill="url(#gMol)" stroke="#92400E" stroke-width="1.5"/>
+              <text x="181" y="266" font-size="12.5" fill="#78350F" text-anchor="middle" font-weight="700">2 mol</text>
+            </g>
+            <!-- branch up: particles -->
+            <path d="M216,258 Q245,244 272,244" stroke="#9CA3AF" stroke-width="1.8" fill="none" marker-end="url(#mkA)"/>
+            <text x="248" y="238" font-size="8.5" fill="#6B7280" text-anchor="middle" font-weight="700">×Nₐ</text>
+            <g opacity="0.35">
+              <animate attributeName="opacity" values="0.35;0.35;1;1;0.35;0.35" keyTimes="0;0.40;0.44;0.55;0.60;1" dur="12s" repeatCount="indefinite"/>
+              <rect x="276" y="231" width="150" height="26" rx="8" fill="url(#gPart)" stroke="#065F46" stroke-width="1.5"/>
+              <text x="351" y="249" font-size="12" fill="#065F46" text-anchor="middle" font-weight="700">1.2×10²⁴ อนุภาค</text>
+            </g>
+            <!-- branch down: volume STP -->
+            <path d="M216,264 Q245,280 272,280" stroke="#9CA3AF" stroke-width="1.8" fill="none" marker-end="url(#mkA)"/>
+            <text x="248" y="294" font-size="8.5" fill="#6B7280" text-anchor="middle" font-weight="700">×22.4</text>
+            <g opacity="0.35">
+              <animate attributeName="opacity" values="0.35;0.35;1;1;0.35" keyTimes="0;0.80;0.84;0.98;1" dur="12s" repeatCount="indefinite"/>
+              <rect x="276" y="267" width="150" height="26" rx="8" fill="url(#gVol)" stroke="#9F1239" stroke-width="1.5"/>
+              <text x="351" y="285" font-size="12" fill="#9F1239" text-anchor="middle" font-weight="700">44.8 L (STP)</text>
+            </g>
           </svg>
         </div>
         <div class="formula-box">
@@ -7498,31 +7548,39 @@ html, body { max-width:100%; overflow-x:hidden; }
         </table>
         <div class="formula-box">
           <div class="formula-label">🧪 ขั้นตอนการเจือจางสารละลาย</div>
-          <svg viewBox="0 0 540 230" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <!-- step 1: concentrated -->
-            <path d="M 60 80 L 60 180 Q 60 200 80 200 L 130 200 Q 150 200 150 180 L 150 80" fill="#FCA5A5" stroke="#374151" stroke-width="2"/>
-            <text x="105" y="220" font-size="11" fill="#374151" text-anchor="middle" font-weight="600">HCl 12 M</text>
-            <text x="105" y="160" font-size="13" fill="#FFF" text-anchor="middle" font-weight="700">เข้มข้น</text>
-            <!-- pipette -->
-            <line x1="180" y1="40" x2="180" y2="120" stroke="#374151" stroke-width="2"/>
-            <line x1="170" y1="40" x2="190" y2="40" stroke="#374151" stroke-width="2"/>
-            <text x="220" y="65" font-size="11" fill="#374151" font-weight="600">1) ดูด 4.17 mL</text>
-            <text x="220" y="80" font-size="10" fill="#374151">ด้วยปิเปต</text>
-            <!-- arrow to volumetric flask -->
-            <path d="M 220 130 L 280 130" stroke="#374151" stroke-width="2" marker-end="url(#arrDil)"/>
-            <!-- volumetric flask -->
-            <path d="M 350 130 L 350 70 L 380 70 L 380 130 L 430 200 Q 430 220 410 220 L 320 220 Q 300 220 300 200 Z" fill="#DBEAFE" stroke="#374151" stroke-width="2"/>
-            <line x1="350" y1="125" x2="380" y2="125" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="3,2"/>
-            <text x="395" y="123" font-size="9" fill="#7C3AED">500 mL</text>
-            <text x="365" y="105" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">+ H₂O</text>
-            <text x="365" y="210" font-size="12" fill="#374151" text-anchor="middle" font-weight="600">HCl 0.1 M</text>
-            <!-- formula -->
-            <text x="270" y="20" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">M₁V₁ = M₂V₂ → V₁ = (0.1 × 500)/12 ≈ 4.17 mL</text>
-            <!-- step number -->
-            <text x="220" y="105" font-size="10" fill="#374151">2) ปล่อยลง flask + เติมน้ำ</text>
-            <text x="220" y="120" font-size="10" fill="#374151">จนถึงขีด 500 mL</text>
-            <defs><marker id="arrDil" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#374151"/></marker></defs>
-          </svg>
+                      <svg viewBox="0 0 540 240" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+              <defs>
+                <linearGradient id="dConc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F87171"/><stop offset="1" stop-color="#B91C1C"/></linearGradient>
+                <linearGradient id="dDil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBCFE8"/><stop offset="1" stop-color="#F9A8D4"/></linearGradient>
+                <marker id="dArr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9 Z" fill="#6B7280"/></marker>
+                <clipPath id="flaskClip"><path d="M405,66 L405,120 L360,205 Q360,216 372,216 L458,216 Q470,216 470,205 L425,120 L425,66 Z"/></clipPath>
+              </defs>
+              <text x="270" y="18" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">การเจือจาง: M₁V₁ = M₂V₂ → V₁ = (0.1×500)/12 ≈ 4.17 mL</text>
+              <!-- concentrated beaker -->
+              <rect x="42" y="104" width="84" height="98" rx="6" fill="none" stroke="#374151" stroke-width="2"/>
+              <rect x="45" y="150" width="78" height="49" rx="2" fill="url(#dConc)"/>
+              <text x="84" y="222" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">HCl 12 M (เข้มข้น)</text>
+              <!-- pipette -->
+              <rect x="150" y="60" width="10" height="70" rx="3" fill="#E5E7EB" stroke="#9CA3AF"/>
+              <text x="200" y="52" font-size="10" fill="#374151" text-anchor="middle" font-weight="700">ดูด 4.17 mL</text>
+              <path d="M170,150 Q250,120 330,120" stroke="#9CA3AF" stroke-width="1.6" fill="none" stroke-dasharray="4,4" marker-end="url(#dArr)"/>
+              <!-- travelling drops -->
+              <circle r="5" fill="url(#dConc)" opacity="0"><animateMotion dur="4s" begin="0s" repeatCount="indefinite" path="M158,132 Q250,120 405,150"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4s" begin="0s" repeatCount="indefinite"/></circle><circle r="5" fill="url(#dConc)" opacity="0"><animateMotion dur="4s" begin="1.3s" repeatCount="indefinite" path="M158,132 Q250,120 405,150"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4s" begin="1.3s" repeatCount="indefinite"/></circle><circle r="5" fill="url(#dConc)" opacity="0"><animateMotion dur="4s" begin="2.6s" repeatCount="indefinite" path="M158,132 Q250,120 405,150"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4s" begin="2.6s" repeatCount="indefinite"/></circle>
+              <!-- volumetric flask outline -->
+              <path d="M405,66 L405,120 L360,205 Q360,216 372,216 L458,216 Q470,216 470,205 L425,120 L425,66 Z" fill="none" stroke="#374151" stroke-width="2"/>
+              <!-- rising + lightening liquid -->
+              <g clip-path="url(#flaskClip)">
+                <rect x="358" width="114" fill="url(#dConc)">
+                  <animate attributeName="y" values="210;210;104;104;210" keyTimes="0;0.1;0.6;0.92;1" dur="4s" repeatCount="indefinite"/>
+                  <animate attributeName="height" values="8;8;114;114;8" keyTimes="0;0.1;0.6;0.92;1" dur="4s" repeatCount="indefinite"/>
+                  <animate attributeName="fill" values="url(#dConc);url(#dConc);url(#dDil);url(#dDil);url(#dConc)" keyTimes="0;0.1;0.6;0.92;1" dur="4s" repeatCount="indefinite"/>
+                </rect>
+              </g>
+              <line x1="360" y1="105" x2="425" y2="105" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="3,2"/>
+              <text x="482" y="108" font-size="9" fill="#7C3AED" text-anchor="middle">500 mL</text>
+              <text x="415" y="150" font-size="11" fill="#4C1D95" text-anchor="middle" font-weight="700">+ H₂O</text>
+              <text x="415" y="234" font-size="12" fill="#BE185D" text-anchor="middle" font-weight="700">HCl 0.1 M (เจือจาง)</text>
+            </svg>
         </div>
         <div class="formula-box">
           <div class="formula-label">การเจือจาง (Dilution)</div>
@@ -7543,23 +7601,44 @@ html, body { max-width:100%; overflow-x:hidden; }
         <p style="font-size:13px;color:#374151;line-height:1.6;">การข้ามระหว่าง %w/w (ใช้มวล) กับ M (ใช้ปริมาตร) ต้องใช้ <strong>ความหนาแน่น (d)</strong> เป็นสะพานเชื่อมมวล↔ปริมาตร และใช้ <strong>Mw</strong> เชื่อมมวล↔โมล</p>
         <div class="formula-box">
           <div class="formula-label">🔁 แผนผังเชื่อมหน่วยความเข้มข้น</div>
-          <svg viewBox="0 0 520 130" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <rect x="20" y="50" width="110" height="34" rx="8" fill="#FEE2E2" stroke="#DC2626"/>
-            <text x="75" y="71" font-size="11" fill="#7F1D1D" text-anchor="middle" font-weight="700">%w/w</text>
-            <rect x="205" y="50" width="110" height="34" rx="8" fill="#DBEAFE" stroke="#2563EB"/>
-            <text x="260" y="71" font-size="11" fill="#1E40AF" text-anchor="middle" font-weight="700">M (mol/L)</text>
-            <rect x="390" y="50" width="110" height="34" rx="8" fill="#CCFBF1" stroke="#0F766E"/>
-            <text x="445" y="71" font-size="11" fill="#0F766E" text-anchor="middle" font-weight="700">m (mol/kg)</text>
-            <line x1="130" y1="67" x2="205" y2="67" stroke="#374151" stroke-width="1.6" marker-start="url(#ms5)" marker-end="url(#me5)"/>
-            <text x="167" y="44" font-size="9" fill="#374151" text-anchor="middle">d, Mw</text>
-            <line x1="315" y1="67" x2="390" y2="67" stroke="#374151" stroke-width="1.6" marker-start="url(#ms5)" marker-end="url(#me5)"/>
-            <text x="352" y="44" font-size="9" fill="#374151" text-anchor="middle">d</text>
-            <text x="260" y="110" font-size="9.5" fill="#B45309" text-anchor="middle">d = สะพานมวล↔ปริมาตร · Mw = สะพานมวล↔โมล</text>
-            <defs>
-              <marker id="me5" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M1,1 L6,4 L1,7" fill="none" stroke="#374151" stroke-width="1.3"/></marker>
-              <marker id="ms5" markerWidth="8" markerHeight="8" refX="2" refY="4" orient="auto"><path d="M7,1 L2,4 L7,7" fill="none" stroke="#374151" stroke-width="1.3"/></marker>
-            </defs>
-          </svg>
+                      <svg viewBox="0 0 540 200" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+              <defs>
+                <linearGradient id="cWW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FECACA"/><stop offset="1" stop-color="#F87171"/></linearGradient>
+                <linearGradient id="cM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFDBFE"/><stop offset="1" stop-color="#60A5FA"/></linearGradient>
+                <linearGradient id="cm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#99F6E4"/><stop offset="1" stop-color="#2DD4BF"/></linearGradient>
+                <marker id="cA" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9 Z" fill="#6B7280"/></marker>
+              </defs>
+              <text x="270" y="18" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">เชื่อมหน่วยความเข้มข้น — ใช้ d (ความหนาแน่น) และ Mw เป็นสะพาน</text>
+              <!-- edges -->
+              <line x1="150" y1="62" x2="205" y2="62" stroke="#9CA3AF" stroke-width="2" marker-start="url(#cA)" marker-end="url(#cA)"/>
+              <line x1="335" y1="62" x2="390" y2="62" stroke="#9CA3AF" stroke-width="2" marker-start="url(#cA)" marker-end="url(#cA)"/>
+              <text x="177" y="50" font-size="10" fill="#6B7280" text-anchor="middle" font-weight="700">d, Mw</text>
+              <text x="362" y="50" font-size="10" fill="#6B7280" text-anchor="middle" font-weight="700">d</text>
+              <!-- nodes -->
+              <rect x="40" y="44" width="110" height="36" rx="10" fill="url(#cWW)" stroke="#B91C1C" stroke-width="2"/>
+              <text x="95" y="67" font-size="13" fill="#7F1D1D" text-anchor="middle" font-weight="700">%w/w</text>
+              <rect x="205" y="44" width="130" height="36" rx="10" fill="url(#cM)" stroke="#1D4ED8" stroke-width="2"/>
+              <text x="270" y="67" font-size="12" fill="#1E3A8A" text-anchor="middle" font-weight="700">M (mol/L)</text>
+              <rect x="390" y="44" width="120" height="36" rx="10" fill="url(#cm)" stroke="#0F766E" stroke-width="2"/>
+              <text x="450" y="67" font-size="12" fill="#0F766E" text-anchor="middle" font-weight="700">m (mol/kg)</text>
+              <!-- courier %w/w -> M -> m -->
+              <circle r="6" fill="#FBBF24" stroke="#92400E" stroke-width="1.3" opacity="0">
+                <animateMotion dur="7s" repeatCount="indefinite" calcMode="linear" path="M150,62 L205,62 L335,62 L390,62" keyPoints="0;0.30;0.30;0.62;0.62;1" keyTimes="0;0.28;0.40;0.68;0.80;1"/>
+                <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.05;0.5;0.92;1" dur="7s" repeatCount="indefinite"/>
+              </circle>
+              <!-- calc strip: 36.5%w/w (d=1.18) -> 11.8 M -->
+              <text x="270" y="128" font-size="9.5" fill="#9CA3AF" text-anchor="middle">ตัวอย่าง: HCl 36.5% w/w · d = 1.18 g/mL · Mw = 36.5</text>
+              <g opacity="0.4"><animate attributeName="opacity" values="0.4;0.4;1;1;0.4;0.4" keyTimes="0;0.02;0.08;0.45;0.55;1" dur="7s" repeatCount="indefinite"/>
+                <rect x="60" y="146" width="150" height="30" rx="8" fill="url(#cWW)" stroke="#B91C1C" stroke-width="1.5"/>
+                <text x="135" y="165" font-size="11.5" fill="#7F1D1D" text-anchor="middle" font-weight="700">36.5 g / 100 g</text>
+              </g>
+              <line x1="214" y1="161" x2="258" y2="161" stroke="#9CA3AF" stroke-width="1.8" marker-end="url(#cA)"/>
+              <text x="236" y="154" font-size="8.5" fill="#6B7280" text-anchor="middle" font-weight="700">×d ÷Mw</text>
+              <g opacity="0.4"><animate attributeName="opacity" values="0.4;0.4;1;1;0.4" keyTimes="0;0.55;0.62;0.95;1" dur="7s" repeatCount="indefinite"/>
+                <rect x="262" y="146" width="210" height="30" rx="8" fill="url(#cM)" stroke="#1D4ED8" stroke-width="1.5"/>
+                <text x="367" y="165" font-size="11.5" fill="#1E3A8A" text-anchor="middle" font-weight="700">11.8 mol/L (คิดต่อ 1 L)</text>
+              </g>
+            </svg>
           <em>ตัวอย่าง:</em> กรด HCl 36.5% w/w ความหนาแน่น 1.18 g/mL หา M<br>
           คิดจากสารละลาย 1 L = 1000 mL → มวล = 1000×1.18 = 1180 g → มวล HCl = 1180×0.365 = 430.7 g<br>
           mol HCl = 430.7 ÷ 36.5 = 11.8 mol → <strong>M = 11.8 mol/L</strong>
@@ -7573,6 +7652,10 @@ html, body { max-width:100%; overflow-x:hidden; }
           <li><span class="li-dot sc-dot"></span>ตัวทำละลายมีขั้ว (H₂O) ละลายสารมีขั้วและไอออนิก เช่น NaCl, HCl, แอลกอฮอล์</li>
           <li><span class="li-dot sc-dot"></span>ตัวทำละลายไม่มีขั้ว (hexane, CCl₄) ละลายสารไม่มีขั้ว เช่น ไขมัน น้ำมัน ไอโอดีน</li>
         </ul>
+        <div class="formula-box">
+          <div class="formula-label">🧲 อนิเมชัน: น้ำล้อมไอออน (Hydration / Like Dissolves Like)</div>
+          <svg viewBox="0 0 540 240" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;"><text x="270" y="18" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">"Like dissolves like" — น้ำ (มีขั้ว) ล้อมและดึงไอออนออกจากผลึก → ละลาย</text><circle cx="48" cy="88" r="8" fill="#60A5FA" stroke="#1D4ED8" stroke-width="1"/><text x="48" y="91" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">+</text><circle cx="70" cy="88" r="8" fill="#34D399" stroke="#0F766E" stroke-width="1"/><text x="70" y="91" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">−</text><circle cx="92" cy="88" r="8" fill="#60A5FA" stroke="#1D4ED8" stroke-width="1"/><text x="92" y="91" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">+</text><circle cx="48" cy="110" r="8" fill="#34D399" stroke="#0F766E" stroke-width="1"/><text x="48" y="113" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">−</text><circle cx="70" cy="110" r="8" fill="#60A5FA" stroke="#1D4ED8" stroke-width="1"/><text x="70" y="113" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">+</text><circle cx="92" cy="110" r="8" fill="#34D399" stroke="#0F766E" stroke-width="1"/><text x="92" y="113" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">−</text><circle cx="48" cy="132" r="8" fill="#60A5FA" stroke="#1D4ED8" stroke-width="1"/><text x="48" y="135" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">+</text><circle cx="70" cy="132" r="8" fill="#34D399" stroke="#0F766E" stroke-width="1"/><text x="70" y="135" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">−</text><circle cx="92" cy="132" r="8" fill="#60A5FA" stroke="#1D4ED8" stroke-width="1"/><text x="92" y="135" font-size="7" fill="#fff" text-anchor="middle" font-weight="700">+</text><text x="80" y="150" font-size="10" fill="#374151" text-anchor="middle" font-weight="700">ผลึก NaCl</text><path d="M120,110 L175,110" stroke="#9CA3AF" stroke-width="2" fill="none" marker-end="url(#svA)"/><text x="147" y="100" font-size="9" fill="#6B7280" text-anchor="middle">ละลาย</text><defs><marker id="svA" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9 Z" fill="#6B7280"/></marker></defs><g><animateTransform attributeName="transform" type="rotate" from="0 275 120" to="360 275 120" dur="14s" repeatCount="indefinite"/><line x1="301.0" y1="120.0" x2="309.0" y2="124.5" stroke="#CBD5E1" stroke-width="1.4"/><line x1="301.0" y1="120.0" x2="309.0" y2="115.5" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="309.0" cy="124.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="309.0" cy="115.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="301.0" cy="120.0" r="4.2" fill="#DC2626"/><line x1="288.0" y1="142.5" x2="288.1" y2="151.7" stroke="#CBD5E1" stroke-width="1.4"/><line x1="288.0" y1="142.5" x2="295.9" y2="147.2" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="288.1" cy="151.7" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="295.9" cy="147.2" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="288.0" cy="142.5" r="4.2" fill="#DC2626"/><line x1="262.0" y1="142.5" x2="254.1" y2="147.2" stroke="#CBD5E1" stroke-width="1.4"/><line x1="262.0" y1="142.5" x2="261.9" y2="151.7" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="254.1" cy="147.2" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="261.9" cy="151.7" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="262.0" cy="142.5" r="4.2" fill="#DC2626"/><line x1="249.0" y1="120.0" x2="241.0" y2="115.5" stroke="#CBD5E1" stroke-width="1.4"/><line x1="249.0" y1="120.0" x2="241.0" y2="124.5" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="241.0" cy="115.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="241.0" cy="124.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="249.0" cy="120.0" r="4.2" fill="#DC2626"/><line x1="262.0" y1="97.5" x2="261.9" y2="88.3" stroke="#CBD5E1" stroke-width="1.4"/><line x1="262.0" y1="97.5" x2="254.1" y2="92.8" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="261.9" cy="88.3" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="254.1" cy="92.8" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="262.0" cy="97.5" r="4.2" fill="#DC2626"/><line x1="288.0" y1="97.5" x2="295.9" y2="92.8" stroke="#CBD5E1" stroke-width="1.4"/><line x1="288.0" y1="97.5" x2="288.1" y2="88.3" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="295.9" cy="92.8" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="288.1" cy="88.3" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="288.0" cy="97.5" r="4.2" fill="#DC2626"/></g><circle cx="275" cy="120" r="15" fill="#2563EB" stroke="#1D4ED8" stroke-width="2"/><text x="275" y="124" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">Na⁺</text><g><animateTransform attributeName="transform" type="rotate" from="0 430 120" to="-360 430 120" dur="16s" repeatCount="indefinite"/><line x1="464.0" y1="120.0" x2="454.0" y2="124.5" stroke="#CBD5E1" stroke-width="1.4"/><line x1="464.0" y1="120.0" x2="454.0" y2="115.5" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="454.0" cy="124.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="454.0" cy="115.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="464.0" cy="120.0" r="4.2" fill="#DC2626"/><line x1="447.0" y1="149.4" x2="438.1" y2="143.0" stroke="#CBD5E1" stroke-width="1.4"/><line x1="447.0" y1="149.4" x2="445.9" y2="138.5" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="438.1" cy="143.0" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="445.9" cy="138.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="447.0" cy="149.4" r="4.2" fill="#DC2626"/><line x1="413.0" y1="149.4" x2="414.1" y2="138.5" stroke="#CBD5E1" stroke-width="1.4"/><line x1="413.0" y1="149.4" x2="421.9" y2="143.0" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="414.1" cy="138.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="421.9" cy="143.0" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="413.0" cy="149.4" r="4.2" fill="#DC2626"/><line x1="396.0" y1="120.0" x2="406.0" y2="115.5" stroke="#CBD5E1" stroke-width="1.4"/><line x1="396.0" y1="120.0" x2="406.0" y2="124.5" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="406.0" cy="115.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="406.0" cy="124.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="396.0" cy="120.0" r="4.2" fill="#DC2626"/><line x1="413.0" y1="90.6" x2="421.9" y2="97.0" stroke="#CBD5E1" stroke-width="1.4"/><line x1="413.0" y1="90.6" x2="414.1" y2="101.5" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="421.9" cy="97.0" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="414.1" cy="101.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="413.0" cy="90.6" r="4.2" fill="#DC2626"/><line x1="447.0" y1="90.6" x2="445.9" y2="101.5" stroke="#CBD5E1" stroke-width="1.4"/><line x1="447.0" y1="90.6" x2="438.1" y2="97.0" stroke="#CBD5E1" stroke-width="1.4"/><circle cx="445.9" cy="101.5" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="438.1" cy="97.0" r="2.6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="0.6"/><circle cx="447.0" cy="90.6" r="4.2" fill="#DC2626"/></g><circle cx="430" cy="120" r="15" fill="#10B981" stroke="#0F766E" stroke-width="2"/><text x="430" y="124" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">Cl⁻</text><text x="275" y="205" font-size="9" fill="#1D4ED8" text-anchor="middle">O (δ−) หันเข้าหา Na⁺</text><text x="430" y="205" font-size="9" fill="#0F766E" text-anchor="middle">H (δ+) หันเข้าหา Cl⁻</text><text x="270" y="228" font-size="9.5" fill="#B45309" text-anchor="middle">🔴 O = ขั้วลบ · ⚪ H = ขั้วบวก · โมเลกุลน้ำหมุนล้อมไอออน (hydration shell)</text></svg>
+        </div>
         <h4>ปัจจัยที่มีผลต่อความสามารถในการละลาย</h4>
         <div class="formula-box">
           <div class="formula-label">📈 กราฟความสามารถในการละลาย vs อุณหภูมิ</div>
@@ -7622,36 +7705,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         </div>
         <div class="formula-box">
           <div class="formula-label">🩸 ออสโมซิสในเม็ดเลือดแดง</div>
-          <svg viewBox="0 0 540 220" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <!-- hypotonic: cell swells -->
-            <g>
-              <rect x="20" y="40" width="140" height="140" fill="#DBEAFE" stroke="#374151" stroke-width="1.5"/>
-              <circle cx="90" cy="110" r="50" fill="#FCA5A5" stroke="#7F1D1D" stroke-width="2"/>
-              <text x="90" y="200" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">Hypotonic</text>
-              <text x="90" y="215" font-size="9" fill="#DC2626" text-anchor="middle">เซลล์บวมแตก (hemolysis)</text>
-              <text x="90" y="20" font-size="9" fill="#374151" text-anchor="middle">น้ำเข้าเซลล์ →</text>
-              <text x="90" y="32" font-size="9" fill="#374151" text-anchor="middle">(น้ำบริสุทธิ์)</text>
-            </g>
-            <!-- isotonic: normal -->
-            <g>
-              <rect x="190" y="40" width="140" height="140" fill="#DBEAFE" stroke="#374151" stroke-width="1.5"/>
-              <ellipse cx="260" cy="110" rx="40" ry="28" fill="#FCA5A5" stroke="#7F1D1D" stroke-width="2"/>
-              <ellipse cx="260" cy="110" rx="20" ry="14" fill="#FEE2E2" stroke="#7F1D1D" stroke-width="1"/>
-              <text x="260" y="200" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">Isotonic</text>
-              <text x="260" y="215" font-size="9" fill="#0F766E" text-anchor="middle">รูปร่างปกติ (0.9% NaCl)</text>
-              <text x="260" y="20" font-size="9" fill="#374151" text-anchor="middle">น้ำเข้า = ออก</text>
-              <text x="260" y="32" font-size="9" fill="#374151" text-anchor="middle">(สมดุล)</text>
-            </g>
-            <!-- hypertonic: shrunk -->
-            <g>
-              <rect x="360" y="40" width="140" height="140" fill="#DBEAFE" stroke="#374151" stroke-width="1.5"/>
-              <path d="M 410 100 Q 430 75 460 100 Q 480 130 460 145 Q 430 155 410 145 Q 395 130 410 100 Z" fill="#FCA5A5" stroke="#7F1D1D" stroke-width="2"/>
-              <text x="430" y="200" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">Hypertonic</text>
-              <text x="430" y="215" font-size="9" fill="#DC2626" text-anchor="middle">เซลล์เหี่ยว (crenation)</text>
-              <text x="430" y="20" font-size="9" fill="#374151" text-anchor="middle">← น้ำออกจากเซลล์</text>
-              <text x="430" y="32" font-size="9" fill="#374151" text-anchor="middle">(น้ำเกลือเข้มข้น)</text>
-            </g>
-          </svg>
+                      <svg viewBox="0 0 540 220" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;"><rect x="20" y="40" width="140" height="140" rx="8" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5"/><text x="90" y="196" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">Hypotonic</text><text x="90" y="210" font-size="8.5" fill="#DC2626" text-anchor="middle">บวมแตก (hemolysis)</text><text x="90" y="34" font-size="9" fill="#2563EB" text-anchor="middle">น้ำเข้า → เซลล์บวม</text><circle cx="90" cy="110" fill="#FCA5A5" stroke="#B91C1C" stroke-width="2"><animate attributeName="r" values="34;54;34" dur="3.6s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.8"><animate attributeName="cx" values="28;90" dur="2.2s" begin="0.0s" repeatCount="indefinite"/><animate attributeName="cy" values="70;110" dur="2.2s" begin="0.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="2.2s" begin="0.0s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.8"><animate attributeName="cx" values="28;90" dur="2.2s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="cy" values="150;110" dur="2.2s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="2.2s" begin="0.4s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.8"><animate attributeName="cx" values="152;90" dur="2.2s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="cy" values="90;110" dur="2.2s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="2.2s" begin="0.8s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.8"><animate attributeName="cx" values="152;90" dur="2.2s" begin="1.2000000000000002s" repeatCount="indefinite"/><animate attributeName="cy" values="140;110" dur="2.2s" begin="1.2000000000000002s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="2.2s" begin="1.2000000000000002s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.8"><animate attributeName="cx" values="90;90" dur="2.2s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="cy" values="46;110" dur="2.2s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="2.2s" begin="1.6s" repeatCount="indefinite"/></circle><rect x="200" y="40" width="140" height="140" rx="8" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5"/><text x="270" y="196" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">Isotonic</text><text x="270" y="210" font-size="8.5" fill="#0F766E" text-anchor="middle">ปกติ (0.9% NaCl)</text><text x="270" y="34" font-size="9" fill="#0F766E" text-anchor="middle">น้ำเข้า = ออก (สมดุล)</text><g><ellipse cx="270" cy="110" rx="40" ry="28" fill="#FCA5A5" stroke="#B91C1C" stroke-width="2"><animate attributeName="rx" values="40;42;40" dur="3s" repeatCount="indefinite"/></ellipse><ellipse cx="270" cy="110" rx="20" ry="13" fill="#FEE2E2" stroke="#B91C1C" stroke-width="1"/></g><circle r="2.6" fill="#2563EB" opacity="0.7"><animate attributeName="cx" values="208;270;208" dur="2.4s" begin="0.0s" repeatCount="indefinite"/><animate attributeName="cy" values="80;110;80" dur="2.4s" begin="0.0s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.7"><animate attributeName="cx" values="270;332;270" dur="2.4s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="cy" values="110;130;110" dur="2.4s" begin="0.5s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.7"><animate attributeName="cx" values="270;270;270" dur="2.4s" begin="1.0s" repeatCount="indefinite"/><animate attributeName="cy" values="46;110;46" dur="2.4s" begin="1.0s" repeatCount="indefinite"/></circle><rect x="380" y="40" width="140" height="140" rx="8" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5"/><text x="450" y="196" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">Hypertonic</text><text x="450" y="210" font-size="8.5" fill="#DC2626" text-anchor="middle">เหี่ยว (crenation)</text><text x="450" y="34" font-size="9" fill="#DC2626" text-anchor="middle">← น้ำออก → เซลล์เหี่ยว</text><circle cx="450" cy="110" fill="#FCA5A5" stroke="#B91C1C" stroke-width="2"><animate attributeName="r" values="40;26;40" dur="3.6s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.8"><animate attributeName="cx" values="450;388" dur="2.2s" begin="0.0s" repeatCount="indefinite"/><animate attributeName="cy" values="110;70" dur="2.2s" begin="0.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="2.2s" begin="0.0s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.8"><animate attributeName="cx" values="450;388" dur="2.2s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="cy" values="110;150" dur="2.2s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="2.2s" begin="0.4s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.8"><animate attributeName="cx" values="450;512" dur="2.2s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="cy" values="110;90" dur="2.2s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="2.2s" begin="0.8s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.8"><animate attributeName="cx" values="450;512" dur="2.2s" begin="1.2000000000000002s" repeatCount="indefinite"/><animate attributeName="cy" values="110;140" dur="2.2s" begin="1.2000000000000002s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="2.2s" begin="1.2000000000000002s" repeatCount="indefinite"/></circle><circle r="2.6" fill="#2563EB" opacity="0.8"><animate attributeName="cx" values="450;450" dur="2.2s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="cy" values="110;46" dur="2.2s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="2.2s" begin="1.6s" repeatCount="indefinite"/></circle></svg>
         </div>
         <div class="tip-box">💡 <strong>ออสโมซิสในชีววิทยา:</strong> เซลล์เม็ดเลือดแดงในน้ำบริสุทธิ์ (hypotonic) → บวมแตก | ในน้ำเกลือเข้มข้น (hypertonic) → เหี่ยว (crenation) | ใน 0.9% NaCl (isotonic) → รูปร่างปกติ</div>
       </div>
