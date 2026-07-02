@@ -11885,25 +11885,28 @@ html, body { max-width:100%; overflow-x:hidden; }
 
         <div class="formula-box">
           <div class="formula-label">📈 กราฟความเข้มข้น–เวลา: การเข้าสู่สมดุล (A ⇌ B)</div>
-          <svg viewBox="0 0 480 260" style="width:100%;max-width:520px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <line x1="50" y1="220" x2="450" y2="220" stroke="#374151" stroke-width="2"/>
-            <line x1="50" y1="30" x2="50" y2="220" stroke="#374151" stroke-width="2"/>
-            <text x="240" y="248" font-size="12" fill="#374151" text-anchor="middle">เวลา (t)</text>
-            <text x="20" y="125" font-size="12" fill="#374151" text-anchor="middle" transform="rotate(-90 20 125)">ความเข้มข้น (M)</text>
-            <!-- reactant A decreasing then leveling off -->
-            <path d="M 50 50 Q 130 90 200 130 Q 280 165 360 175 L 450 175" stroke="#DC2626" stroke-width="2.5" fill="none"/>
-            <circle cx="50" cy="50" r="4" fill="#DC2626"/>
-            <text x="60" y="42" font-size="11" fill="#DC2626" font-weight="600">[A] สารตั้งต้น</text>
-            <!-- product B increasing then leveling off -->
-            <path d="M 50 215 Q 130 175 200 130 Q 280 100 360 88 L 450 88" stroke="#0F766E" stroke-width="2.5" fill="none"/>
-            <circle cx="450" cy="88" r="4" fill="#0F766E"/>
-            <text x="340" y="78" font-size="11" fill="#0F766E" font-weight="600">[B] ผลิตภัณฑ์</text>
-            <!-- equilibrium region -->
-            <line x1="320" y1="30" x2="320" y2="220" stroke="#7C3AED" stroke-width="1.8" stroke-dasharray="5,3"/>
-            <text x="325" y="50" font-size="11" fill="#7C3AED" font-weight="700">เริ่มเข้าสมดุล</text>
-            <rect x="320" y="80" width="130" height="100" fill="#A78BFA" opacity="0.12"/>
-            <text x="385" y="135" font-size="11" fill="#5B21B6" font-weight="600" text-anchor="middle">ภาวะสมดุล</text>
-            <text x="385" y="150" font-size="10" fill="#5B21B6" text-anchor="middle">rate ไป = rate กลับ</text>
+                    <svg viewBox="0 0 480 262" style="width:100%;max-width:520px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+          <rect x="322" y="40" width="128" height="150" fill="#A78BFA" opacity="0.12"/>
+          <g stroke="#EDF0F3" stroke-width="1">
+          <line x1="50" y1="60" x2="440" y2="60"/>
+          <line x1="50" y1="100" x2="440" y2="100"/>
+          <line x1="50" y1="140" x2="440" y2="140"/>
+          <line x1="50" y1="180" x2="440" y2="180"/>
+          </g>
+          <line x1="50" y1="220" x2="450" y2="220" stroke="#374151" stroke-width="2"/>
+          <line x1="50" y1="30" x2="50" y2="220" stroke="#374151" stroke-width="2"/>
+          <text x="245" y="248" font-size="12" fill="#374151" text-anchor="middle">เวลา (t) →</text>
+          <text x="20" y="125" font-size="12" fill="#374151" text-anchor="middle" transform="rotate(-90 20 125)">ความเข้มข้น (M)</text>
+          <line x1="322" y1="30" x2="322" y2="220" stroke="#7C3AED" stroke-width="1.6" stroke-dasharray="5,3"/>
+          <text x="386" y="120" font-size="11" fill="#5B21B6" text-anchor="middle" font-weight="700">ภาวะสมดุล</text>
+          <text x="386" y="134" font-size="9.5" fill="#5B21B6" text-anchor="middle">rate ไป = rate กลับ</text>
+          <path d="M60.0,52.0 L73.1,65.3 L86.2,77.1 L99.3,87.6 L112.4,96.9 L125.5,105.2 L138.6,112.6 L151.7,119.2 L164.8,125.0 L177.9,130.2 L191.0,134.8 L204.1,139.0 L217.2,142.6 L230.3,145.9 L243.4,148.8 L256.6,151.3 L269.7,153.6 L282.8,155.6 L295.9,157.5 L309.0,159.1 L322.1,160.5 L335.2,161.8 L348.3,162.9 L361.4,163.9 L374.5,164.8 L387.6,165.6 L400.7,166.3 L413.8,166.9 L426.9,167.5 L440.0,168.0" stroke="#DC2626" stroke-width="2.6" fill="none" stroke-linejoin="round"/>
+          <path d="M60.0,214.0 L73.1,200.5 L86.2,188.5 L99.3,177.8 L112.4,168.3 L125.5,159.9 L138.6,152.4 L151.7,145.7 L164.8,139.8 L177.9,134.5 L191.0,129.8 L204.1,125.6 L217.2,121.9 L230.3,118.6 L243.4,115.6 L256.6,113.0 L269.7,110.7 L282.8,108.6 L295.9,106.8 L309.0,105.2 L322.1,103.7 L335.2,102.4 L348.3,101.3 L361.4,100.2 L374.5,99.3 L387.6,98.5 L400.7,97.8 L413.8,97.1 L426.9,96.6 L440.0,96.1" stroke="#0F766E" stroke-width="2.6" fill="none" stroke-linejoin="round"/>
+          <text x="66" y="46" font-size="11" fill="#DC2626" font-weight="700">[A] สารตั้งต้น ↓</text>
+          <text x="330" y="84" font-size="11" fill="#0F766E" font-weight="700">[B] ผลิตภัณฑ์ ↑</text>
+          <line y1="34" y2="222" stroke="#9CA3AF" stroke-width="1.4" stroke-dasharray="3,3" opacity="0"><animate attributeName="x1" values="60;440" dur="5.5s" repeatCount="indefinite"/><animate attributeName="x2" values="60;440" dur="5.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.06;0.5;0.9;1" dur="5.5s" repeatCount="indefinite"/></line>
+          <circle r="5.5" fill="#DC2626" stroke="#fff" stroke-width="1.4" opacity="0"><animate attributeName="cx" values="60;440" dur="5.5s" repeatCount="indefinite"/><animate attributeName="cy" values="52.0;65.3;77.1;87.6;96.9;105.2;112.6;119.2;125.0;130.2;134.8;139.0;142.6;145.9;148.8;151.3;153.6;155.6;157.5;159.1;160.5;161.8;162.9;163.9;164.8;165.6;166.3;166.9;167.5;168.0" keyTimes="0.000;0.034;0.069;0.103;0.138;0.172;0.207;0.241;0.276;0.310;0.345;0.379;0.414;0.448;0.483;0.517;0.552;0.586;0.621;0.655;0.690;0.724;0.759;0.793;0.828;0.862;0.897;0.931;0.966;1.000" dur="5.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.06;0.5;0.9;1" dur="5.5s" repeatCount="indefinite"/></circle>
+          <circle r="5.5" fill="#0F766E" stroke="#fff" stroke-width="1.4" opacity="0"><animate attributeName="cx" values="60;440" dur="5.5s" repeatCount="indefinite"/><animate attributeName="cy" values="214.0;200.5;188.5;177.8;168.3;159.9;152.4;145.7;139.8;134.5;129.8;125.6;121.9;118.6;115.6;113.0;110.7;108.6;106.8;105.2;103.7;102.4;101.3;100.2;99.3;98.5;97.8;97.1;96.6;96.1" keyTimes="0.000;0.034;0.069;0.103;0.138;0.172;0.207;0.241;0.276;0.310;0.345;0.379;0.414;0.448;0.483;0.517;0.552;0.586;0.621;0.655;0.690;0.724;0.759;0.793;0.828;0.862;0.897;0.931;0.966;1.000" dur="5.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.06;0.5;0.9;1" dur="5.5s" repeatCount="indefinite"/></circle>
           </svg>
           <strong>การอ่านกราฟ:</strong> ความเข้มข้นของ A ลดลง ส่วน B เพิ่มขึ้น เมื่อถึงจุดที่ <em>อัตราไปข้างหน้า = อัตราย้อนกลับ</em> ความเข้มข้นทั้งสองจะคงที่ (เส้นแบนราบ) — นี่คือ <em>สมดุลพลวัต</em> ระดับโมเลกุลยังเกิดอยู่
         </div>
@@ -11976,33 +11979,24 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h3>🔄 หลักเลอชาเตอลิเอ (Le Châtelier's Principle)</h3>
         <div class="formula-box">
           <div class="formula-label">🔁 ภาพการเลื่อนสมดุลเมื่อเติมสารตั้งต้น</div>
-          <svg viewBox="0 0 500 240" style="width:100%;max-width:540px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <line x1="50" y1="200" x2="450" y2="200" stroke="#374151" stroke-width="2"/>
-            <line x1="50" y1="30" x2="50" y2="200" stroke="#374151" stroke-width="2"/>
-            <text x="240" y="225" font-size="12" fill="#374151" text-anchor="middle">เวลา (t) →</text>
-            <text x="22" y="115" font-size="12" fill="#374151" text-anchor="middle" transform="rotate(-90 22 115)">[สาร] (M)</text>
-            <!-- Stage 1: existing equilibrium -->
-            <line x1="60" y1="100" x2="180" y2="100" stroke="#DC2626" stroke-width="2.5"/>
-            <line x1="60" y1="160" x2="180" y2="160" stroke="#0F766E" stroke-width="2.5"/>
-            <text x="120" y="85" font-size="10" fill="#374151" text-anchor="middle">สมดุลที่ 1</text>
-            <!-- Disturbance: add A -->
-            <line x1="180" y1="200" x2="180" y2="30" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4,3"/>
-            <text x="185" y="50" font-size="10" fill="#92400E" font-weight="600">เติม A</text>
-            <!-- jump in A -->
-            <line x1="180" y1="100" x2="180" y2="60" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="60" stroke-dashoffset="60"><animate attributeName="stroke-dashoffset" from="60" to="0" dur="0.5s" begin="0.4s" fill="freeze"/></line>
-            <!-- Stage 2: shift right -->
-            <path d="M 180 60 Q 240 80 320 95 L 400 100" stroke="#DC2626" stroke-width="2.5" fill="none" stroke-dasharray="240" stroke-dashoffset="240"><animate attributeName="stroke-dashoffset" from="240" to="0" dur="1.6s" begin="1.0s" fill="freeze"/></path>
-            <path d="M 180 160 Q 240 145 320 130 L 400 125" stroke="#0F766E" stroke-width="2.5" fill="none" stroke-dasharray="240" stroke-dashoffset="240"><animate attributeName="stroke-dashoffset" from="240" to="0" dur="1.6s" begin="1.0s" fill="freeze"/></path>
-            <line x1="400" y1="100" x2="450" y2="100" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="3,2"/>
-            <line x1="400" y1="125" x2="450" y2="125" stroke="#0F766E" stroke-width="2.5" stroke-dasharray="3,2"/>
-            <text x="350" y="85" font-size="10" fill="#374151" text-anchor="middle">สมดุลใหม่</text>
-            <!-- labels -->
-            <text x="62" y="115" font-size="10" fill="#DC2626" font-weight="600">[A]</text>
-            <text x="62" y="175" font-size="10" fill="#0F766E" font-weight="600">[B]</text>
-            <!-- arrow indicating shift -->
-            <text x="280" y="225" font-size="10" fill="#7C3AED" font-weight="700" text-anchor="middle">⇒ ระบบเลื่อนไปข้างหน้าเพื่อใช้ A และสร้าง B เพิ่ม</text>
+                    <svg viewBox="0 0 500 240" style="width:100%;max-width:540px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+          <line x1="50" y1="200" x2="470" y2="200" stroke="#374151" stroke-width="2"/>
+          <line x1="50" y1="30" x2="50" y2="200" stroke="#374151" stroke-width="2"/>
+          <text x="250" y="225" font-size="12" fill="#374151" text-anchor="middle">เวลา (t) →</text>
+          <text x="22" y="115" font-size="12" fill="#374151" text-anchor="middle" transform="rotate(-90 22 115)">[สาร] (M)</text>
+          <text x="110" y="90" font-size="10" fill="#374151" text-anchor="middle" font-weight="600">สมดุลที่ 1</text>
+          <text x="410" y="88" font-size="10" fill="#374151" text-anchor="middle" font-weight="600">สมดุลใหม่</text>
+          <line x1="165" y1="30" x2="165" y2="200" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4,3"/>
+          <text x="176" y="48" font-size="11" fill="#92400E" font-weight="700">เติม A ⬆</text>
+          <path d="M60,100 L165,100 L165,58 Q210,72 300,90 Q360,95 400,97 L450,97" stroke="#DC2626" stroke-width="2.6" fill="none" stroke-linejoin="round"/>
+          <path d="M60,158 L165,158 Q210,150 300,136 Q360,131 400,129 L450,129" stroke="#0F766E" stroke-width="2.6" fill="none" stroke-linejoin="round"/>
+          <text x="62" y="94" font-size="11" fill="#DC2626" font-weight="700">[A]</text>
+          <text x="62" y="172" font-size="11" fill="#0F766E" font-weight="700">[B]</text>
+          <circle r="6" fill="#DC2626" stroke="#fff" stroke-width="1.4" opacity="0"><animateMotion dur="6s" repeatCount="indefinite" path="M60,100 L165,100 L165,58 Q210,72 300,90 Q360,95 400,97 L450,97"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.05;0.5;0.92;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="6" fill="#0F766E" stroke="#fff" stroke-width="1.4" opacity="0"><animateMotion dur="6s" repeatCount="indefinite" path="M60,158 L165,158 Q210,150 300,136 Q360,131 400,129 L450,129"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.05;0.5;0.92;1" dur="6s" repeatCount="indefinite"/></circle>
+          <text x="300" y="60" font-size="9.5" fill="#DC2626">A พุ่งขึ้น (รบกวน)</text>
+          <text x="285" y="228" font-size="10" fill="#7C3AED" text-anchor="middle" font-weight="700">⇒ ระบบเลื่อนไปข้างหน้า: ใช้ A ลง (A↓) สร้าง B เพิ่ม (B↑) จนถึงสมดุลใหม่</text>
           </svg>
-          <div style="text-align:center;margin:4px 0 8px;"><button class="pk-replay" onclick="pkReplay(this)">▶️ เล่นซ้ำ</button></div>
           <strong>หลักการ:</strong> เมื่อ<em>เติม A</em> (รบกวน) ระบบจะ <em>ลดผลรบกวน</em> โดยเลื่อนไปข้างหน้า — ใช้ A ไปเรื่อย ๆ จนกระทั่งถึงสมดุลใหม่ (Q กลับเท่ากับ K) ค่า K ไม่เปลี่ยนเพราะ T ไม่เปลี่ยน
         </div>
         <p>"เมื่อระบบที่อยู่ในสมดุลถูกรบกวน ระบบจะปรับตัวเพื่อ <em>ลดผล</em>ของการรบกวนนั้น แล้วเข้าสู่สมดุลใหม่"</p>
@@ -12024,24 +12018,23 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h3>🌡️ สมการแวนต์ฮอฟฟ์ (van't Hoff Equation)</h3>
         <div class="formula-box">
           <div class="formula-label">📊 กราฟ ln K vs <span class="frac"><span class="n">1</span><span class="d">T</span></span>: ปฏิกิริยาคายความร้อน vs ดูดความร้อน</div>
-          <svg viewBox="0 0 480 260" style="width:100%;max-width:520px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <line x1="60" y1="220" x2="450" y2="220" stroke="#374151" stroke-width="2"/>
-            <line x1="60" y1="30" x2="60" y2="220" stroke="#374151" stroke-width="2"/>
-            <text x="255" y="247" font-size="12" fill="#374151" text-anchor="middle">1/T (K⁻¹) →</text>
-            <text x="22" y="125" font-size="12" fill="#374151" text-anchor="middle" transform="rotate(-90 22 125)">ln K</text>
-            <!-- exothermic: positive slope (high <span class="frac"><span class="n">1</span><span class="d">T</span></span> = low T → high K) -->
-            <line x1="80" y1="60" x2="430" y2="190" stroke="#DC2626" stroke-width="2.5" stroke-dasharray="400" stroke-dashoffset="400"><animate attributeName="stroke-dashoffset" from="400" to="0" dur="1.8s" begin="0.4s" fill="freeze"/></line>
-            <text x="100" y="50" font-size="11" fill="#DC2626" font-weight="600">คายความร้อน (ΔH &lt; 0)</text>
-            <text x="100" y="65" font-size="10" fill="#DC2626">slope = -ΔH/R &gt; 0</text>
-            <!-- endothermic: negative slope -->
-            <line x1="80" y1="190" x2="430" y2="60" stroke="#0F766E" stroke-width="2.5" stroke-dasharray="400" stroke-dashoffset="400"><animate attributeName="stroke-dashoffset" from="400" to="0" dur="1.8s" begin="0.8s" fill="freeze"/></line>
-            <text x="240" y="50" font-size="11" fill="#0F766E" font-weight="600">ดูดความร้อน (ΔH &gt; 0)</text>
-            <text x="240" y="65" font-size="10" fill="#0F766E">slope = -ΔH/R &lt; 0</text>
-            <!-- T arrows -->
-            <text x="80" y="235" font-size="10" fill="#374151">T สูง</text>
-            <text x="400" y="235" font-size="10" fill="#374151">T ต่ำ</text>
+                    <svg viewBox="0 0 480 262" style="width:100%;max-width:520px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+          <line x1="60" y1="220" x2="450" y2="220" stroke="#374151" stroke-width="2"/>
+          <line x1="60" y1="30" x2="60" y2="220" stroke="#374151" stroke-width="2"/>
+          <text x="255" y="247" font-size="12" fill="#374151" text-anchor="middle">1/T (K⁻¹) →</text>
+          <text x="22" y="125" font-size="12" fill="#374151" text-anchor="middle" transform="rotate(-90 22 125)">ln K</text>
+          <line x1="80" y1="190" x2="430" y2="60" stroke="#DC2626" stroke-width="2.6"/>
+          <text x="300" y="86" font-size="11" fill="#DC2626" font-weight="700">คายความร้อน (ΔH&lt;0)</text>
+          <text x="300" y="100" font-size="9.5" fill="#DC2626">slope = −ΔH/R &gt; 0</text>
+          <line x1="80" y1="60" x2="430" y2="190" stroke="#0F766E" stroke-width="2.6"/>
+          <text x="300" y="176" font-size="11" fill="#0F766E" font-weight="700">ดูดความร้อน (ΔH&gt;0)</text>
+          <text x="300" y="190" font-size="9.5" fill="#0F766E">slope = −ΔH/R &lt; 0</text>
+          <text x="86" y="236" font-size="10" fill="#374151">T สูง (1/T ต่ำ)</text>
+          <text x="360" y="236" font-size="10" fill="#374151">T ต่ำ (1/T สูง)</text>
+          <line y1="34" y2="222" stroke="#9CA3AF" stroke-width="1.4" stroke-dasharray="3,3" opacity="0"><animate attributeName="x1" values="80;430" dur="5.5s" repeatCount="indefinite"/><animate attributeName="x2" values="80;430" dur="5.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.06;0.5;0.9;1" dur="5.5s" repeatCount="indefinite"/></line>
+          <circle r="5.5" fill="#DC2626" stroke="#fff" stroke-width="1.4" opacity="0"><animate attributeName="cx" values="80;430" dur="5.5s" repeatCount="indefinite"/><animate attributeName="cy" values="190;60" dur="5.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.06;0.5;0.9;1" dur="5.5s" repeatCount="indefinite"/></circle>
+          <circle r="5.5" fill="#0F766E" stroke="#fff" stroke-width="1.4" opacity="0"><animate attributeName="cx" values="80;430" dur="5.5s" repeatCount="indefinite"/><animate attributeName="cy" values="60;190" dur="5.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.06;0.5;0.9;1" dur="5.5s" repeatCount="indefinite"/></circle>
           </svg>
-          <div style="text-align:center;margin:4px 0 8px;"><button class="pk-replay" onclick="pkReplay(this)">▶️ เล่นซ้ำ</button></div>
           <strong>การตีความ:</strong> สมการ van't Hoff: ln K = (−Δ<span class="frac"><span class="n">H°</span><span class="d">R</span></span>)(<span class="frac"><span class="n">1</span><span class="d">T</span></span>) + Δ<span class="frac"><span class="n">S°</span><span class="d">R</span></span><br>
           • คายความร้อน (ΔH&lt;0): slope = −Δ<span class="frac"><span class="n">H</span><span class="d">R</span></span> &gt; 0 → T เพิ่ม (<span class="frac"><span class="n">1</span><span class="d">T</span></span> ลด) ⇒ ln K ลด ⇒ <em>K ลดลง</em><br>
           • ดูดความร้อน (ΔH&gt;0): slope = −Δ<span class="frac"><span class="n">H</span><span class="d">R</span></span> &lt; 0 → T เพิ่ม (<span class="frac"><span class="n">1</span><span class="d">T</span></span> ลด) ⇒ ln K เพิ่ม ⇒ <em>K เพิ่มขึ้น</em><br>
