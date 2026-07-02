@@ -8603,7 +8603,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h4>เอนทาลปีปฏิกิริยา (ΔH) เบื้องต้น</h4>
         <div class="formula-box">
           <div class="formula-label">⚡ แผนภาพพลังงาน: คายความร้อน vs ดูดความร้อน</div>
-                    <svg viewBox="0 0 560 236" style="width:100%;max-width:600px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+                              <svg viewBox="0 0 560 236" style="width:100%;max-width:600px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
           <defs><linearGradient id="exArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCA5A5" stop-opacity="0.5"/><stop offset="1" stop-color="#FCA5A5" stop-opacity="0.05"/></linearGradient><linearGradient id="enArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5EEAD4" stop-opacity="0.5"/><stop offset="1" stop-color="#5EEAD4" stop-opacity="0.05"/></linearGradient></defs>
           <text x="145" y="22" font-size="12" fill="#DC2626" text-anchor="middle" font-weight="700">Exothermic · คายความร้อน (ΔH &lt; 0)</text>
           <line x1="40" y1="32" x2="40" y2="188" stroke="#374151" stroke-width="1.6"/>
@@ -8616,7 +8616,8 @@ html, body { max-width:100%; overflow-x:hidden; }
           <line x1="104" y1="88" x2="214" y2="88" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="3,2"/>
           <text x="70" y="82" font-size="9" fill="#DC2626" text-anchor="middle" font-weight="700">สารตั้งต้น</text>
           <text x="221" y="165" font-size="9" fill="#DC2626" text-anchor="middle" font-weight="700">ผลิตภัณฑ์</text>
-          <line x1="120" y1="58" x2="120" y2="82" stroke="#7C3AED" stroke-width="1.5"/><polygon points="116,59 124,59 120,52" fill="#7C3AED"/><polygon points="116,81 124,81 120,88" fill="#7C3AED"/>
+          <line x1="120" y1="50" x2="150" y2="50" stroke="#7C3AED" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="120" y1="56" x2="120" y2="82" stroke="#7C3AED" stroke-width="1.5"/><polygon points="116,57 124,57 120,50" fill="#7C3AED"/><polygon points="116,81 124,81 120,88" fill="#7C3AED"/>
           <text x="104" y="74" font-size="9" fill="#7C3AED" text-anchor="middle" font-weight="700">Ea</text>
           <line x1="214" y1="94" x2="214" y2="144" stroke="#B45309" stroke-width="1.5"/><polygon points="210,95 218,95 214,88" fill="#B45309"/><polygon points="210,143 218,143 214,150" fill="#B45309"/>
           <text x="236" y="122" font-size="9" fill="#B45309" text-anchor="middle" font-weight="700">ΔH&lt;0</text>
@@ -8636,6 +8637,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           <line x1="376" y1="150" x2="488" y2="150" stroke="#9CA3AF" stroke-width="1" stroke-dasharray="3,2"/>
           <text x="345" y="165" font-size="9" fill="#0F766E" text-anchor="middle" font-weight="700">สารตั้งต้น</text>
           <text x="495" y="77" font-size="9" fill="#0F766E" text-anchor="middle" font-weight="700">ผลิตภัณฑ์</text>
+          <line x1="402" y1="52" x2="432" y2="52" stroke="#7C3AED" stroke-width="1" stroke-dasharray="3,2"/>
           <line x1="402" y1="58" x2="402" y2="144" stroke="#7C3AED" stroke-width="1.5"/><polygon points="398,59 406,59 402,52" fill="#7C3AED"/><polygon points="398,143 406,143 402,150" fill="#7C3AED"/>
           <text x="386" y="104" font-size="9" fill="#7C3AED" text-anchor="middle" font-weight="700">Ea</text>
           <line x1="488" y1="88" x2="488" y2="144" stroke="#B45309" stroke-width="1.5"/><polygon points="484,89 492,89 488,82" fill="#B45309"/><polygon points="484,143 492,143 488,150" fill="#B45309"/>
@@ -8671,12 +8673,27 @@ html, body { max-width:100%; overflow-x:hidden; }
         <div class="formula-box">
           <div class="formula-label">⚛️ Atom Economy</div>
           % atom economy = <span class="frac"><span class="n">มวลโมลาร์ของผลิตภัณฑ์ที่ต้องการ</span><span class="d">ผลรวมมวลโมลาร์ของผลิตภัณฑ์ทั้งหมด</span></span> × 100<br>
-          <svg viewBox="0 0 520 80" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <text x="20" y="28" font-size="10" fill="#374151">ปฏิกิริยาเติม (addition) — อะตอมเข้าผลิตภัณฑ์เดียว:</text>
-            <rect x="20" y="34" width="300" height="20" fill="#0F766E"/>
-            <text x="170" y="48" font-size="10" fill="#FFF" text-anchor="middle">100% (ไม่มีของเสีย)</text>
-            <text x="340" y="48" font-size="9" fill="#0F766E">ดีต่อสิ่งแวดล้อม ✓</text>
-            <text x="20" y="72" font-size="9" fill="#B45309">ปฏิกิริยาแทนที่/ควบแน่น มักมีผลพลอยได้ → atom economy ต่ำกว่า</text>
+                    <svg viewBox="0 0 540 210" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+          <defs><linearGradient id="aeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4ADE80"/><stop offset="1" stop-color="#16A34A"/></linearGradient><linearGradient id="aeR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F87171"/><stop offset="1" stop-color="#DC2626"/></linearGradient></defs>
+          <text x="270" y="18" font-size="11.5" fill="#374151" text-anchor="middle" font-weight="700">Atom Economy = สัดส่วนอะตอมที่กลายเป็น "ผลิตภัณฑ์ที่ต้องการ" (ยิ่งสูง = ของเสียน้อย)</text>
+          <text x="30" y="44" font-size="10.5" fill="#065F46" font-weight="700">① เติม (Addition): C₂H₄ + Br₂ → C₂H₄Br₂</text>
+          <rect x="30" y="50" width="360" height="24" rx="6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1"/>
+          <rect x="30" y="50" width="0" height="24" rx="6" fill="url(#aeG)"><animate attributeName="width" values="0;0;360;360;0" keyTimes="0;0.08;0.45;0.92;1" dur="5.5s" repeatCount="indefinite"/></rect>
+          <text x="210" y="66" font-size="10" fill="#FFFFFF" text-anchor="middle" font-weight="700" opacity="0">อะตอมทั้งหมด → ผลิตภัณฑ์<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4;0.48;0.92;1" dur="5.5s" repeatCount="indefinite"/></text>
+          <text x="415" y="60" font-size="15" fill="#16A34A" font-weight="700" opacity="0">100%<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.42;0.5;0.92;1" dur="5.5s" repeatCount="indefinite"/></text>
+          <text x="415" y="73" font-size="8.5" fill="#16A34A" opacity="0">ไม่มีของเสีย ✓<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.42;0.5;0.92;1" dur="5.5s" repeatCount="indefinite"/></text>
+          <text x="30" y="120" font-size="10.5" fill="#92400E" font-weight="700">② กำจัดน้ำ (Elimination): C₂H₅OH → C₂H₄ + H₂O</text>
+          <rect x="30" y="126" width="360" height="24" rx="6" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1"/>
+          <rect x="30" y="126" width="0" height="24" rx="6" fill="url(#aeG)"><animate attributeName="width" values="0;0;220;220;0" keyTimes="0;0.12;0.45;0.92;1" dur="5.5s" repeatCount="indefinite"/></rect>
+          <rect x="250" y="126" width="0" height="24" fill="url(#aeR)"><animate attributeName="width" values="0;0;140;140;0" keyTimes="0;0.45;0.72;0.92;1" dur="5.5s" repeatCount="indefinite"/></rect>
+          <text x="140" y="142" font-size="9.5" fill="#FFFFFF" text-anchor="middle" font-weight="700" opacity="0">C₂H₄ 61%<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4;0.48;0.92;1" dur="5.5s" repeatCount="indefinite"/></text>
+          <text x="320" y="142" font-size="9" fill="#FFFFFF" text-anchor="middle" font-weight="700" opacity="0">H₂O 39%<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.68;0.76;0.92;1" dur="5.5s" repeatCount="indefinite"/></text>
+          <text x="415" y="136" font-size="15" fill="#B45309" font-weight="700" opacity="0">61%<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.7;0.78;0.92;1" dur="5.5s" repeatCount="indefinite"/></text>
+          <text x="415" y="149" font-size="8.5" fill="#DC2626" opacity="0">น้ำ = ของเสีย<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.7;0.78;0.92;1" dur="5.5s" repeatCount="indefinite"/></text>
+          <circle cx="280" r="4" fill="#DC2626" opacity="0"><animate attributeName="cy" values="150;150;172;180" keyTimes="0;0.5;0.8;1" dur="5.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.5;0.66;0.82;1" dur="5.5s" repeatCount="indefinite"/></circle>
+          <circle cx="320" r="4" fill="#DC2626" opacity="0"><animate attributeName="cy" values="150;150;172;180" keyTimes="0;0.55;0.8500000000000001;1" dur="5.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.55;0.7100000000000001;0.87;1" dur="5.5s" repeatCount="indefinite"/></circle>
+          <circle cx="360" r="4" fill="#DC2626" opacity="0"><animate attributeName="cy" values="150;150;172;180" keyTimes="0;0.6;0.9;1" dur="5.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.6;0.76;0.9199999999999999;1" dur="5.5s" repeatCount="indefinite"/></circle>
+          <text x="270" y="196" font-size="9.5" fill="#6B7280" text-anchor="middle">อะตอมที่ไม่ได้เป็นผลิตภัณฑ์ที่ต้องการ = ของเสีย → atom economy ต่ำลง (เคมีสีเขียวต้องการค่าสูง)</text>
           </svg>
         </div>
         <div class="tip-box">💡 <strong>ต่างกัน:</strong> %yield วัดประสิทธิภาพ "การทำจริง" · atom economy วัดประสิทธิภาพ "การออกแบบปฏิกิริยา" — ปฏิกิริยาที่ดีควรสูงทั้งคู่ (เชื่อมโยงบทเคมีกับการแก้ปัญหา/สิ่งแวดล้อม)</div>
@@ -9667,48 +9684,35 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h4>การหาความดันด้วยแมนอมิเตอร์</h4>
         <!-- Manometer Animation -->
         <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:16px;margin:10px 0;">
-          <div style="display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:16px;">
-            <div style="text-align:center;">
-              <svg width="80" height="120" viewBox="0 0 80 120">
-                <rect x="30" y="10" width="12" height="60" fill="#94A3B8" rx="2"/>
-                <rect x="30" y="70" width="12" height="8" fill="#94A3B8"/>
-                <rect x="10" y="70" width="52" height="12" fill="#94A3B8" rx="4"/>
-                <rect x="10" y="82" width="12" height="30" fill="#94A3B8" rx="2"/>
-                <rect x="12" y="84" width="8" height="26" fill="#EF4444" rx="1"/>
-                <rect x="32" y="12" width="8" height="56" fill="#EF4444" rx="1"/>
-                <text x="40" y="108" text-anchor="middle" font-size="8" fill="#1E293B">P_gas = P_atm</text>
-              </svg>
-              <div style="font-size:11px;color:#64748B;">ระดับเท่ากัน</div>
-            </div>
-            <div style="text-align:center;">
-              <svg width="80" height="120" viewBox="0 0 80 120">
-                <rect x="30" y="10" width="12" height="40" fill="#94A3B8" rx="2"/>
-                <rect x="30" y="50" width="12" height="8" fill="#94A3B8"/>
-                <rect x="10" y="50" width="52" height="12" fill="#94A3B8" rx="4"/>
-                <rect x="10" y="62" width="12" height="50" fill="#94A3B8" rx="2"/>
-                <rect x="12" y="64" width="8" height="46" fill="#EF4444" rx="1"/>
-                <rect x="32" y="12" width="8" height="36" fill="#EF4444" rx="1"/>
-                <text x="62" y="85" text-anchor="middle" font-size="7" fill="#1E293B">h</text>
-                <line x1="58" y1="64" x2="58" y2="108" stroke="#1E293B" stroke-width="1" stroke-dasharray="2"/>
-                <text x="40" y="115" text-anchor="middle" font-size="8" fill="#EF4444">P_gas = P_atm + h</text>
-              </svg>
-              <div style="font-size:11px;color:#64748B;">P_gas สูงกว่า</div>
-            </div>
-            <div style="text-align:center;">
-              <svg width="80" height="120" viewBox="0 0 80 120">
-                <rect x="30" y="10" width="12" height="70" fill="#94A3B8" rx="2"/>
-                <rect x="30" y="80" width="12" height="8" fill="#94A3B8"/>
-                <rect x="10" y="80" width="52" height="12" fill="#94A3B8" rx="4"/>
-                <rect x="10" y="92" width="12" height="20" fill="#94A3B8" rx="2"/>
-                <rect x="12" y="94" width="8" height="16" fill="#EF4444" rx="1"/>
-                <rect x="32" y="12" width="8" height="66" fill="#EF4444" rx="1"/>
-                <text x="62" y="60" text-anchor="middle" font-size="7" fill="#1E293B">h</text>
-                <line x1="58" y1="12" x2="58" y2="94" stroke="#1E293B" stroke-width="1" stroke-dasharray="2"/>
-                <text x="40" y="115" text-anchor="middle" font-size="8" fill="#3B82F6">P_gas = P_atm − h</text>
-              </svg>
-              <div style="font-size:11px;color:#64748B;">P_gas ต่ำกว่า</div>
-            </div>
-          </div>
+                    <svg viewBox="0 0 340 244" style="width:100%;max-width:460px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+          <text x="170" y="20" font-size="13" fill="#374151" text-anchor="middle" font-weight="700">แมนอมิเตอร์ปลายเปิด — เทียบ P_gas กับ P_atm</text>
+          <circle cx="50" cy="82" r="30" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2.5"/>
+          <text x="50" y="78" font-size="14" fill="#1E3A8A" text-anchor="middle" font-weight="700">แก๊ส</text>
+          <text x="50" y="92" font-size="10" fill="#1E40AF" text-anchor="middle" font-weight="600">P_gas</text>
+          <circle cx="38" cy="102" r="2.6" fill="#2563EB" opacity="0.7"><animate attributeName="cx" values="38;42;35;38" dur="1.7s" repeatCount="indefinite"/></circle>
+          <circle cx="62" cy="102" r="2.6" fill="#2563EB" opacity="0.7"><animate attributeName="cx" values="62;66;59;62" dur="1.9s" repeatCount="indefinite"/></circle>
+          <circle cx="50" cy="106" r="2.6" fill="#2563EB" opacity="0.7"><animate attributeName="cx" values="50;54;47;50" dur="2.1s" repeatCount="indefinite"/></circle>
+          <path d="M76,96 L100,90 L100,44" fill="none" stroke="#64748B" stroke-width="2.5"/>
+          <text x="188" y="34" font-size="11" fill="#374151" text-anchor="middle" font-weight="600">เปิดสู่บรรยากาศ</text>
+          <text x="252" y="60" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">P_atm</text>
+          <path d="M210,50 L192,58" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#mDn)"/>
+          <rect x="90" y="44" width="24" height="156" fill="none" stroke="#475569" stroke-width="2.5"/>
+          <rect x="170" y="44" width="24" height="156" fill="none" stroke="#475569" stroke-width="2.5"/>
+          <rect x="90" y="176" width="104" height="24" fill="none" stroke="#475569" stroke-width="2.5"/>
+          <rect x="94" y="180" width="96" height="16" fill="#EF4444"/>
+          <rect x="94" width="16" fill="#EF4444"><animate attributeName="y" values="112;112;134;134;112;112;90;90;112;112" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/><animate attributeName="height" values="84;84;62;62;84;84;106;106;84;84" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/></rect>
+          <rect x="174" width="16" fill="#EF4444"><animate attributeName="y" values="112;112;90;90;112;112;134;134;112;112" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/><animate attributeName="height" values="84;84;106;106;84;84;62;62;84;84" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/></rect>
+          <rect x="94" width="16" height="3" fill="#FCA5A5"><animate attributeName="y" values="112;112;134;134;112;112;90;90;112;112" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/></rect>
+          <rect x="174" width="16" height="3" fill="#FCA5A5"><animate attributeName="y" values="112;112;90;90;112;112;134;134;112;112" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/></rect>
+          <line x1="150" y1="90" x2="222" y2="90" stroke="#7C3AED" stroke-width="1" stroke-dasharray="3,2" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0;1;1;0;0" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/></line>
+          <line x1="150" y1="134" x2="222" y2="134" stroke="#7C3AED" stroke-width="1" stroke-dasharray="3,2" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0;1;1;0;0" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/></line>
+          <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0;1;1;0;0" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/><line x1="214" y1="90" x2="214" y2="134" stroke="#7C3AED" stroke-width="1.5"/><polygon points="210,97 218,97 214,90" fill="#7C3AED"/><polygon points="210,127 218,127 214,134" fill="#7C3AED"/><text x="228" y="116" font-size="15" fill="#7C3AED" font-weight="700">h</text></g>
+          <text x="170" y="228" font-size="14" fill="#16A34A" text-anchor="middle" font-weight="700" opacity="0">ระดับเท่ากัน → P_gas = P_atm<animate attributeName="opacity" values="1;1;0;0;1;1;0;0;1;1" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/></text>
+          <text x="170" y="228" font-size="14" fill="#DC2626" text-anchor="middle" font-weight="700" opacity="0">P_gas สูงกว่า → P_gas = P_atm + h<animate attributeName="opacity" values="0;0;1;1;0;0;0;0;0;0" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/></text>
+          <text x="170" y="228" font-size="14" fill="#2563EB" text-anchor="middle" font-weight="700" opacity="0">P_gas ต่ำกว่า → P_gas = P_atm − h<animate attributeName="opacity" values="0;0;0;0;0;0;1;1;0;0" keyTimes="0;0.14;0.22;0.40;0.52;0.62;0.70;0.82;0.92;1" dur="9s" repeatCount="indefinite"/></text>
+          <defs><marker id="mDn" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto"><path d="M1,1 L4,6 L7,1" fill="none" stroke="#94A3B8" stroke-width="1.3"/></marker></defs>
+          </svg>
+          <div style="font-size:11px;color:#64748B;text-align:center;margin-top:4px;">ปรอทไหลตามความดันแก๊ส · P_gas = P_atm ± h (h = ผลต่างระดับปรอทสองข้าง)</div>
         </div>
       </div>
 
