@@ -7548,39 +7548,45 @@ html, body { max-width:100%; overflow-x:hidden; }
         </table>
         <div class="formula-box">
           <div class="formula-label">🧪 ขั้นตอนการเจือจางสารละลาย</div>
-                      <svg viewBox="0 0 540 240" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-              <defs>
-                <linearGradient id="dConc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F87171"/><stop offset="1" stop-color="#B91C1C"/></linearGradient>
-                <linearGradient id="dDil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBCFE8"/><stop offset="1" stop-color="#F9A8D4"/></linearGradient>
-                <marker id="dArr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9 Z" fill="#6B7280"/></marker>
-                <clipPath id="flaskClip"><path d="M405,66 L405,120 L360,205 Q360,216 372,216 L458,216 Q470,216 470,205 L425,120 L425,66 Z"/></clipPath>
-              </defs>
-              <text x="270" y="18" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">การเจือจาง: M₁V₁ = M₂V₂ → V₁ = (0.1×500)/12 ≈ 4.17 mL</text>
-              <!-- concentrated beaker -->
-              <rect x="42" y="104" width="84" height="98" rx="6" fill="none" stroke="#374151" stroke-width="2"/>
-              <rect x="45" y="150" width="78" height="49" rx="2" fill="url(#dConc)"/>
-              <text x="84" y="222" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">HCl 12 M (เข้มข้น)</text>
-              <!-- pipette -->
-              <rect x="150" y="60" width="10" height="70" rx="3" fill="#E5E7EB" stroke="#9CA3AF"/>
-              <text x="200" y="52" font-size="10" fill="#374151" text-anchor="middle" font-weight="700">ดูด 4.17 mL</text>
-              <path d="M170,150 Q250,120 330,120" stroke="#9CA3AF" stroke-width="1.6" fill="none" stroke-dasharray="4,4" marker-end="url(#dArr)"/>
-              <!-- travelling drops -->
-              <circle r="5" fill="url(#dConc)" opacity="0"><animateMotion dur="4s" begin="0s" repeatCount="indefinite" path="M158,132 Q250,120 405,150"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4s" begin="0s" repeatCount="indefinite"/></circle><circle r="5" fill="url(#dConc)" opacity="0"><animateMotion dur="4s" begin="1.3s" repeatCount="indefinite" path="M158,132 Q250,120 405,150"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4s" begin="1.3s" repeatCount="indefinite"/></circle><circle r="5" fill="url(#dConc)" opacity="0"><animateMotion dur="4s" begin="2.6s" repeatCount="indefinite" path="M158,132 Q250,120 405,150"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="4s" begin="2.6s" repeatCount="indefinite"/></circle>
-              <!-- volumetric flask outline -->
-              <path d="M405,66 L405,120 L360,205 Q360,216 372,216 L458,216 Q470,216 470,205 L425,120 L425,66 Z" fill="none" stroke="#374151" stroke-width="2"/>
-              <!-- rising + lightening liquid -->
-              <g clip-path="url(#flaskClip)">
-                <rect x="358" width="114" fill="url(#dConc)">
-                  <animate attributeName="y" values="210;210;104;104;210" keyTimes="0;0.1;0.6;0.92;1" dur="4s" repeatCount="indefinite"/>
-                  <animate attributeName="height" values="8;8;114;114;8" keyTimes="0;0.1;0.6;0.92;1" dur="4s" repeatCount="indefinite"/>
-                  <animate attributeName="fill" values="url(#dConc);url(#dConc);url(#dDil);url(#dDil);url(#dConc)" keyTimes="0;0.1;0.6;0.92;1" dur="4s" repeatCount="indefinite"/>
-                </rect>
-              </g>
-              <line x1="360" y1="105" x2="425" y2="105" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="3,2"/>
-              <text x="482" y="108" font-size="9" fill="#7C3AED" text-anchor="middle">500 mL</text>
-              <text x="415" y="150" font-size="11" fill="#4C1D95" text-anchor="middle" font-weight="700">+ H₂O</text>
-              <text x="415" y="234" font-size="12" fill="#BE185D" text-anchor="middle" font-weight="700">HCl 0.1 M (เจือจาง)</text>
-            </svg>
+                                <svg viewBox="0 0 480 288" style="width:100%;max-width:560px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+          <text x="240" y="16" font-size="11.5" fill="#374151" text-anchor="middle" font-weight="700">การเจือจาง: เติมน้ำ → ปริมาตร↑ → เข้มข้น↓ (จำนวนอนุภาคตัวถูกละลายเท่าเดิม)</text>
+          <line x1="150" y1="250" x2="150" y2="102" stroke="#2563EB" stroke-width="3" stroke-linecap="round"/>
+          <polygon points="150,86 141,104 159,104" fill="#2563EB"/>
+          <text x="140" y="170" font-size="11" fill="#2563EB" text-anchor="middle" font-weight="700" transform="rotate(-90 140 170)">ปริมาตร V ↑</text>
+          <rect x="196" y="30" width="8" height="10" fill="#9CA3AF"/>
+          <rect x="196" y="40" width="8" height="150" fill="#60A5FA" opacity="0"><animate attributeName="opacity" values="0;0;0.55;0.55;0" keyTimes="0;0.08;0.14;0.55;0.62" dur="6s" repeatCount="indefinite"/></rect>
+          <circle cx="200" r="3" fill="#3B82F6"><animate attributeName="cy" values="44;150" dur="0.7s" begin="0.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.9;0" dur="0.7s" begin="0.0s" repeatCount="indefinite"/></circle>
+          <circle cx="200" r="3" fill="#3B82F6"><animate attributeName="cy" values="44;150" dur="0.7s" begin="0.3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.9;0" dur="0.7s" begin="0.3s" repeatCount="indefinite"/></circle>
+          <circle cx="200" r="3" fill="#3B82F6"><animate attributeName="cy" values="44;150" dur="0.7s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.9;0" dur="0.7s" begin="0.6s" repeatCount="indefinite"/></circle>
+          <rect x="170" y="46" width="100" height="204" rx="6" fill="#FFFFFF" stroke="#374151" stroke-width="2"/>
+          <line x1="170" y1="196" x2="184" y2="196" stroke="#9CA3AF" stroke-width="1.2"/><text x="166" y="199" font-size="7.5" fill="#9CA3AF" text-anchor="end">100</text>
+          <line x1="170" y1="140" x2="184" y2="140" stroke="#9CA3AF" stroke-width="1.2"/><text x="166" y="143" font-size="7.5" fill="#9CA3AF" text-anchor="end">300</text>
+          <line x1="170" y1="84" x2="184" y2="84" stroke="#9CA3AF" stroke-width="1.2"/><text x="166" y="87" font-size="7.5" fill="#9CA3AF" text-anchor="end">500</text>
+          <rect x="172" width="96" fill="#B91C1C" opacity="0"><animate attributeName="y" values="196;196;84;84" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="height" values="52;52;164;164" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="fill" values="#B91C1C;#B91C1C;#FCA5A5;#FCA5A5" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.85;0.85;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></rect>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="184;184;184;184" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="211;211;107;107" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="216;216;216;216" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="212;212;108;108" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="239;239;239;239" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="213;213;109;109" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="260;260;260;260" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="214;214;110;110" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="189;189;189;189" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="229;229;176;176" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="212;212;212;212" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="230;230;177;177" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="235;235;235;235" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="231;231;178;178" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="256;256;256;256" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="225;225;172;172" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="185;185;185;185" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="240;240;236;236" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="208;208;208;208" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="241;241;237;237" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="240;240;240;240" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="242;242;238;238" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <circle r="4" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8" opacity="0"><animate attributeName="cx" values="261;261;261;261" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="243;243;239;239" keyTimes="0;0.08;0.6;1" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.86;1" dur="6s" repeatCount="indefinite"/></circle>
+          <text x="220" y="270" font-size="12" fill="#B91C1C" text-anchor="middle" font-weight="700" opacity="0">เข้มข้น 12 M<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.06;0.3;0.42;1" dur="6s" repeatCount="indefinite"/></text>
+          <text x="220" y="270" font-size="12" fill="#BE185D" text-anchor="middle" font-weight="700" opacity="0">เจือจาง 0.1 M<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.6;0.68;0.86;1" dur="6s" repeatCount="indefinite"/></text>
+          <circle cx="306" cy="86" r="5" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="0.8"/>
+          <text x="318" y="90" font-size="10" fill="#374151" font-weight="700">= อนุภาคตัวถูกละลาย (คงที่)</text>
+          <text x="306" y="118" font-size="10" fill="#2563EB">💧 เติมน้ำ (ตัวทำละลาย) เพิ่ม</text>
+          <text x="306" y="140" font-size="11" fill="#374151" font-weight="700">→ อนุภาคเดิมกระจายห่างขึ้น</text>
+          <text x="306" y="158" font-size="11" fill="#BE185D" font-weight="700">→ ความเข้มข้นลดลง</text>
+          <rect x="300" y="176" width="170" height="46" rx="8" fill="#FEF3C7" stroke="#F59E0B"/>
+          <text x="385" y="196" font-size="12" fill="#92400E" text-anchor="middle" font-weight="700">M₁V₁ = M₂V₂</text>
+          <text x="385" y="213" font-size="9.5" fill="#92400E" text-anchor="middle">12×4.17 = 0.1×500</text>
+          <text x="385" y="250" font-size="9" fill="#6B7280" text-anchor="middle">โมลตัวถูกละลาย = เท่าเดิม</text>
+          </svg>
         </div>
         <div class="formula-box">
           <div class="formula-label">การเจือจาง (Dilution)</div>
@@ -8471,32 +8477,48 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h4>ขั้นตอนคำนวณปริมาณสัมพันธ์</h4>
         <div class="formula-box">
           <div class="formula-label">🔁 แผนผังขั้นตอนการแก้โจทย์ Stoichiometry</div>
-          <svg viewBox="0 0 560 200" style="width:100%;max-width:600px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <!-- 4 boxes -->
-            <rect x="20" y="60" width="100" height="60" fill="#A78BFA" opacity="0.5" stroke="#5B21B6" stroke-width="2" rx="6"/>
-            <text x="70" y="85" font-size="11" fill="#5B21B6" text-anchor="middle" font-weight="700">มวล (g)</text>
-            <text x="70" y="103" font-size="9" fill="#5B21B6" text-anchor="middle">สาร A</text>
-            <text x="140" y="80" font-size="10" fill="#374151">÷ M(A)</text>
-            <line x1="120" y1="90" x2="180" y2="90" stroke="#374151" stroke-width="2" marker-end="url(#arrSt)"/>
-            <rect x="180" y="60" width="100" height="60" fill="#FBBF24" opacity="0.5" stroke="#92400E" stroke-width="2" rx="6"/>
-            <text x="230" y="85" font-size="11" fill="#92400E" text-anchor="middle" font-weight="700">mol (A)</text>
-            <text x="300" y="80" font-size="10" fill="#374151">× ratio</text>
-            <text x="300" y="93" font-size="9" fill="#374151">(b/a)</text>
-            <line x1="280" y1="90" x2="340" y2="90" stroke="#374151" stroke-width="2" marker-end="url(#arrSt)"/>
-            <rect x="340" y="60" width="100" height="60" fill="#FBBF24" opacity="0.5" stroke="#92400E" stroke-width="2" rx="6"/>
-            <text x="390" y="85" font-size="11" fill="#92400E" text-anchor="middle" font-weight="700">mol (B)</text>
-            <text x="460" y="80" font-size="10" fill="#374151">× M(B)</text>
-            <line x1="440" y1="90" x2="490" y2="90" stroke="#374151" stroke-width="2" marker-end="url(#arrSt)"/>
-            <rect x="490" y="60" width="60" height="60" fill="#86EFAC" opacity="0.5" stroke="#14532D" stroke-width="2" rx="6"/>
-            <text x="520" y="85" font-size="11" fill="#14532D" text-anchor="middle" font-weight="700">มวล</text>
-            <text x="520" y="98" font-size="11" fill="#14532D" text-anchor="middle" font-weight="700">(B)</text>
-            <!-- header -->
-            <text x="280" y="30" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">สำหรับ aA → bB:  g(A) → mol(A) → mol(B) → g(B)</text>
-            <text x="280" y="48" font-size="10" fill="#374151" text-anchor="middle">เคล็ดลับ: ทุกอย่างวิ่งผ่าน mole — อย่าข้ามขั้น!</text>
-            <!-- bottom note -->
-            <text x="280" y="160" font-size="10" fill="#7C3AED" text-anchor="middle" font-weight="700">สำหรับแก๊ส: ใช้ V/22.4 (STP) หรือ PV=nRT แทน m/M</text>
-            <text x="280" y="175" font-size="10" fill="#7C3AED" text-anchor="middle">สำหรับจำนวนอนุภาค: ×Nₐ ที่ปลาย</text>
-            <defs><marker id="arrSt" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#374151"/></marker></defs>
+                              <svg viewBox="0 0 560 254" style="width:100%;max-width:600px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+          <defs><linearGradient id="sEq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFDBFE"/><stop offset="1" stop-color="#60A5FA"/></linearGradient><linearGradient id="sMass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDE9FE"/><stop offset="1" stop-color="#A78BFA"/></linearGradient><linearGradient id="sMol" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FDE68A"/><stop offset="1" stop-color="#F59E0B"/></linearGradient><linearGradient id="sProd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D1FAE5"/><stop offset="1" stop-color="#34D399"/></linearGradient><marker id="stA" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9 Z" fill="#6B7280"/></marker><marker id="stT" markerWidth="10" markerHeight="10" refX="7.5" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,5 L0,10 Z" fill="#0F766E"/></marker></defs>
+          <text x="280" y="16" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">ขั้นตอนแก้โจทย์ปริมาณสัมพันธ์ — ทุกอย่างวิ่งผ่าน "mol"</text>
+          <circle cx="30" cy="45" r="11" fill="#1D4ED8"/><text x="30" y="49" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">1</text>
+          <text x="46" y="49" font-size="11" fill="#1E3A8A" font-weight="700">ดุลสมการ</text>
+          <rect x="150" y="29" width="250" height="32" rx="8" fill="url(#sEq)" stroke="#1D4ED8" stroke-width="2"/>
+          <text x="275" y="50" font-size="15" fill="#1E3A8A" text-anchor="middle" font-weight="700">N₂ + <tspan fill="#DC2626">3</tspan>H₂ → <tspan fill="#DC2626">2</tspan>NH₃</text>
+          <path d="M275,61 L273,108" stroke="#0F766E" stroke-width="1.6" fill="none" stroke-dasharray="4,3" marker-end="url(#stT)"/>
+          <text x="408" y="52" font-size="9" fill="#0F766E" text-anchor="middle" font-weight="700">อัตราส่วน = สัมประสิทธิ์</text>
+          <text x="408" y="64" font-size="9" fill="#0F766E" text-anchor="middle">(3H₂ : 2NH₃)</text>
+          <rect x="18" y="110" width="96" height="44" rx="8" fill="url(#sMass)" stroke="#5B21B6" stroke-width="2"/>
+          <text x="66" y="130" font-size="12" fill="#4C1D95" text-anchor="middle" font-weight="700">H₂</text>
+          <text x="66" y="145" font-size="9" fill="#4C1D95" text-anchor="middle">มวล A (g)</text>
+          <rect x="160" y="110" width="86" height="44" rx="8" fill="url(#sMol)" stroke="#92400E" stroke-width="2"/>
+          <text x="203" y="130" font-size="12" fill="#78350F" text-anchor="middle" font-weight="700">mol H₂</text>
+          <text x="203" y="145" font-size="9" fill="#78350F" text-anchor="middle">mol A</text>
+          <rect x="300" y="110" width="86" height="44" rx="8" fill="url(#sMol)" stroke="#92400E" stroke-width="2"/>
+          <text x="343" y="130" font-size="12" fill="#78350F" text-anchor="middle" font-weight="700">mol NH₃</text>
+          <text x="343" y="145" font-size="9" fill="#78350F" text-anchor="middle">mol B</text>
+          <rect x="432" y="110" width="110" height="44" rx="8" fill="url(#sProd)" stroke="#065F46" stroke-width="2"/>
+          <text x="487" y="130" font-size="12" fill="#065F46" text-anchor="middle" font-weight="700">NH₃</text>
+          <text x="487" y="145" font-size="9" fill="#065F46" text-anchor="middle">มวล B (g)</text>
+          <line x1="114" y1="132" x2="160" y2="132" stroke="#9CA3AF" stroke-width="2" marker-end="url(#stA)"/>
+          <text x="137" y="100" font-size="9.5" fill="#374151" text-anchor="middle" font-weight="700">② ÷ M(A)</text>
+          <line x1="246" y1="132" x2="300" y2="132" stroke="#0F766E" stroke-width="3" marker-end="url(#stT)"/>
+          <text x="273" y="172" font-size="9.5" fill="#0F766E" text-anchor="middle" font-weight="700">③ × อัตราส่วนโมล (2/3)</text>
+          <line x1="386" y1="132" x2="432" y2="132" stroke="#9CA3AF" stroke-width="2" marker-end="url(#stA)"/>
+          <text x="409" y="100" font-size="9.5" fill="#374151" text-anchor="middle" font-weight="700">④ × M(B)</text>
+          <circle r="7" fill="url(#sMol)" stroke="#92400E" stroke-width="1.5" opacity="0"><animateMotion dur="10s" repeatCount="indefinite" calcMode="linear" path="M66,132 L487,132" keyPoints="0;0;0.325;0.325;0.658;0.658;1;1" keyTimes="0;0.10;0.30;0.40;0.58;0.68;0.88;1"/><animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.04;0.5;0.93;1" dur="10s" repeatCount="indefinite"/></circle>
+          <rect x="16" y="108" width="100" height="48" rx="9" fill="none" stroke="#5B21B6" stroke-width="3" opacity="0"><animate attributeName="opacity" values="0;0;0.9;0.9;0;0" keyTimes="0;0.0;0.04;0.16;0.22;1" dur="10s" repeatCount="indefinite"/></rect>
+          <rect x="158" y="108" width="90" height="48" rx="9" fill="none" stroke="#92400E" stroke-width="3" opacity="0"><animate attributeName="opacity" values="0;0;0.9;0.9;0;0" keyTimes="0;0.30;0.34;0.40;0.46;1" dur="10s" repeatCount="indefinite"/></rect>
+          <rect x="298" y="108" width="90" height="48" rx="9" fill="none" stroke="#92400E" stroke-width="3" opacity="0"><animate attributeName="opacity" values="0;0;0.9;0.9;0;0" keyTimes="0;0.58;0.62;0.68;0.74;1" dur="10s" repeatCount="indefinite"/></rect>
+          <rect x="430" y="108" width="114" height="48" rx="9" fill="none" stroke="#065F46" stroke-width="3" opacity="0"><animate attributeName="opacity" values="0;0;0.9;0.9;0" keyTimes="0;0.86;0.90;0.99;1" dur="10s" repeatCount="indefinite"/></rect>
+          <text x="66" y="186" font-size="9" fill="#9CA3AF" text-anchor="middle">โจทย์: ให้ H₂ 12 g</text>
+          <g opacity="0.35"><animate attributeName="opacity" values="0.35;1;1;1;0.35;0.35" keyTimes="0;0.02;0.06;0.16;0.22;1" dur="10s" repeatCount="indefinite"/><rect x="28" y="194" width="76" height="26" rx="8" fill="url(#sMass)" stroke="#5B21B6" stroke-width="1.5"/><text x="66" y="212" font-size="12.5" fill="#4C1D95" text-anchor="middle" font-weight="700">12 g</text></g>
+          <g opacity="0.35"><animate attributeName="opacity" values="0.35;0.35;1;1;0.35;0.35" keyTimes="0;0.30;0.34;0.46;0.52;1" dur="10s" repeatCount="indefinite"/><rect x="168" y="194" width="70" height="26" rx="8" fill="url(#sMol)" stroke="#92400E" stroke-width="1.5"/><text x="203" y="212" font-size="12.5" fill="#78350F" text-anchor="middle" font-weight="700">6 mol</text></g>
+          <g opacity="0.35"><animate attributeName="opacity" values="0.35;0.35;1;1;0.35;0.35" keyTimes="0;0.58;0.62;0.74;0.80;1" dur="10s" repeatCount="indefinite"/><rect x="308" y="194" width="70" height="26" rx="8" fill="url(#sMol)" stroke="#92400E" stroke-width="1.5"/><text x="343" y="212" font-size="12.5" fill="#78350F" text-anchor="middle" font-weight="700">4 mol</text></g>
+          <g opacity="0.35"><animate attributeName="opacity" values="0.35;0.35;1;1;0.35" keyTimes="0;0.86;0.90;0.99;1" dur="10s" repeatCount="indefinite"/><rect x="440" y="194" width="94" height="26" rx="8" fill="url(#sProd)" stroke="#065F46" stroke-width="1.5"/><text x="487" y="212" font-size="12.5" fill="#065F46" text-anchor="middle" font-weight="700">68 g NH₃</text></g>
+          <line x1="104" y1="207" x2="166" y2="207" stroke="#9CA3AF" stroke-width="1.6" marker-end="url(#stA)"/>
+          <line x1="238" y1="207" x2="306" y2="207" stroke="#9CA3AF" stroke-width="1.6" marker-end="url(#stA)"/>
+          <line x1="378" y1="207" x2="438" y2="207" stroke="#9CA3AF" stroke-width="1.6" marker-end="url(#stA)"/>
+          <text x="280" y="242" font-size="9.5" fill="#7C3AED" text-anchor="middle" font-weight="700">แก๊ส → ใช้ V÷22.4 (STP) แทน ÷M · จำนวนอนุภาค → ×Nₐ ที่ปลายทาง</text>
           </svg>
         </div>
         <table class="content-table">
@@ -8529,29 +8551,29 @@ html, body { max-width:100%; overflow-x:hidden; }
         <h3>📈 สารกำหนดปริมาณ (Limiting Reagent)</h3>
         <div class="formula-box">
           <div class="formula-label">🍞 ภาพอุปมา: สารกำหนดปริมาณ (Limiting Reagent)</div>
-          <svg viewBox="0 0 540 220" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
-            <!-- recipe row -->
-            <text x="270" y="22" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">สูตร: 2 แผ่นขนมปัง + 1 ชีส → 1 แซนด์วิช</text>
-            <!-- available bread -->
-            <text x="80" y="55" font-size="11" fill="#374151" font-weight="700">มี:</text>
-            <g><rect x="20" y="65" width="40" height="25" fill="#FBBF24" stroke="#92400E"/>
-               <rect x="65" y="65" width="40" height="25" fill="#FBBF24" stroke="#92400E"/>
-               <rect x="110" y="65" width="40" height="25" fill="#FBBF24" stroke="#92400E"/>
-               <rect x="155" y="65" width="40" height="25" fill="#FBBF24" stroke="#92400E"/>
-               <rect x="200" y="65" width="40" height="25" fill="#FBBF24" stroke="#92400E"/>
-               <rect x="245" y="65" width="40" height="25" fill="#FBBF24" stroke="#92400E"/>
-            </g>
-            <text x="305" y="83" font-size="10" fill="#374151">ขนมปัง 6 แผ่น</text>
-            <!-- available cheese -->
-            <g><circle cx="40" cy="115" r="12" fill="#F59E0B" stroke="#7C2D12"/>
-               <circle cx="80" cy="115" r="12" fill="#F59E0B" stroke="#7C2D12"/>
-            </g>
-            <text x="105" y="120" font-size="10" fill="#374151">ชีส 2 แผ่น</text>
-            <!-- calculation -->
-            <text x="270" y="155" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">ขนมปัง: 6/2 = 3 แซนด์วิช  ·  ชีส: 2/1 = 2 แซนด์วิช</text>
-            <text x="270" y="172" font-size="11" fill="#DC2626" text-anchor="middle" font-weight="700">⇒ ชีสน้อยกว่า = สารกำหนดปริมาณ → ได้ 2 แซนด์วิช</text>
-            <text x="270" y="190" font-size="10" fill="#0F766E" text-anchor="middle" font-weight="600">ขนมปังเหลือ = 6 − (2×2) = 2 แผ่น</text>
-            <text x="270" y="205" font-size="10" fill="#374151" text-anchor="middle">หลักเดียวกัน: หารด้วยสัมประสิทธิ์ — ตัวที่น้อยสุดคือ limiting!</text>
+                    <svg viewBox="0 0 540 244" style="width:100%;max-width:580px;display:block;margin:8px auto;background:#FAFAFA;border-radius:8px;">
+          <text x="270" y="18" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">สูตร: 2 ขนมปัง + 1 ชีส → 1 แซนด์วิช</text>
+          <text x="24" y="52" font-size="11" fill="#374151" font-weight="700">คลัง (มี):</text>
+          <g opacity="1"><animate attributeName="opacity" values="1;1;0.12;0.12;1" keyTimes="0;0.1;0.18;0.95;1" dur="9s" repeatCount="indefinite"/><rect x="92" y="40" width="44" height="22" rx="6" fill="#FCD34D" stroke="#B45309" stroke-width="1.5"/><line x1="96" y1="47" x2="132" y2="47" stroke="#B45309" stroke-width="0.8" opacity="0.5"/></g>
+          <g opacity="1"><animate attributeName="opacity" values="1;1;0.12;0.12;1" keyTimes="0;0.1;0.18;0.95;1" dur="9s" repeatCount="indefinite"/><rect x="140" y="40" width="44" height="22" rx="6" fill="#FCD34D" stroke="#B45309" stroke-width="1.5"/><line x1="144" y1="47" x2="180" y2="47" stroke="#B45309" stroke-width="0.8" opacity="0.5"/></g>
+          <g opacity="1"><animate attributeName="opacity" values="1;1;0.12;0.12;1" keyTimes="0;0.38;0.46;0.95;1" dur="9s" repeatCount="indefinite"/><rect x="188" y="40" width="44" height="22" rx="6" fill="#FCD34D" stroke="#B45309" stroke-width="1.5"/><line x1="192" y1="47" x2="228" y2="47" stroke="#B45309" stroke-width="0.8" opacity="0.5"/></g>
+          <g opacity="1"><animate attributeName="opacity" values="1;1;0.12;0.12;1" keyTimes="0;0.38;0.46;0.95;1" dur="9s" repeatCount="indefinite"/><rect x="236" y="40" width="44" height="22" rx="6" fill="#FCD34D" stroke="#B45309" stroke-width="1.5"/><line x1="240" y1="47" x2="276" y2="47" stroke="#B45309" stroke-width="0.8" opacity="0.5"/></g>
+          <g opacity="1"><rect x="284" y="40" width="44" height="22" rx="6" fill="#FCD34D" stroke="#B45309" stroke-width="1.5"/><line x1="288" y1="47" x2="324" y2="47" stroke="#B45309" stroke-width="0.8" opacity="0.5"/></g>
+          <g opacity="1"><rect x="332" y="40" width="44" height="22" rx="6" fill="#FCD34D" stroke="#B45309" stroke-width="1.5"/><line x1="336" y1="47" x2="372" y2="47" stroke="#B45309" stroke-width="0.8" opacity="0.5"/></g>
+          <text x="386" y="56" font-size="11" fill="#B45309" font-weight="700">×6</text>
+          <g opacity="1"><animate attributeName="opacity" values="1;1;0.12;0.12;1" keyTimes="0;0.1;0.18;0.95;1" dur="9s" repeatCount="indefinite"/><circle cx="104" cy="84" r="13" fill="#F59E0B" stroke="#7C2D12" stroke-width="1.5"/><circle cx="100" cy="81" r="2" fill="#FDE68A"/><circle cx="108" cy="87" r="1.6" fill="#FDE68A"/></g>
+          <g opacity="1"><animate attributeName="opacity" values="1;1;0.12;0.12;1" keyTimes="0;0.38;0.46;0.95;1" dur="9s" repeatCount="indefinite"/><circle cx="150" cy="84" r="13" fill="#F59E0B" stroke="#7C2D12" stroke-width="1.5"/><circle cx="146" cy="81" r="2" fill="#FDE68A"/><circle cx="154" cy="87" r="1.6" fill="#FDE68A"/></g>
+          <text x="176" y="89" font-size="11" fill="#7C2D12" font-weight="700">×2</text>
+          <text x="250" y="89" font-size="11" fill="#DC2626" font-weight="700" opacity="0">← ชีสหมดก่อน!<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.56;0.95;1" dur="9s" repeatCount="indefinite"/></text>
+          <rect x="280" y="36" width="100" height="30" rx="8" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-dasharray="5,3" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.70;0.76;0.95;1" dur="9s" repeatCount="indefinite"/></rect>
+          <text x="330" y="82" font-size="9.5" fill="#16A34A" text-anchor="middle" font-weight="700" opacity="0">เหลือ 2 (excess)<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.70;0.76;0.95;1" dur="9s" repeatCount="indefinite"/></text>
+          <text x="24" y="140" font-size="11" fill="#374151" font-weight="700">ได้:</text>
+          <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2;0.26;0.95;1" dur="9s" repeatCount="indefinite"/><animateTransform attributeName="transform" attributeType="XML" type="translate" values="0,10;0,10;0,0;0,0;0,0" keyTimes="0;0.2;0.26;0.95;1" dur="9s" repeatCount="indefinite"/><rect x="122" y="122" width="56" height="11" rx="5" fill="#FCD34D" stroke="#B45309" stroke-width="1.5"/><path d="M124,134 L176,134 L170,140 L130,140 Z" fill="#F59E0B" stroke="#7C2D12" stroke-width="1"/><rect x="122" y="139" width="56" height="11" rx="5" fill="#FCD34D" stroke="#B45309" stroke-width="1.5"/></g>
+          <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.48;0.54;0.95;1" dur="9s" repeatCount="indefinite"/><animateTransform attributeName="transform" attributeType="XML" type="translate" values="0,10;0,10;0,0;0,0;0,0" keyTimes="0;0.48;0.54;0.95;1" dur="9s" repeatCount="indefinite"/><rect x="252" y="122" width="56" height="11" rx="5" fill="#FCD34D" stroke="#B45309" stroke-width="1.5"/><path d="M254,134 L306,134 L300,140 L260,140 Z" fill="#F59E0B" stroke="#7C2D12" stroke-width="1"/><rect x="252" y="139" width="56" height="11" rx="5" fill="#FCD34D" stroke="#B45309" stroke-width="1.5"/></g>
+          <text x="360" y="140" font-size="13" fill="#DC2626" font-weight="700" opacity="0">= 2 แซนด์วิช<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.62;0.95;1" dur="9s" repeatCount="indefinite"/></text>
+          <text x="270" y="180" font-size="10.5" fill="#374151" text-anchor="middle" font-weight="700">หารด้วยสัมประสิทธิ์: ขนมปัง 6÷2 = 3  ·  ชีส 2÷1 = 2  →  ตัวน้อยสุด = limiting</text>
+          <text x="270" y="202" font-size="11" fill="#DC2626" text-anchor="middle" font-weight="700" opacity="0">⇒ ชีสหมดก่อน = สารกำหนดปริมาณ (Limiting Reagent) · ได้ 2 แซนด์วิช<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.62;0.95;1" dur="9s" repeatCount="indefinite"/></text>
+          <text x="270" y="222" font-size="10" fill="#0F766E" text-anchor="middle" font-weight="700" opacity="0">ขนมปังเหลือ = 6 − (2×2) = 2 แผ่น (สารที่มากเกินพอ / Excess)<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.70;0.76;0.95;1" dur="9s" repeatCount="indefinite"/></text>
           </svg>
         </div>
         <div class="formula-box">
