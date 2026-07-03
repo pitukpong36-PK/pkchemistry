@@ -19002,9 +19002,18 @@ var ChemTools = window.ChemTools = {
     var e=ELEMENTS[z-1]; if(!e) return;
     var sym=e[1],en=e[2],th=e[3],mass=e[4],cat=e[5],grp=e[6],per=e[7];
     function item(k,v){ return '<div class="el-item"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>'; }
+    // ชื่อหมู่ตามธรรมเนียม — ใช้ประเภทเป็นหลัก (หมู่มีชื่อเฉพาะ) ที่เหลือใช้ชื่อกลุ่ม p-block ตามเลขหมู่
+    function famName(cat,grp){
+      var byCat={alkali:'โลหะแอลคาไล (หมู่ IA)',alkaline:'โลหะแอลคาไลน์เอิร์ท (หมู่ IIA)',transition:'โลหะแทรนซิชัน',halogen:'แฮโลเจน (หมู่ VIIA)',noble:'แก๊สมีตระกูล (หมู่ VIIIA)',lanthanide:'แลนทาไนด์',actinide:'แอกทิไนด์'};
+      if(byCat[cat]) return byCat[cat];
+      var byGrp={13:'หมู่โบรอน (IIIA)',14:'หมู่คาร์บอน (IVA)',15:'หมู่ไนโตรเจน · พนิกโทเจน (VA)',16:'หมู่ออกซิเจน · แคลโคเจน (VIA)'};
+      return byGrp[grp]||'';
+    }
+    var grpTxt=(grp==='L'||grp==='A')?'f-block':grp, fam=famName(cat,grp);
+    var famItem=fam?'<div class="el-item" style="grid-column:1/-1"><div class="k">ชื่อหมู่</div><div class="v">'+fam+'</div></div>':'';
     $('elModal').innerHTML='<div class="el-z">เลขอะตอม '+z+'</div>'+
       '<div class="el-sym">'+sym+'</div><h3>'+th+'</h3><div class="el-en">'+en+'</div>'+
-      '<div class="el-grid">'+item('มวลอะตอม',mass)+item('หมู่',(grp==='L'||grp==='A')?'f-block':grp)+item('คาบ',per)+item('ประเภท',CATMAP[cat])+'</div>'+
+      '<div class="el-grid">'+item('มวลอะตอม',mass)+item('หมู่',grpTxt)+item('คาบ',per)+item('ประเภท',CATMAP[cat])+famItem+'</div>'+
       '<button class="el-close" onclick="ChemTools.closeEl()">ปิด</button>';
     $('elModalOverlay').classList.add('open');
   },
