@@ -12,3 +12,7 @@ Thumbs.db
 
 # ===== Claude Code (เฉพาะเครื่อง) =====
 .claude/settings.local.json
+
+# ===== ไม่เผยแพร่ขึ้น GitHub (ยังอยู่บนเครื่อง) =====
+chemistry-learning-center.html
+reports/
