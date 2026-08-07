@@ -20012,6 +20012,8 @@ const CloudBackend = {
       s.forEach(d=>{ const t=d.data().lastActive; const ms=(t&&t.toMillis)?t.toMillis():0; if(now-ms<ONLINE_WINDOW_MS) n++; });
       this._online=n; this._pushCounters();
     }, ()=>{});
+    // ยอดเข้าชมเว็บรวมทุกอุปกรณ์ (stats/site) — อ่านสด + เพิ่ม 1 ต่อการเข้าชมใหม่
+    this._initVisits();
     // ติดตามสถานะล็อกอิน
     this.A.onAuthStateChanged(this.auth, u=>{
       if(this._unsubUser){ this._unsubUser(); this._unsubUser=null; }
@@ -20051,6 +20053,15 @@ const CloudBackend = {
   saveStreak(st){ const u=this.auth&&this.auth.currentUser; if(!u)return; this.F.updateDoc(this.F.doc(this.db,'users',u.uid),{'progress.streak':st}).catch(()=>{}); },
   saveRPG(s){ const u=this.auth&&this.auth.currentUser; if(!u)return; this.F.updateDoc(this.F.doc(this.db,'users',u.uid),{'progress.rpg':s}).catch(()=>{}); },
   _pushCounters(){ PK._onCounters({members:this._members||0, online:this._online||0}); },
+  async _initVisits(){
+    const ref=this.F.doc(this.db,'stats','site');
+    this.F.onSnapshot(ref, s=>{ const d=s.data()||{}; PK._onVisits(d.count); },
+      err=>console.warn('[PK] อ่านยอดผู้เข้าชมไม่ได้ — ตรวจ Firestore rules ของ stats/site', err));
+    if(!isNewVisit()) return;                       // ยังอยู่ในการเข้าชมเดิม (ภายใน 30 นาที)
+    try{
+      await this.F.setDoc(ref, {count:this.F.increment(1), updatedAt:this.F.serverTimestamp()}, {merge:true});
+    }catch(err){ console.warn('[PK] บวกยอดผู้เข้าชมไม่สำเร็จ — ตรวจ Firestore rules ของ stats/site', err); }
+  },
   _startHeartbeat(u){
     const beat=()=>this.F.setDoc(this.F.doc(this.db,'presence',u.uid),
       {name:u.displayName||'', lastActive:this.F.serverTimestamp()}).catch(()=>{});
@@ -20728,11 +20739,33 @@ function countUp(el, target, dur){
     el.textContent=Math.round(e*target); if(t<1) requestAnimationFrame(step); else el.textContent=target; }
   requestAnimationFrame(step);
 }
-/* ─── ระบบนับคนเข้าชม (per-device, ออฟไลน์ได้) + สถิติหน้าแรก ─── */
+/* ─── ระบบนับคนเข้าชม (รวมทุกอุปกรณ์ผ่าน Firestore · สำรองในเครื่องเมื่อออฟไลน์) ─── */
+/* นับเป็น "การเข้าชมใหม่" เมื่อห่างจากครั้งก่อนเกิน 30 นาที
+   (ของเดิมใช้ sessionStorage → รีเฟรชกี่ครั้งเลขก็ไม่ขยับ จนดูเหมือนค้าง) */
+const VISIT_GAP_MS = 30*60*1000;
+let _newVisit = null;                        // ตัดสินใจครั้งเดียวต่อการโหลดหน้า
+function isNewVisit(){
+  if(_newVisit!==null) return _newVisit;
+  try{
+    const last=parseInt(localStorage.getItem('pk_visit_at')||'0',10)||0;
+    _newVisit = (Date.now()-last) > VISIT_GAP_MS;
+    if(_newVisit) localStorage.setItem('pk_visit_at', String(Date.now()));
+  }catch(e){ _newVisit=true; }
+  return _newVisit;
+}
+PK._visits = 0;
+let _bumpedLocal = false;                    // กันบวกซ้ำเมื่อกลับมาหน้าแรกหลายรอบ
 PK.bumpVisits = ()=>{ try{
   let n=parseInt(localStorage.getItem('pk_visits')||'0',10)||0;
-  if(!sessionStorage.getItem('pk_visited')){ n++; localStorage.setItem('pk_visits',String(n)); sessionStorage.setItem('pk_visited','1'); }
-  return n; }catch(e){ return 0; } };
+  if(!_bumpedLocal && isNewVisit()){ _bumpedLocal=true; n++; localStorage.setItem('pk_visits',String(n)); }
+  PK._visits = Math.max(PK._visits||0, n);   // มีเลขจากคลาวด์แล้วอย่าถอยกลับเป็นเลขในเครื่อง
+  return PK._visits; }catch(e){ return PK._visits||0; } };
+/* คลาวด์ส่งยอดรวมจริงมาให้ (เรียลไทม์) */
+PK._onVisits = n=>{
+  if(typeof n!=='number' || !(n>0) || n===PK._visits) return;
+  PK._visits = n;
+  const d=$('statCount4'); if(d) countUp(d, n);
+};
 PK.renderWelcome = ()=>{
   const a=$('statCount1'),b=$('statCount2'),c=$('statCount3'),d=$('statCount4');
   const ch=(typeof CHAPTERS!=='undefined'&&CHAPTERS.length)?CHAPTERS.length:14;

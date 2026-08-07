@@ -25,10 +25,12 @@
   - Authentication แบบ Email/Password เปิดแล้ว · โดเมนที่อนุญาต: `pitukpong36-pk.github.io`
   - Firestore ฐานข้อมูลอยู่ที่ **asia-southeast1 (สิงคโปร์)**
   - Security Rules: นักเรียนอ่าน/เขียนได้เฉพาะ `users/{uid}` ของตัวเอง · ครูอ่านได้ทุกคน
+  - ⚠️ ตัวนับผู้เข้าชม (`stats/site`) และ presence ต้องใช้ rules เวอร์ชันใหม่ใน `firestore.rules`
+    — **ต้องคัดลอกไปวางที่ Firestore → Rules ในคอนโซลแล้วกด Publish** ไม่งั้นเลขเข้าชมจะไม่ขยับ
 - **อีเมลครู** (เห็นแดชบอร์ดครู): `pitukpong36@gmail.com`, `pitukpong36@brw.ac.th`
   - แก้ได้ 2 ที่พร้อมกัน: ตัวแปร `TEACHER_EMAILS` ใน `index.html` **และ** ฟังก์ชัน `isTeacher()` ใน `firestore.rules`
 - `firebaseConfig` จริงใส่ใน `index.html` แล้ว (บรรทัด ~19169) — เว็บทำงานโหมด Cloud
-- เวอร์ชันแคช Service Worker ปัจจุบัน: **`pkchem-v23`** (ใน `sw.js`)
+- เวอร์ชันแคช Service Worker ปัจจุบัน: **`pkchem-v24`** (ใน `sw.js`)
 - ทดสอบครบวงจรแล้ว: สมัคร → ข้อมูลเข้า Firestore → ครูเห็นในแดชบอร์ด → คนนอกถูกปฏิเสธ ✅
 
 ### บัญชีทดสอบที่ยังอยู่ในระบบ
@@ -54,10 +56,10 @@
 
 ## ⚠️ ข้อควรระวัง
 
-- **โฟลเดอร์ในเครื่อง (`Desktop/4_PKchemistry website`) จะเก่ากว่าเว็บทันทีที่แก้ผ่าน GitHub**
+- **โฟลเดอร์ในเครื่อง (`Desktop/06_PKchemistry website`) จะเก่ากว่าเว็บทันทีที่แก้ผ่าน GitHub**
   ถ้าวันหนึ่งกลับมาแก้ในเครื่อง ต้องดึงเวอร์ชันล่าสุดก่อนเสมอ ไม่งั้นจะทับงานที่แก้บนเว็บ:
   ```bash
-  cd "~/Desktop/4_PKchemistry website" && git pull
+  cd "~/Desktop/06_PKchemistry website" && git pull
   ```
 - อย่าแก้/ลบไฟล์ `firestore.rules`, `firebase.json`, `.firebaserc`, `.nojekyll` ถ้าไม่แน่ใจ
 - `apiKey` ใน `index.html` เป็นค่า public ของ Firebase Web โดยออกแบบ — อยู่ในโค้ดสาธารณะได้ ไม่ใช่ความลับ
