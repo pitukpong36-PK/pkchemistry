@@ -18805,7 +18805,7 @@ function showChapter(chapterId) {
 document.getElementById('nav-welcome').classList.add('active');
 
 // ─── เวอร์ชันเว็บ (ใช้ยืนยันว่าโหลดตัวล่าสุดแล้ว — ต้องตรงกับ CACHE ใน sw.js) ───
-const APP_VERSION = 'v26';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
+const APP_VERSION = 'v27';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
 (function stampVersion() {
   try { console.log('%cPKchemistry ' + APP_VERSION, 'color:#14B8A6;font-weight:700;font-size:13px'); } catch (e) {}
   function paint() {
@@ -19214,7 +19214,7 @@ const firebaseConfig = {
 };
 const CLOUD = !/^YOUR_/.test(firebaseConfig.apiKey);
 /* ═══ อีเมลของ "ครู" (เห็นแดชบอร์ดครู) — เพิ่มได้หลายอีเมล ═══ */
-const TEACHER_EMAILS = ['pitukpong36@gmail.com','pitukpong36@brw.ac.th'];
+const TEACHER_EMAILS = ['pitukpong36@gmail.com'];   // เพิ่มอีเมลครู: ต้องสมัครบัญชีด้วยอีเมลนั้นก่อน แล้วค่อยเพิ่มที่นี่ + firestore.rules
 const SDK = "https://www.gstatic.com/firebasejs/10.12.0/";
 const ONLINE_WINDOW_MS = 330000;            // ถือว่า "ออนไลน์" ถ้า active ภายใน 5.5 นาที
 const HEARTBEAT_MS = 180000;                // ส่งสัญญาณออนไลน์ + นับคนออนไลน์ใหม่ ทุก 3 นาที (เฉพาะตอนเปิดหน้าอยู่)
