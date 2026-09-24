@@ -1,6 +1,6 @@
 /* PKchemistry service worker — offline cache (works only when served over http/https) */
-const CACHE = 'pkchem-v24';
-const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon.svg', './data/media.json'];
+const CACHE = 'pkchem-v25';
+const ASSETS = ['./index.html', './manifest.webmanifest', './icon.svg', './data/media.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -30,12 +30,17 @@ self.addEventListener('fetch', e => {
   const isData = /\/data\/.*\.json(\?.*)?$/.test(url.pathname);
 
   if (isDoc || isData) {
+    // ทุก ?fbclid=… / ?utm=… ของหน้าเว็บใช้แคชก้อนเดียว (ไม่งั้นแคชไฟล์ 2.9 MB ซ้ำทุกลิงก์ที่แชร์)
+    const key = req.mode === 'navigate' ? './index.html' : req;
+    const net = fetch(req).then(res => {
+      if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(key, copy)); }
+      return res;
+    });
+    // เน็ตช้า/หลุด: รอไม่เกิน 4 วิ แล้วใช้ฉบับในเครื่องก่อน (โหลดฉบับใหม่ต่อเบื้องหลังให้ครั้งหน้า)
+    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 4000));
     e.respondWith(
-      fetch(req).then(res => {
-        const copy = res.clone();
-        caches.open(CACHE).then(c => c.put(req, copy));
-        return res;
-      }).catch(() => caches.match(req).then(c => c || caches.match('./index.html')))
+      Promise.race([net, timeout]).catch(() =>
+        caches.match(key).then(c => c || caches.match('./index.html')).then(c => c || net))
     );
     return;
   }
@@ -44,8 +49,7 @@ self.addEventListener('fetch', e => {
   e.respondWith(
     caches.match(req).then(cached =>
       cached || fetch(req).then(res => {
-        const copy = res.clone();
-        caches.open(CACHE).then(c => c.put(req, copy));
+        if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
         return res;
       }).catch(() => cached)
     )

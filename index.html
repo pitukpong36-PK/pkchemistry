@@ -10,6 +10,12 @@
 <link rel="apple-touch-icon" href="./icon.svg">
 <link rel="icon" type="image/svg+xml" href="./icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js">
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js">
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js">
+<script>/* ตั้งธีม/ขนาดตัวอักษรก่อนวาดหน้า กันจอกะพริบขาวสำหรับคนใช้โหมดมืด */try{var _t=localStorage.getItem('pk_theme');if(_t)document.documentElement.setAttribute('data-theme',_t);var _z=[0.92,1,1.12,1.28][parseInt(localStorage.getItem('pk_fontscale'),10)];if(_z&&_z!==1)document.documentElement.style.zoom=_z;}catch(e){}</script>
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -1784,7 +1790,8 @@ html, body { max-width:100%; overflow-x:hidden; }
   <button onclick="PK.navTo('home')">📚 เนื้อหาวิชา</button>
   <button onclick="PK.navTo('media')">🎬 คลังสื่อการเรียน</button>
   <button onclick="PK.navTo('tools')">🧰 เครื่องมือ</button>
-  <button onclick="PK.navTo('game')">🎲 เกมเคมีมาร์เบิล</button>
+  <button onclick="PK.navTo('lab')">🧪 ห้องแล็บ</button>
+  <button onclick="PK.navTo('game')">🎮 เกม</button>
 </div>
 
 <!-- back to top -->
@@ -18365,6 +18372,7 @@ function showPage(pageId) {
   const navBtn = document.getElementById('nav-' + pageId);
   if (navBtn) navBtn.classList.add('active');
   if (pageId==='game' && window.GameHub) GameHub.toHub();
+  if (pageId!=='lab' && window.Lab){ if(Lab._stopAnim) Lab._stopAnim(); const la=document.getElementById('labAnim'); if(la) la.innerHTML=''; }
   if (pageId==='lab' && window.Lab) Lab.openHub();
   if (pageId==='media') loadMedia();
   if (pageId==='welcome' && window.PK && PK.renderWelcome) PK.renderWelcome();
@@ -18648,14 +18656,24 @@ function pkInitChapterAnims(){
     .concat(orbs.map((el,i)=>({ el, kind:'orb', type:(el.dataset.orb||'p'), a: Math.random()*6, uid:(el.dataset.orb||'p')+i })))
     .concat(atoms.map((el,i)=>({ el, kind:'atom', type:(el.dataset.atom||'bohr'), a: Math.random()*6, t: Math.random()*6, uid:(el.dataset.atom||'bohr')+i })));
   states.forEach(pkAttachDrag);
-  function frame(){
-    if(!states[0].el.isConnected) { _pkMolRAF=null; return; }
-    const active = document.getElementById('page-chapter').classList.contains('active');
+  // วาดเฉพาะโมเดลที่อยู่บนจอ · ~30 เฟรม/วิ · หยุดเมื่อแท็บถูกซ่อน (ความเร็วหมุนเท่าเดิม)
+  const onScreen=new Set(states.map(s=>s.el)); let _io=null, _last=0, _first=true;
+  try{ _io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting) onScreen.add(en.target); else onScreen.delete(en.target); }),{rootMargin:'150px'}); states.forEach(s=>_io.observe(s.el)); }catch(e){}
+  function frame(now){
+    if(!states[0].el.isConnected) { _pkMolRAF=null; if(_io) _io.disconnect(); return; }
+    _pkMolRAF = requestAnimationFrame(frame);
+    now = now || performance.now();
+    const dt = _first ? 16.7 : Math.min(100, now-_last);
+    if(!_first && dt < 30 && !states.some(s=>s.dragging)) return;
+    _first=false; _last=now;
+    const k = dt/16.7;
+    const active = !document.hidden && document.getElementById('page-chapter').classList.contains('active');
     if(active) states.forEach(s=>{
-      if(!reduce && s.auto) s.a += 0.011;
+      if(!onScreen.has(s.el) && !s.dragging) return;
+      if(!reduce && s.auto) s.a += 0.011*k;
       if(s.kind==='imf'){ pkRenderIMF(s); return; }
       if(s.kind==='orb'){ pkRenderOrb(s); return; }
-      if(s.kind==='atom'){ if(!reduce) s.t=(s.t||0)+0.03; pkRenderAtom(s); return; }
+      if(s.kind==='atom'){ if(!reduce) s.t=(s.t||0)+0.03*k; pkRenderAtom(s); return; }
       const d = PK_MOL_DEFS[s.type] || PK_MOL_DEFS.tetra;
       const cx=70, cy=70, f=210, ax=s.ax, ay=s.a;
       let atoms=[{x:0,y:0,z:0,r:13,fill:d.cc,label:d.cn,lc:'#fff'}];
@@ -18678,9 +18696,18 @@ function pkInitChapterAnims(){
       });
       s.el.innerHTML = '<svg viewBox="0 0 140 140" style="width:100%;max-width:150px;display:block;margin:0 auto;">'+bonds+circs+'</svg>';
     });
-    _pkMolRAF = requestAnimationFrame(frame);
   }
   frame();
+}
+// พักอนิเมชัน SMIL ของแผนภาพที่อยู่นอกจอ แล้วเล่นต่อเมื่อเลื่อนมาถึง (ลด CPU บนมือถือ)
+let _pkSmilIO=null;
+function pkPauseOffscreenSmil(){
+  if(_pkSmilIO){ _pkSmilIO.disconnect(); _pkSmilIO=null; }
+  if(!('IntersectionObserver' in window)) return;
+  const svgs=Array.from(document.querySelectorAll('#chap-body svg')).filter(s=>s.pauseAnimations && !(s.parentElement && s.parentElement.closest('svg')) && s.querySelector('animate,animateMotion,animateTransform'));
+  if(!svgs.length) return;
+  _pkSmilIO=new IntersectionObserver(es=>es.forEach(en=>{ try{ if(en.isIntersecting) en.target.unpauseAnimations(); else en.target.pauseAnimations(); }catch(e){} }),{rootMargin:'200px'});
+  svgs.forEach(s=>_pkSmilIO.observe(s));
 }
 // เรนเดอร์ฉากแรงระหว่างโมเลกุล (คู่โมเลกุล + เส้นประแรง) หมุน 3D รอบจุดกึ่งกลางฉาก
 function pkRenderIMF(s){
@@ -18759,6 +18786,7 @@ function showChapter(chapterId) {
   window.__pkChapter = chapterId;
   showPage('chapter');
   pkInitChapterAnims();  // เริ่มอนิเมชันโมเลกุล 3D (ถ้ามีในบท)
+  pkPauseOffscreenSmil();
   // สร้างสารบัญหัวข้อในบทใหม่ (Table of Contents)
   if (window.PK_TOC) window.PK_TOC.build();
   // toggle quiz button if this chapter has a quiz
@@ -18777,7 +18805,7 @@ function showChapter(chapterId) {
 document.getElementById('nav-welcome').classList.add('active');
 
 // ─── เวอร์ชันเว็บ (ใช้ยืนยันว่าโหลดตัวล่าสุดแล้ว — ต้องตรงกับ CACHE ใน sw.js) ───
-const APP_VERSION = 'v4';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
+const APP_VERSION = 'v25';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
 (function stampVersion() {
   try { console.log('%cPKchemistry ' + APP_VERSION, 'color:#14B8A6;font-weight:700;font-size:13px'); } catch (e) {}
   function paint() {
@@ -18927,7 +18955,15 @@ var CATMAP={alkali:'โลหะแอลคาไล',alkaline:'โลหะแ
 var CATS=[['alkali','โลหะแอลคาไล'],['alkaline','แอลคาไลน์เอิร์ท'],['transition','แทรนซิชัน'],['post','หลังแทรนซิชัน'],['metalloid','กึ่งโลหะ'],['nonmetal','อโลหะ'],['halogen','แฮโลเจน'],['noble','แก๊สมีตระกูล'],['lanthanide','แลนทาไนด์'],['actinide','แอกทิไนด์']];
 
 /* ---- formula parser ---- */
+/* รองรับไฮเดรต: CuSO4·5H2O / CuSO4.5H2O / CuSO4*5H2O — เลขหน้าส่วนหลังจุด = จำนวนหน่วยนั้น */
 function parseFormula(f){
+  var parts=String(f).split(/[·•∙⋅*.]/), total={};
+  parts.forEach(function(p,pi){ if(!p) return; var mul=1;
+    if(pi>0){ var m=p.match(/^(\d+)(.*)$/); if(m){ mul=parseInt(m[1],10); p=m[2]; } }
+    var c=parseFormulaPart(p); for(var k in c) total[k]=(total[k]||0)+c[k]*mul; });
+  return total;
+}
+function parseFormulaPart(f){
   var i=0;
   function readNum(){ var s=''; while(i<f.length&&/[0-9]/.test(f[i])){s+=f[i];i++;} return s===''?1:parseInt(s,10); }
   function grp(){ var c={}; while(i<f.length){ var ch=f[i];
@@ -18971,9 +19007,10 @@ function nullspace(M,ncols){
   return ints;
 }
 function balanceEq(eq){
-  var sides=eq.split(/->|=|→/); if(sides.length!==2) throw new Error('ต้องมี -> หรือ = คั่นสองข้าง');
-  var rs=sides[0].split('+').map(function(s){return s.trim().replace(/\s/g,'');}).filter(Boolean);
-  var ps=sides[1].split('+').map(function(s){return s.trim().replace(/\s/g,'');}).filter(Boolean);
+  var sides=eq.split(/<=>|<->|->|=>|⇌|⟶|→|=/); if(sides.length!==2) throw new Error('ต้องมี -> หรือ = คั่นสองข้าง');
+  var clean=function(s){ return s.trim().replace(/\s/g,'').replace(/^\d+(?=[A-Z(\[])/,''); };  // 3H2 → H2 (ระบบคำนวณสัมประสิทธิ์ใหม่เอง)
+  var rs=sides[0].split('+').map(clean).filter(Boolean);
+  var ps=sides[1].split('+').map(clean).filter(Boolean);
   if(!rs.length||!ps.length) throw new Error('สมการไม่ครบสองข้าง');
   var species=rs.map(function(s){return {f:s,side:'r',c:parseFormula(s)};}).concat(ps.map(function(s){return {f:s,side:'p',c:parseFormula(s)};}));
   var els={}; species.forEach(function(sp){for(var k in sp.c){ if(!EMAP[k]) throw new Error('ไม่รู้จักธาตุ "'+k+'"'); els[k]=1;} });
@@ -19047,11 +19084,12 @@ var ChemTools = window.ChemTools = {
     var type=$('phType').value, conc=parseFloat($('phConc').value), n=parseFloat($('phN').value)||1, out=$('phOut'), H;
     if(type==='h'){ H=conc; if(!(H>0)){ out.className='tool-out show err'; out.textContent='กรอก [H⁺] มากกว่า 0'; return; } }
     else { if(!(conc>0)){ out.className='tool-out show err'; out.textContent='กรอกความเข้มข้นมากกว่า 0'; return; }
-      if(type==='acid') H=conc*n; else { var OHb=conc*n; H=1e-14/OHb; } }
+      var Cx=conc*n, X=(Cx+Math.sqrt(Cx*Cx+4e-14))/2;   // รวม H⁺/OH⁻ จากน้ำ (Kw) — มีผลเฉพาะเมื่อเจือจางกว่า ~10⁻⁶ M
+      if(type==='acid') H=X; else H=1e-14/X; }
     var pH=-Math.log10(H), pOH=14-pH, OH=1e-14/H;
     var nature = pH<6.99?'กรด ⚠️':(pH>7.01?'เบส 💙':'กลาง ✓');
     out.className='tool-out show';
-    out.innerHTML='<div class="big">pH = '+pH.toFixed(2)+'</div>pOH = '+pOH.toFixed(2)+'<br>[H⁺] = '+H.toExponential(2)+' mol/L<br>[OH⁻] = '+OH.toExponential(2)+' mol/L<br>สภาพสารละลาย: <b>'+nature+'</b>';
+    out.innerHTML='<div class="big">pH = '+pH.toFixed(2)+'</div>pOH = '+pOH.toFixed(2)+'<br>[H⁺] = '+H.toExponential(2)+' mol/L<br>[OH⁻] = '+OH.toExponential(2)+' mol/L<br>สภาพสารละลาย: <b>'+nature+'</b>'+((type!=='h'&&Cx<1e-6)?'<br><span style="font-size:12px;opacity:.75">* เจือจางมาก: คิดรวม H⁺/OH⁻ จากการแตกตัวของน้ำแล้ว</span>':'');
   },
   temp:function(){
     var v=parseFloat($('tConv').value), from=$('tFrom').value, out=$('tempOut');
@@ -19944,6 +19982,16 @@ PK.runSelfTest = function(){ var r=PK.selfTest();
 };
 const $ = id => document.getElementById(id);
 
+/* คะแนนดีสุดต้องเป็นคู่ best/total ของ "รอบเดียวกัน" (แต่ละรอบจำนวนข้อไม่เท่ากัน เช่น สอบ 20/40/60 ข้อ)
+   ข้อมูลเก่าที่ best>total ถือว่าเพี้ยน → รอบถัดไปเขียนทับให้ถูกเอง */
+function bestRec(prev, score, total){
+  prev=prev||{};
+  const pt=+prev.total||0, pb=+prev.best||0;
+  const prevPct=(pt>0 && pb<=pt) ? pb/pt : -1;
+  const pct=total>0 ? score/total : 0;
+  const better = pct>prevPct || (pct===prevPct && total>pt);
+  return { best: better?score:pb, total: better?total:pt, last:score, lastTotal:total, attempts:(+prev.attempts||0)+1 };
+}
 /* ═══ 2) LOCAL (เดโม) BACKEND — localStorage ═══ */
 function strHash(s){ let h=0x811c9dc5; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,0x01000193);} return (h>>>0).toString(16); }
 const LocalBackend = {
@@ -19976,7 +20024,7 @@ const LocalBackend = {
   saveQuiz(chId,score,total){ const u=this._cur(); if(!u)return null; const m=this._all();
     const q=m[u.email].progress.quizzes||(m[u.email].progress.quizzes={});
     const prev=q[chId]||{best:0,attempts:0};
-    q[chId]={best:Math.max(prev.best||0,score), last:score, total, attempts:(prev.attempts||0)+1};
+    q[chId]=bestRec(prev,score,total);
     this._set(m); PK._onProgress(m[u.email].progress); return q[chId]; },
   getStudents(){ return Object.values(this._all()).map(u=>({uid:u.email,name:u.name,email:u.email,progress:u.progress||{}})); },
   saveStreak(st){ const u=this._cur(); if(!u)return; const m=this._all(); m[u.email].progress.streak=st; this._set(m); PK._onProgress(m[u.email].progress); },
@@ -19993,9 +20041,8 @@ const LocalBackend = {
 const CloudBackend = {
   mode:'cloud',
   async init(){
-    const { initializeApp } = await import(SDK+"firebase-app.js");
-    this.A = await import(SDK+"firebase-auth.js");
-    this.F = await import(SDK+"firebase-firestore.js");
+    const [appMod, A, F] = await Promise.all([import(SDK+"firebase-app.js"), import(SDK+"firebase-auth.js"), import(SDK+"firebase-firestore.js")]);
+    const { initializeApp } = appMod; this.A = A; this.F = F;
     const app = initializeApp(firebaseConfig);
     this.auth = this.A.getAuth(app);
     this.db   = this.F.getFirestore(app);
@@ -20022,6 +20069,9 @@ const CloudBackend = {
         PK._onAuth({uid:u.uid, name:u.displayName||'ผู้ใช้', email:u.email});
         const ref=this.F.doc(this.db,'users',u.uid);
         this._unsubUser=onSnapshot(ref, snap=>{
+          if(!snap.exists() && !snap.metadata.fromCache && u.metadata && (Date.now()-Date.parse(u.metadata.creationTime||0))>60000){
+            this.F.setDoc(ref,{name:u.displayName||'ผู้ใช้', email:u.email||'', createdAt:this.F.serverTimestamp(), progress:{chapters:{},problems:0,visits:0}},{merge:true}).catch(()=>{});
+          }
           const d=snap.data()||{};
           if(d.createdAt&&d.createdAt.toMillis) PK._setCreatedAt(d.createdAt.toMillis());
           PK._onProgress(d.progress||{chapters:{},problems:0,visits:0});
@@ -20046,7 +20096,7 @@ const CloudBackend = {
     this.F.updateDoc(this.F.doc(this.db,'users',u.uid),{'progress.problems':this.F.increment(1)}).catch(()=>{}); },
   saveQuiz(chId,score,total){ const u=this.auth&&this.auth.currentUser; if(!u)return null;
     const cur=(state.progress&&state.progress.quizzes&&state.progress.quizzes[chId])||{best:0,attempts:0};
-    const rec={best:Math.max(cur.best||0,score), last:score, total, attempts:(cur.attempts||0)+1};
+    const rec=bestRec(cur,score,total);
     this.F.updateDoc(this.F.doc(this.db,'users',u.uid),{['progress.quizzes.'+chId]:rec}).catch(()=>{});
     return rec; },
   getStudents(){ return this._students||[]; },
@@ -20135,6 +20185,7 @@ function renderProfile(){
 /* ─── DASHBOARD: ทบทวนข้อที่เคยผิด + สรุปความแม่นยำ ─── */
 function renderSRS(p){
   const card=$('srsCard'); if(!card) return;
+  try{ SRS.prune(); }catch(e){}
   const due=SRS.due().length, tracked=SRS.count();
   $('srsDue').textContent=due; $('srsTracked').textContent=tracked;
   const qz=(p&&p.quizzes)||{}; let bs=0,tt=0;
@@ -20262,6 +20313,7 @@ PK.submitAuth = async e=>{
       else { msg.className='auth-msg ok'; msg.textContent='📧 ส่งลิงก์รีเซ็ตรหัสผ่านไปที่ '+email+' แล้ว กรุณาตรวจกล่องจดหมาย (รวมถึงโฟลเดอร์สแปม)'; }
     } else if(state.tab==='register'){
       await PK._backend.register(name,email,pass); PK.closeAuth(); toast('🎉 สมัครสมาชิกสำเร็จ! ยินดีต้อนรับ');
+      if(state.user && state.user.name!==name){ state.user.name=name; renderAuthUI(); }
     } else {
       await PK._backend.login(email,pass); PK.closeAuth(); toast('👋 เข้าสู่ระบบสำเร็จ');
     }
@@ -20275,11 +20327,13 @@ PK.openProfile = ()=>{ $('userMenu').classList.remove('open'); if(!state.user) r
 PK.logout = async ()=>{ $('userMenu').classList.remove('open'); try{ await PK._backend.logout(); }catch(e){} window.showPage('welcome'); toast('ออกจากระบบแล้ว'); };
 /* ── สำรอง/กู้ข้อมูล (กันข้อมูล localStorage หาย) ── */
 PK._BK_KEYS = ['pk_rpg','pk_flash','pk_match','pk_marble','pk_members','pk_theme'];
+PK._bkOk = k => /^pk_/.test(k) && !/^pk_(session|visit_at|visits)$/.test(k);
+PK._bkKeys = ()=>{ const ks=[]; try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(PK._bkOk(k)) ks.push(k); } }catch(e){} return ks; };
 PK.openBackup = ()=>{ var m=$('userMenu'); if(m) m.classList.remove('open'); var n=$('bkNote'); if(n) n.textContent=''; $('backupOverlay').classList.add('open'); };
 PK.closeBackup = ()=>{ $('backupOverlay').classList.remove('open'); };
 PK.exportData = ()=>{ try{
     var data={ _app:'PKchemistry', _ver:1, _ts:Date.now() };
-    PK._BK_KEYS.forEach(function(k){ var v=localStorage.getItem(k); if(v!=null) data[k]=v; });
+    PK._bkKeys().forEach(function(k){ var v=localStorage.getItem(k); if(v!=null) data[k]=v; });
     var blob=new Blob([JSON.stringify(data)],{type:'application/json'});
     var url=URL.createObjectURL(blob), a=document.createElement('a');
     a.href=url; a.download='pkchemistry_backup_'+new Date().toISOString().slice(0,10)+'.json';
@@ -20291,7 +20345,7 @@ PK.importData = (file)=>{ if(!file) return;
   var r=new FileReader();
   r.onload=function(){ try{ var data=JSON.parse(r.result);
       if(!data || data._app!=='PKchemistry') throw new Error('format');
-      var restored=0; PK._BK_KEYS.forEach(function(k){ if(typeof data[k]==='string'){ localStorage.setItem(k,data[k]); restored++; } });
+      var restored=0; Object.keys(data).filter(PK._bkOk).forEach(function(k){ if(typeof data[k]==='string'){ localStorage.setItem(k,data[k]); restored++; } });
       $('bkNote').textContent='✅ กู้ข้อมูลแล้ว '+restored+' ส่วน · กำลังโหลดใหม่...';
       setTimeout(function(){ location.reload(); },900);
     }catch(e){ $('bkNote').textContent='❌ ไฟล์ไม่ถูกต้อง (ต้องเป็นไฟล์สำรองของ PKchemistry)'; } };
@@ -20312,7 +20366,7 @@ const SRS = {
   _save(m){ try{ localStorage.setItem(this._key(), JSON.stringify(m)); }catch(e){} },
   _hash(s){ let h=0; s=String(s); for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))|0; } return h.toString(36); },
   /* บันทึกผลตอบ 1 ข้อ: ผิด→เข้ากล่อง 1 (ทบทวนเร็ว) · ถูก→เลื่อนกล่องสูงขึ้น (ทิ้งช่วงนานขึ้น) · ถึงกล่อง 5 = จำได้ ลบออก */
-  record(ch, qtext, ok){
+  record(ch, qtext, ok, qobj){
     if(!ch || ch==='__exam' || ch==='__review') return;
     const m=this._all(), k=ch+'|'+this._hash(qtext); let it=m[k];
     if(ok){
@@ -20322,18 +20376,23 @@ const SRS = {
     } else {
       it=it||{ch, q:qtext, box:1, right:0, wrong:0, created:Date.now()};
       it.ch=ch; it.q=qtext; it.box=1; it.wrong=(it.wrong||0)+1; it.due=Date.now()+this._iv[1];
+      if(qobj && Array.isArray(qobj.c)) it.o={q:qobj.q, c:qobj.c.slice(), a:qobj.a, e:qobj.e};
       m[k]=it;
     }
     this._save(m);
   },
   due(){ const m=this._all(), now=Date.now(); return Object.values(m).filter(it=>(it.due||0)<=now); },
-  count(){ return Object.keys(this._all()).length; }
+  count(){ return Object.keys(this._all()).length; },
+  prune(){ const m=this._all(); let n=0;
+    for(const k in m){ const it=m[k]; if(it.o) continue; const bank=QUIZ_BANK[it.ch]||[]; if(!bank.some(x=>x.q===it.q)){ delete m[k]; n++; } }
+    if(n) this._save(m); return n; }
 };
 PK.startReview = ()=>{
+  SRS.prune();
   const due=SRS.due();
   if(!due.length){ toast('ยังไม่มีข้อที่ถึงกำหนดทบทวน 🎉'); return; }
   const qs=[];
-  due.forEach(it=>{ const bank=QUIZ_BANK[it.ch]||[]; const q=bank.find(x=>x.q===it.q); if(q) qs.push(Object.assign({}, q, {_ch:it.ch})); });
+  due.forEach(it=>{ const bank=QUIZ_BANK[it.ch]||[]; const q=bank.find(x=>x.q===it.q)||it.o; if(q) qs.push(Object.assign({}, q, {_ch:it.ch})); });
   if(!qs.length){ toast('ไม่พบข้อทบทวนในคลังปัจจุบัน'); return; }
   QZ.ch='__review'; QZ.review=true; QZ.qs=shuffle(qs).slice(0, Math.min(20, qs.length)); QZ.i=0; QZ.score=0; QZ.answered=false;
   window.__pkQuizChapter='__review';
@@ -20354,11 +20413,10 @@ PK.refreshQuizButton = id => {
     const rec = state.progress && state.progress.quizzes && state.progress.quizzes[id];
     $('quizLaunchInfo').textContent = rec ? '(ดีสุด '+rec.best+'/'+rec.total+')' : ('(สุ่ม '+Math.min(QUIZ_PER,QUIZ_BANK[id].length)+' จาก '+QUIZ_BANK[id].length+' ข้อ)');
     if(lvBox){ const c=PK.levelCounts(QUIZ_BANK[id]);
-      lvBox.innerHTML='<span class="ql-label">เลือกระดับ:</span>'+
-        '<button class="ql-chip" style="--lc:#16a34a" onclick="PK.startQuiz(\''+id+'\',\'easy\')">ง่าย ('+c.easy+')</button>'+
-        '<button class="ql-chip" style="--lc:#d97706" onclick="PK.startQuiz(\''+id+'\',\'med\')">ปานกลาง ('+c.med+')</button>'+
-        '<button class="ql-chip" style="--lc:#dc2626" onclick="PK.startQuiz(\''+id+'\',\'hard\')">ยาก ('+c.hard+')</button>';
-      lvBox.style.display='';
+      const chip=(k,t,col)=> c[k]>=4 ? '<button class="ql-chip" style="--lc:'+col+'" onclick="PK.startQuiz(\''+id+'\',\''+k+'\')">'+t+' ('+c[k]+')</button>' : '';
+      const chips=chip('easy','ง่าย','#16a34a')+chip('med','ปานกลาง','#d97706')+chip('hard','ยาก','#dc2626');
+      lvBox.innerHTML='<span class="ql-label">เลือกระดับ:</span>'+chips;
+      lvBox.style.display = chips ? '' : 'none';
     }
   } else { btn.style.display='none'; if(lvBox) lvBox.style.display='none'; }
 };
@@ -20410,7 +20468,7 @@ PK.answer = idx => {
   const btns=$('quizChoices').querySelectorAll('.quiz-choice');
   btns.forEach((b,i)=>{ b.disabled=true; if(i===correct) b.classList.add('correct'); });
   if(idx===correct) QZ.score++; else btns[idx].classList.add('wrong');
-  try{ SRS.record(QZ.review ? (QZ.qs[QZ.i]._ch||QZ.ch) : QZ.ch, QZ.qs[QZ.i].q, idx===correct); }catch(e){}
+  try{ SRS.record(QZ.review ? (QZ.qs[QZ.i]._ch||QZ.ch) : QZ.ch, QZ.qs[QZ.i].q, idx===correct, QZ.qs[QZ.i]); }catch(e){}
   const ex=$('quizExplain'); ex.classList.add('show');
   ex.innerHTML='<b>'+(idx===correct ? '✓ ถูกต้อง! ' : '✗ คำตอบที่ถูกคือ '+KEYS[correct]+'. ')+'</b>'+QZ.qs[QZ.i].e;
   $('quizNext').disabled=false;
@@ -20481,7 +20539,7 @@ MEX.start = (n, min)=>{
   MEX.render();
 };
 MEX._fmt = (s)=>{ const m=Math.floor(s/60), ss=s%60; return m+':'+(ss<10?'0':'')+ss; };
-MEX.tick = ()=>{ if(!EX) return; EX.timeLeft--; if(EX.timeLeft<=0){ EX.timeLeft=0; MEX.submit(true); return; }
+MEX.tick = ()=>{ if(!EX) return; EX.timeLeft=Math.max(0, EX.dur-Math.floor((Date.now()-EX.startTs)/1000)); if(EX.timeLeft<=0){ EX.timeLeft=0; MEX.submit(true); return; }
   if(typeof document!=='undefined'&&document.getElementById){ const t=document.getElementById('exTimer'); if(t){ t.textContent='⏱️ '+MEX._fmt(EX.timeLeft); if(EX.timeLeft<=60) t.classList.add('low'); } } };
 MEX.render = ()=>{
   const i=EX.i, q=EX.qs[i], answered=EX.ans.filter(a=>a!==null).length;
@@ -24250,8 +24308,19 @@ function studentStats(s){
   return { visited, quizAvg, bestSum, taken, quizCount:qChs.length, rpg, rankScore: visited + bestSum + rpgScore };
 }
 PK.openTeacher = () => { $('userMenu').classList.remove('open'); if(!PK.isTeacher()) return; PK.renderTeacher(); window.showPage('teacher'); };
+/* ข้อมูลใน users/{uid} นักเรียนเขียนเองได้ → แปลงเป็นตัวเลข/ตัดค่าเกินก่อนนำไปแสดง (กันแทรก HTML/สคริปต์) */
+function _num(v){ v=Number(v); return isFinite(v) ? v : 0; }
+function cleanStudent(s){
+  const p=s.progress||{}, qz=p.quizzes||{}, q={}, ch={};
+  for(const k in qz){ const r=qz[k]||{}, t=_num(r.total); if(t>0) q[k]={best:Math.max(0,Math.min(_num(r.best),t)), total:t, attempts:_num(r.attempts)}; }
+  for(const k in (p.chapters||{})) if(CHAPTERS.some(c=>c.id===k)) ch[k]=p.chapters[k];
+  let rpg=null;
+  if(p.rpg && typeof p.rpg==='object'){ const m={}, pm=p.rpg.mastery||{}; for(const k in pm) m[k]=Math.max(0,Math.min(100,_num(pm[k])));
+    rpg={ level:_num(p.rpg.level), cleared:Math.max(0,Math.min(CHAPTERS.length,_num(p.rpg.cleared))), acc:Math.max(0,Math.min(100,_num(p.rpg.acc))), mastery:m }; }
+  return Object.assign({}, s, { name:String(s.name==null?'':s.name), email:String(s.email==null?'':s.email), progress:Object.assign({}, p, { chapters:ch, quizzes:q, rpg:rpg }) });
+}
 PK.renderTeacher = () => {
-  const studs = (PK._backend.getStudents ? PK._backend.getStudents() : []).map(s=>({...s, st:studentStats(s)}));
+  const studs = (PK._backend.getStudents ? PK._backend.getStudents() : []).map(cleanStudent).map(s=>({...s, st:studentStats(s)}));
   const n=studs.length;
   $('tdStudents').textContent=n;
   const avgCh = n ? (studs.reduce((a,s)=>a+s.st.visited,0)/n) : 0;
@@ -24301,7 +24370,7 @@ PK.exportCSV = ()=>{
   const studs=PK._studs||[];
   if(!studs.length){ toast('ยังไม่มีข้อมูลนักเรียน'); return; }
   const head=['ชื่อ','อีเมล','บทที่เรียน','ควิซเฉลี่ย(%)','จำนวนควิซ(บท)','สอบรวม(best)','RPG เลเวล','RPG บทพิชิต','RPG แม่นยำ(%)','คะแนนรวม'];
-  const esc2=v=>{ v=String(v==null?'':v); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; };
+  const esc2=v=>{ v=String(v==null?'':v); if(/^[=+\-@\t\r]/.test(v)) v="'"+v; return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; };
   const lines=[head.join(',')];
   studs.forEach(s=>{ const st=s.st, p=s.progress||{}, ex=p.quizzes&&p.quizzes['__exam'];
     lines.push([s.name, s.email, st.visited+'/'+CHAPTERS.length, st.quizAvg==null?'':st.quizAvg, st.quizCount,
