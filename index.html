@@ -1750,7 +1750,7 @@ html, body { max-width:100%; overflow-x:hidden; }
     <button class="nav-icon-btn" title="ค้นหา (กด /)" onclick="PK.openSearch()">🔍</button>
     <button class="nav-icon-btn" id="themeBtn" title="สลับโหมดมืด/สว่าง" onclick="PK.toggleTheme()">🌙</button>
     <button class="nav-icon-btn" id="fontBtn" title="ขนาดตัวอักษร (เล็ก/ปกติ/ใหญ่/ใหญ่มาก)" onclick="PK.cycleFontScale()">🔠</button>
-    <div class="member-badge" id="memberBadge" title="จำนวนสมาชิกและผู้ใช้งานออนไลน์">
+    <div class="member-badge" id="memberBadge" title="จำนวนสมาชิกและผู้ใช้งานออนไลน์" style="display:none">
       <span class="mb-item"><span class="mb-text">สมาชิก</span> <b id="statMembers">–</b></span>
       <span class="mb-sep"></span>
       <span class="mb-item"><span class="dot-online"></span><span class="mb-text">ออนไลน์</span> <b id="statOnline">–</b></span>
@@ -18805,7 +18805,7 @@ function showChapter(chapterId) {
 document.getElementById('nav-welcome').classList.add('active');
 
 // ─── เวอร์ชันเว็บ (ใช้ยืนยันว่าโหลดตัวล่าสุดแล้ว — ต้องตรงกับ CACHE ใน sw.js) ───
-const APP_VERSION = 'v25';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
+const APP_VERSION = 'v26';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
 (function stampVersion() {
   try { console.log('%cPKchemistry ' + APP_VERSION, 'color:#14B8A6;font-weight:700;font-size:13px'); } catch (e) {}
   function paint() {
@@ -19216,8 +19216,8 @@ const CLOUD = !/^YOUR_/.test(firebaseConfig.apiKey);
 /* ═══ อีเมลของ "ครู" (เห็นแดชบอร์ดครู) — เพิ่มได้หลายอีเมล ═══ */
 const TEACHER_EMAILS = ['pitukpong36@gmail.com','pitukpong36@brw.ac.th'];
 const SDK = "https://www.gstatic.com/firebasejs/10.12.0/";
-const ONLINE_WINDOW_MS = 120000;            // ถือว่า "ออนไลน์" ถ้า active ภายใน 2 นาที
-const HEARTBEAT_MS = 45000;
+const ONLINE_WINDOW_MS = 330000;            // ถือว่า "ออนไลน์" ถ้า active ภายใน 5.5 นาที
+const HEARTBEAT_MS = 180000;                // ส่งสัญญาณออนไลน์ + นับคนออนไลน์ใหม่ ทุก 3 นาที (เฉพาะตอนเปิดหน้าอยู่)
 
 const CHAPTERS = [
   {id:'c1b1', t:'ความปลอดภัยและทักษะในปฏิบัติการเคมี'},
@@ -20047,24 +20047,39 @@ const CloudBackend = {
     this.auth = this.A.getAuth(app);
     this.db   = this.F.getFirestore(app);
     const { onSnapshot, collection } = this.F;
-    // นับสมาชิกทั้งหมด + เก็บข้อมูลนักเรียนสำหรับแดชบอร์ดครู
-    onSnapshot(collection(this.db,'users'), s=>{
-      this._members=s.size; this._pushCounters();
-      this._students = s.docs.map(d=>{ const x=d.data()||{}; return {uid:d.id, name:x.name||'ผู้ใช้', email:x.email||'', progress:x.progress||{}}; });
-      if(PK._teacherActive && PK._teacherActive()) PK.renderTeacher();
-    }, ()=>{});
-    // นับผู้ใช้ออนไลน์ (presence ภายในกรอบเวลา)
-    onSnapshot(collection(this.db,'presence'), s=>{
-      const now=Date.now(); let n=0;
-      s.forEach(d=>{ const t=d.data().lastActive; const ms=(t&&t.toMillis)?t.toMillis():0; if(now-ms<ONLINE_WINDOW_MS) n++; });
-      this._online=n; this._pushCounters();
-    }, ()=>{});
+    // รายชื่อนักเรียน (แดชบอร์ดครู + จำนวนสมาชิก): ฟังเฉพาะตอน "ครู" ล็อกอินอยู่
+    // (เดิมฟังตั้งแต่เปิดหน้า → นักเรียน/คนทั่วไปถูก rules ปฏิเสธ และครูที่ล็อกอินทีหลังได้รายชื่อว่าง)
+    this._watchStudents = on=>{
+      if(this._unsubStudents){ this._unsubStudents(); this._unsubStudents=null; }
+      this._members=null; this._students=[];
+      if(!on) return;
+      this._unsubStudents = onSnapshot(collection(this.db,'users'), s=>{
+        this._members=s.size; this._pushCounters();
+        this._students = s.docs.map(d=>{ const x=d.data()||{}; return {uid:d.id, name:x.name||'ผู้ใช้', email:x.email||'', progress:x.progress||{}}; });
+        if(PK._teacherActive && PK._teacherActive()) PK.renderTeacher();
+      }, ()=>{});
+    };
+    // นับคนออนไลน์ด้วย count query (1 read ต่อครั้ง) ทุก 3 นาที เฉพาะคนที่ล็อกอินและเปิดหน้าอยู่
+    // (เดิมทุกเครื่องฟัง presence ทั้งคอลเลกชันแบบเรียลไทม์ → reads โตตามจำนวนคน² จนโควตาฟรีหมด)
+    this._refreshOnline = async force=>{
+      if(!this.auth.currentUser || document.hidden) return;
+      if(force!==true && Date.now()-(this._lastCount||0)<60000) return;
+      this._lastCount=Date.now();
+      try{
+        const F=this.F, q=F.query(collection(this.db,'presence'), F.where('lastActive','>', F.Timestamp.fromMillis(Date.now()-ONLINE_WINDOW_MS)));
+        this._online=(await F.getCountFromServer(q)).data().count; this._pushCounters();
+      }catch(e){}
+    };
+    setInterval(()=>this._refreshOnline(true), HEARTBEAT_MS);
+    document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) setTimeout(()=>this._refreshOnline(false),1500); });
+    this._pushCounters();                            // ยังไม่ล็อกอิน → ซ่อนตัวเลขที่ยังไม่รู้
     // ยอดเข้าชมเว็บรวมทุกอุปกรณ์ (stats/site) — อ่านสด + เพิ่ม 1 ต่อการเข้าชมใหม่
     this._initVisits();
     // ติดตามสถานะล็อกอิน
     this.A.onAuthStateChanged(this.auth, u=>{
       if(this._unsubUser){ this._unsubUser(); this._unsubUser=null; }
       this._stopHeartbeat();
+      this._watchStudents(!!u && TEACHER_EMAILS.map(e=>e.toLowerCase()).includes((u.email||'').toLowerCase()));
       if(u){
         PK._onAuth({uid:u.uid, name:u.displayName||'ผู้ใช้', email:u.email});
         const ref=this.F.doc(this.db,'users',u.uid);
@@ -20077,7 +20092,8 @@ const CloudBackend = {
           PK._onProgress(d.progress||{chapters:{},problems:0,visits:0});
         });
         this._startHeartbeat(u);
-      } else { PK._onAuth(null); PK._onProgress(null); }
+        setTimeout(()=>this._refreshOnline(true),1500);
+      } else { this._online=null; this._pushCounters(); PK._onAuth(null); PK._onProgress(null); }
     });
   },
   async register(name,email,pass){
@@ -20102,22 +20118,25 @@ const CloudBackend = {
   getStudents(){ return this._students||[]; },
   saveStreak(st){ const u=this.auth&&this.auth.currentUser; if(!u)return; this.F.updateDoc(this.F.doc(this.db,'users',u.uid),{'progress.streak':st}).catch(()=>{}); },
   saveRPG(s){ const u=this.auth&&this.auth.currentUser; if(!u)return; this.F.updateDoc(this.F.doc(this.db,'users',u.uid),{'progress.rpg':s}).catch(()=>{}); },
-  _pushCounters(){ PK._onCounters({members:this._members||0, online:this._online||0}); },
+  _pushCounters(){ PK._onCounters({members:(this._members==null?null:this._members), online:(this._online==null?null:this._online)}); },
   async _initVisits(){
     const ref=this.F.doc(this.db,'stats','site');
-    this.F.onSnapshot(ref, s=>{ const d=s.data()||{}; PK._onVisits(d.count); },
-      err=>console.warn('[PK] อ่านยอดผู้เข้าชมไม่ได้ — ตรวจ Firestore rules ของ stats/site', err));
-    if(!isNewVisit()) return;                       // ยังอยู่ในการเข้าชมเดิม (ภายใน 30 นาที)
-    try{
-      await this.F.setDoc(ref, {count:this.F.increment(1), updatedAt:this.F.serverTimestamp()}, {merge:true});
-    }catch(err){ console.warn('[PK] บวกยอดผู้เข้าชมไม่สำเร็จ — ตรวจ Firestore rules ของ stats/site', err); }
+    if(isNewVisit()){                               // การเข้าชมใหม่ (ห่างครั้งก่อนเกิน 30 นาที) → บวก 1
+      try{ await this.F.setDoc(ref, {count:this.F.increment(1), updatedAt:this.F.serverTimestamp()}, {merge:true}); }
+      catch(err){ console.warn('[PK] บวกยอดผู้เข้าชมไม่สำเร็จ — ตรวจ Firestore rules ของ stats/site', err); }
+    }
+    // อ่านยอดรวมครั้งเดียว (เดิมฟังเรียลไทม์ → ทุกการเข้าชมใหม่ทำให้ทุกเครื่องที่เปิดอยู่ต้องอ่านซ้ำ)
+    try{ const s=await this.F.getDoc(ref); const d=s.data()||{}; PK._onVisits(d.count); }
+    catch(err){ console.warn('[PK] อ่านยอดผู้เข้าชมไม่ได้ — ตรวจ Firestore rules ของ stats/site', err); }
   },
   _startHeartbeat(u){
-    const beat=()=>this.F.setDoc(this.F.doc(this.db,'presence',u.uid),
-      {name:u.displayName||'', lastActive:this.F.serverTimestamp()}).catch(()=>{});
-    beat(); this._hb=setInterval(beat,HEARTBEAT_MS);
+    // ส่งเฉพาะตอนหน้าเว็บเปิดอยู่ (ซ่อนแท็บ/ล็อกจอ = ไม่ส่ง) · ไม่เก็บชื่อ เพราะทุกคนที่ล็อกอินอ่าน presence ได้
+    const beat=force=>{ if(document.hidden) return; if(!force && Date.now()-(this._lastBeat||0)<60000) return; this._lastBeat=Date.now();
+      this.F.setDoc(this.F.doc(this.db,'presence',u.uid), {lastActive:this.F.serverTimestamp()}).catch(()=>{}); };
+    beat(true); this._hb=setInterval(()=>beat(true),HEARTBEAT_MS);
+    this._onVis=()=>beat(false); document.addEventListener('visibilitychange', this._onVis);
   },
-  _stopHeartbeat(){ if(this._hb){ clearInterval(this._hb); this._hb=null; } },
+  _stopHeartbeat(){ if(this._hb){ clearInterval(this._hb); this._hb=null; } if(this._onVis){ document.removeEventListener('visibilitychange', this._onVis); this._onVis=null; } this._lastBeat=0; },
   async _removePresence(){ const u=this.auth&&this.auth.currentUser; if(u){ try{ await this.F.deleteDoc(this.F.doc(this.db,'presence',u.uid)); }catch(e){} } },
   start(){}
 };
@@ -20142,8 +20161,16 @@ function renderAuthUI(){
 }
 PK.openProfileOrLogin = ()=>{ if(state.user) PK.openProfile(); else PK.openAuth('login'); };
 function renderCounters(c){
-  $('statMembers').textContent = c.members;
-  $('statOnline').textContent  = c.online;
+  // แสดงเฉพาะตัวเลขที่รู้จริง: "สมาชิก" = ครู (หรือโหมดเดโม) · "ออนไลน์" = ผู้ที่ล็อกอิน · ไม่รู้ทั้งคู่ → ซ่อนป้าย
+  const has=v=>typeof v==='number';
+  $('statMembers').textContent = has(c.members) ? c.members : '–';
+  $('statOnline').textContent  = has(c.online) ? c.online : '–';
+  const b=$('memberBadge'); if(!b) return;
+  const it=b.querySelectorAll('.mb-item'), sep=b.querySelector('.mb-sep');
+  if(it[0]) it[0].style.display = has(c.members) ? '' : 'none';
+  if(it[1]) it[1].style.display = has(c.online) ? '' : 'none';
+  if(sep) sep.style.display = (has(c.members) && has(c.online)) ? '' : 'none';
+  b.style.display = (has(c.members) || has(c.online)) ? '' : 'none';
 }
 function profileActive(){ return $('page-profile').classList.contains('active'); }
 function renderProfile(){
