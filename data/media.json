@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18",
+  "updated": "2026-09-25",
   "ipstUrl": "https://proj14.ipst.ac.th/m4-6-chem/",
   "ytSearchBase": "https://www.youtube.com/results?search_query=",
   "note": "คลังสื่อรวบรวมชื่อ+ลิงก์วิดีโอเคมีจริงจาก YouTube (ทั้งไทยและต่างประเทศ) สื่อจำลอง PhET คลิปการทดลอง และบทเรียน สสวท. (Project 14) จัดตามบทและหัวข้อสำคัญ — เพิ่ม/แก้รายการได้ที่บล็อก id=\"media-data\" ในไฟล์ index.html (หรือไฟล์ data/media.json เมื่ออัปขึ้นเว็บ). kind: บทเรียน=คลิปสอน, ทดลอง=คลิปการทดลอง, จำลอง=สื่อโต้ตอบ/simulation, เพลย์ลิสต์=ชุดวิดีโอ",
@@ -16,8 +16,8 @@
       "videos": [
         { "t": "เคมี ม.4 บทที่ 1 ความปลอดภัยและทักษะในปฏิบัติการเคมี", "u": "https://www.youtube.com/watch?v=TNGFNxFb71M", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "เลขนัยสำคัญ ตอน การคูณและการหาร", "u": "https://www.youtube.com/watch?v=BSCa7I1vkWo", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Lab Techniques & Safety – Crash Course Chemistry #21", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 21", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" },
-        { "t": "Unit Conversion & Significant Figures – Crash Course #2", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 2", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Lab Techniques & Safety – Crash Course Chemistry #21", "u": "https://www.youtube.com/watch?v=VRWRmIEHr3A", "by": "CrashCourse", "lang": "อังกฤษ", "kind": "บทเรียน" },
+        { "t": "Unit Conversion & Significant Figures – Crash Course #2", "u": "https://www.youtube.com/watch?v=hQpQ0hxVNTg", "by": "CrashCourse", "lang": "อังกฤษ", "kind": "บทเรียน" }
       ]
     },
     {
@@ -51,7 +51,7 @@
         { "t": "[เคมี ม.4: พันธะเคมี] ep.1 ความรู้พื้นฐานเกี่ยวกับพันธะเคมี", "u": "https://www.youtube.com/watch?v=5cVsfFWJP7Y", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "พันธะเคมี: การเกิดพันธะโคเวเลนต์ | เคมี ม.4-6 เล่ม 1", "u": "https://www.youtube.com/watch?v=Agj8ks3i8Tc", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "\"พันธะเคมี\" รู้กัน วันเดียว – เคมี ม.4 เทอม 1", "u": "https://www.youtube.com/watch?v=-4r8CA2ufCA", "by": "เคมีพี่กัปตัน", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Atomic Hook-Ups: Types of Chemical Bonds – Crash Course #22", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 22-24", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" },
+        { "t": "Atomic Hook-Ups: Types of Chemical Bonds – Crash Course #22", "u": "https://www.youtube.com/watch?v=QXT4OVM4vXI&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 22-24", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" },
         { "t": "เพลย์ลิสต์: [เคมี ม.4] พันธะเคมี", "u": "https://www.youtube.com/playlist?list=PLlSdOm06ZZ7ThagD8BDTlTG8SU5KYVcqV", "by": "YouTube", "lang": "ไทย", "kind": "เพลย์ลิสต์" }
       ]
     },
@@ -66,7 +66,7 @@
       "q": "เคมี โมลและสูตรเคมี มวลโมเลกุล สูตรเอมพิริคัล",
       "videos": [
         { "t": "โมล Part 1 – พื้นฐานต้องรู้ ก่อนขึ้น \"โมล\"", "u": "https://www.youtube.com/watch?v=brHpDxyXAmU", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Stoichiometry (Chemistry for Massive Creatures) – Crash Course #6", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 6", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Stoichiometry (Chemistry for Massive Creatures) – Crash Course #6", "u": "https://www.youtube.com/watch?v=UL1jmJaUkaQ", "by": "CrashCourse", "lang": "อังกฤษ", "kind": "บทเรียน" }
       ]
     },
     {
@@ -80,7 +80,7 @@
       "q": "เคมี สารละลาย ความเข้มข้น โมลาริตี การเตรียมสารละลาย",
       "videos": [
         { "t": "ติวเคมี ม.4 เทอม 2 FINAL: สารละลาย และ ปริมาณสารสัมพันธ์", "u": "https://www.youtube.com/watch?v=Y5Xmqt1O1Uo", "by": "เคมีพี่กัปตัน", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Water & Solutions (for Dirty Laundry) – Crash Course #7", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 7, 27", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Water & Solutions (for Dirty Laundry) – Crash Course #7", "u": "https://www.youtube.com/watch?v=AN4KifV12DA&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 7, 27", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {
@@ -112,7 +112,7 @@
         { "t": "แก๊สและสมบัติของแก๊ส ep.1 เคมี ม.5", "u": "https://www.youtube.com/watch?v=7tS9q7PJHUk", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "กฎแก๊สอุดมคติ (PV=nRT) เคมี ม.5 เทอม 1", "u": "https://www.youtube.com/watch?v=pYrtB93FgTA", "by": "เคมีพี่กัปตัน", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "จำลองสถานะของสสาร: ของแข็ง-ของเหลว-แก๊ส (States of Matter)", "u": "https://phet.colorado.edu/en/simulations/states-of-matter-basics", "by": "PhET · Univ. of Colorado", "lang": "อังกฤษ", "kind": "จำลอง" },
-        { "t": "The Ideal Gas Law – Crash Course Chemistry #12", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 12-16", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "The Ideal Gas Law – Crash Course Chemistry #12", "u": "https://www.youtube.com/watch?v=BxUS1K7xu30&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 12-16", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {
@@ -129,7 +129,7 @@
         { "t": "อัตราการเกิดปฏิกิริยาเคมี สรุปเนื้อหา เคมี ม.5 (พร้อมการคำนวณ)", "u": "https://www.youtube.com/watch?v=xGy_xrOj0CI", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "สรุป อัตราการเกิดปฏิกิริยาเคมี เต็มบท 30 นาทีรู้เรื่อง", "u": "https://www.youtube.com/watch?v=rkkCcZCBKU0", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "เพลย์ลิสต์: อัตราการเกิดปฏิกิริยาเคมี เคมี ม.5 เทอม 1", "u": "https://www.youtube.com/playlist?list=PLHY_bhZpPfZydrcD4vn4wkhP-nttRu3wP", "by": "YouTube", "lang": "ไทย", "kind": "เพลย์ลิสต์" },
-        { "t": "Kinetics: Chemistry's Demolition Derby – Crash Course #32", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 32", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Kinetics: Chemistry's Demolition Derby – Crash Course #32", "u": "https://www.youtube.com/watch?v=7qOFtL3VEBc", "by": "CrashCourse", "lang": "อังกฤษ", "kind": "บทเรียน" }
       ]
     },
     {
@@ -145,7 +145,7 @@
         { "t": "\"สมดุลเคมี\" รู้กัน วันเดียว – เคมี ม.5 เทอม 1", "u": "https://www.youtube.com/watch?v=Z2poIvdm8d0", "by": "เคมีพี่กัปตัน", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "7.5 หลักของเลอชาเตอลิเอ (เคมีเพิ่มเติม เล่ม 3)", "u": "https://www.youtube.com/watch?v=vgVAiH4qKGI", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "เพลย์ลิสต์: [เคมี ม.5] สมดุลเคมี", "u": "https://www.youtube.com/playlist?list=PLlSdOm06ZZ7QeyPCuoacsBMWvsCfBh-DM", "by": "YouTube", "lang": "ไทย", "kind": "เพลย์ลิสต์" },
-        { "t": "Equilibrium – Crash Course Chemistry #28", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 28-29", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Equilibrium – Crash Course Chemistry #28", "u": "https://www.youtube.com/watch?v=g5wNg_dKsYY&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 28-29", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {
@@ -160,7 +160,7 @@
       "videos": [
         { "t": "สรุปเคมี กรด-เบส EP.1: การคำนวณ pH ของกรด-เบสแก่", "u": "https://www.youtube.com/watch?v=WB1_MLGGE8Q", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "[เคมี] สรุป ม.5 – การไทเทรตกรด-เบส", "u": "https://www.youtube.com/watch?v=pHhYE8bNjC4", "by": "CHOTIWAT", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "pH and pOH / Buffers – Crash Course Chemistry #30-31", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 30-31", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "pH and pOH / Buffers – Crash Course Chemistry #30-31", "u": "https://www.youtube.com/watch?v=LS67vS10O5Y&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 30-31", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {
@@ -176,7 +176,7 @@
         { "t": "เซลล์อิเล็กโทรลิติก-เซลล์เคมีไฟฟ้า | เคมีไฟฟ้า ep.7", "u": "https://www.youtube.com/watch?v=tqYzi2ervFk", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "เคมี: ติวเข้ม เคมีไฟฟ้า | ห้องเรียนติวเข้ม ม.6", "u": "https://www.youtube.com/watch?v=FF8r0UA5qqA", "by": "ALTV / Thai PBS", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "ประโยชน์ของเซลล์กัลวานิก (เคมีทั่วไป 2 Ep 5.6)", "u": "https://www.youtube.com/watch?v=ntz1lppMopg", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Electrochemistry – Crash Course Chemistry #36", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 10, 36", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Electrochemistry – Crash Course Chemistry #36", "u": "https://www.youtube.com/watch?v=IV4IUsholjg&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 10, 36", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {
@@ -191,7 +191,7 @@
       "videos": [
         { "t": "เพลย์ลิสต์: เคมีอินทรีย์หลักสูตรใหม่ เคมี ม.6", "u": "https://www.youtube.com/playlist?list=PLHY_bhZpPfZwNPoWVbG_AOyG1LDwzGdkc", "by": "YouTube", "lang": "ไทย", "kind": "เพลย์ลิสต์" },
         { "t": "ข้อสอบ-แบบฝึกหัดเคมีอินทรีย์ | เคมี ม.6", "u": "https://www.youtube.com/watch?v=iieK5ynBHh4", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Hydrocarbon Power! / Alkenes & Alkynes – Crash Course #40-43", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 40-44", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Hydrocarbon Power! / Alkenes & Alkynes – Crash Course #40-43", "u": "https://www.youtube.com/watch?v=UloIw7dhnlQ&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 40-44", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {

@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#0EA5A0">
 <meta name="description" content="ศูนย์การเรียนรู้วิชาเคมี ม.ปลาย เนื้อหาครบเคมี 1-6 พร้อมแบบทดสอบ เครื่องมือเคมี และระบบติดตามการเรียน">
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="apple-touch-icon" href="./icon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png">
 <link rel="icon" type="image/svg+xml" href="./icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -548,6 +548,12 @@ footer strong { color:white; font-weight:600; }
 .cp-row.todo .cp-title { color:var(--muted); }
 
 /* Toast */
+.pk-offline { position:fixed; top:var(--nav-h); left:0; right:0; z-index:99; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:6px 10px;
+  padding:8px 14px; background:#FEF3C7; color:#78350F; border-bottom:1px solid #FCD34D; font-size:13px; line-height:1.45; text-align:center; }
+.pk-offline button { font:inherit; font-weight:600; border:1px solid #D97706; background:#fff; color:#92400E; border-radius:8px; padding:3px 12px; cursor:pointer; }
+.pk-offline .po-x { border:none; background:transparent; padding:2px 6px; }
+html[data-theme="dark"] .pk-offline { background:#422006; color:#FDE68A; border-bottom-color:#92400E; }
+html[data-theme="dark"] .pk-offline button { background:transparent; color:#FDE68A; border-color:#B45309; }
 .pk-toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
   background:var(--text); color:#fff; padding:12px 22px; border-radius:12px; font-size:14px; font-weight:500;
   box-shadow:0 10px 30px rgba(0,0,0,.25); opacity:0; pointer-events:none; transition:all .3s; z-index:300; }
@@ -1572,6 +1578,19 @@ html[data-theme="dark"] .rpg-skill .sk-mp { background:#4c1d95; color:#ddd6fe; }
   nav { padding:0 0.8rem; }
   .nav-title { font-size:14px; }
   .nav-sub { font-size:10px; }
+  /* แถบบนต้องมีที่ให้ปุ่มเมนู ☰ เสมอ (เดิมตอนล็อกอินแล้ว ปุ่ม ☰ ล้นออกนอกจอมือถือ 1–53px)
+     → ซ่อนตัวนับออนไลน์บนมือถือ · ชื่อเว็บบรรทัดเดียวตัดด้วย … แทนการขึ้น 3 บรรทัด */
+  .member-badge { display:none !important; }
+  .nav-auth { gap:6px; flex-shrink:0; }
+  .nav-logo { min-width:0; }
+  .nav-logo > div:last-child { min-width:0; overflow:hidden; }
+  .nav-title, .nav-sub { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+}
+@media(max-width:360px){
+  .nav-logo > div:last-child { display:none; }
+  .nav-icon-btn, .nav-hamburger { width:38px; height:38px; }
+}
+@media(max-width:480px){
 
   .hero { padding:52px 1rem 64px; }
   .hero h1 { font-size:clamp(1.6rem,8vw,2.2rem); }
@@ -2171,7 +2190,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
     <!-- ───── เกม 1: เคมีมาร์เบิล ───── -->
     <div id="marbleGame" style="display:none;">
-    <button class="game-back" onclick="GameHub.toHub()">⟵ เลือกเกม</button>
+    <button class="game-back" onclick="GameHub.back()">⟵ เลือกเกม</button>
     <h2>🎲 เคมีมาร์เบิล</h2>
     <div class="game-sub">เกมกระดานเคมีรวมทุกบท — เดินรอบกระดาน ตอบคำถามเพื่อครอบครองพื้นที่ ใครมีทรัพย์สินมากกว่าเมื่อจบเกมเป็นผู้ชนะ!</div>
 
@@ -2227,7 +2246,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
     <!-- ───── เกม 2: บันไดงูเคมี ───── -->
     <div id="snakeGame" style="display:none;">
-      <button class="game-back" onclick="GameHub.toHub()">⟵ เลือกเกม</button>
+      <button class="game-back" onclick="GameHub.back()">⟵ เลือกเกม</button>
       <h2>🐍 บันไดงูเคมี</h2>
       <div class="game-sub">ทอยลูกเต๋าเดินหน้า · เจอบันได 🪜 ตอบถูกเพื่อปีนขึ้น · เจองู 🐍 ตอบถูกเพื่อรอด · ใครถึงช่อง 36 ก่อนชนะ!</div>
       <div id="snakeStart">
@@ -2256,7 +2275,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
     <!-- ───── เกม 3: จับคู่เคมี ───── -->
     <div id="matchGame" style="display:none;">
-      <button class="game-back" onclick="GameHub.toHub()">⟵ เลือกเกม</button>
+      <button class="game-back" onclick="GameHub.back()">⟵ เลือกเกม</button>
       <h2>🃏 จับคู่เคมี</h2>
       <div class="game-sub">เลือก <strong>เวอร์ชัน</strong> ที่อยากเล่น แล้วพลิกการ์ด 2 ใบจับคู่ให้ครบทุกคู่ ใช้จำนวนตาน้อยและเร็วที่สุด!</div>
       <div id="matchStart">
@@ -2279,13 +2298,13 @@ html, body { max-width:100%; overflow-x:hidden; }
 
     <!-- ───── เกม 4: นักผจญภัยเคมี (RPG) ───── -->
     <div id="rpgGame" style="display:none;">
-      <button class="game-back" onclick="GameHub.toHub()">⟵ เลือกเกม</button>
+      <button class="game-back" onclick="GameHub.back()">⟵ เลือกเกม</button>
       <div id="rpgRoot"></div>
     </div><!-- /#rpgGame -->
 
     <!-- ───── เกม 5: บิงโกตารางธาตุ ───── -->
     <div id="bingoGame" style="display:none;">
-      <button class="game-back" onclick="GameHub.toHub()">⟵ เลือกเกม</button>
+      <button class="game-back" onclick="GameHub.back()">⟵ เลือกเกม</button>
       <h2>🔢 บิงโกตารางธาตุ</h2>
       <div class="game-sub">ผู้เรียกจะให้คำใบ้เกี่ยวกับธาตุทีละข้อ — กดช่องบนการ์ดที่ตรงกับคำใบ้ · ทำเครื่องหมายให้ครบ 1 แถว (แนวนอน/ตั้ง/ทแยง) เป็น <strong>BINGO!</strong></div>
       <div id="bingoStart">
@@ -2311,7 +2330,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
     <!-- ───── เกม 6: Wordle เคมี ───── -->
     <div id="chemleGame" style="display:none;">
-      <button class="game-back" onclick="GameHub.toHub()">⟵ เลือกเกม</button>
+      <button class="game-back" onclick="GameHub.back()">⟵ เลือกเกม</button>
       <h2>🔤 Wordle เคมี</h2>
       <div class="game-sub">เดาคำศัพท์เคมีภาษาอังกฤษให้ถูกภายใน 6 ครั้ง — พิมพ์คำที่มีความยาวเท่ากัน แล้วดูสีไฟ: 🟩 ตัวอักษรถูกที่ · 🟨 มีในคำแต่ผิดที่ · ⬜ ไม่มีในคำ</div>
       <div id="chemleStart">
@@ -2338,7 +2357,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
     <!-- ───── เกม 7: จับคู่ไอออน ───── -->
     <div id="ionsGame" style="display:none;">
-      <button class="game-back" onclick="GameHub.toHub()">⟵ เลือกเกม</button>
+      <button class="game-back" onclick="GameHub.back()">⟵ เลือกเกม</button>
       <h2>⚡ จับคู่ไอออน</h2>
       <div class="game-sub">สร้างเกลือให้เป็นกลาง! เลือกไอออนบวกและไอออนลบให้ประจุรวมหักล้างกันพอดี — ทำให้ครบเป้าก่อนหมดเวลา ตอบเร็วต่อเนื่องได้คอมโบ 🔥</div>
       <div id="ionsStart"></div>
@@ -2347,7 +2366,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
     <!-- ───── เกม 8: ไทเทรชันแม่นยำ ───── -->
     <div id="titrateGame" style="display:none;">
-      <button class="game-back" onclick="GameHub.toHub()">⟵ เลือกเกม</button>
+      <button class="game-back" onclick="GameHub.back()">⟵ เลือกเกม</button>
       <h2>🧪 ไทเทรชันแม่นยำ</h2>
       <div class="game-sub">หยดสารละลายมาตรฐานลงในกรด/เบสตัวอย่าง เฝ้าดูสีอินดิเคเตอร์และกราฟ pH แล้วกด "หยุด" ให้ใกล้จุดสมมูลที่สุด ⭐ ยิ่งแม่นยิ่งได้ดาว</div>
       <div id="titrateStart"></div>
@@ -2356,7 +2375,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
     <!-- ───── เกม 9: ผสมสารค้นพบ ───── -->
     <div id="alchemyGame" style="display:none;">
-      <button class="game-back" onclick="GameHub.toHub()">⟵ เลือกเกม</button>
+      <button class="game-back" onclick="GameHub.back()">⟵ เลือกเกม</button>
       <h2>⚗️ ผสมสารค้นพบ</h2>
       <div class="game-sub">ลากสารสองตัวมาชนกันเพื่อค้นพบสารหรือปฏิกิริยาใหม่ สะสมทุกการค้นพบลงสมุด แล้วปลดล็อกให้ครบทุกสูตร!</div>
       <div id="alchemyStart"></div>
@@ -2857,7 +2876,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 ════════════════════════════════════ -->
 <script type="application/json" id="media-data">
 {
-  "updated": "2026-06-18",
+  "updated": "2026-09-25",
   "ipstUrl": "https://proj14.ipst.ac.th/m4-6-chem/",
   "ytSearchBase": "https://www.youtube.com/results?search_query=",
   "note": "คลังสื่อรวบรวมชื่อ+ลิงก์วิดีโอเคมีจริงจาก YouTube (ทั้งไทยและต่างประเทศ) สื่อจำลอง PhET คลิปการทดลอง และบทเรียน สสวท. (Project 14) จัดตามบทและหัวข้อสำคัญ — เพิ่ม/แก้รายการได้ที่บล็อก id=\"media-data\" ในไฟล์ index.html (หรือไฟล์ data/media.json เมื่ออัปขึ้นเว็บ). kind: บทเรียน=คลิปสอน, ทดลอง=คลิปการทดลอง, จำลอง=สื่อโต้ตอบ/simulation, เพลย์ลิสต์=ชุดวิดีโอ",
@@ -2874,8 +2893,8 @@ html, body { max-width:100%; overflow-x:hidden; }
       "videos": [
         { "t": "เคมี ม.4 บทที่ 1 ความปลอดภัยและทักษะในปฏิบัติการเคมี", "u": "https://www.youtube.com/watch?v=TNGFNxFb71M", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "เลขนัยสำคัญ ตอน การคูณและการหาร", "u": "https://www.youtube.com/watch?v=BSCa7I1vkWo", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Lab Techniques & Safety – Crash Course Chemistry #21", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 21", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" },
-        { "t": "Unit Conversion & Significant Figures – Crash Course #2", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 2", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Lab Techniques & Safety – Crash Course Chemistry #21", "u": "https://www.youtube.com/watch?v=VRWRmIEHr3A", "by": "CrashCourse", "lang": "อังกฤษ", "kind": "บทเรียน" },
+        { "t": "Unit Conversion & Significant Figures – Crash Course #2", "u": "https://www.youtube.com/watch?v=hQpQ0hxVNTg", "by": "CrashCourse", "lang": "อังกฤษ", "kind": "บทเรียน" }
       ]
     },
     {
@@ -2909,7 +2928,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         { "t": "[เคมี ม.4: พันธะเคมี] ep.1 ความรู้พื้นฐานเกี่ยวกับพันธะเคมี", "u": "https://www.youtube.com/watch?v=5cVsfFWJP7Y", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "พันธะเคมี: การเกิดพันธะโคเวเลนต์ | เคมี ม.4-6 เล่ม 1", "u": "https://www.youtube.com/watch?v=Agj8ks3i8Tc", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "\"พันธะเคมี\" รู้กัน วันเดียว – เคมี ม.4 เทอม 1", "u": "https://www.youtube.com/watch?v=-4r8CA2ufCA", "by": "เคมีพี่กัปตัน", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Atomic Hook-Ups: Types of Chemical Bonds – Crash Course #22", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 22-24", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" },
+        { "t": "Atomic Hook-Ups: Types of Chemical Bonds – Crash Course #22", "u": "https://www.youtube.com/watch?v=QXT4OVM4vXI&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 22-24", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" },
         { "t": "เพลย์ลิสต์: [เคมี ม.4] พันธะเคมี", "u": "https://www.youtube.com/playlist?list=PLlSdOm06ZZ7ThagD8BDTlTG8SU5KYVcqV", "by": "YouTube", "lang": "ไทย", "kind": "เพลย์ลิสต์" }
       ]
     },
@@ -2924,7 +2943,7 @@ html, body { max-width:100%; overflow-x:hidden; }
       "q": "เคมี โมลและสูตรเคมี มวลโมเลกุล สูตรเอมพิริคัล",
       "videos": [
         { "t": "โมล Part 1 – พื้นฐานต้องรู้ ก่อนขึ้น \"โมล\"", "u": "https://www.youtube.com/watch?v=brHpDxyXAmU", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Stoichiometry (Chemistry for Massive Creatures) – Crash Course #6", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 6", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Stoichiometry (Chemistry for Massive Creatures) – Crash Course #6", "u": "https://www.youtube.com/watch?v=UL1jmJaUkaQ", "by": "CrashCourse", "lang": "อังกฤษ", "kind": "บทเรียน" }
       ]
     },
     {
@@ -2938,7 +2957,7 @@ html, body { max-width:100%; overflow-x:hidden; }
       "q": "เคมี สารละลาย ความเข้มข้น โมลาริตี การเตรียมสารละลาย",
       "videos": [
         { "t": "ติวเคมี ม.4 เทอม 2 FINAL: สารละลาย และ ปริมาณสารสัมพันธ์", "u": "https://www.youtube.com/watch?v=Y5Xmqt1O1Uo", "by": "เคมีพี่กัปตัน", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Water & Solutions (for Dirty Laundry) – Crash Course #7", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 7, 27", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Water & Solutions (for Dirty Laundry) – Crash Course #7", "u": "https://www.youtube.com/watch?v=AN4KifV12DA&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 7, 27", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {
@@ -2970,7 +2989,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         { "t": "แก๊สและสมบัติของแก๊ส ep.1 เคมี ม.5", "u": "https://www.youtube.com/watch?v=7tS9q7PJHUk", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "กฎแก๊สอุดมคติ (PV=nRT) เคมี ม.5 เทอม 1", "u": "https://www.youtube.com/watch?v=pYrtB93FgTA", "by": "เคมีพี่กัปตัน", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "จำลองสถานะของสสาร: ของแข็ง-ของเหลว-แก๊ส (States of Matter)", "u": "https://phet.colorado.edu/en/simulations/states-of-matter-basics", "by": "PhET · Univ. of Colorado", "lang": "อังกฤษ", "kind": "จำลอง" },
-        { "t": "The Ideal Gas Law – Crash Course Chemistry #12", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 12-16", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "The Ideal Gas Law – Crash Course Chemistry #12", "u": "https://www.youtube.com/watch?v=BxUS1K7xu30&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 12-16", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {
@@ -2987,7 +3006,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         { "t": "อัตราการเกิดปฏิกิริยาเคมี สรุปเนื้อหา เคมี ม.5 (พร้อมการคำนวณ)", "u": "https://www.youtube.com/watch?v=xGy_xrOj0CI", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "สรุป อัตราการเกิดปฏิกิริยาเคมี เต็มบท 30 นาทีรู้เรื่อง", "u": "https://www.youtube.com/watch?v=rkkCcZCBKU0", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "เพลย์ลิสต์: อัตราการเกิดปฏิกิริยาเคมี เคมี ม.5 เทอม 1", "u": "https://www.youtube.com/playlist?list=PLHY_bhZpPfZydrcD4vn4wkhP-nttRu3wP", "by": "YouTube", "lang": "ไทย", "kind": "เพลย์ลิสต์" },
-        { "t": "Kinetics: Chemistry's Demolition Derby – Crash Course #32", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 32", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Kinetics: Chemistry's Demolition Derby – Crash Course #32", "u": "https://www.youtube.com/watch?v=7qOFtL3VEBc", "by": "CrashCourse", "lang": "อังกฤษ", "kind": "บทเรียน" }
       ]
     },
     {
@@ -3003,7 +3022,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         { "t": "\"สมดุลเคมี\" รู้กัน วันเดียว – เคมี ม.5 เทอม 1", "u": "https://www.youtube.com/watch?v=Z2poIvdm8d0", "by": "เคมีพี่กัปตัน", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "7.5 หลักของเลอชาเตอลิเอ (เคมีเพิ่มเติม เล่ม 3)", "u": "https://www.youtube.com/watch?v=vgVAiH4qKGI", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "เพลย์ลิสต์: [เคมี ม.5] สมดุลเคมี", "u": "https://www.youtube.com/playlist?list=PLlSdOm06ZZ7QeyPCuoacsBMWvsCfBh-DM", "by": "YouTube", "lang": "ไทย", "kind": "เพลย์ลิสต์" },
-        { "t": "Equilibrium – Crash Course Chemistry #28", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 28-29", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Equilibrium – Crash Course Chemistry #28", "u": "https://www.youtube.com/watch?v=g5wNg_dKsYY&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 28-29", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {
@@ -3018,7 +3037,7 @@ html, body { max-width:100%; overflow-x:hidden; }
       "videos": [
         { "t": "สรุปเคมี กรด-เบส EP.1: การคำนวณ pH ของกรด-เบสแก่", "u": "https://www.youtube.com/watch?v=WB1_MLGGE8Q", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "[เคมี] สรุป ม.5 – การไทเทรตกรด-เบส", "u": "https://www.youtube.com/watch?v=pHhYE8bNjC4", "by": "CHOTIWAT", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "pH and pOH / Buffers – Crash Course Chemistry #30-31", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 30-31", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "pH and pOH / Buffers – Crash Course Chemistry #30-31", "u": "https://www.youtube.com/watch?v=LS67vS10O5Y&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 30-31", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {
@@ -3034,7 +3053,7 @@ html, body { max-width:100%; overflow-x:hidden; }
         { "t": "เซลล์อิเล็กโทรลิติก-เซลล์เคมีไฟฟ้า | เคมีไฟฟ้า ep.7", "u": "https://www.youtube.com/watch?v=tqYzi2ervFk", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "เคมี: ติวเข้ม เคมีไฟฟ้า | ห้องเรียนติวเข้ม ม.6", "u": "https://www.youtube.com/watch?v=FF8r0UA5qqA", "by": "ALTV / Thai PBS", "lang": "ไทย", "kind": "บทเรียน" },
         { "t": "ประโยชน์ของเซลล์กัลวานิก (เคมีทั่วไป 2 Ep 5.6)", "u": "https://www.youtube.com/watch?v=ntz1lppMopg", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Electrochemistry – Crash Course Chemistry #36", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 10, 36", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Electrochemistry – Crash Course Chemistry #36", "u": "https://www.youtube.com/watch?v=IV4IUsholjg&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 10, 36", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {
@@ -3049,7 +3068,7 @@ html, body { max-width:100%; overflow-x:hidden; }
       "videos": [
         { "t": "เพลย์ลิสต์: เคมีอินทรีย์หลักสูตรใหม่ เคมี ม.6", "u": "https://www.youtube.com/playlist?list=PLHY_bhZpPfZwNPoWVbG_AOyG1LDwzGdkc", "by": "YouTube", "lang": "ไทย", "kind": "เพลย์ลิสต์" },
         { "t": "ข้อสอบ-แบบฝึกหัดเคมีอินทรีย์ | เคมี ม.6", "u": "https://www.youtube.com/watch?v=iieK5ynBHh4", "by": "YouTube", "lang": "ไทย", "kind": "บทเรียน" },
-        { "t": "Hydrocarbon Power! / Alkenes & Alkynes – Crash Course #40-43", "u": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 40-44", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
+        { "t": "Hydrocarbon Power! / Alkenes & Alkynes – Crash Course #40-43", "u": "https://www.youtube.com/watch?v=UloIw7dhnlQ&list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr", "by": "CrashCourse · ดูตอนที่ 40-44", "lang": "อังกฤษ", "kind": "เพลย์ลิสต์" }
       ]
     },
     {
@@ -18377,6 +18396,7 @@ function showPage(pageId) {
   if (pageId==='media') loadMedia();
   if (pageId==='welcome' && window.PK && PK.renderWelcome) PK.renderWelcome();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (window.PKRouter) PKRouter.sync();   // ปุ่ม Back/ลิงก์ตรง (ดู PKRouter)
 }
 
 // ─── MEDIA LIBRARY (คลังสื่อ) ───
@@ -18805,7 +18825,7 @@ function showChapter(chapterId) {
 document.getElementById('nav-welcome').classList.add('active');
 
 // ─── เวอร์ชันเว็บ (ใช้ยืนยันว่าโหลดตัวล่าสุดแล้ว — ต้องตรงกับ CACHE ใน sw.js) ───
-const APP_VERSION = 'v27';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
+const APP_VERSION = 'v28';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
 (function stampVersion() {
   try { console.log('%cPKchemistry ' + APP_VERSION, 'color:#14B8A6;font-weight:700;font-size:13px'); } catch (e) {}
   function paint() {
@@ -20037,6 +20057,20 @@ const LocalBackend = {
   start(){ this._emit(); }
 };
 
+/* ═══ 2b) OFFLINE — มี Firebase แต่โหลดไม่ได้ (เน็ตหลุด/เครือข่ายโรงเรียนบล็อก) ═══
+   เดิมสลับเป็นโหมดเดโมเงียบ ๆ → นักเรียนที่สมัครตอนนั้นได้บัญชีที่อยู่แค่ในเครื่อง ครูไม่เห็น
+   ตอนนี้: เรียน/ทำควิซ/เล่นเกมได้ตามปกติ · สมัคร/เข้าสู่ระบบไม่ได้ พร้อมแถบแจ้งและปุ่มลองใหม่ */
+const OFFLINE_MSG = 'เชื่อมต่อระบบสมาชิกไม่ได้ (เน็ตหลุดหรือเครือข่ายบล็อก) — ยังเรียนได้ตามปกติ แต่สมัคร/เข้าสู่ระบบไม่ได้ชั่วคราว ลองใหม่เมื่อเน็ตกลับมา';
+const OfflineBackend = {
+  mode:'offline',
+  async register(){ throw new Error(OFFLINE_MSG); },
+  async login(){ throw new Error(OFFLINE_MSG); },
+  async resetPassword(){ throw new Error(OFFLINE_MSG); },
+  async logout(){},
+  trackChapter(){}, trackProblem(){}, saveQuiz(){ return null; }, getStudents(){ return []; }, saveStreak(){}, saveRPG(){},
+  start(){ PK._onAuth(null); PK._onCounters({members:null, online:null}); PK._onProgress(null); PK._showOffline(); }
+};
+
 /* ═══ 3) CLOUD BACKEND — Firebase Auth + Firestore ═══ */
 const CloudBackend = {
   mode:'cloud',
@@ -20117,7 +20151,7 @@ const CloudBackend = {
     return rec; },
   getStudents(){ return this._students||[]; },
   saveStreak(st){ const u=this.auth&&this.auth.currentUser; if(!u)return; this.F.updateDoc(this.F.doc(this.db,'users',u.uid),{'progress.streak':st}).catch(()=>{}); },
-  saveRPG(s){ const u=this.auth&&this.auth.currentUser; if(!u)return; this.F.updateDoc(this.F.doc(this.db,'users',u.uid),{'progress.rpg':s}).catch(()=>{}); },
+  saveRPG(s){ const u=this.auth&&this.auth.currentUser; if(!u)return; return this.F.updateDoc(this.F.doc(this.db,'users',u.uid),{'progress.rpg':s}).then(()=>true, ()=>false); },
   _pushCounters(){ PK._onCounters({members:(this._members==null?null:this._members), online:(this._online==null?null:this._online)}); },
   async _initVisits(){
     const ref=this.F.doc(this.db,'stats','site');
@@ -20157,7 +20191,7 @@ function renderAuthUI(){
   const hg=$('heroGreeting');
   if(hg){ hg.textContent = u ? ('👋 ยินดีต้อนรับกลับ, '+u.name+'!') : '👋 ยินดีต้อนรับสู่ศูนย์การเรียนรู้เคมี — เข้าสู่ระบบเพื่อบันทึกความก้าวหน้า'; hg.style.display='block'; }
   const hb=$('heroAuthBtn'); if(hb) hb.textContent = u ? '📊 โปรไฟล์ของฉัน' : '🔐 เข้าสู่ระบบ';
-  if(!u && $('page-teacher').classList.contains('active')) window.showPage('welcome');
+  if(!u && $('page-teacher').classList.contains('active')){ if(window.PKRouter) PKRouter.replaceNext(); window.showPage('welcome'); }
 }
 PK.openProfileOrLogin = ()=>{ if(state.user) PK.openProfile(); else PK.openAuth('login'); };
 function renderCounters(c){
@@ -20290,13 +20324,21 @@ PK._onAuth = u=>{
   state.user=u; state.createdAt = u && u.createdAt ? u.createdAt : state.createdAt;
   if(!u) PK._touched=false;
   renderAuthUI();
-  if(profileActive()){ u ? renderProfile() : window.showPage('welcome'); }
+  if(profileActive()){ if(u) renderProfile(); else { if(window.PKRouter) PKRouter.replaceNext(); window.showPage('welcome'); } }
+  try{ if(window.RPG && RPG._onUser) RPG._onUser(); }catch(e){}
+  if(window.PKRouter) PKRouter.onAuth(u);
 };
 PK._onCounters = renderCounters;
 PK._onProgress = p=>{ state.progress=p; if(state.user && p && !PK._touched){ PK._touched=true; PK.touchActivity(); } if(profileActive()) renderProfile(); if(window.__pkChapter) PK.refreshQuizButton(window.__pkChapter); };
 PK._setCreatedAt = ms=>{ state.createdAt=ms; if(profileActive()) renderProfile(); };
 
-PK.openAuth = (tab='login')=>{ PK.switchTab(tab); $('authMsg').className='auth-msg'; $('authForm').reset(); $('authOverlay').classList.add('open'); };
+PK.openAuth = (tab='login')=>{ PK.switchTab(tab); $('authMsg').className='auth-msg'; $('authForm').reset(); $('authOverlay').classList.add('open');
+  if(PK._backend && PK._backend.mode==='offline'){ $('authMsg').className='auth-msg err'; $('authMsg').textContent=OFFLINE_MSG; } };
+PK._showOffline = ()=>{ if($('pkOfflineBar')) return;
+  const b=document.createElement('div'); b.id='pkOfflineBar'; b.className='pk-offline'; b.setAttribute('role','status');
+  b.innerHTML='<span>⚠️ เชื่อมต่อระบบสมาชิกไม่ได้ — ยังเรียนได้ตามปกติ แต่เข้าสู่ระบบและบันทึกคะแนนไม่ได้ชั่วคราว</span>'+
+    '<button type="button" onclick="location.reload()">ลองใหม่</button><button type="button" class="po-x" aria-label="ปิดแถบแจ้งเตือน" onclick="this.parentNode.remove()">✕</button>';
+  document.body.appendChild(b); };
 PK.closeAuth = ()=> $('authOverlay').classList.remove('open');
 PK.overlayClick = e=>{ if(e.target===$('authOverlay')) PK.closeAuth(); };
 PK.switchTab = tab=>{
@@ -20329,6 +20371,7 @@ PK.submitAuth = async e=>{
   const name=$('inName').value.trim(), email=$('inEmail').value.trim(), pass=$('inPass').value;
   const msg=$('authMsg'), btn=$('authSubmitBtn');
   msg.className='auth-msg';
+  if(!PK._backend){ msg.className='auth-msg err'; msg.textContent='กำลังเชื่อมต่อระบบสมาชิก… รอสักครู่แล้วกดอีกครั้ง'; return; }
   if(state.tab==='register' && !name){ msg.className='auth-msg err'; msg.textContent='กรุณากรอกชื่อที่แสดง'; return; }
   if(state.tab==='reset' && !email){ msg.className='auth-msg err'; msg.textContent='กรุณากรอกอีเมล'; return; }
   btn.disabled=true; const old=btn.textContent; btn.textContent='กำลังดำเนินการ...';
@@ -20380,7 +20423,7 @@ PK.importData = (file)=>{ if(!file) return;
 };
 PK.trackChapter = (id)=>{ try{ PK._backend && PK._backend.trackChapter(id); }catch(e){} };
 PK.trackProblem = ()=>{ try{ PK._backend && PK._backend.trackProblem(); }catch(e){} };
-PK.saveRPG = (s)=>{ try{ PK._backend && PK._backend.saveRPG && PK._backend.saveRPG(s); }catch(e){} };
+PK.saveRPG = (s)=>{ try{ return PK._backend && PK._backend.saveRPG && PK._backend.saveRPG(s); }catch(e){} };
 
 /* ─── QUIZ ENGINE ─── */
 const QZ = { ch:null, qs:[], i:0, score:0, answered:false, review:false };
@@ -20528,7 +20571,9 @@ function showResult(){
     PK.refreshQuizButton(QZ.ch);
   }
 }
-PK.exitQuiz = () => { window.showPage(window.__pkQuizChapter==='__review' ? 'profile' : window.__pkQuizChapter==='__exam' ? 'home' : (window.__pkChapter ? 'chapter' : 'home')); };
+PK.exitQuiz = () => { const pg = window.__pkQuizChapter==='__review' ? 'profile' : window.__pkQuizChapter==='__exam' ? 'home' : (window.__pkChapter ? 'chapter' : 'home');
+  if(window.PKRouter && PKRouter.up(pg==='chapter' ? window.__pkChapter : pg)) return;
+  window.showPage(pg); };
 
 /* ═══ MOCK EXAM — โหมดสอบเสมือนจริง (จับเวลา · ไม่เฉลยจนจบ · ทบทวนรายข้อ) ═══ */
 const MEX = window.MEX = {};
@@ -20648,7 +20693,7 @@ MEX.renderResult = ()=>{
   $('examRoot').innerHTML=h;
 };
 MEX.toggleWrong = ()=>{ EX.showWrong=!EX.showWrong; MEX.renderResult(); };
-MEX.exit = ()=>{ if(EX && EX.timer){ clearInterval(EX.timer); EX.timer=null; } window.showPage('home'); };
+MEX.exit = ()=>{ if(EX && EX.timer){ clearInterval(EX.timer); EX.timer=null; } if(window.PKRouter && PKRouter.up('home')) return; window.showPage('home'); };
 
 /* ─── SEARCH ─── */
 const SEARCH_KW = {
@@ -21440,7 +21485,9 @@ function doMini(p){
 /* ═══ GAME HUB + เกมเพิ่มเติม (บันไดงู / จับคู่) ═══ */
 const GameHub = window.GameHub = {};
 GameHub._cur='hub'; GameHub._winCtx=null;
+GameHub.back = ()=>{ if(window.PKRouter && PKRouter.up('game')) return; GameHub.toHub(); };
 GameHub.open = (g)=>{
+  if(window.PKRouter) PKRouter.sync();
   $('gameHub').style.display='none';
   $('winOverlay').classList.remove('open');
   ['marble','snake','match','rpg','bingo','chemle','ions','titrate','alchemy'].forEach(k=>{ const el=$(k+'Game'); if(el) el.style.display=(k===g)?'':'none'; });
@@ -21456,6 +21503,7 @@ GameHub.open = (g)=>{
   else if(g==='alchemy') Alchemy.menu();
 };
 GameHub.toHub = ()=>{
+  if(window.PKRouter) PKRouter.sync();
   Game.toMenu(); Snake.stop(); Match.stop(); if(window.RPG) RPG.stop(); if(window.Bingo) Bingo.stop();
   if(window.Chemle) Chemle.stop(); if(window.Ions) Ions.stop(); if(window.Titrate) Titrate.stop(); if(window.Alchemy) Alchemy.stop();
   $('winOverlay').classList.remove('open');
@@ -21765,10 +21813,13 @@ Chemle.renderBest = ()=>{ try{ const s=JSON.parse(localStorage.getItem('pk_cheml
   if(s.played) t+='เล่นแล้ว '+s.played+' คำ · ชนะ '+(s.won||0)+' ('+Math.round((s.won||0)/s.played*100)+'%)';
   if(s.streak) t+=(t?' · ':'')+'🔥 สตรีคประจำวัน '+s.streak;
   el.textContent=t; }catch(e){} };
+/* วันตามปฏิทินของเครื่อง (เดิมใช้ UTC → คำประจำวันเปลี่ยนตอน 07:00 น. เวลาไทย แทนเที่ยงคืน) */
+Chemle._day = (off)=>{ const n=new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()+(off||0)); };
+Chemle._ymd = (off)=>{ const d=Chemle._day(off); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
 Chemle.start = (mode)=>{
   CML.on=true; CML.mode=mode; CML.rows=[]; CML.cur=''; CML.row=0; CML.over=false; CML.won=false; CML.keyState={};
   let pick;
-  if(mode==='daily'){ const d=Math.floor(Date.now()/86400000); pick=CHEMLE_WORDS[d % CHEMLE_WORDS.length]; }
+  if(mode==='daily'){ const t=Chemle._day(0), d=Math.round(Date.UTC(t.getFullYear(), t.getMonth(), t.getDate())/86400000); pick=CHEMLE_WORDS[d % CHEMLE_WORDS.length]; }
   else pick=CHEMLE_WORDS[Math.floor(Math.random()*CHEMLE_WORDS.length)];
   CML.word=pick[0]; CML.hint=pick[1]; CML.len=CML.word.length;
   $('chemleStart').style.display='none'; $('chemlePlay').style.display='';
@@ -21829,8 +21880,8 @@ Chemle.key = (k)=>{
 Chemle.finish = (won)=>{
   CML.over=true; CML.won=won; CML.on=false; document.removeEventListener('keydown', Chemle._onKey);
   try{ const s=JSON.parse(localStorage.getItem('pk_chemle')||'{}'); s.played=(s.played||0)+1; if(won) s.won=(s.won||0)+1;
-    if(CML.mode==='daily'){ const today=new Date().toISOString().slice(0,10);
-      if(won && s.lastWin!==today){ const y=new Date(Date.now()-86400000).toISOString().slice(0,10); s.streak=(s.lastWin===y?(s.streak||0):0)+1; s.lastWin=today; } }
+    if(CML.mode==='daily'){ const today=Chemle._ymd(0);
+      if(won && s.lastWin!==today){ const y=Chemle._ymd(-1); s.streak=(s.lastWin===y?(s.streak||0):0)+1; s.lastWin=today; } }
     localStorage.setItem('pk_chemle',JSON.stringify(s)); }catch(e){}
   const emoji={g:'🟩',y:'🟨',x:'⬛'};
   const grid=CML.rows.map(r=>r.score.map(s=>emoji[s]).join('')).join('\n');
@@ -22186,7 +22237,9 @@ Lab._renderAnimPanel = (labId)=>{
   const d = el.querySelector('details');
   if(d) d.addEventListener('toggle', ()=>{ if(d.open) el.querySelectorAll('.pk-replay').forEach(b=>pkReplay(b)); });
 };
+Lab.back = ()=>{ if(window.PKRouter && PKRouter.up('lab')) return; Lab.openHub(); };
 Lab.openHub = ()=>{
+  if(window.PKRouter) PKRouter.sync();
   Lab._stopAnim();
   const _a=document.getElementById('labAnim'); if(_a) _a.innerHTML='';
   let h='<div style="font-size:13px;color:var(--muted);margin-bottom:14px;">เลือกแล็บด้านล่างเพื่อเริ่มทดลอง — แต่ละแล็บจับคู่กับบทเรียน</div>';
@@ -22197,6 +22250,7 @@ Lab.openHub = ()=>{
   $('labRoot').innerHTML=h;
 };
 Lab.open = (id)=>{
+  if(window.PKRouter) PKRouter.sync();
   Lab._stopAnim();
   Lab._curId = id;
   Lab._renderAnimPanel(id);
@@ -22302,7 +22356,7 @@ Lab._labHead = (title)=>{
   const cid = LAB_CHAP[Lab._curId];
   const quizCTA = (cid && typeof PK!=='undefined' && PK.hasQuiz && PK.hasQuiz(cid))
     ? '<button class="lab-quiz-cta" onclick="PK.startQuiz(\''+cid+'\')" title="ทำแบบทดสอบบทนี้ ข้อที่ตอบผิดจะถูกเก็บไปทบทวน">📝 ทดสอบความเข้าใจ</button>' : '';
-  return '<div class="lab-head"><button class="lab-back" onclick="Lab.openHub()">⟵ แล็บอื่น</button><h3>'+title+'</h3>'+quizCTA+'</div>';
+  return '<div class="lab-head"><button class="lab-back" onclick="Lab.back()">⟵ แล็บอื่น</button><h3>'+title+'</h3>'+quizCTA+'</div>';
 };
 
 /* ── helper โหมดอิสระ/ภารกิจ + กล่องเป้าหมาย (ใช้ซ้ำหลายแล็บ) ── */
@@ -23509,7 +23563,17 @@ let RS = null;   // สถานะถาวรของผู้เล่น
 let RB = null;   // สถานะการต่อสู้ชั่วคราว
 RPG._default = ()=>({ level:1, xp:0, gold:30, hp:120, mp:30, items:{potion:1,hint:1,skip:0}, unlocked:1, cleared:[], pos:0, mapView:'world', chests:[], buff:null, bonus:{atk:0,hp:0,mp:0}, mastery:{}, review:[], equip:{weapon:null,armor:null,charm:null}, owned:[], gearLv:{}, secretCleared:false,
   stats:{kills:0,bosses:0,maxCombo:0,answered:0,correct:0,crits:0,drops:0,casts:0,chests:0,mystery:0,reviewed:0,secretWins:0}, best:{endless:0} });
-RPG.load = ()=>{ let s; try{ s=JSON.parse(localStorage.getItem('pk_rpg')||'null'); }catch(e){ s=null; }
+/* เซฟแยกตามบัญชี (pk_rpg_<uid>) · ไม่ล็อกอิน = เซฟของเครื่อง (pk_rpg)
+   เดิมมีเซฟเดียวต่อเครื่อง → ใช้คอม/มือถือร่วมกัน คนที่ล็อกอินถัดไปได้เลเวลของคนก่อน และถูกส่งขึ้นแดชบอร์ดครูในชื่อคนใหม่
+   เซฟเดิมของเครื่องย้ายให้ "บัญชีแรก" ที่เปิดเกมบนเครื่องนี้ครั้งเดียว บัญชีถัดไปเริ่มใหม่ */
+RPG._key = ()=>{ const u=(typeof state!=='undefined' && state.user && state.user.uid) ? state.user.uid : ''; return u ? 'pk_rpg_'+u : 'pk_rpg'; };
+RPG._hasUserSaves = ()=>{ try{ for(let i=0;i<localStorage.length;i++){ if(/^pk_rpg_/.test(localStorage.key(i)||'')) return true; } }catch(e){} return false; };
+RPG.load = ()=>{ const key=RPG._key(); let raw=null;
+  try{ raw=localStorage.getItem(key);
+    if(raw==null && key!=='pk_rpg' && !RPG._hasUserSaves()){ const g=localStorage.getItem('pk_rpg'); if(g!=null){ localStorage.setItem(key,g); localStorage.removeItem('pk_rpg'); raw=g; } }
+  }catch(e){}
+  RPG._curKey=key; RPG._lastSync=null;
+  let s; try{ s=JSON.parse(raw||'null'); }catch(e){ s=null; }
   RS=Object.assign(RPG._default(), s||{});
   if(!RS.items || typeof RS.items!=='object') RS.items={potion:1,hint:1,skip:0};
   if(!Array.isArray(RS.cleared)) RS.cleared=[]; RS.unlocked=RS.unlocked||1;
@@ -23524,7 +23588,7 @@ RPG.load = ()=>{ let s; try{ s=JSON.parse(localStorage.getItem('pk_rpg')||'null'
   if(!RS.gearLv || typeof RS.gearLv!=='object') RS.gearLv={};
   if(typeof RS.mp!=='number') RS.mp=RPG.maxMP();
   if(typeof RS.pos!=='number') RS.pos=0; if(RS.mapView!=='list'&&RS.mapView!=='world') RS.mapView='world'; };
-RPG.save = ()=>{ try{ localStorage.setItem('pk_rpg', JSON.stringify({level:RS.level,xp:RS.xp,gold:RS.gold,items:RS.items,unlocked:RS.unlocked,cleared:RS.cleared,pos:RS.pos,mapView:RS.mapView,chests:RS.chests,buff:RS.buff,bonus:RS.bonus,mastery:RS.mastery,review:RS.review,stats:RS.stats,best:RS.best,equip:RS.equip,owned:RS.owned,gearLv:RS.gearLv,secretCleared:RS.secretCleared})); }catch(e){} };
+RPG.save = ()=>{ try{ localStorage.setItem(RPG._curKey||RPG._key(), JSON.stringify({level:RS.level,xp:RS.xp,gold:RS.gold,items:RS.items,unlocked:RS.unlocked,cleared:RS.cleared,pos:RS.pos,mapView:RS.mapView,chests:RS.chests,buff:RS.buff,bonus:RS.bonus,mastery:RS.mastery,review:RS.review,stats:RS.stats,best:RS.best,equip:RS.equip,owned:RS.owned,gearLv:RS.gearLv,secretCleared:RS.secretCleared})); }catch(e){} };
 /* ── ระบบเรียนรู้อัจฉริยะ: มาสเตอรี + คลังข้อพลาด ── */
 RPG._recordAnswer = (ch, correct)=>{ if(!ch) return; const m=RS.mastery[ch]||(RS.mastery[ch]={seen:0,correct:0}); m.seen++; if(correct) m.correct++; };
 RPG._mPct = (ch)=>{ const m=RS.mastery[ch]; return (m&&m.seen)?Math.round(m.correct/m.seen*100):null; };
@@ -23538,13 +23602,19 @@ RPG._summary = ()=>{ const s=RS.stats, acc=s.answered?Math.round(s.correct/s.ans
   return { level:RS.level, cleared:RS.cleared.length, acc:acc, answered:s.answered, endless:RS.best.endless, reviewed:s.reviewed||0, mastery:mas, ts:Date.now() }; };
 RPG._sync = ()=>{ try{ if(typeof state==='undefined' || !state.user || typeof PK==='undefined' || !PK.saveRPG) return;
   const sum=RPG._summary(); const key=sum.level+'|'+sum.cleared+'|'+sum.answered+'|'+sum.endless+'|'+sum.reviewed;
-  if(key===RPG._lastSync) return; RPG._lastSync=key; PK.saveRPG(sum); }catch(e){} };
+  if(key===RPG._lastSync) return; RPG._lastSync=key;
+  // ส่งไม่สำเร็จ (เช่น เพิ่งสมัครแล้วเอกสารบัญชียังสร้างไม่เสร็จ) → ให้ครั้งถัดไปส่งใหม่ ไม่ถือว่าส่งแล้ว
+  const r=PK.saveRPG(sum); if(r && r.then) r.then(ok=>{ if(!ok && RPG._lastSync===key) RPG._lastSync=null; }); }catch(e){} };
 /* พลังจริง = สูตรพื้นฐาน + โบนัสถาวร (จากของหายาก) */
 RPG.maxHP = ()=>RPGCFG.maxHP(RS.level)+(RS.bonus?RS.bonus.hp:0)+RPG._gearBonus('hp');
 RPG.maxMP = ()=>RPGCFG.maxMP(RS.level)+(RS.bonus?RS.bonus.mp:0)+RPG._gearBonus('mp');
 RPG.atk   = ()=>RPGCFG.atk(RS.level)+(RS.bonus?RS.bonus.atk:0)+RPG._gearBonus('atk');
 RPG.open = ()=>{ RPG.load(); RPG.showMap(); };
 RPG.stop = ()=>{ RB=null; };
+/* เปลี่ยนบัญชี (ล็อกอิน/ออก) ขณะเกมโหลดอยู่ → เปลี่ยนไปใช้เซฟของบัญชีใหม่ทันที (กันเซฟคนก่อนถูกเขียนลงบัญชีใหม่) */
+RPG._onUser = ()=>{ if(!RS || RPG._curKey===RPG._key()) return;
+  RB=null;
+  if(GameHub._cur==='rpg' && $('page-game').classList.contains('active')) RPG.open(); else RPG.load(); };
 
 RPG.renderTop = ()=>{
   const lv=RS.level, mhp=RPG.maxHP(), mmp=RPG.maxMP(), need=RPGCFG.xpNext(lv);
@@ -24432,18 +24502,117 @@ document.addEventListener('click', e=>{
 });
 window.addEventListener('beforeunload', ()=>{ if(state.mode==='cloud' && PK._backend && PK._backend._removePresence) PK._backend._removePresence(); });
 
+/* ═══ ประวัติหน้า + ลิงก์ตรง — ปุ่ม Back ของมือถือ/เบราว์เซอร์ย้อนทีละหน้า · รีเฟรชแล้วอยู่หน้าเดิม · แชร์ลิงก์เข้าบทได้ ═══
+   #c2b4 = บท · #c2b4/quiz = ควิซของบท · #lab · #lab/atom · #game · #game/rpg · #home #media #tools #exam #profile #teacher · ไม่มี # = หน้าแรก
+   หน้าเปลี่ยน → sync() รวมการเรียกซ้อนกันในคลิกเดียวเป็นประวัติ 1 รายการ · ปุ่ม "กลับ/ออก" ในหน้าใช้ up() = ย้อนประวัติถ้าหน้าก่อนหน้าคือปลายทาง */
+const GAME_IDS = ['marble','snake','match','rpg','bingo','chemle','ions','titrate','alchemy'];
+const PKRouter = window.PKRouter = {
+  _idx:0, _stack:[], _queued:false, _replace:false, _pending:null, _y:0,
+  _isCh(id){ return !!(id && CHAPTERS.some(c=>c.id===id)); },
+  cur(){
+    const act=document.querySelector('.page.active'), id=act ? act.id.replace('page-','') : 'welcome';
+    if(id==='welcome') return '';
+    if(id==='chapter') return this._isCh(window.__pkChapter) ? window.__pkChapter : 'home';
+    if(id==='quiz') return (this._isCh(QZ.ch) && !QZ.review) ? QZ.ch+'/quiz' : 'quiz';
+    if(id==='lab') return (Lab._curId && !document.querySelector('#labRoot .lab-hub')) ? 'lab/'+Lab._curId : 'lab';
+    if(id==='game') return (GameHub._cur && GameHub._cur!=='hub') ? 'game/'+GameHub._cur : 'game';
+    return id;
+  },
+  _url(r){ return r ? '#'+r : location.pathname+location.search; },
+  _parse(h){ let r=''; try{ r=decodeURIComponent(String(h||'').replace(/^#\/?/,'')); }catch(e){} return r.replace(/\/+$/,''); },
+  _set(r, push){ // บันทึกประวัติ (ไม่เปลี่ยนหน้า)
+    try{
+      if(push){
+        history.replaceState(Object.assign({}, history.state, {y:this._y}), '');   // จำตำแหน่งเลื่อนของหน้าที่กำลังจะออก
+        this._idx++; this._stack.length=this._idx;
+      }
+      this._stack[this._idx]=r;
+      history[push?'pushState':'replaceState']({pk:1, i:this._idx, r:r, y:0}, '', this._url(r));
+    }catch(e){}
+  },
+  sync(){ if(this._queued) return; this._queued=true; Promise.resolve().then(()=>{ this._queued=false; this._commit(); }); },
+  replaceNext(){ this._replace=true; },
+  _commit(){ const r=this.cur(), rep=this._replace; this._replace=false;
+    if(r===this._stack[this._idx]) return;
+    this._pending=null; this._set(r, !rep); },
+  up(r){ if(this._idx>0 && this._stack[this._idx-1]===r){ try{ history.back(); return true; }catch(e){} } return false; },
+  _go(r){ // แสดงหน้าตาม route โดยไม่เพิ่มประวัติ · false = เปิดไม่ได้
+    if(r===this.cur()) return true;
+    const a=r.split('/')[0], b=r.split('/')[1];
+    if(r==='') window.showPage('welcome');
+    else if(this._isCh(a) && b==='quiz'){ if(QZ.ch===a && !QZ.review && QZ.qs.length) window.showPage('quiz'); else return this._go(a); }
+    else if(this._isCh(a) && !b){ if(window.__pkChapter===a) window.showPage('chapter'); else window.showChapter(a); }
+    else if(r==='quiz'){ if(!QZ.qs.length) return false; window.showPage('quiz'); }
+    else if(a==='lab' && (!b || LABS.some(L=>L.id===b))){ window.showPage('lab'); if(b) Lab.open(b); }
+    else if(a==='game' && (!b || GAME_IDS.includes(b))){ window.showPage('game'); if(b) GameHub.open(b); }
+    else if(r==='home' || r==='media' || r==='tools') window.showPage(r);
+    else if(r==='exam') MEX.open();
+    else if(r==='profile'){ if(!state.user) return false; PK.openProfile(); }
+    else if(r==='teacher'){ if(!PK.isTeacher()) return false; PK.openTeacher(); }
+    else return false;
+    return true;
+  },
+  _scroll(y){ try{ window.scrollTo({top:y||0, left:0, behavior:'instant'}); }catch(e){ window.scrollTo(0, y||0); } },
+  _onPop(e){
+    const st=(e && e.state && e.state.pk) ? e.state : null, r=st ? st.r : this._parse(location.hash);
+    if(r===this.cur()) return;
+    // กำลังสอบเสมือนจริง → ถามก่อน เหมือนปุ่ม "ออกจากข้อสอบ" · ไม่ออก = ใส่หน้าสอบกลับเข้าประวัติ
+    if(EX && EX.timer && $('page-exam').classList.contains('active')){
+      if(typeof confirm==='function' && !confirm('ออกจากข้อสอบ? คำตอบจะไม่ถูกบันทึก')){
+        const i=(st ? st.i : this._idx)+1; this._idx=i; this._stack.length=i; this._stack[i]='exam';
+        try{ history.pushState({pk:1, i:i, r:'exam', y:0}, '', '#exam'); }catch(err){}
+        return; }
+      clearInterval(EX.timer); EX.timer=null;
+    }
+    this._pending=null; this._replace=false;
+    this._idx = st ? st.i : this._idx+1;
+    this._stack[this._idx]=r;
+    try{ PK.closeDrawer(); }catch(err){}
+    if(!this._go(r)) window.showPage((r==='profile' || r==='teacher') ? 'welcome' : 'home');
+    const got=this.cur();
+    if(got!==r || !st) this._set(got, false);
+    this._scroll(st && got===r ? st.y : 0);
+  },
+  onAuth(u){ // ตอนโหลดหน้า: รู้สถานะล็อกอินแล้ว → นับการเข้าบทจากลิงก์ตรง · เปิดลิงก์ #profile / #teacher
+    const t=this._trackOnAuth; this._trackOnAuth=null;
+    if(u && t && window.__pkChapter===t && $('page-chapter').classList.contains('active')) PK.trackChapter(t);
+    const p=this._pending; if(!p) return; this._pending=null;
+    if(!(u && this._go(p))) this._set(this.cur(), false);
+  },
+  init(){
+    try{ if('scrollRestoration' in history) history.scrollRestoration='manual'; }catch(e){}
+    const st=(history.state && history.state.pk) ? history.state : null, want=this._parse(location.hash);
+    this._idx = st ? (st.i|0) : 0;
+    let r;
+    if(want==='profile' || want==='teacher'){ this._pending=want; r=want; }
+    else { if(want) this._go(want); r=this.cur(); if(this._isCh(r)) this._trackOnAuth=r; }   // ระบบสมาชิกยังไม่พร้อม → นับการเข้าบทเมื่อรู้ว่าใครล็อกอิน
+    this._stack[this._idx]=r;
+    const y=(st && st.r===r) ? (st.y||0) : 0;
+    try{ history.replaceState({pk:1, i:this._idx, r:r, y:y}, '', this._url(r)); }catch(e){}
+    if(y && !this._pending) setTimeout(()=>this._scroll(y), 60);
+    window.addEventListener('popstate', e=>this._onPop(e));
+    window.addEventListener('hashchange', ()=>this._onPop(null));
+    // จำตำแหน่งเลื่อนไว้ในประวัติหลังหยุดเลื่อน → รีเฟรช/เบราว์เซอร์ปิดแท็บเบื้องหลังแล้วเปิดใหม่ กลับมาที่เดิม
+    window.addEventListener('scroll', ()=>{ this._y=window.scrollY||0; clearTimeout(this._yt);
+      this._yt=setTimeout(()=>{ try{ const h=history.state; if(h && h.pk && h.y!==this._y) history.replaceState(Object.assign({}, h, {y:this._y}), ''); }catch(e){} }, 700); }, {passive:true});
+  }
+};
+PKRouter.init();
+
 /* ═══ 6) BOOT ═══ */
 (async function boot(){
   await loadQuizFromSheet();   // ดึงคลังโจทย์จาก Google Sheets มาทับ (ถ้าตั้งค่า QUIZ_SHEET_URL + เปิดผ่าน http)
   let backend;
   if(CLOUD){
     try{ backend=CloudBackend; await backend.init(); }
-    catch(err){ console.warn('[PK] Firebase ใช้งานไม่ได้ → สลับเป็นโหมดเดโม', err); backend=LocalBackend; state.mode='local'; }
+    catch(err){ console.warn('[PK] Firebase ใช้งานไม่ได้ → ปิดการสมัคร/เข้าสู่ระบบชั่วคราว (ไม่สลับเป็นโหมดเดโม)', err); backend=OfflineBackend; state.mode='offline'; }
   } else { backend=LocalBackend; }
   PK._backend=backend;
   if(backend.start) backend.start();
   $('authModeNote').textContent = state.mode==='cloud'
     ? '🔒 เชื่อมต่อระบบคลาวด์ — ข้อมูลซิงก์ทุกอุปกรณ์'
+    : state.mode==='offline'
+    ? '⚠️ ออฟไลน์ — เชื่อมต่อระบบสมาชิกไม่ได้ ลองรีเฟรชหน้าเมื่อเน็ตกลับมา'
     : '💾 โหมดเดโม — เก็บข้อมูลในเครื่องนี้ (เปิด Firebase เพื่อใช้บัญชีจริงข้ามเครื่อง)';
   // PWA — register service worker only when served over http(s)
   if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){

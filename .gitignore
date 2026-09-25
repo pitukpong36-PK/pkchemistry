@@ -16,6 +16,7 @@ Thumbs.db
 # ===== ไม่เผยแพร่ขึ้น GitHub (ยังอยู่บนเครื่อง) =====
 chemistry-learning-center.html
 reports/
+data/quiz-export.csv
 
 # log จาก Firebase CLI
 firebase-debug.log
