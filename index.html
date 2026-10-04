@@ -1764,6 +1764,18 @@ html, body { max-width:100%; overflow-x:hidden; }
 .user-menu .um-logout .ic { color:inherit; }
 .toc-fab .ic { width:22px; height:22px; vertical-align:middle; }
 .toc-head .ic { width:16px; height:16px; margin-right:4px; }
+/* เฟส 2: หน้าแรก + เนื้อหาวิชา */
+.float-mol .i3d { width:40px; height:40px; }
+.hero-badge .ic, .hero-btn .ic { width:18px; height:18px; margin-right:4px; vertical-align:-0.22em; }
+.feature-ico .i3d, .subject-icon .i3d { width:40px; height:40px; }
+.extra-icon .i3d { width:42px; height:42px; }
+.exam-banner-ico .i3d { width:48px; height:48px; }
+.about-img .i3d { width:52%; height:auto; max-height:80%; filter:drop-shadow(0 12px 20px rgba(0,0,0,.15)); }
+.section-title .ic { color:var(--amber, #F59E0B); margin-left:4px; }
+.contact-row .ic { width:18px; height:18px; color:var(--teal-d); margin-right:6px; vertical-align:-0.25em; }
+.ref-ic .ic { width:24px; height:24px; color:#fff; }
+.page-header h1 .ic, h1 > .ic:first-child { color:var(--teal-d); margin-right:6px; }
+.quiz-launch-btn .ic { width:18px; height:18px; margin-right:4px; }
 </style>
 </head>
 <body>
@@ -2492,25 +2504,25 @@ html, body { max-width:100%; overflow-x:hidden; }
   <!-- HERO -->
   <section class="hero">
     <div class="hero-floats" aria-hidden="true">
-      <span class="float-mol" style="left:7%;top:20%;animation-duration:7s">⚗️</span>
-      <span class="float-mol" style="left:87%;top:24%;animation-duration:9s">🧪</span>
-      <span class="float-mol" style="left:15%;top:66%;animation-duration:8s">💧</span>
-      <span class="float-mol" style="left:80%;top:68%;animation-duration:10s">🔬</span>
-      <span class="float-mol" style="left:48%;top:10%;animation-duration:11s">⚛️</span>
-      <span class="float-mol" style="left:64%;top:82%;animation-duration:7.5s">🧬</span>
+      <span class="float-mol" style="left:7%;top:20%;animation-duration:7s"><img class="i3d" src="img/icons3d/flask.webp" alt=""></span>
+      <span class="float-mol" style="left:87%;top:24%;animation-duration:9s"><img class="i3d" src="img/icons3d/testtube.webp" alt=""></span>
+      <span class="float-mol" style="left:15%;top:66%;animation-duration:8s"><img class="i3d" src="img/icons3d/drop.webp" alt=""></span>
+      <span class="float-mol" style="left:80%;top:68%;animation-duration:10s"><img class="i3d" src="img/icons3d/microscope.webp" alt=""></span>
+      <span class="float-mol" style="left:48%;top:10%;animation-duration:11s"><img class="i3d" src="img/icons3d/atom.webp" alt=""></span>
+      <span class="float-mol" style="left:64%;top:82%;animation-duration:7.5s"><img class="i3d" src="img/icons3d/dna.webp" alt=""></span>
     </div>
     <div class="atom atom-1"></div>
     <div class="atom atom-2"></div>
     <div class="atom atom-3"></div>
     <div style="position:relative;z-index:1">
       <div class="hero-greeting" id="heroGreeting"></div>
-      <div class="hero-badge">🧪 โรงเรียนบัวเชดวิทยา · สุรินทร์</div>
+      <div class="hero-badge"><svg class="ic" aria-hidden="true"><use href="#i-test-tube"/></svg>โรงเรียนบัวเชดวิทยา · สุรินทร์</div>
       <h1>ศูนย์การเรียนรู้<br><span>วิชาเคมี</span> ม.ปลาย</h1>
       <p>เรียนเคมี 1–6 ครบทุกบท พร้อมแบบทดสอบ 140 ข้อ เครื่องมือคำนวณ และระบบติดตามผลการเรียน — <strong style="color:#FBBF24">ฟรีทุกอย่าง</strong></p>
       <div class="hero-cta">
-        <button class="hero-btn" onclick="showPage('home')">📚 เข้าสู่บทเรียน</button>
-        <button class="hero-btn secondary" id="heroAuthBtn" onclick="PK.openProfileOrLogin && PK.openProfileOrLogin()">🔐 เข้าสู่ระบบ</button>
-        <button class="hero-btn secondary" onclick="PK.startExam()">🎯 ลองทำข้อสอบ</button>
+        <button class="hero-btn" onclick="showPage('home')"><svg class="ic" aria-hidden="true"><use href="#i-books"/></svg>เข้าสู่บทเรียน</button>
+        <button class="hero-btn secondary" id="heroAuthBtn" onclick="PK.openProfileOrLogin && PK.openProfileOrLogin()"><svg class="ic" aria-hidden="true"><use href="#i-lock-key"/></svg>เข้าสู่ระบบ</button>
+        <button class="hero-btn secondary" onclick="PK.startExam()"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg>ลองทำข้อสอบ</button>
       </div>
     </div>
   </section>
@@ -2539,37 +2551,37 @@ html, body { max-width:100%; overflow-x:hidden; }
     <!-- FEATURES -->
     <div class="features">
       <div class="features-head">
-        <div class="section-title">ทำไมต้องเรียนที่นี่ ✨</div>
+        <div class="section-title">ทำไมต้องเรียนที่นี่<svg class="ic" aria-hidden="true"><use href="#i-sparkle"/></svg></div>
         <div class="section-sub">ครบทุกเครื่องมือสำหรับการเรียนเคมีในที่เดียว</div>
       </div>
       <div class="features-grid">
         <div class="feature-card" onclick="showPage('home')">
-          <div class="feature-ico" style="background:var(--teal-l)">📚</div>
+          <div class="feature-ico" style="background:var(--teal-l)"><img class="i3d" src="img/icons3d/book.webp" alt="" loading="lazy"></div>
           <h3>เนื้อหา 14 บท</h3>
           <p>เคมี 1–6 ครบทุกบท พร้อมตัวอย่าง โจทย์ และเฉลยทีละขั้น</p>
         </div>
         <div class="feature-card" onclick="showPage('home')">
-          <div class="feature-ico" style="background:var(--amber-l)">📝</div>
+          <div class="feature-ico" style="background:var(--amber-l)"><img class="i3d" src="img/icons3d/quiz.webp" alt="" loading="lazy"></div>
           <h3>แบบทดสอบ 140 ข้อ</h3>
           <p>ตรวจอัตโนมัติ เฉลยพร้อมคำอธิบายทันที สลับตัวเลือกทุกครั้ง</p>
         </div>
         <div class="feature-card" onclick="showPage('tools')">
-          <div class="feature-ico" style="background:var(--green-l)">🧰</div>
+          <div class="feature-ico" style="background:var(--green-l)"><img class="i3d" src="img/icons3d/toolbox.webp" alt="" loading="lazy"></div>
           <h3>เครื่องมือเคมี</h3>
           <p>ตารางธาตุ 118 ธาตุ ดุลสมการ คำนวณมวลโมล/pH แปลงหน่วย</p>
         </div>
         <div class="feature-card" onclick="PK.startExam()">
-          <div class="feature-ico" style="background:var(--purple-l)">🎯</div>
+          <div class="feature-ico" style="background:var(--purple-l)"><img class="i3d" src="img/icons3d/target.webp" alt="" loading="lazy"></div>
           <h3>ข้อสอบรวมทุกบท</h3>
           <p>สุ่มข้อจากทั้ง 14 บท ฝึกความพร้อมก่อนสอบจริง</p>
         </div>
         <div class="feature-card" onclick="PK.openProfileOrLogin && PK.openProfileOrLogin()">
-          <div class="feature-ico" style="background:var(--blue-l)">📊</div>
+          <div class="feature-ico" style="background:var(--blue-l)"><img class="i3d" src="img/icons3d/chart.webp" alt="" loading="lazy"></div>
           <h3>ติดตามความก้าวหน้า</h3>
           <p>เก็บคะแนน แต้มสะสม เหรียญตรา และความคืบหน้ารายบท</p>
         </div>
         <div class="feature-card" onclick="PK.toggleTheme()">
-          <div class="feature-ico" style="background:var(--coral-l)">🌙</div>
+          <div class="feature-ico" style="background:var(--coral-l)"><img class="i3d" src="img/icons3d/moon.webp" alt="" loading="lazy"></div>
           <h3>ใช้ได้ทุกอุปกรณ์</h3>
           <p>มือถือ/คอม รองรับโหมดมืด และติดตั้งเป็นแอปใช้ออฟไลน์</p>
         </div>
@@ -2578,7 +2590,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
     <!-- ABOUT -->
     <div class="about-grid">
-      <div class="about-img">🔬</div>
+      <div class="about-img"><img class="i3d" src="img/icons3d/microscope.webp" alt="" loading="lazy"></div>
       <div class="about-text">
         <h2>เกี่ยวกับไซต์นี้</h2>
         <p>ยินดีต้อนรับสู่ศูนย์การเรียนรู้วิชาเคมี จัดทำขึ้นโดยไม่หวังผลประโยชน์ทางการค้า มีจุดประสงค์เพื่อให้นักเรียนสามารถเกิดการเรียนรู้ได้ทุกที่ทุกเวลา</p>
@@ -2597,9 +2609,9 @@ html, body { max-width:100%; overflow-x:hidden; }
       <div>
         <div class="contact-name">ครูพิทักษ์พงศ์ คำแดง</div>
         <div class="contact-school">โรงเรียนบัวเชดวิทยา จ.สุรินทร์</div>
-        <div class="contact-row">📧 <a href="mailto:pitukpong36@brw.ac.th">pitukpong36@brw.ac.th</a></div>
-        <div class="contact-row">📍 โรงเรียนบัวเชดวิทยา อ.บัวเชด จ.สุรินทร์ 32230</div>
-        <div class="contact-row">📞 0-5378-3245</div>
+        <div class="contact-row"><svg class="ic" aria-hidden="true"><use href="#i-envelope-simple"/></svg><a href="mailto:pitukpong36@brw.ac.th">pitukpong36@brw.ac.th</a></div>
+        <div class="contact-row"><svg class="ic" aria-hidden="true"><use href="#i-map-pin"/></svg>โรงเรียนบัวเชดวิทยา อ.บัวเชด จ.สุรินทร์ 32230</div>
+        <div class="contact-row"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>0-5378-3245</div>
         <p style="font-size:13px;color:var(--muted);margin-top:10px;">หากพบข้อผิดพลาดในไซต์นี้ โปรดแจ้งที่อีเมลด้านบน ทางผู้จัดทำจะได้ปรับปรุงให้ถูกต้องยิ่งขึ้น</p>
       </div>
     </div>
@@ -2607,7 +2619,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
   <!-- REFERENCES -->
     <div style="margin:36px 0 24px;padding:24px 28px;background:linear-gradient(135deg,#F0FDFA 0%,#FFF 100%);border-radius:18px;border:1px solid #CCFBF1;">
-      <h2 style="margin:0 0 8px;color:#0F766E;font-size:22px;">📚 แหล่งอ้างอิงและศึกษาเพิ่มเติม</h2>
+      <h2 style="margin:0 0 8px;color:#0F766E;font-size:22px;"><svg class="ic" aria-hidden="true"><use href="#i-books"/></svg> แหล่งอ้างอิงและศึกษาเพิ่มเติม</h2>
       <p style="margin:0 0 18px;color:#6B7280;font-size:13px;">เว็บไซต์นี้พัฒนาเนื้อหาตามตำราสากลและแหล่งข้อมูลที่เชื่อถือได้ — สามารถศึกษาเพิ่มเติมได้จากแหล่งต่อไปนี้</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;">
 
@@ -2625,7 +2637,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
         <a href="https://www.google.com/search?q=Raymond+Chang+Jason+Overby+Chemistry+McGraw+Hill" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block;padding:16px;background:#FFF;border-radius:12px;border:1px solid #E5E7EB;transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,.08)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
-            <div style="width:42px;height:42px;background:#7C3AED;color:#FFF;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;">📖</div>
+            <div style="width:42px;height:42px;background:#7C3AED;color:#FFF;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;" class="ref-ic"><svg class="ic" aria-hidden="true"><use href="#i-book-open-text"/></svg></div>
             <div>
               <div style="font-weight:700;font-size:14px;color:#5B21B6;">Chemistry 14e</div>
               <div style="font-size:11px;color:#6B7280;">Raymond Chang &amp; Jason Overby</div>
@@ -2637,7 +2649,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
         <a href="https://chem.libretexts.org" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block;padding:16px;background:#FFF;border-radius:12px;border:1px solid #E5E7EB;transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,.08)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
-            <div style="width:42px;height:42px;background:#DC2626;color:#FFF;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;">📚</div>
+            <div style="width:42px;height:42px;background:#DC2626;color:#FFF;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;" class="ref-ic"><svg class="ic" aria-hidden="true"><use href="#i-books"/></svg></div>
             <div>
               <div style="font-weight:700;font-size:14px;color:#7F1D1D;">LibreTexts Chemistry</div>
               <div style="font-size:11px;color:#6B7280;">ตำราเคมีออนไลน์ฟรี ทุกระดับ</div>
@@ -2649,7 +2661,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
         <a href="https://pubchem.ncbi.nlm.nih.gov" target="_blank" style="text-decoration:none;color:inherit;display:block;padding:16px;background:#FFF;border-radius:12px;border:1px solid #E5E7EB;transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,.08)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
-            <div style="width:42px;height:42px;background:#1D4ED8;color:#FFF;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;">🧪</div>
+            <div style="width:42px;height:42px;background:#1D4ED8;color:#FFF;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;" class="ref-ic"><svg class="ic" aria-hidden="true"><use href="#i-test-tube"/></svg></div>
             <div>
               <div style="font-weight:700;font-size:14px;color:#1E3A8A;">PubChem</div>
               <div style="font-size:11px;color:#6B7280;">ฐานข้อมูลโมเลกุล NIH</div>
@@ -2661,7 +2673,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 
         <a href="https://iupac.org" target="_blank" style="text-decoration:none;color:inherit;display:block;padding:16px;background:#FFF;border-radius:12px;border:1px solid #E5E7EB;transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 12px rgba(0,0,0,.08)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
-            <div style="width:42px;height:42px;background:#F59E0B;color:#FFF;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;">⚛️</div>
+            <div style="width:42px;height:42px;background:#F59E0B;color:#FFF;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;" class="ref-ic"><svg class="ic" aria-hidden="true"><use href="#i-atom"/></svg></div>
             <div>
               <div style="font-weight:700;font-size:14px;color:#92400E;">IUPAC</div>
               <div style="font-size:11px;color:#6B7280;">มาตรฐานชื่อสาร+ระบบหน่วย</div>
@@ -2674,7 +2686,7 @@ html, body { max-width:100%; overflow-x:hidden; }
       </div>
 
       <div style="margin-top:18px;padding:14px 16px;background:#FEF3C7;border-radius:10px;border-left:4px solid #F59E0B;">
-        <div style="font-size:12px;color:#92400E;font-weight:700;margin-bottom:4px;">💡 คำแนะนำสำหรับนักเรียน</div>
+        <div style="font-size:12px;color:#92400E;font-weight:700;margin-bottom:4px;"><svg class="ic" aria-hidden="true"><use href="#i-lightbulb"/></svg> คำแนะนำสำหรับนักเรียน</div>
         <div style="font-size:12px;color:#374151;line-height:1.6;">
           • <strong>Khan Academy</strong> เหมาะมากสำหรับฟังบรรยายซ้ำหลายรอบ + ทำโจทย์ออนไลน์<br>
           • <strong>Chang Chemistry</strong> เหมาะกับนักเรียนที่ต้องการเตรียมตัวสอบ <em>โอลิมปิก</em> หรือ <em>เข้ามหาวิทยาลัย</em><br>
@@ -2694,12 +2706,12 @@ html, body { max-width:100%; overflow-x:hidden; }
 ════════════════════════════════════ -->
 <div class="page" id="page-home">
   <div class="page-header">
-    <h1>🏠 เนื้อหาวิชาเคมี ม.ปลาย</h1>
+    <h1><svg class="ic" aria-hidden="true"><use href="#i-books"/></svg>เนื้อหาวิชาเคมี ม.ปลาย</h1>
     <p>เลือกวิชาและบทเรียนที่ต้องการเรียน</p>
   </div>
 
   <div class="exam-banner" onclick="PK.startExam()">
-    <div class="exam-banner-ico">🎯</div>
+    <div class="exam-banner-ico"><img class="i3d" src="img/icons3d/target.webp" alt="" loading="lazy"></div>
     <div class="exam-banner-text">
       <div class="exam-banner-title">ข้อสอบรวมทุกบท</div>
       <div class="exam-banner-sub">สุ่ม 20 ข้อจากทั้ง 14 บท ทดสอบความพร้อมก่อนสอบจริง</div>
@@ -2712,7 +2724,7 @@ html, body { max-width:100%; overflow-x:hidden; }
     <!-- เคมี 1 -->
     <div class="subject-card c1">
       <div class="subject-card-top">
-        <div class="subject-icon sc-bg"><span style="color:var(--sc)">⚗️</span></div>
+        <div class="subject-icon sc-bg"><img class="i3d" src="img/icons3d/flask.webp" alt="" loading="lazy"></div>
         <div>
           <div class="subject-card-title sc-txt">เคมี 1</div>
           <div class="subject-card-desc">ความปลอดภัย · อะตอม · พันธะเคมี</div>
@@ -2734,7 +2746,7 @@ html, body { max-width:100%; overflow-x:hidden; }
     <!-- เคมี 2 -->
     <div class="subject-card c2">
       <div class="subject-card-top">
-        <div class="subject-icon sc-bg"><span style="color:var(--sc)">🧫</span></div>
+        <div class="subject-icon sc-bg"><img class="i3d" src="img/icons3d/scale.webp" alt="" loading="lazy"></div>
         <div>
           <div class="subject-card-title sc-txt">เคมี 2</div>
           <div class="subject-card-desc">โมล · สารละลาย · ปริมาณสัมพันธ์</div>
@@ -2756,7 +2768,7 @@ html, body { max-width:100%; overflow-x:hidden; }
     <!-- เคมี 3 -->
     <div class="subject-card c3">
       <div class="subject-card-top">
-        <div class="subject-icon sc-bg"><span style="color:var(--sc)">💨</span></div>
+        <div class="subject-icon sc-bg"><img class="i3d" src="img/icons3d/gas.webp" alt="" loading="lazy"></div>
         <div>
           <div class="subject-card-title sc-txt">เคมี 3</div>
           <div class="subject-card-desc">แก๊ส · อัตราปฏิกิริยา · สมดุลเคมี</div>
@@ -2778,7 +2790,7 @@ html, body { max-width:100%; overflow-x:hidden; }
     <!-- เคมี 4 -->
     <div class="subject-card c4">
       <div class="subject-card-top">
-        <div class="subject-icon sc-bg"><span style="color:var(--sc)">⚡</span></div>
+        <div class="subject-icon sc-bg"><img class="i3d" src="img/icons3d/battery.webp" alt="" loading="lazy"></div>
         <div>
           <div class="subject-card-title sc-txt">เคมี 4</div>
           <div class="subject-card-desc">กรด-เบส · เคมีไฟฟ้า</div>
@@ -2797,7 +2809,7 @@ html, body { max-width:100%; overflow-x:hidden; }
     <!-- เคมี 5 -->
     <div class="subject-card c5">
       <div class="subject-card-top">
-        <div class="subject-icon sc-bg"><span style="color:var(--sc)">🌿</span></div>
+        <div class="subject-icon sc-bg"><img class="i3d" src="img/icons3d/organic.webp" alt="" loading="lazy"></div>
         <div>
           <div class="subject-card-title sc-txt">เคมี 5</div>
           <div class="subject-card-desc">เคมีอินทรีย์ · พอลิเมอร์</div>
@@ -2816,7 +2828,7 @@ html, body { max-width:100%; overflow-x:hidden; }
     <!-- เคมี 6 -->
     <div class="subject-card c6">
       <div class="subject-card-top">
-        <div class="subject-icon sc-bg"><span style="color:var(--sc)">🌍</span></div>
+        <div class="subject-icon sc-bg"><img class="i3d" src="img/icons3d/earth.webp" alt="" loading="lazy"></div>
         <div>
           <div class="subject-card-title sc-txt">เคมี 6</div>
           <div class="subject-card-desc">เคมีกับการแก้ปัญหาในชีวิต</div>
@@ -2834,7 +2846,7 @@ html, body { max-width:100%; overflow-x:hidden; }
   <!-- Extra cards -->
   <div class="extra-cards">
     <div class="extra-card" onclick="showPage('media')">
-      <div class="extra-icon" style="background:var(--amber-l)">🎬</div>
+      <div class="extra-icon" style="background:var(--amber-l)"><img class="i3d" src="img/icons3d/clapper.webp" alt="" loading="lazy"></div>
       <div>
         <div class="extra-title">คลังสื่อการเรียน</div>
         <div class="extra-desc">รวมวิดีโอเคมีจาก YouTube และ สสวท. จัดเป็นหมวดตามบทเรียน</div>
@@ -2862,7 +2874,7 @@ html, body { max-width:100%; overflow-x:hidden; }
     <div class="chapter-badge sc-bg sc-txt" id="chap-badge"></div>
     <h1 class="chapter-title" id="chap-title"></h1>
     <p class="chapter-meta" id="chap-meta"></p>
-    <button class="quiz-launch-btn" id="quizLaunchBtn" style="display:none;" onclick="PK.startQuiz(window.__pkChapter)">📝 ทำแบบทดสอบบทนี้ (คละระดับ) <span id="quizLaunchInfo"></span></button>
+    <button class="quiz-launch-btn" id="quizLaunchBtn" style="display:none;" onclick="PK.startQuiz(window.__pkChapter)"><svg class="ic" aria-hidden="true"><use href="#i-note-pencil"/></svg>ทำแบบทดสอบบทนี้ (คละระดับ) <span id="quizLaunchInfo"></span></button>
     <div class="quiz-levels" id="quizLevels" style="display:none;"></div>
   </div>
 
@@ -18897,7 +18909,7 @@ function showChapter(chapterId) {
 document.getElementById('nav-welcome').classList.add('active');
 
 // ─── เวอร์ชันเว็บ (ใช้ยืนยันว่าโหลดตัวล่าสุดแล้ว — ต้องตรงกับ CACHE ใน sw.js) ───
-const APP_VERSION = 'v31';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
+const APP_VERSION = 'v32';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
 (function stampVersion() {
   try { console.log('%cPKchemistry ' + APP_VERSION, 'color:#14B8A6;font-weight:700;font-size:13px'); } catch (e) {}
   function paint() {
@@ -20262,7 +20274,7 @@ function renderAuthUI(){
   }
   const hg=$('heroGreeting');
   if(hg){ hg.textContent = u ? ('👋 ยินดีต้อนรับกลับ, '+u.name+'!') : '👋 ยินดีต้อนรับสู่ศูนย์การเรียนรู้เคมี — เข้าสู่ระบบเพื่อบันทึกความก้าวหน้า'; hg.style.display='block'; }
-  const hb=$('heroAuthBtn'); if(hb) hb.textContent = u ? '📊 โปรไฟล์ของฉัน' : '🔐 เข้าสู่ระบบ';
+  const hb=$('heroAuthBtn'); if(hb) hb.innerHTML = '<svg class="ic" aria-hidden="true"><use href="#i-'+(u?'chart-bar':'lock-key')+'"/></svg>'+(u ? 'โปรไฟล์ของฉัน' : 'เข้าสู่ระบบ');
   if(!u && $('page-teacher').classList.contains('active')){ if(window.PKRouter) PKRouter.replaceNext(); window.showPage('welcome'); }
 }
 PK.openProfileOrLogin = ()=>{ if(state.user) PK.openProfile(); else PK.openAuth('login'); };
