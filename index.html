@@ -1328,7 +1328,17 @@ html[data-theme="dark"] .zone-card.cleared { background:#0e2a1a; }
 .rpg-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px; }
 .rpg-zbanner { text-align:center; font-family:'Prompt',sans-serif; font-weight:700; font-size:13px; color:var(--teal-d); background:var(--teal-l); border-radius:10px; padding:6px 10px; margin-bottom:12px; }
 .rpg-zbanner span { font-weight:400; color:var(--muted); font-size:11px; }
+.pk-fig { margin:12px auto; max-width:560px; }
+.pk-fig img { width:100%; height:auto; display:block; border-radius:8px; background:#FAFAFA; }
+.pk-fig figcaption { font-size:13px; color:var(--muted); margin-top:6px; text-align:center; line-height:1.5; }
+html[data-theme="dark"] .pk-fig img { filter:brightness(.92); }
 .rpg-enemy { text-align:center; margin-bottom:10px; position:relative; }
+/* ภาพฉากประจำดินแดน + สไปรต์มอนสเตอร์ (img/rpg/*.webp) */
+.rpg-enemy.has-bg { background:linear-gradient(rgba(0,0,0,.02),rgba(0,0,0,.42)), var(--zbg) center/cover; border-radius:14px; padding:12px 10px 12px; }
+.rpg-enemy.secret-bg { background:radial-gradient(circle at 50% 40%,#7f1d1d,#1c0a0a 75%); border-radius:14px; padding:12px 10px 12px; }
+.rpg-enemy.has-bg .re-name, .rpg-enemy.secret-bg .re-name { color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.8); }
+.rpg-enemy .re-img { width:140px; height:140px; object-fit:contain; display:block; margin:0 auto; filter:drop-shadow(0 6px 8px rgba(0,0,0,.35)); }
+.rpg-enemy.boss .re-img { width:176px; height:176px; }
 .re-pop { position:absolute; left:50%; top:14px; transform:translateX(-50%); font-family:'Prompt',sans-serif; font-weight:800; font-size:26px; color:#f97316; text-shadow:0 2px 5px rgba(0,0,0,.3); animation:rpgPop .9s ease-out forwards; pointer-events:none; z-index:5; }
 .re-pop.crit { font-size:34px; color:#eab308; }
 .re-pop.heal { color:#22c55e; font-size:28px; }
@@ -12941,6 +12951,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           <strong>ขั้น 3:</strong> หาสารที่ <em>รับ H⁺</em> เข้ามา → สารนั้นคือ "เบส"<br>
           <strong>ขั้น 4:</strong> ผลที่ได้หลังรับ H⁺ → "กรดคอนจูเกต"
         </div>
+        <figure class="pk-fig"><img src="img/lessons/ab-proton-transfer.webp" width="1200" height="675" loading="lazy" alt="HCl ส่ง H⁺ ให้ H₂O ได้ Cl⁻ และ H₃O⁺"><figcaption>HCl (กรด) ส่ง H⁺ ให้ H₂O (เบส) → ได้ Cl⁻ (เบสคอนจูเกต) และ H₃O⁺ (กรดคอนจูเกต) · ลูกศรทางเดียวเพราะ HCl เป็นกรดแก่</figcaption></figure>
       </div>
 
       <div class="content-section">
@@ -13026,6 +13037,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           pH &lt; 7 → กรด · pH = 7 → กลาง · pH &gt; 7 → เบส
         </div>
         <div class="tip-box">💡 <strong>เข้าใจก่อนคำนวณ:</strong> pH เป็นตัวเลขที่ใช้แสดงความเข้มข้น H⁺ ในรูปที่อ่านง่าย — ทุกครั้งที่ pH ลด <em>1 หน่วย</em> ความเข้มข้น H⁺ เพิ่ม <em>10 เท่า</em></div>
+        <figure class="pk-fig"><img src="img/lessons/ab-ph-life.webp" width="1200" height="675" loading="lazy" alt="สารในชีวิตประจำวันเรียงตาม pH"><figcaption>เรียงจากกรดมาก → เบสมาก: น้ำกรดแบตเตอรี่ (~0–1) · มะนาว (~2) · น้ำอัดลม (~2.5) · มะเขือเทศ (~4) · กาแฟ (~5) · นม (~6.5) · น้ำบริสุทธิ์ (7) · เลือด/ไข่ขาว (~7.4–8) · เบกกิ้งโซดา (~8.3) · สบู่ (~10) · แอมโมเนีย (~11) · น้ำยาฟอกขาว (~12–13)</figcaption></figure>
       </div>
 
       <div class="content-section">
@@ -13072,6 +13084,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           </svg>
           <strong>สังเกต:</strong> กรดแก่แตกตัวเกือบหมดเหลือแต่ไอออนอิสระ (H⁺, Cl⁻) — กรดอ่อนส่วนใหญ่ยังเป็นโมเลกุล มีสมดุลแตกตัว/รวมกลับ (⇌) จึงมี H⁺ น้อย ("แก่" บอกระดับการแตกตัว ไม่ใช่ความเข้มข้น)
         </div>
+        <figure class="pk-fig"><img src="img/lessons/ab-strong-weak.webp" width="1200" height="675" loading="lazy" alt="เทียบอนุภาคในกรดแก่และกรดอ่อน"><figcaption>ซ้าย: กรดแก่ (เช่น HCl) แตกตัวเกือบหมด เห็นแต่ H₃O⁺ (แดง) กับแอนไอออน (เขียว) · ขวา: กรดอ่อน (เช่น CH₃COOH) ส่วนใหญ่ยังเป็นโมเลกุล แตกตัวเพียงเล็กน้อย</figcaption></figure>
       </div>
 
       <div class="content-section">
@@ -13216,6 +13229,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           pH = 4.74 + log(<span class="frac"><span class="n">0.20</span><span class="d">0.10</span></span>) = 4.74 + 0.30 = <strong>5.04</strong>
         </div>
         <div class="tip-box">💡 <strong>บัฟเฟอร์ในเลือดมนุษย์:</strong> H₂CO₃ / HCO₃⁻ (pKa ≈ 6.1) ควบคุม pH ของเลือดให้อยู่ในช่วง 7.35–7.45 · pH &lt; 7.35 = <em>acidosis</em> · pH &gt; 7.45 = <em>alkalosis</em> · นอกช่วง 6.8–7.8 อาจถึงแก่ชีวิต</div>
+        <figure class="pk-fig"><img src="img/lessons/ab-buffer.webp" width="1200" height="675" loading="lazy" alt="บัฟเฟอร์จับ H⁺ และ OH⁻ ที่เติมเข้ามา"><figcaption>บัฟเฟอร์เหมือน "โล่": H⁺ ที่เติมเข้ามา (แดง) ถูกเบสคอนจูเกต A⁻ (ฟ้า) จับไว้ · OH⁻ (ม่วง) ถูกกรดอ่อน HA (ส้ม) สะเทิน → pH แทบไม่เปลี่ยน (เข็มอยู่ช่วงเขียว)</figcaption></figure>
       </div>
 
       <div class="content-section">
@@ -13318,6 +13332,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>กรดแก่ + เบสอ่อน (HCl + NH₃)</td><td>&lt; 7 (เกลือไฮโดรไลซิสเป็นกรด)</td><td>เมทิลออเรนจ์</td></tr>
         </table>
         <div class="tip-box">💡 <strong>หลักเลือกอินดิเคเตอร์:</strong> ช่วงเปลี่ยนสีของอินดิเคเตอร์ต้องคร่อม pH ที่จุดสมมูลของระบบนั้น ๆ</div>
+        <figure class="pk-fig"><img src="img/lessons/ab-titration.webp" width="1200" height="675" loading="lazy" alt="อุปกรณ์ไทเทรตและสีฟีนอล์ฟทาลีน"><figcaption>หยดเบส (NaOH) จากบิวเรตต์ลงกรดในขวดรูปกรวย · ฟีนอล์ฟทาลีน: ไม่มีสี (ก่อนจุดยุติ) → ชมพูอ่อนคงอยู่ (จุดยุติ) → ชมพูเข้ม (เกินจุดยุติ)</figcaption></figure>
       </div>
 
       <div class="content-section">
@@ -14210,6 +14225,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           ไอออนใน salt bridge เคลื่อนที่: ไอออนบวก (เช่น K⁺) → ครึ่งเซลล์แคโทด · ไอออนลบ (เช่น NO₃⁻) → ครึ่งเซลล์แอโนด
         </div>
         <div class="note-box">⚠️ <strong>ข้อควรระวัง:</strong> e⁻ <em>ไม่</em> เคลื่อนที่ผ่านสะพานเกลือ — เคลื่อนผ่านสายไฟภายนอกเท่านั้น · สะพานเกลือมีไว้รักษาความเป็นกลางทางประจุของทั้งสองครึ่งเซลล์ ถ้าไม่มีสะพานเกลือ ประจุจะสะสมจนปฏิกิริยาหยุด</div>
+        <figure class="pk-fig"><img src="img/lessons/ec-daniell.webp" width="1200" height="675" loading="lazy" alt="เซลล์ดาเนียลล์ Zn/Cu พร้อมสะพานเกลือ"><figcaption>ซ้าย: แผ่น Zn ใน ZnSO₄ (แอโนด −) · ขวา: แผ่น Cu ใน CuSO₄ สีฟ้า (แคโทด +) · สะพานเกลือเชื่อมสารละลาย · อิเล็กตรอน (จุดเหลือง) ไหลจาก Zn → Cu ผ่านโวลต์มิเตอร์</figcaption></figure>
       </div>
 
       <div class="content-section">
@@ -14456,6 +14472,7 @@ html, body { max-width:100%; overflow-x:hidden; }
           ขั้น 4: Ag⁺ + e⁻ → Ag ดังนั้น mol Ag = mol e⁻ = 0.0373 mol<br>
           ขั้น 5: m = mol × M = 0.0373 × 107.9 ≈ <strong>4.03 g</strong>
         </div>
+        <figure class="pk-fig"><img src="img/lessons/ec-electroplating.webp" width="1200" height="675" loading="lazy" alt="การชุบเงินช้อนด้วยไฟฟ้า"><figcaption>ชุบเงิน: แท่ง Ag ต่อขั้วบวก (แอโนด: Ag → Ag⁺ + e⁻) · ช้อนต่อขั้วลบ (แคโทด: Ag⁺ + e⁻ → Ag) · ยิ่งกระแสมาก/นาน เงินยิ่งเคลือบหนา (m ∝ I × t)</figcaption></figure>
       </div>
 
       <div class="content-section">
@@ -14471,6 +14488,8 @@ html, body { max-width:100%; overflow-x:hidden; }
           <tr><td>การถลุงโลหะ</td><td>อิเล็กโทรไลซิสของสารหลอม</td><td>Al จาก Al₂O₃ (Hall-Héroult) · Na จาก NaCl (Downs)</td></tr>
           <tr><td>Chlor-alkali</td><td>อิเล็กโทรไลซิสสารละลาย NaCl เข้มข้น</td><td>ได้ NaOH + Cl₂ + H₂ พร้อมกัน</td></tr>
         </table>
+        <figure class="pk-fig"><img src="img/lessons/ec-batteries.webp" width="1200" height="675" loading="lazy" alt="แบตเตอรี่และเซลล์เชื้อเพลิงแบบต่าง ๆ"><figcaption>เซลล์ไฟฟ้าเคมีรอบตัว: ถ่านอัลคาไลน์ · ถ่านกระดุมลิเทียม · แบต Li-ion มือถือ · แบตตะกั่ว-กรดรถยนต์ · รถ EV ขณะชาร์จ (อิเล็กโทรไลซิส) · เซลล์เชื้อเพลิง H₂</figcaption></figure>
+        <figure class="pk-fig"><img src="img/lessons/ec-corrosion.webp" width="1200" height="675" loading="lazy" alt="สนิมเหล็กและการป้องกันด้วยโลหะบูชายัญ"><figcaption>ซ้าย: เหล็กเป็นสนิมเมื่อมีน้ำ + O₂ (Fe เสีย e⁻) · ขวา: ก้อน Zn ติดท้องเรือ ถูกออกซิไดส์แทน ("ขั้วบูชายัญ") ตัวเรือเหล็กจึงไม่ผุ</figcaption></figure>
       </div>
 
       <div class="content-section">
@@ -18825,7 +18844,7 @@ function showChapter(chapterId) {
 document.getElementById('nav-welcome').classList.add('active');
 
 // ─── เวอร์ชันเว็บ (ใช้ยืนยันว่าโหลดตัวล่าสุดแล้ว — ต้องตรงกับ CACHE ใน sw.js) ───
-const APP_VERSION = 'v28';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
+const APP_VERSION = 'v29';  /* v4: คลังสื่อฝังข้อมูลในหน้า เปิดแบบ offline ได้ */
 (function stampVersion() {
   try { console.log('%cPKchemistry ' + APP_VERSION, 'color:#14B8A6;font-weight:700;font-size:13px'); } catch (e) {}
   function paint() {
@@ -23554,6 +23573,8 @@ const RPG_ZONES = [
   {ic:'🧵', th:'เขาวงกตพอลิเมอร์', boss:'เจ้าแห่งพอลิเมอร์', bspr:'🕷️'},
   {ic:'🌍', th:'นครเคมีพิทักษ์โลก', boss:'มหาเทพเคมี', bspr:'👑'}
 ];
+/* ชื่อไฟล์ภาพ (เรียงตรงกับ RPG_MOBS) — ไฟล์โหลดไม่ได้จะกลับไปใช้อีโมจิเดิม */
+const RPG_MOB_ART = ['mob-slime','mob-formula','mob-scorpion','mob-snake','mob-mosquito','mob-zombie','mob-bat','mob-spider'];
 const RPG_MOBS = [
   {spr:'🦠', n:'สไลม์เคมี'}, {spr:'👾', n:'ปีศาจสูตร'}, {spr:'🦂', n:'แมงป่องกรด'},
   {spr:'🐍', n:'งูไอออน'}, {spr:'🦟', n:'ยุงตัวเร่ง'}, {spr:'🧟', n:'ซอมบี้พันธะ'},
@@ -23561,6 +23582,9 @@ const RPG_MOBS = [
 ];
 let RS = null;   // สถานะถาวรของผู้เล่น
 let RB = null;   // สถานะการต่อสู้ชั่วคราว
+RPG._art = ()=>{ if(RB.secret) return 'boss-secret'; if(RB.review) return ''; if(RB.isBoss) return 'boss-'+String(RB.zi).padStart(2,'0');
+  for(let i=0;i<RPG_MOBS.length;i++){ if(RPG_MOBS[i].n===RB.mname) return RPG_MOB_ART[i]; } return ''; };
+RPG._sprHTML = ()=>{ const a=RPG._art(); return a ? '<img class="re-img" src="img/rpg/'+a+'.webp" alt="" data-e="'+RB.spr+'" onerror="this.replaceWith(this.dataset.e)">' : RB.spr; };
 RPG._default = ()=>({ level:1, xp:0, gold:30, hp:120, mp:30, items:{potion:1,hint:1,skip:0}, unlocked:1, cleared:[], pos:0, mapView:'world', chests:[], buff:null, bonus:{atk:0,hp:0,mp:0}, mastery:{}, review:[], equip:{weapon:null,armor:null,charm:null}, owned:[], gearLv:{}, secretCleared:false,
   stats:{kills:0,bosses:0,maxCombo:0,answered:0,correct:0,crits:0,drops:0,casts:0,chests:0,mystery:0,reviewed:0,secretWins:0}, best:{endless:0} });
 /* เซฟแยกตามบัญชี (pk_rpg_<uid>) · ไม่ล็อกอิน = เซฟของเครื่อง (pk_rpg)
@@ -23905,7 +23929,8 @@ RPG.renderBattle = (feedback, shake)=>{
   if(RB.buffName) h+='<div class="rpg-buff">'+RB.buffName+'</div>';
   const pop = (fx && fx.t==='hit') ? '<div class="re-pop'+(fx.crit?' crit':'')+'">'+(fx.crit?'✦ ':'')+'-'+fx.n+'</div>'
             : (fx && fx.t==='heal') ? '<div class="re-pop heal">+'+fx.n+'</div>' : '';
-  h+='<div class="rpg-enemy'+(RB.isBoss?' boss':'')+(enraged?' enraged':'')+(shake?' hit':'')+'">'+pop+'<div class="re-spr">'+RB.spr+'</div>'+
+  const zbg = RB.secret ? ' secret-bg"' : (RB.zi>=0 && RB.zi<14) ? ' has-bg" style="--zbg:url(img/rpg/zone-'+String(RB.zi).padStart(2,'0')+'.webp)"' : '"';
+  h+='<div class="rpg-enemy'+(RB.isBoss?' boss':'')+(enraged?' enraged':'')+(shake?' hit':'')+zbg+'>'+pop+'<div class="re-spr">'+RPG._sprHTML()+'</div>'+
      '<div class="re-name">'+(RB.isBoss?'👑 บอส: ':'')+RB.mname+'</div><div class="rpg-ehp"><i style="width:'+hpPct+'%"></i></div></div>';
   h+='<div class="rpg-combo">'+(RB.combo?('🔥 คอมโบ ×'+RB.combo+' — ดาเมจ ×'+cm):'')+(RB.shield?' &nbsp; 🛡️ เกราะธาตุพร้อม':'')+'</div>';
   h+='<div class="rpg-q">'+q.q+'</div><div class="rpg-choices">';
